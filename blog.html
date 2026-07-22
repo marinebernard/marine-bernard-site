@@ -279,25 +279,6 @@
           </div>
         </a>
 
-        <!-- PROFIL KOMOOT -->
-        <div class="profil-section" style="margin-bottom:1.5rem">
-          <div class="profil-icon"><svg class="icon"><use href="#icon-compass"/></svg></div>
-          <div>
-            <div class="profil-title">Marine — La Ch'tite Randonneuse</div>
-            <p class="profil-desc">Retrouvez tous mes parcours, collections et traces GPS sur mon profil Komoot. Téléchargez les traces pour vos propres aventures dans les Hauts-de-France !</p>
-            <a href="https://www.komoot.com/fr-fr/user/4969537527049" target="_blank" rel="noopener" class="profil-btn">Voir mon profil Komoot ↗</a>
-          </div>
-        </div>
-
-        <!-- FILTRES -->
-        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:1.5rem;">
-          <span style="font-size:0.68rem;color:#9a88b8;letter-spacing:0.1em;text-transform:uppercase;">Filtrer :</span>
-          <button class="filter-btn active" onclick="filterParcours('tous',this)">Tous</button>
-          <button class="filter-btn" onclick="filterParcours('cote',this)">Côte d'Opale</button>
-          <button class="filter-btn" onclick="filterParcours('foret',this)">Forêt</button>
-          <button class="filter-btn" onclick="filterParcours('campagne',this)">Campagne</button>
-        </div>
-
         <!-- GRILLE PARCOURS -->
         <div class="parcours-grid" id="blog-parcours-grid">
           <!-- AUTO-KOMOOT:START (généré automatiquement, ne pas éditer à la main) -->
@@ -528,6 +509,14 @@
 
       <!-- SIDEBAR -->
       <aside class="sidebar">
+        <div class="profil-section">
+          <div class="profil-icon"><svg class="icon"><use href="#icon-compass"/></svg></div>
+          <div>
+            <div class="profil-title">Marine — La Ch'tite Randonneuse</div>
+            <p class="profil-desc">Retrouvez tous mes parcours, collections et traces GPS sur mon profil Komoot.</p>
+            <a href="https://www.komoot.com/fr-fr/user/4969537527049" target="_blank" rel="noopener" class="profil-btn">Voir mon profil Komoot ↗</a>
+          </div>
+        </div>
         <div class="sidebar-card">
           <div class="sidebar-title">Rubriques</div>
           <div class="sidebar-links">
@@ -847,14 +836,6 @@ function revealMoreParcours(){
 }
 
 /* ── PANELS ── */
-function filterParcours(cat,btn){
-  document.querySelectorAll('#blog-parcours-grid .parcours-card').forEach(card=>{
-    card.style.display=(cat==='tous'||card.dataset.cat===cat)?'block':'none';
-  });
-  document.querySelectorAll('#panel-carnets .filter-btn').forEach(b=>b.classList.remove('active'));
-  if(btn)btn.classList.add('active');
-}
-
 function showPanel(id,btn){
   document.querySelectorAll('.blog-panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.blog-subnav-btn').forEach(b=>b.classList.remove('active'));
