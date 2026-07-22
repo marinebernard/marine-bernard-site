@@ -1,0 +1,54 @@
+name: Mise à jour quotidienne des parcours Komoot
+
+on:
+  schedule:
+    - cron: '0 6 * * *'   # tous les jours à 6h UTC (~7h-8h heure française)
+  workflow_dispatch:        # bouton "Run workflow" manuel dans l'onglet Actions
+
+permissions:
+  contents: write
+
+jobs:
+  update-komoot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout du site
+        uses: actions/checkout@v4
+
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Récupérer les derniers parcours Komoot et régénérer les pages
+        run: node scripts/update-komoot-tours.mjs
+
+      - name: Commit et push si changements
+        run: |
+          git config user.name "Komoot Bot"
+          git config user.email "actions@github.com"
+          git add parcours-komoot.html blog.html
+          if git diff --cached --quiet; then
+            echo "Aucun nouveau parcours aujourd'hui."
+          else
+            git commit -m "Mise à jour automatique des parcours Komoot"
+            git push
+          fi
+
+      # Étape de publication FTP — désactivée par défaut.
+      # Pour l'activer : Settings > Secrets and variables > Actions
+      #   - Variable "FTP_ENABLED" = true
+      #   - Secrets "FTP_SERVER", "FTP_USERNAME", "FTP_PASSWORD"
+      - name: Publication sur l'hébergeur (FTP)
+        if: ${{ vars.FTP_ENABLED == 'true' }}
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/scripts/**
