@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 /**
- * Régénère la grille "derniers parcours" de parcours-komoot.html et blog.html
- * à partir de l'API publique Komoot (aucune authentification requise).
+ * Régénère la grille "derniers parcours" du panneau Carnet de randonnée
+ * de blog.html à partir de l'API publique Komoot (aucune authentification
+ * requise). Ajoute une vraie photo de la sortie quand Komoot en propose une.
  *
- * Ne touche jamais aux blocs "coups de cœur" (rédigés à la main) — seul le
- * contenu entre les marqueurs AUTO-KOMOOT:START / AUTO-KOMOOT:END est remplacé.
+ * Ne touche jamais aux blocs rédigés à la main (coups de cœur, bons plans…) —
+ * seul le contenu entre les marqueurs AUTO-KOMOOT:START / AUTO-KOMOOT:END
+ * est remplacé.
  */
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -14,20 +16,18 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_DIR = path.resolve(__dirname, '..');
 
 const KOMOOT_USER_ID = '4969537527049';
-const MAX_CARDS = 6;
+const FETCH_COUNT = 10;
+const INITIAL_VISIBLE = 4;
 const START_MARKER = '<!-- AUTO-KOMOOT:START (généré automatiquement, ne pas éditer à la main) -->';
 const END_MARKER = '<!-- AUTO-KOMOOT:END -->';
 
-const TARGET_FILES = [
-  { path: path.join(SITE_DIR, 'parcours-komoot.html'), headingTag: 'h2', indent: '    ' },
-  { path: path.join(SITE_DIR, 'blog.html'), headingTag: 'h3', indent: '          ' },
-];
+const TARGET_FILE = { path: path.join(SITE_DIR, 'blog.html'), headingTag: 'h3', indent: '          ' };
+
+const FETCH_HEADERS = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) marine-bernard-site-bot/1.0' };
 
 async function fetchTours() {
-  const url = `https://www.komoot.com/api/v007/users/${KOMOOT_USER_ID}/tours/?limit=${MAX_CARDS}&status=public&type=tour_recorded&sort_field=date&sort_direction=desc`;
-  const res = await fetch(url, {
-    headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) marine-bernard-site-bot/1.0' },
-  });
+  const url = `https://www.komoot.com/api/v007/users/${KOMOOT_USER_ID}/tours/?limit=${FETCH_COUNT}&status=public&type=tour_recorded&sort_field=date&sort_direction=desc`;
+  const res = await fetch(url, { headers: FETCH_HEADERS });
   if (!res.ok) {
     throw new Error(`Komoot API a répondu ${res.status} ${res.statusText}`);
   }
@@ -37,6 +37,21 @@ async function fetchTours() {
     throw new Error('Aucun parcours trouvé dans la réponse Komoot — structure API peut-être changée');
   }
   return tours;
+}
+
+async function fetchCoverPhoto(tourId) {
+  try {
+    const res = await fetch(`https://www.komoot.com/api/v007/tours/${tourId}/cover_images/`, { headers: FETCH_HEADERS });
+    if (!res.ok) return null;
+    const data = await res.json();
+    const items = data?._embedded?.items || [];
+    if (items.length === 0) return null;
+    const chosen = items.find((it) => it.cover === 1) || items[0];
+    if (!chosen?.src) return null;
+    return chosen.src.replace('{width}', '640').replace('{height}', '360').replace('{crop}', 'fill');
+  } catch {
+    return null; // une photo indisponible ne doit jamais faire échouer la mise à jour
+  }
 }
 
 function formatDuration(seconds) {
@@ -77,7 +92,7 @@ function escapeHtml(str) {
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-function buildCard(tour, { headingTag, indent }) {
+function buildCard(tour, photoUrl, { headingTag, indent }, visible) {
   const distanceKm = tour.distance / 1000;
   const distanceStr = distanceKm.toFixed(distanceKm < 10 ? 2 : 1).replace('.', ',');
   const durationStr = formatDuration(tour.duration);
@@ -88,9 +103,18 @@ function buildCard(tour, { headingTag, indent }) {
   const diff = guessDifficulty(distanceKm, tour.elevation_up);
   const name = escapeHtml(tour.name?.trim() || 'Randonnée — Pas-de-Calais');
   const i = indent;
+  const cardClass = `parcours-card reveal${visible ? '' : ' hidden'}`;
 
-  return `${i}<div class="parcours-card reveal" data-cat="${cat}">
-${i}  <div class="parcours-card-header">
+  const photoBlock = photoUrl
+    ? `${i}  <div class="parcours-card-photo"><img src="${photoUrl}" alt="${name}" loading="lazy"></div>\n`
+    : '';
+
+  const mapOrTrace = photoUrl
+    ? ''
+    : `${i}  <iframe class="komoot-embed" src="https://www.komoot.com/tour/${tour.id}/embed?profile=1" height="${headingTag === 'h2' ? 380 : 320}" scrolling="no"></iframe>\n`;
+
+  return `${i}<div class="${cardClass}" data-cat="${cat}">
+${photoBlock}${i}  <div class="parcours-card-header">
 ${i}    <div>
 ${i}      <div class="parcours-card-cat"><svg class="icon"><use href="#${icon}"/></svg> ${label}</div>
 ${i}      <${headingTag} class="parcours-card-title">${name}</${headingTag}>
@@ -103,9 +127,8 @@ ${i}    <div class="meta-item"><span class="meta-icon"><svg class="icon"><use hr
 ${i}    <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-arrow-up"/></svg></span> ${upStr}</div>
 ${i}    <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-arrow-down"/></svg></span> ${downStr}</div>
 ${i}  </div>
-${i}  <iframe class="komoot-embed" src="https://www.komoot.com/tour/${tour.id}/embed?profile=1" height="${headingTag === 'h2' ? 380 : 320}" scrolling="no"></iframe>
-${i}  <div class="parcours-card-footer">
-${i}    <a href="https://www.komoot.com/fr-fr/tour/${tour.id}" target="_blank" rel="noopener" class="komoot-link">Ouvrir sur Komoot</a>
+${mapOrTrace}${i}  <div class="parcours-card-footer">
+${i}    <a href="https://www.komoot.com/fr-fr/tour/${tour.id}" target="_blank" rel="noopener" class="komoot-link">${photoUrl ? 'Voir le tracé sur Komoot' : 'Ouvrir sur Komoot'}</a>
 ${i}    <span class="diff-badge ${diff.cls}">${diff.label}</span>
 ${i}  </div>
 ${i}</div>`;
@@ -131,17 +154,17 @@ async function main() {
   const tours = await fetchTours();
   console.log(`${tours.length} parcours récupérés.`);
 
-  let anyChanged = false;
-  for (const target of TARGET_FILES) {
-    const cardsHtml = tours.map((t) => buildCard(t, target)).join('\n\n');
-    const changed = updateFile(target.path, cardsHtml);
-    console.log(`${path.basename(target.path)} : ${changed ? 'mis à jour' : 'déjà à jour'}`);
-    anyChanged = anyChanged || changed;
-  }
+  console.log('Recherche de photos de couverture par parcours…');
+  const photos = await Promise.all(tours.map((t) => fetchCoverPhoto(t.id)));
+  console.log(`${photos.filter(Boolean).length}/${tours.length} parcours avec photo.`);
 
-  if (!anyChanged) {
-    console.log('Aucun changement — rien à publier aujourd’hui.');
-  }
+  const cardsHtml = tours
+    .map((t, idx) => buildCard(t, photos[idx], TARGET_FILE, idx < INITIAL_VISIBLE))
+    .join('\n\n');
+
+  const changed = updateFile(TARGET_FILE.path, cardsHtml);
+  console.log(`${path.basename(TARGET_FILE.path)} : ${changed ? 'mis à jour' : 'déjà à jour'}`);
+  if (!changed) console.log('Aucun changement — rien à publier aujourd’hui.');
 }
 
 main().catch((err) => {

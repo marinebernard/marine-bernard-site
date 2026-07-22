@@ -1053,6 +1053,23 @@ html,body{
   box-shadow:0 14px 38px rgba(45,27,105,0.1);
   transform:translateY(-3px);
 }
+.parcours-card.hidden{display:none}
+
+.parcours-card-photo{aspect-ratio:16/9;overflow:hidden;background:#F0E6FF;}
+.parcours-card-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.45s ease;}
+.parcours-card:hover .parcours-card-photo img{transform:scale(1.045)}
+
+.coups-title{font-family:'Playfair Display',serif;font-size:1.15rem;color:#2D1B69;margin-bottom:1rem;}
+
+.parcours-load-more-btn{
+  font-family:'Inter',sans-serif;font-size:0.74rem;font-weight:600;
+  letter-spacing:0.08em;text-transform:uppercase;
+  background:#fff;color:#3B6D11;border:1.5px solid rgba(59,109,17,0.35);
+  padding:10px 24px;border-radius:20px;cursor:none;
+  transition:background 0.2s,color 0.2s;
+}
+.parcours-load-more-btn:hover{background:#3B6D11;color:#fff}
+
 .parcours-card-header{
   padding:0.9rem 1.1rem 0.6rem;
   display:flex;align-items:flex-start;justify-content:space-between;gap:0.8rem;
