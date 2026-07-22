@@ -38,6 +38,7 @@ jobs:
       # Étape de publication FTP — désactivée par défaut.
       # Pour l'activer : Settings > Secrets and variables > Actions
       #   - Variable "FTP_ENABLED" = true
+      #   - Variable "FTP_SERVER_DIR" = dossier distant (ex. "./" ou "/marine-bernard.fr/")
       #   - Secrets "FTP_SERVER", "FTP_USERNAME", "FTP_PASSWORD"
       - name: Publication sur l'hébergeur (FTP)
         if: ${{ vars.FTP_ENABLED == 'true' }}
@@ -47,6 +48,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./
+          server-dir: ${{ vars.FTP_SERVER_DIR || './' }}
           exclude: |
             **/.git*
             **/.git*/**
