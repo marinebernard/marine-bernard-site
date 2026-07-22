@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <style>
+    .petale-v { animation: spin 6s linear infinite; transform-origin: 16px 16px; }
+    .petale-or { animation: spin 6s linear infinite reverse; transform-origin: 16px 16px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+
+  <!-- Pétales violets (axe H/V) -->
+  <g class="petale-v">
+    <ellipse cx="16" cy="5.5" rx="3.2" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+    <ellipse cx="16" cy="26.5" rx="3.2" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+    <ellipse cx="5.5" cy="16" rx="5.5" ry="3.2" fill="#8B6BB1" opacity="0.9"/>
+    <ellipse cx="26.5" cy="16" rx="5.5" ry="3.2" fill="#8B6BB1" opacity="0.9"/>
+  </g>
+
+  <!-- Pétales or (diagonales) -->
+  <g class="petale-or">
+    <ellipse cx="8.5" cy="8.5" rx="3" ry="5" fill="#C9A96E" opacity="0.85" transform="rotate(-45 8.5 8.5)"/>
+    <ellipse cx="23.5" cy="8.5" rx="3" ry="5" fill="#C9A96E" opacity="0.85" transform="rotate(45 23.5 8.5)"/>
+    <ellipse cx="8.5" cy="23.5" rx="3" ry="5" fill="#C9A96E" opacity="0.85" transform="rotate(45 8.5 23.5)"/>
+    <ellipse cx="23.5" cy="23.5" rx="3" ry="5" fill="#C9A96E" opacity="0.85" transform="rotate(-45 23.5 23.5)"/>
+  </g>
+
+  <!-- Cœur central violet -->
+  <circle cx="16" cy="16" r="5.5" fill="#2D1B69"/>
+
+  <!-- Lettre M -->
+  <text x="16" y="19.5"
+    text-anchor="middle"
+    font-family="'Playfair Display', Georgia, serif"
+    font-size="7.5"
+    font-weight="700"
+    font-style="italic"
+    fill="#FAF8FF"
+    letter-spacing="0">M</text>
+</svg>

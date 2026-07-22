@@ -1,0 +1,41 @@
+# ═══════════════════════════════════════════════════════════════
+#  .htaccess — Marine Bernard · marine-bernard.fr
+#  URLs propres sans extension .html
+# ═══════════════════════════════════════════════════════════════
+
+Options -Indexes
+RewriteEngine On
+
+# ── Redirection HTTPS (si certificat SSL actif) ──────────────
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ── Redirection www → sans www ───────────────────────────────
+# RewriteCond %{HTTP_HOST} ^www\.marine-bernard\.fr [NC]
+# RewriteRule ^(.*)$ https://marine-bernard.fr/$1 [L,R=301]
+
+# ── Supprimer le .html des URLs ──────────────────────────────
+
+# Si quelqu'un tape l'URL avec .html → rediriger sans .html
+RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# Servir le fichier .html correspondant sans l'extension
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^([^/]+)/?$ $1.html [L]
+
+# ── Page d'erreur 404 personnalisée (optionnel) ───────────────
+# ErrorDocument 404 /404.html
+
+# ── Cache navigateur (performances) ──────────────────────────
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType text/javascript "access plus 1 month"
+  ExpiresByType image/webp "access plus 6 months"
+  ExpiresByType image/jpeg "access plus 6 months"
+  ExpiresByType image/png "access plus 6 months"
+  ExpiresByType image/svg+xml "access plus 6 months"
+</IfModule>

@@ -1,0 +1,28 @@
+# ═══════════════════════════════════════════════════════════════
+#  .htaccess — Marine Bernard · marine-bernard.fr
+#  URLs propres sans extension + redirections dossiers
+# ═══════════════════════════════════════════════════════════════
+
+Options -Indexes
+RewriteEngine On
+
+# ── Redirection .html → URL propre ──────────────────────────
+RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# ── Servir .html sans extension ─────────────────────────────
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^([^/]+)/?$ $1.html [L]
+
+# ── Cache navigateur ────────────────────────────────────────
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType text/javascript "access plus 1 month"
+  ExpiresByType image/webp "access plus 6 months"
+  ExpiresByType image/jpeg "access plus 6 months"
+  ExpiresByType image/png "access plus 6 months"
+  ExpiresByType image/svg+xml "access plus 6 months"
+</IfModule>

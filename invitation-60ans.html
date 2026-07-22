@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invitation 60 ans — Thème Voyage · Marine Bernard</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+/* ── PAGE PROJET ── */
+.projet-hero{
+  padding:4rem 3rem 3rem;
+  border-bottom:1px solid rgba(139,107,177,0.12);
+  max-width:1000px;margin:0 auto;
+}
+.projet-back{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:0.74rem;color:#8B6BB1;text-decoration:none;
+  letter-spacing:0.08em;text-transform:uppercase;font-weight:500;
+  margin-bottom:2rem;transition:color 0.2s;
+}
+.projet-back:hover{color:#2D1B69}
+.projet-back::before{content:'←';font-size:0.9rem}
+
+.projet-eyebrow{
+  font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;
+  color:#C9A96E;margin-bottom:0.5rem;
+  display:flex;align-items:center;gap:8px;
+}
+.projet-eyebrow::before{content:'';display:block;width:22px;height:1.5px;background:#C9A96E}
+
+.projet-title{
+  font-family:'Playfair Display',serif;
+  font-size:2.6rem;font-weight:700;color:#2D1B69;
+  line-height:1.15;margin-bottom:0.6rem;
+}
+.projet-title em{font-style:italic;color:#8B6BB1}
+
+.projet-sub{
+  font-size:0.88rem;color:#7a6090;
+  line-height:1.7;max-width:560px;margin-bottom:1.5rem;
+}
+
+.projet-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:2rem;}
+.projet-tag{
+  display:inline-block;font-size:0.7rem;padding:5px 14px;
+  border-radius:20px;font-weight:500;
+  background:#F0E6FF;color:#5a3d99;
+  border:1px solid rgba(139,107,177,0.2);
+}
+.projet-tag.rose{background:#fce8ee;color:#b04060;border-color:rgba(176,64,96,0.2)}
+.projet-tag.dark{background:#2D1B69;color:#fff;border-color:#2D1B69}
+
+/* ── LAYOUT ── */
+.projet-body{
+  max-width:1000px;margin:0 auto;
+  padding:3rem;
+  display:grid;grid-template-columns:1fr 320px;gap:3rem;
+  align-items:start;
+}
+
+/* ── VISUELS ── */
+.projet-visual{
+  border-radius:20px;overflow:hidden;
+  border:1px solid rgba(139,107,177,0.15);
+  box-shadow:0 20px 60px rgba(45,27,105,0.12);
+}
+.projet-visual img{width:100%;display:block;}
+
+.mockup-label{
+  font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;
+  color:#9a88b8;margin-top:0.6rem;text-align:center;
+}
+
+/* ── PALETTE COULEURS ── */
+.palette{
+  display:flex;gap:8px;margin:1rem 0 0.4rem;
+}
+.swatch{
+  width:36px;height:36px;border-radius:50%;
+  border:2px solid rgba(255,255,255,0.8);
+  box-shadow:0 2px 8px rgba(0,0,0,0.12);
+  flex-shrink:0;
+}
+.swatch-label{font-size:0.68rem;color:#9a88b8;text-align:center;margin-top:3px}
+
+/* ── SIDEBAR ── */
+.projet-info{display:flex;flex-direction:column;gap:1.5rem;position:sticky;top:90px;align-self:start;}
+
+.info-card{
+  background:#fff;border:1px solid rgba(139,107,177,0.15);
+  border-radius:16px;padding:1.3rem;
+}
+.info-card-title{
+  font-size:0.67rem;letter-spacing:0.16em;text-transform:uppercase;
+  color:#C9A96E;font-weight:600;margin-bottom:0.9rem;
+}
+.info-row{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  font-size:0.8rem;padding:0.4rem 0;
+  border-bottom:1px solid rgba(139,107,177,0.08);gap:1rem;
+}
+.info-row:last-child{border-bottom:none}
+.info-label{color:#9a88b8;flex-shrink:0}
+.info-val{color:#2D1B69;font-weight:500;text-align:right}
+
+.competences-list{display:flex;flex-direction:column;gap:6px}
+.comp-item{
+  display:flex;align-items:center;gap:8px;
+  font-size:0.8rem;color:#5a4870;
+}
+.comp-item::before{content:'✦';color:#C9A96E;font-size:0.65rem;flex-shrink:0}
+
+.projet-cta{
+  background:linear-gradient(135deg,#2D1B69,#8B6BB1);
+  border-radius:16px;padding:1.3rem;text-align:center;
+}
+.projet-cta p{font-size:0.8rem;color:rgba(255,255,255,0.78);margin-bottom:0.9rem;line-height:1.6}
+.cta-btn{
+  display:inline-block;background:#C9A96E;color:#fff;
+  padding:10px 22px;border-radius:20px;
+  font-size:0.74rem;letter-spacing:0.1em;text-transform:uppercase;
+  font-weight:600;text-decoration:none;transition:background 0.2s;
+}
+.cta-btn:hover{background:#b8945a}
+
+/* ── DESCRIPTION ── */
+.projet-desc-section{
+  max-width:1000px;margin:0 auto;
+  padding:0 3rem 3rem;
+}
+.desc-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.3rem;color:#2D1B69;margin-bottom:0.8rem;
+}
+.desc-text{
+  font-size:0.86rem;color:#5a4870;line-height:1.82;margin-bottom:1.5rem;
+}
+
+/* ── BRIEF CLIENT ── */
+.brief-box{
+  background:linear-gradient(135deg,#fce8ee,#fff5f8);
+  border:1px solid rgba(176,64,96,0.15);
+  border-left:3px solid #C9A96E;
+  border-radius:0 14px 14px 0;
+  padding:1.3rem 1.5rem;
+  margin-bottom:2rem;
+  font-size:0.86rem;color:#5a4870;line-height:1.8;font-style:italic;
+}
+.brief-box strong{
+  display:block;font-style:normal;
+  font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;
+  color:#C9A96E;font-weight:600;margin-bottom:0.4rem;
+}
+
+/* ── CHOIX GRAPHIQUES ── */
+.choix-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:1.5rem;}
+.choix-card{
+  background:#fff;border:1px solid rgba(139,107,177,0.15);
+  border-radius:14px;padding:1rem;
+}
+.choix-icon{font-size:1.4rem;margin-bottom:0.5rem}
+.choix-title{font-size:0.78rem;font-weight:600;color:#2D1B69;margin-bottom:0.3rem}
+.choix-desc{font-size:0.74rem;color:#7a6090;line-height:1.55}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .projet-hero{padding:2.5rem 1.5rem 2rem}
+  .projet-body{grid-template-columns:1fr;padding:2rem 1.5rem}
+  .projet-desc-section{padding:0 1.5rem 2rem}
+  .choix-grid{grid-template-columns:1fr}
+  .projet-title{font-size:2rem}
+}
+</style>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KZEHR4YQFQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KZEHR4YQFQ');
+</script>
+</head>
+<body>
+
+<!-- ICÔNES SVG (sprite) -->
+<svg style="display:none" aria-hidden="true">
+<symbol id="icon-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9a1 1 0 0 0 1 1h3v-5h4v5h3a1 1 0 0 0 1-1v-9"/></symbol>
+<symbol id="icon-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.2"/><rect x="13" y="4" width="7" height="7" rx="1.2"/><rect x="4" y="13" width="7" height="7" rx="1.2"/><rect x="13" y="13" width="7" height="7" rx="1.2"/></symbol>
+<symbol id="icon-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="9.5" width="16" height="10.5" rx="1"/><path d="M4 13.5h16"/><path d="M12 9.5v10.5"/><path d="M12 9.5c-1.5 0-4-1-4-3a2.2 2.2 0 0 1 4 0zM12 9.5c1.5 0 4-1 4-3a2.2 2.2 0 0 0-4 0z"/></symbol>
+<symbol id="icon-plane" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></symbol>
+<symbol id="icon-flower" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><circle cx="12" cy="6" r="2.6"/><circle cx="18" cy="12" r="2.6"/><circle cx="12" cy="18" r="2.6"/><circle cx="6" cy="12" r="2.6"/></symbol>
+<symbol id="icon-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5a1.5 1.5 0 0 1 1.5-1.5h2l1-2h7l1 2h2A1.5 1.5 0 0 1 20 8.5v9A1.5 1.5 0 0 1 18.5 19h-13A1.5 1.5 0 0 1 4 17.5z"/><circle cx="12" cy="13" r="3.3"/></symbol>
+<symbol id="icon-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3.5" cy="6" r="1" fill="currentColor" stroke="none"/><circle cx="3.5" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="3.5" cy="18" r="1" fill="currentColor" stroke="none"/></symbol>
+</svg>
+
+<!-- CURSEUR FLEUR -->
+<div id="cursor-flower">
+  <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="15" cy="15" r="4.5" fill="#2D1B69"/>
+    <ellipse cx="15" cy="6.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+    <ellipse cx="15" cy="23.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+    <ellipse cx="6.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
+    <ellipse cx="23.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
+    <ellipse cx="9" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 9 9)"/>
+    <ellipse cx="21" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 21 9)"/>
+    <ellipse cx="9" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 9 21)"/>
+    <ellipse cx="21" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 21 21)"/>
+    <circle cx="15" cy="15" r="3.2" fill="#FAF8FF"/>
+  </svg>
+</div>
+
+<!-- NAVIGATION -->
+<nav class="nav" id="navbar">
+  <a href="index.html" class="nav-logo-wrap">
+    <svg class="logo-mark" viewBox="0 0 30 30" aria-hidden="true">
+      <circle cx="15" cy="15" r="4.5" fill="#2D1B69"/>
+      <ellipse cx="15" cy="6.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+      <ellipse cx="15" cy="23.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+      <ellipse cx="6.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
+      <ellipse cx="23.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
+      <ellipse cx="9" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 9 9)"/>
+      <ellipse cx="21" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 21 9)"/>
+      <ellipse cx="9" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 9 21)"/>
+      <ellipse cx="21" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 21 21)"/>
+      <circle cx="15" cy="15" r="3.2" fill="#FAF8FF"/>
+    </svg>
+    <span class="logo-text">Marine <em>Bernard</em></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="index.html#projets"  class="active">Projets</a></li>
+    <li><a href="index.html#photos">Photos</a></li>
+    <li><a href="parcours-komoot.html">Randonnée</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="window.location='index.html#contact'">Me contacter</button>
+</nav>
+
+<nav class="breadcrumb" aria-label="Fil d'Ariane"><div class="breadcrumb-inner"><a href="index.html"><svg class="icon bc-icon"><use href="#icon-home"/></svg> Accueil</a><a href="index.html#projets"><svg class="icon bc-icon"><use href="#icon-grid"/></svg> Projets</a><span class="breadcrumb-current"><svg class="icon bc-icon"><use href="#icon-gift"/></svg> Invitation 60 ans</span></div></nav>
+
+<!-- HEADER -->
+<div class="projet-hero reveal">
+  <a href="index.html#projets" class="projet-back">Retour aux projets</a>
+  <p class="projet-eyebrow">Design Print · Événementiel</p>
+  <h1 class="projet-title">Invitation anniversaire<br><em>60 ans — Thème Voyage & Van</em></h1>
+  <p class="projet-sub">Création d'une invitation sur-mesure pour les 60 ans d'une passionnée de voyage en van. Univers carte postale aérienne, palette rose poudré & bleu denim, avec intégration d'une photo personnelle de la fêtée.</p>
+  <div class="projet-tags">
+    <span class="projet-tag">Design Print</span>
+    <span class="projet-tag">Événementiel</span>
+    <span class="projet-tag rose">Carte postale</span>
+    <span class="projet-tag rose">Voyage · Van life</span>
+    <span class="projet-tag">Format carré</span>
+    <span class="projet-tag dark">Commande personnelle</span>
+  </div>
+</div>
+
+<!-- CORPS -->
+<div class="projet-body">
+
+  <div>
+    <!-- Visuel mockup -->
+    <div class="projet-visual reveal">
+      <img src="images/invitation-retraite-cathy.png" alt="Invitation anniversaire 60 ans thème voyage van — mockup mise en situation" class="zoomable" onclick="openLightbox(this.src)">
+    </div>
+    <p class="mockup-label">Mise en situation · Mockup éditorial</p>
+
+    <!-- Palette couleurs -->
+    <div class="info-card reveal" style="margin-top:1.5rem">
+      <div class="info-card-title">Palette graphique</div>
+      <div class="palette">
+        <div>
+          <div class="swatch" style="background:#e8a0b0"></div>
+          <div class="swatch-label">Rose</div>
+        </div>
+        <div>
+          <div class="swatch" style="background:#8fa8c8"></div>
+          <div class="swatch-label">Bleu</div>
+        </div>
+        <div>
+          <div class="swatch" style="background:#2d3f6b"></div>
+          <div class="swatch-label">Marine</div>
+        </div>
+        <div>
+          <div class="swatch" style="background:#ffffff;border:1.5px solid #ddd"></div>
+          <div class="swatch-label">Blanc</div>
+        </div>
+        <div>
+          <div class="swatch" style="background:#c97a8a"></div>
+          <div class="swatch-label">Corail</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="projet-info">
+
+    <div class="info-card projet-toc reveal">
+      <div class="info-card-title projet-toc-title"><svg class="icon"><use href="#icon-list"/></svg> Sur cette page</div>
+      <div class="projet-toc-list">
+        <a href="#mission" class="projet-toc-link">Le brief</a>
+        <a href="#demarche" class="projet-toc-link">La démarche</a>
+        <a href="#choix" class="projet-toc-link">Les choix graphiques</a>
+      </div>
+    </div>
+
+    <div class="info-card reveal">
+      <div class="info-card-title">Détails du projet</div>
+      <div class="info-row"><span class="info-label">Type</span><span class="info-val">Commande personnelle</span></div>
+      <div class="info-row"><span class="info-label">Occasion</span><span class="info-val">Anniversaire 60 ans</span></div>
+      <div class="info-row"><span class="info-label">Format</span><span class="info-val">Carré · Print & Digital</span></div>
+      <div class="info-row"><span class="info-label">Univers</span><span class="info-val">Voyage · Van life · Carte postale</span></div>
+      <div class="info-row"><span class="info-label">Éléments</span><span class="info-val">Photo, timbre, avion, cœur</span></div>
+    </div>
+
+    <div class="info-card reveal">
+      <div class="info-card-title">Compétences mobilisées</div>
+      <div class="competences-list">
+        <div class="comp-item">Direction artistique sur brief client</div>
+        <div class="comp-item">Détourage & intégration photo</div>
+        <div class="comp-item">Typographie mixte (script & serif)</div>
+        <div class="comp-item">Mise en page narrative & émotionnelle</div>
+        <div class="comp-item">Création d'éléments graphiques (timbre, cachet)</div>
+        <div class="comp-item">Livraison print & réseaux sociaux</div>
+      </div>
+    </div>
+
+    <div class="projet-cta reveal">
+      <p>Une invitation ou un faire-part à créer pour un événement unique ?</p>
+      <a href="index.html#contact" class="cta-btn">Me contacter →</a>
+    </div>
+
+  </aside>
+</div>
+
+<!-- DESCRIPTION -->
+<div class="projet-desc-section">
+
+  <div class="brief-box reveal" id="mission">
+    <strong>Le brief client</strong>
+    Créer une invitation pour les 60 ans de ma belle-mère, grande passionnée de voyages en van. Elle adore les escapades sur la route, la liberté, les paysages. L'invitation devait refléter sa personnalité aventurière et chaleureuse, avec une touche romantique — et intégrer une photo d'elle.
+  </div>
+
+  <h2 class="desc-title reveal" id="demarche">La démarche créative</h2>
+  <p class="desc-text reveal">
+    Le brief évoquait immédiatement l'univers de la correspondance et du voyage : j'ai opté pour le format carte postale aérienne, avec ses bandes diagonales caractéristiques en rose et bleu denim. Ce motif, universellement reconnu, ancre immédiatement l'invitation dans un imaginaire de départ et d'évasion.
+  </p>
+  <p class="desc-text reveal">
+    La typographie mêle une écriture script élégante pour le prénom — personnelle et chaleureuse — avec une police serif pour les informations pratiques. L'intégration de la photo détourée de la fêtée apporte une dimension intime et unique que l'on ne retrouve pas dans les invitations standard.
+  </p>
+
+  <h2 class="desc-title reveal" id="choix">Les choix graphiques</h2>
+  <div class="choix-grid">
+    <div class="choix-card reveal">
+      <div class="choix-icon"><svg class="icon"><use href="#icon-plane"/></svg></div>
+      <div class="choix-title">Bandes aérogramme</div>
+      <div class="choix-desc">Référence directe aux enveloppes par avion vintage — évoque instantanément le voyage et l'aventure.</div>
+    </div>
+    <div class="choix-card reveal">
+      <div class="choix-icon"><svg class="icon"><use href="#icon-flower"/></svg></div>
+      <div class="choix-title">Palette rose & marine</div>
+      <div class="choix-desc">Douce et festive sans être criarde. Le bleu denim rappelle la tenue de la fêtée sur la photo intégrée.</div>
+    </div>
+    <div class="choix-card reveal">
+      <div class="choix-icon"><svg class="icon"><use href="#icon-camera"/></svg></div>
+      <div class="choix-title">Photo détourée intégrée</div>
+      <div class="choix-desc">La présence de la fêtée sur son invitation lui donne un caractère unique et personnalisé, impossible à confondre.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- NAVIGATION PROJET PRÉCÉDENT / SUIVANT -->
+<div class="projet-nav-adjacent">
+  <a href="invitation-anniversaire" class="projet-nav-link prev">
+    <span class="projet-nav-label">← Projet précédent</span>
+    <span class="projet-nav-name">Invitation anniversaire 50 ans</span>
+  </a>
+  <a href="colorale" class="projet-nav-link next">
+    <span class="projet-nav-label">Projet suivant →</span>
+    <span class="projet-nav-name">Colorale Club</span>
+  </a>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox(); event.stopPropagation();">✕</button>
+  <img id="lightbox-img" src="" alt="Vue agrandie">
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <svg width="42" height="26" viewBox="0 0 42 26" style="display:block;margin:0 auto 0.5rem">
+    <circle cx="21" cy="13" r="4.5" fill="#8B6BB1"/>
+    <ellipse cx="21" cy="4" rx="3" ry="4.3" fill="#d4b8f0"/>
+    <ellipse cx="21" cy="22" rx="3" ry="4.3" fill="#d4b8f0"/>
+    <ellipse cx="12" cy="13" rx="4.3" ry="3" fill="#C9A96E"/>
+    <ellipse cx="30" cy="13" rx="4.3" ry="3" fill="#C9A96E"/>
+    <circle cx="21" cy="13" r="2.8" fill="#F0E6FF"/>
+  </svg>
+  Marine Bernard · Portfolio · 2026 · Hauts-de-France
+</footer>
+
+<script>
+const cur=document.getElementById('cursor-flower');
+let mx=0,my=0,cx=0,cy=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function loop(){cx+=(mx-cx)*0.13;cy+=(my-cy)*0.13;cur.style.left=cx+'px';cur.style.top=cy+'px';requestAnimationFrame(loop)})();
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target)}});},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+document.querySelectorAll('a[href]').forEach(a=>{
+  a.addEventListener('click',function(e){
+    const href=this.getAttribute('href');
+    if(!href||!href.startsWith('#')||href==='#') return;
+    const target=document.getElementById(href.slice(1));
+    if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth'});}
+  });
+});
+
+/* ── LIGHTBOX ── */
+const lightbox=document.getElementById('lightbox');
+const lightboxImg=document.getElementById('lightbox-img');
+function openLightbox(src){lightboxImg.src=src;lightbox.classList.add('open');document.body.style.overflow='hidden';}
+function closeLightbox(){lightbox.classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
+
+/* ── SOMMAIRE (scroll-spy) ── */
+const tocLinks=document.querySelectorAll('.projet-toc-link');
+const tocSections=[...tocLinks].map(a=>document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+const tocObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      tocLinks.forEach(a=>a.classList.remove('active'));
+      const match=document.querySelector(`.projet-toc-link[href="#${e.target.id}"]`);
+      if(match)match.classList.add('active');
+    }
+  });
+},{rootMargin:'-90px 0px -70% 0px'});
+tocSections.forEach(s=>tocObs.observe(s));
+</script>
+</body>
+</html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Refonte Pirus Composites — Marine Bernard</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+.projet-hero{padding:4rem 3rem 3rem;border-bottom:1px solid rgba(139,107,177,0.12);max-width:1000px;margin:0 auto;}
+.projet-back{display:inline-flex;align-items:center;gap:6px;font-size:0.74rem;color:#8B6BB1;text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;font-weight:500;margin-bottom:2rem;transition:color 0.2s;}
+.projet-back:hover{color:#2D1B69}
+.projet-back::before{content:'←';font-size:0.9rem}
+.projet-eyebrow{font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:#C9A96E;margin-bottom:0.5rem;display:flex;align-items:center;gap:8px;}
+.projet-eyebrow::before{content:'';display:block;width:22px;height:1.5px;background:#C9A96E}
+.projet-title{font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:700;color:#2D1B69;line-height:1.15;margin-bottom:0.6rem;}
+.projet-title em{font-style:italic;color:#8B6BB1}
+.projet-sub{font-size:0.88rem;color:#7a6090;line-height:1.7;max-width:560px;margin-bottom:1.5rem;}
+.projet-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:2rem;}
+.projet-tag{display:inline-block;font-size:0.7rem;padding:5px 14px;border-radius:20px;font-weight:500;background:#F0E6FF;color:#5a3d99;border:1px solid rgba(139,107,177,0.2);}
+.projet-tag.dark{background:#2D1B69;color:#fff;border-color:#2D1B69}
+.projet-tag.orange{background:#fdeee3;color:#a34413;border-color:rgba(232,99,28,0.25)}
+
+.projet-body{max-width:1000px;margin:0 auto;padding:3rem;display:grid;grid-template-columns:1fr 320px;gap:3rem;align-items:start;}
+
+.projet-visual{border-radius:20px;overflow:hidden;border:1px solid rgba(139,107,177,0.15);box-shadow:0 20px 60px rgba(45,27,105,0.12);}
+.projet-visual img{width:100%;display:block;}
+.mockup-label{font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:#9a88b8;margin-top:0.6rem;text-align:center;}
+
+/* Comparaison avant/après */
+.avant-apres{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:1.5rem;}
+.avant-apres-item{border-radius:14px;overflow:hidden;border:1px solid rgba(139,107,177,0.12);}
+.avant-apres-item img{width:100%;display:block;}
+.avant-apres-label{
+  font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;
+  font-weight:600;text-align:center;padding:7px;
+}
+.label-avant{background:#f5f0e8;color:#8a7060}
+.label-apres{background:#fdeee3;color:#a34413}
+
+/* Étapes savoir-faire */
+.etapes-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:10px;
+  margin-top:1.2rem;
+}
+.etape-item{
+  background:#fff;border:1px solid rgba(139,107,177,0.15);
+  border-radius:12px;padding:0.9rem 0.5rem;
+  text-align:center;
+}
+.etape-emoji{font-size:1.5rem;margin-bottom:5px}
+.etape-label{font-size:0.64rem;color:#7a6090;letter-spacing:0.03em;line-height:1.3}
+
+/* Palette */
+.palette{display:flex;gap:8px;margin:1rem 0 0.4rem;}
+.swatch{width:36px;height:36px;border-radius:50%;border:2px solid rgba(255,255,255,0.8);box-shadow:0 2px 8px rgba(0,0,0,0.12);flex-shrink:0;}
+.swatch-label{font-size:0.68rem;color:#9a88b8;text-align:center;margin-top:3px}
+
+/* Sidebar */
+.projet-info{display:flex;flex-direction:column;gap:1.5rem;position:sticky;top:90px;align-self:start;}
+.info-card{background:#fff;border:1px solid rgba(139,107,177,0.15);border-radius:16px;padding:1.3rem;}
+.info-card-title{font-size:0.67rem;letter-spacing:0.16em;text-transform:uppercase;color:#C9A96E;font-weight:600;margin-bottom:0.9rem;}
+.info-row{display:flex;justify-content:space-between;align-items:flex-start;font-size:0.8rem;padding:0.4rem 0;border-bottom:1px solid rgba(139,107,177,0.08);gap:1rem;}
+.info-row:last-child{border-bottom:none}
+.info-label{color:#9a88b8;flex-shrink:0}
+.info-val{color:#2D1B69;font-weight:500;text-align:right}
+.competences-list{display:flex;flex-direction:column;gap:6px}
+.comp-item{display:flex;align-items:center;gap:8px;font-size:0.8rem;color:#5a4870;}
+.comp-item::before{content:'✦';color:#C9A96E;font-size:0.65rem;flex-shrink:0}
+.projet-cta{background:linear-gradient(135deg,#2D1B69,#8B6BB1);border-radius:16px;padding:1.3rem;text-align:center;}
+.projet-cta p{font-size:0.8rem;color:rgba(255,255,255,0.78);margin-bottom:0.9rem;line-height:1.6}
+.cta-btn{display:inline-block;background:#C9A96E;color:#fff;padding:10px 22px;border-radius:20px;font-size:0.74rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;text-decoration:none;transition:background 0.2s;}
+.cta-btn:hover{background:#b8945a}
+
+/* Description */
+.projet-desc-section{max-width:1000px;margin:0 auto;padding:0 3rem 3rem;}
+.desc-title{font-family:'Playfair Display',serif;font-size:1.3rem;color:#2D1B69;margin-bottom:0.8rem;}
+.desc-text{font-size:0.86rem;color:#5a4870;line-height:1.82;margin-bottom:1.5rem;}
+.brief-box{background:linear-gradient(135deg,#fdeee3,#FAF8FF);border:1px solid rgba(232,99,28,0.15);border-left:3px solid #C9A96E;border-radius:0 14px 14px 0;padding:1.3rem 1.5rem;margin-bottom:2rem;font-size:0.86rem;color:#5a4870;line-height:1.8;font-style:italic;}
+.brief-box strong{display:block;font-style:normal;font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:#C9A96E;font-weight:600;margin-bottom:0.4rem;}
+
+/* Résultats */
+.resultats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:1.5rem 0;}
+.resultat-card{background:linear-gradient(135deg,#2D1B69,#5a3d99);border-radius:14px;padding:1.2rem;text-align:center;}
+.resultat-num{font-family:'Playfair Display',serif;font-size:1.8rem;color:#C9A96E;line-height:1;margin-bottom:4px;}
+.resultat-label{font-size:0.72rem;color:rgba(255,255,255,0.78);letter-spacing:0.08em;text-transform:uppercase;}
+
+/* Choix graphiques */
+.choix-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:1.5rem;}
+.choix-card{background:#fff;border:1px solid rgba(139,107,177,0.15);border-radius:14px;padding:1rem;}
+.choix-icon{font-size:1.4rem;margin-bottom:0.5rem}
+.choix-title{font-size:0.78rem;font-weight:600;color:#2D1B69;margin-bottom:0.3rem}
+.choix-desc{font-size:0.74rem;color:#7a6090;line-height:1.55}
+
+@media(max-width:768px){
+  .projet-hero{padding:2.5rem 1.5rem 2rem}
+  .projet-body{grid-template-columns:1fr;padding:2rem 1.5rem}
+  .projet-desc-section{padding:0 1.5rem 2rem}
+  .choix-grid,.resultats-grid,.avant-apres{grid-template-columns:1fr}
+  .etapes-grid{grid-template-columns:repeat(2,1fr)}
+  .projet-title{font-size:2rem}
+}
+</style>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KZEHR4YQFQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KZEHR4YQFQ');
+</script>
+</head>
+<body>
+
+<!-- ICÔNES SVG (sprite) -->
+<svg style="display:none" aria-hidden="true">
+<symbol id="icon-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9a1 1 0 0 0 1 1h3v-5h4v5h3a1 1 0 0 0 1-1v-9"/></symbol>
+<symbol id="icon-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.2"/><rect x="13" y="4" width="7" height="7" rx="1.2"/><rect x="4" y="13" width="7" height="7" rx="1.2"/><rect x="13" y="13" width="7" height="7" rx="1.2"/></symbol>
+<symbol id="icon-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3v2.4M12 18.6V21M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M3 12h2.4M18.6 12H21M4.9 19.1l1.7-1.7M17.4 6.6l1.7-1.7"/></symbol>
+<symbol id="icon-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5.5l4 4L8 20H4v-4z"/><path d="M12.5 7.5l4 4"/></symbol>
+<symbol id="icon-cube" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 20 7.5v9L12 21 4 16.5v-9z"/><path d="M12 3v9M4 7.5l8 4.5 8-4.5"/></symbol>
+<symbol id="icon-wrench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5a4 4 0 0 0-5.4 4.9L3 17.5 5.5 20l6.1-6.1a4 4 0 0 0 4.9-5.4l-2.6 2.6-2-2z"/></symbol>
+<symbol id="icon-box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9-4 9 4-9 4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/></symbol>
+<symbol id="icon-image" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 17l5-5 4 4 3-3 4 4"/></symbol>
+<symbol id="icon-palette" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5a8.5 8.5 0 1 0 0 17c1 0 1.6-.7 1.6-1.5 0-.4-.15-.7-.4-1-.25-.3-.4-.6-.4-1 0-.8.65-1.5 1.5-1.5H16a4 4 0 0 0 4-4c0-4.7-3.8-8-8-8z"/><circle cx="7.5" cy="11" r="1.05" fill="currentColor" stroke="none"/><circle cx="9.5" cy="7.2" r="1.05" fill="currentColor" stroke="none"/><circle cx="14.5" cy="7.2" r="1.05" fill="currentColor" stroke="none"/><circle cx="16.7" cy="11" r="1.05" fill="currentColor" stroke="none"/></symbol>
+<symbol id="icon-compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M15 9l-2 5-5 2 2-5z"/></symbol>
+<symbol id="icon-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3.5" cy="6" r="1" fill="currentColor" stroke="none"/><circle cx="3.5" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="3.5" cy="18" r="1" fill="currentColor" stroke="none"/></symbol>
+</svg>
+
+<div id="cursor-flower">
+  <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="15" cy="15" r="4.5" fill="#2D1B69"/>
+    <ellipse cx="15" cy="6.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+    <ellipse cx="15" cy="23.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+    <ellipse cx="6.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
+    <ellipse cx="23.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
+    <ellipse cx="9" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 9 9)"/>
+    <ellipse cx="21" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 21 9)"/>
+    <ellipse cx="9" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 9 21)"/>
+    <ellipse cx="21" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 21 21)"/>
+    <circle cx="15" cy="15" r="3.2" fill="#FAF8FF"/>
+  </svg>
+</div>
+<nav class="nav" id="navbar">
+  <a href="index.html" class="nav-logo-wrap">
+    <svg class="logo-mark" viewBox="0 0 30 30" aria-hidden="true">
+      <circle cx="15" cy="15" r="4.5" fill="#2D1B69"/>
+      <ellipse cx="15" cy="6.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+      <ellipse cx="15" cy="23.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+      <ellipse cx="6.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
+      <ellipse cx="23.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
+      <ellipse cx="9" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 9 9)"/>
+      <ellipse cx="21" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 21 9)"/>
+      <ellipse cx="9" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 9 21)"/>
+      <ellipse cx="21" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 21 21)"/>
+      <circle cx="15" cy="15" r="3.2" fill="#FAF8FF"/>
+    </svg>
+    <span class="logo-text">Marine <em>Bernard</em></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="index.html#projets"  class="active">Projets</a></li>
+    <li><a href="index.html#photos">Photos</a></li>
+    <li><a href="parcours-komoot.html">Randonnée</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="window.location='index.html#contact'">Me contacter</button>
+</nav>
+<nav class="breadcrumb" aria-label="Fil d'Ariane"><div class="breadcrumb-inner"><a href="index.html"><svg class="icon bc-icon"><use href="#icon-home"/></svg> Accueil</a><a href="index.html#projets"><svg class="icon bc-icon"><use href="#icon-grid"/></svg> Projets</a><span class="breadcrumb-current"><svg class="icon bc-icon"><use href="#icon-settings"/></svg> Refonte Pirus Composites</span></div></nav>
+
+<!-- HEADER -->
+<div class="projet-hero reveal">
+  <a href="index.html#projets" class="projet-back">Retour aux projets</a>
+  <p class="projet-eyebrow">Site vitrine · UX/UI · WordPress</p>
+  <h1 class="projet-title">Refonte Pirus Composites<br><em>De l'idée à la matière</em></h1>
+  <p class="projet-sub">Refonte du site vitrine de Pirus Composites, PME du Pas-de-Calais spécialisée dans la conception et la fabrication de pièces plastiques et composites (automobile, nautisme, ferroviaire). Nouvelle identité visuelle et mise en valeur du savoir-faire technique.</p>
+  <div class="projet-tags">
+    <span class="projet-tag">Site vitrine</span>
+    <span class="projet-tag">WordPress</span>
+    <span class="projet-tag">UX/UI</span>
+    <span class="projet-tag orange">Orange · Noir · Blanc</span>
+    <span class="projet-tag">Charte graphique</span>
+    <span class="projet-tag dark">Mission 2019 · Meyou Paris</span>
+  </div>
+</div>
+
+<!-- CORPS -->
+<div class="projet-body">
+  <div>
+
+    <!-- Mockup principal -->
+    <div class="projet-visual reveal">
+      <img src="images/mockup-pirus.png" alt="Refonte Pirus Composites — MacBook Pro mockup bureau" class="zoomable" onclick="openLightbox(this.src)">
+    </div>
+    <p class="mockup-label">Site refondu · MacBook Pro · Mise en situation</p>
+
+    <!-- Avant / Après -->
+    <div class="avant-apres reveal" style="margin-top:1.5rem">
+      <div class="avant-apres-item">
+        <img src="images/pirus-avant.png" alt="Site Pirus Composites avant refonte" class="zoomable" onclick="openLightbox(this.src)">
+        <div class="avant-apres-label label-avant">⟵ Avant</div>
+      </div>
+      <div class="avant-apres-item">
+        <img src="images/pirus-apres.png" alt="Site Pirus Composites après refonte" class="zoomable" onclick="openLightbox(this.src)">
+        <div class="avant-apres-label label-apres">Après ⟶</div>
+      </div>
+    </div>
+    <p class="mockup-label">Comparaison avant / après · cliquer pour agrandir</p>
+
+    <!-- Étapes du savoir-faire mises en avant -->
+    <div class="info-card reveal" style="margin-top:1.5rem">
+      <div class="info-card-title">Savoir-faire structuré en 5 étapes</div>
+      <div class="etapes-grid">
+        <div class="etape-item">
+          <div class="etape-emoji"><svg class="icon"><use href="#icon-edit"/></svg></div>
+          <div class="etape-label">Conception</div>
+        </div>
+        <div class="etape-item">
+          <div class="etape-emoji"><svg class="icon"><use href="#icon-cube"/></svg></div>
+          <div class="etape-label">Maquettage</div>
+        </div>
+        <div class="etape-item">
+          <div class="etape-emoji"><svg class="icon"><use href="#icon-wrench"/></svg></div>
+          <div class="etape-label">Modelage</div>
+        </div>
+        <div class="etape-item">
+          <div class="etape-emoji"><svg class="icon"><use href="#icon-settings"/></svg></div>
+          <div class="etape-label">Outillage</div>
+        </div>
+        <div class="etape-item">
+          <div class="etape-emoji"><svg class="icon"><use href="#icon-box"/></svg></div>
+          <div class="etape-label">Pièces à façon</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Palette -->
+    <div class="info-card reveal" style="margin-top:1rem">
+      <div class="info-card-title">Palette graphique</div>
+      <div class="palette">
+        <div><div class="swatch" style="background:#e8631c"></div><div class="swatch-label">Orange</div></div>
+        <div><div class="swatch" style="background:#1a1a1a"></div><div class="swatch-label">Anthracite</div></div>
+        <div><div class="swatch" style="background:#c81f2c"></div><div class="swatch-label">Rouge (ancien)</div></div>
+        <div><div class="swatch" style="background:#f5f5f5;border:1.5px solid #ddd"></div><div class="swatch-label">Gris clair</div></div>
+        <div><div class="swatch" style="background:#ffffff;border:1.5px solid #ddd"></div><div class="swatch-label">Blanc</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="projet-info">
+
+    <div class="info-card projet-toc reveal">
+      <div class="info-card-title projet-toc-title"><svg class="icon"><use href="#icon-list"/></svg> Sur cette page</div>
+      <div class="projet-toc-list">
+        <a href="#mission" class="projet-toc-link">La mission</a>
+        <a href="#resultats" class="projet-toc-link">Les résultats</a>
+        <a href="#demarche" class="projet-toc-link">La démarche</a>
+        <a href="#choix" class="projet-toc-link">Les choix graphiques</a>
+      </div>
+    </div>
+
+    <div class="info-card reveal">
+      <div class="info-card-title">Détails du projet</div>
+      <div class="info-row"><span class="info-label">Client</span><span class="info-val">Pirus Composites, Ruitz (62)</span></div>
+      <div class="info-row"><span class="info-label">Période</span><span class="info-val">2019</span></div>
+      <div class="info-row"><span class="info-label">Contexte</span><span class="info-val">Mission via Meyou Paris</span></div>
+      <div class="info-row"><span class="info-label">CMS</span><span class="info-val">WordPress</span></div>
+      <div class="info-row"><span class="info-label">Secteur</span><span class="info-val">BtoB · Industrie composite</span></div>
+    </div>
+
+    <div class="info-card reveal">
+      <div class="info-card-title">Compétences mobilisées</div>
+      <div class="competences-list">
+        <div class="comp-item">Audit UX de l'existant</div>
+        <div class="comp-item">Architecture de l'information</div>
+        <div class="comp-item">Design UI & charte graphique</div>
+        <div class="comp-item">Intégration WordPress</div>
+        <div class="comp-item">Structuration du contenu</div>
+        <div class="comp-item">Optimisation SEO on-page</div>
+        <div class="comp-item">Responsive design mobile</div>
+      </div>
+    </div>
+
+    <div class="info-card reveal" style="text-align:center">
+      <div class="info-card-title">Statut du site</div>
+      <p style="font-size:0.78rem;color:#7a6090;line-height:1.6">Le site n'est plus en ligne dans sa version refondue suite à un changement de propriétaire de l'entreprise.</p>
+    </div>
+
+    <div class="projet-cta reveal">
+      <p>Besoin d'une refonte de site vitrine ou d'une nouvelle identité visuelle ?</p>
+      <a href="index.html#contact" class="cta-btn">Me contacter →</a>
+    </div>
+
+  </aside>
+</div>
+
+<!-- DESCRIPTION -->
+<div class="projet-desc-section">
+
+  <div class="brief-box reveal" id="mission">
+    <strong>La mission</strong>
+    En poste chez Meyou Paris en 2019 comme Chargée de communication digitale, j'ai pris en charge la refonte du site vitrine de Pirus Composites, PME du Pas-de-Calais spécialisée dans la conception et la fabrication de pièces plastiques et composites pour l'automobile, le nautisme et le ferroviaire. L'ancien site, avec sa mise en page dense et sa navigation en onglets multiples, ne mettait pas en valeur le niveau d'expertise technique de l'entreprise. L'objectif : moderniser l'identité visuelle et donner immédiatement à voir le savoir-faire à travers les réalisations phares de l'entreprise.
+  </div>
+
+  <h2 class="desc-title reveal" id="resultats">Les résultats</h2>
+  <div class="resultats-grid">
+    <div class="resultat-card reveal">
+      <div class="resultat-num">5</div>
+      <div class="resultat-label">Étapes du savoir-faire structurées</div>
+    </div>
+    <div class="resultat-card reveal">
+      <div class="resultat-num">100%</div>
+      <div class="resultat-label">Responsive mobile</div>
+    </div>
+    <div class="resultat-card reveal">
+      <div class="resultat-num">Nouvelle</div>
+      <div class="resultat-label">Identité visuelle</div>
+    </div>
+  </div>
+
+  <h2 class="desc-title reveal" id="demarche" style="margin-top:1rem">La démarche UX</h2>
+  <p class="desc-text reveal">Le site d'origine reposait sur une mise en page en colonnes denses, une navigation par onglets peu hiérarchisée et une palette rouge vif qui datait visuellement l'entreprise. Les réalisations (pièces automobiles, nautiques, ferroviaires) étaient noyées dans de petits carrousels peu lisibles, alors qu'elles constituaient la meilleure preuve du savoir-faire de Pirus.</p>
+  <p class="desc-text reveal">La refonte a mis ces réalisations au premier plan avec une mosaïque photo en pleine largeur dès la page d'accueil, puis a structuré le processus de fabrication en 5 étapes claires — conception, maquettage, modelage, outillage, pièces à façon — pour que chaque visiteur BtoB comprenne immédiatement l'étendue des compétences de l'entreprise.</p>
+
+  <h2 class="desc-title reveal" id="choix">Les choix graphiques</h2>
+  <div class="choix-grid">
+    <div class="choix-card reveal">
+      <div class="choix-icon"><svg class="icon"><use href="#icon-image"/></svg></div>
+      <div class="choix-title">Mosaïque de réalisations</div>
+      <div class="choix-desc">Grandes photos de projets (voiture, bateau, train) en page d'accueil — la preuve du savoir-faire technique dès le premier écran.</div>
+    </div>
+    <div class="choix-card reveal">
+      <div class="choix-icon"><svg class="icon"><use href="#icon-palette"/></svg></div>
+      <div class="choix-title">Palette orange & noir</div>
+      <div class="choix-desc">Une identité plus dynamique et contemporaine que le rouge/gris d'origine, tout en gardant la rigueur attendue d'un acteur industriel.</div>
+    </div>
+    <div class="choix-card reveal">
+      <div class="choix-icon"><svg class="icon"><use href="#icon-compass"/></svg></div>
+      <div class="choix-title">Process en 5 étapes</div>
+      <div class="choix-desc">Le savoir-faire "de l'idée à la matière" est présenté en cartes horizontales claires, à la place des longues listes à puces de l'ancien site.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- NAVIGATION PROJET PRÉCÉDENT / SUIVANT -->
+<div class="projet-nav-adjacent">
+  <a href="refonte-moustikit" class="projet-nav-link prev">
+    <span class="projet-nav-label">← Projet précédent</span>
+    <span class="projet-nav-name">Refonte site Mousti-Kit</span>
+  </a>
+  <a href="blablapattes" class="projet-nav-link next">
+    <span class="projet-nav-label">Projet suivant →</span>
+    <span class="projet-nav-name">BlaBlaPattes</span>
+  </a>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox(); event.stopPropagation();">✕</button>
+  <img id="lightbox-img" src="" alt="Vue agrandie">
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <svg width="42" height="26" viewBox="0 0 42 26" style="display:block;margin:0 auto 0.5rem">
+    <circle cx="21" cy="13" r="4.5" fill="#8B6BB1"/>
+    <ellipse cx="21" cy="4" rx="3" ry="4.3" fill="#d4b8f0"/>
+    <ellipse cx="21" cy="22" rx="3" ry="4.3" fill="#d4b8f0"/>
+    <ellipse cx="12" cy="13" rx="4.3" ry="3" fill="#C9A96E"/>
+    <ellipse cx="30" cy="13" rx="4.3" ry="3" fill="#C9A96E"/>
+    <circle cx="21" cy="13" r="2.8" fill="#F0E6FF"/>
+  </svg>
+  Marine Bernard · Portfolio · 2026 · Hauts-de-France
+</footer>
+
+<script>
+const cur=document.getElementById('cursor-flower');
+let mx=0,my=0,cx=0,cy=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function loop(){cx+=(mx-cx)*0.13;cy+=(my-cy)*0.13;cur.style.left=cx+'px';cur.style.top=cy+'px';requestAnimationFrame(loop)})();
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target)}});},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+document.querySelectorAll('a[href]').forEach(a=>{
+  a.addEventListener('click',function(e){
+    const href=this.getAttribute('href');
+    if(!href||!href.startsWith('#')||href==='#') return;
+    const target=document.getElementById(href.slice(1));
+    if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth'});}
+  });
+});
+
+/* ── LIGHTBOX ── */
+const lightbox=document.getElementById('lightbox');
+const lightboxImg=document.getElementById('lightbox-img');
+function openLightbox(src){
+  lightboxImg.src=src;
+  lightbox.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLightbox(){
+  lightbox.classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
+
+/* ── SOMMAIRE (scroll-spy) ── */
+const tocLinks=document.querySelectorAll('.projet-toc-link');
+const tocSections=[...tocLinks].map(a=>document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+const tocObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      tocLinks.forEach(a=>a.classList.remove('active'));
+      const match=document.querySelector(`.projet-toc-link[href="#${e.target.id}"]`);
+      if(match)match.classList.add('active');
+    }
+  });
+},{rootMargin:'-90px 0px -70% 0px'});
+tocSections.forEach(s=>tocObs.observe(s));
+</script>
+</body>
+</html>

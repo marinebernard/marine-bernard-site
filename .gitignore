@@ -1,0 +1,14 @@
+# Journaux serveur (sensibles, ne pas versionner)
+logs/
+
+# Anciens fichiers hérités, sans rapport avec le site actuel
+homza.html
+homza-site.html
+.thumbnail
+
+# Fichiers système
+Thumbs.db
+.DS_Store
+
+# Config locale Claude
+.claude/
