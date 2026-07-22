@@ -26,29 +26,20 @@ a,button{cursor:none;}
 }
 @keyframes spinFlower{to{transform:rotate(360deg)}}
 
-/* ── BARRE HAUT ── */
-.top-bar{
-  height:52px;
-  background:rgba(250,248,255,0.95);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(139,107,177,0.18);
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 2rem;
-  position:relative;z-index:20;
-}
-.top-logo{
-  font-family:'Playfair Display',serif;font-style:italic;
-  font-size:15px;color:#2D1B69;text-decoration:none;
-}
-.skip-link{
-  font-size:11px;color:#9a88b8;
-  border:0.5px solid rgba(212,194,239,0.6);
-  border-radius:12px;padding:4px 12px;
+/* ── BOUTON FIXE "PASSER CETTE ÉTAPE" ── */
+.skip-fixed{
+  position:fixed;bottom:24px;right:24px;z-index:100;
+  background:rgba(250,248,255,0.92);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  border:0.5px solid rgba(139,107,177,0.35);
+  color:#9a88b8;
+  border-radius:22px;padding:8px 18px;
+  font-size:12px;
   text-decoration:none;
   transition:background 0.2s,color 0.2s;
 }
-.skip-link:hover{background:#F0E6FF;color:#2D1B69;}
+.skip-fixed:hover{background:#F0E6FF;color:#2D1B69;}
 
 /* ── SPLIT SCREEN ── */
 .split-container{display:flex;position:relative;width:100%;}
@@ -174,15 +165,6 @@ a,button{cursor:none;}
   to{transform:rotate(8deg);}
 }
 
-/* ── BARRE BAS ── */
-.bottom-bar{
-  background:#FAF8FF;padding:14px;
-  border-top:0.5px solid rgba(139,107,177,0.12);
-  text-align:center;position:relative;z-index:20;
-}
-.bottom-flower{width:28px;height:28px;display:block;margin:0 auto 6px;}
-.bottom-text{font-size:11px;color:#b0a0c8;}
-
 /* ── RESPONSIVE ── */
 @media(max-width:768px){
   .split-container{flex-direction:column;}
@@ -209,11 +191,8 @@ a,button{cursor:none;}
   </svg>
 </div>
 
-<!-- BARRE HAUT -->
-<div class="top-bar">
-  <a href="index.html" class="top-logo">Marine Bernard</a>
-  <a href="index.html" class="skip-link">Passer cette étape →</a>
-</div>
+<!-- BOUTON FIXE -->
+<a href="index.html" class="skip-fixed">Passer cette étape →</a>
 
 <!-- SPLIT SCREEN -->
 <div class="split-container">
@@ -224,7 +203,7 @@ a,button{cursor:none;}
 
     <div class="panel-content">
       <p class="panel-eyebrow left">Professionnel / Entreprise</p>
-      <h1 class="panel-title">Vous cherchez<br><em class="left">une graphiste ?</em></h1>
+      <h1 class="panel-title"><em class="left">Je recherche une Chargée de communication &amp; création digitale</em></h1>
       <p class="panel-desc">Projets e-commerce, identité visuelle, refonte de sites web, communication digitale</p>
       <div class="panel-tags">
         <span class="tag-pill">UX/UI</span>
@@ -260,7 +239,7 @@ a,button{cursor:none;}
 
     <div class="panel-content">
       <p class="panel-eyebrow right">Randonneur / Passionné nature</p>
-      <h1 class="panel-title">Vous cherchez<br><em class="right">des sentiers ?</em></h1>
+      <h1 class="panel-title"><em class="right">Je recherche des sentiers de randonnée et astuces rando</em></h1>
       <p class="panel-desc">Blog rando, photos de nature, traces Komoot, bons plans dans les Hauts-de-France</p>
       <div class="panel-tags">
         <span class="tag-pill">Randonnée</span>
@@ -272,23 +251,6 @@ a,button{cursor:none;}
     </div>
   </section>
 
-</div>
-
-<!-- BARRE BAS -->
-<div class="bottom-bar">
-  <svg class="bottom-flower" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="15" cy="15" r="4.5" fill="#2D1B69"/>
-    <ellipse cx="15" cy="6.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
-    <ellipse cx="15" cy="23.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
-    <ellipse cx="6.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
-    <ellipse cx="23.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
-    <ellipse cx="9" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 9 9)"/>
-    <ellipse cx="21" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 21 9)"/>
-    <ellipse cx="9" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 9 21)"/>
-    <ellipse cx="21" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 21 21)"/>
-    <circle cx="15" cy="15" r="3.2" fill="#FAF8FF"/>
-  </svg>
-  <p class="bottom-text">Marine Bernard · portfolio · 2026 · Hauts-de-France</p>
 </div>
 
 <script>
