@@ -61,17 +61,9 @@
 .safety-title{font-size:0.85rem;font-weight:600;color:#2D1B69;margin-bottom:0.4rem;}
 .safety-desc{font-size:0.78rem;color:#7a6090;line-height:1.6;}
 
-/* Placeholders photo */
-.article-photo-placeholder{
-  width:100%;min-height:220px;border-radius:16px;margin:2rem 0;
-  background:linear-gradient(135deg,#f0ebfa,#FAF8FF);
-  border:1.5px dashed rgba(139,107,177,0.35);
-  display:flex;align-items:center;justify-content:center;
-}
-.article-photo-placeholder-inner{text-align:center;padding:1.2rem;color:#9a88b8;}
-.article-photo-placeholder-inner svg{width:1.8rem;height:1.8rem;margin-bottom:0.5rem;}
-.article-photo-placeholder-inner .pp-text{font-size:0.76rem;letter-spacing:0.04em;line-height:1.6}
-.article-photo-placeholder-inner .pp-file{display:block;opacity:0.7;font-size:0.68rem;margin-top:3px}
+/* Photos d'article */
+.article-photo{width:100%;border-radius:16px;margin:2rem 0;overflow:hidden;}
+.article-photo img{width:100%;height:auto;display:block;}
 
 /* Listes (sac, matériel) */
 .article-sublist-title{font-size:0.8rem;font-weight:600;color:#C9A96E;letter-spacing:0.06em;text-transform:uppercase;margin:1.3rem 0 0.6rem;}
@@ -209,13 +201,8 @@
   <p class="article-text reveal">Ce qui m'aide concrètement dans ces moments : avoir mon téléphone accessible (pas au fond du sac), connaître l'itinéraire par cœur pour ne pas avoir l'air perdue ou hésitante, et marcher avec une posture assurée. Pas de la frime — juste ne pas donner l'impression d'être vulnérable.</p>
   <p class="article-text reveal">Ça ne m'a jamais empêchée de repartir le week-end suivant. Et ça ne m'empêchera jamais.</p>
 
-  <!-- PHOTO À AJOUTER -->
-  <div class="article-photo-placeholder reveal">
-    <div class="article-photo-placeholder-inner">
-      <svg><use href="#icon-camera"/></svg>
-      <div class="pp-text">Photo à ajouter — une sortie solo, un sentier</div>
-      <span class="pp-file">images/article-randonner-seule-photo-1.jpg</span>
-    </div>
+  <div class="article-photo reveal">
+    <img src="images/article-randonner-seule-photo-1.jpg" alt="Sentier en sous-bois longeant un petit ruisseau" loading="lazy" class="zoomable" onclick="openLightbox(this.src)">
   </div>
 
   <h2 class="article-h2 reveal">Mes réflexes sécurité — ceux que j'applique à chaque sortie</h2>
@@ -272,13 +259,8 @@
 
   <p class="article-text reveal">La patience, c'est d'ailleurs quelque chose que la rando solo t'apprend mieux que n'importe quelle autre activité. Quand tu es seule, tu peux t'arrêter vingt minutes sans que personne soupire. Tu peux attendre qu'un héron reprenne son envol. Tu peux t'asseoir sur un tronc et observer sans avoir à justifier pourquoi.</p>
 
-  <!-- PHOTO À AJOUTER -->
-  <div class="article-photo-placeholder reveal">
-    <div class="article-photo-placeholder-inner">
-      <svg><use href="#icon-camera"/></svg>
-      <div class="pp-text">Photo à ajouter — une rencontre animale ou le matériel photo</div>
-      <span class="pp-file">images/article-randonner-seule-photo-2.jpg</span>
-    </div>
+  <div class="article-photo reveal">
+    <img src="images/article-randonner-seule-photo-2.jpg" alt="Cygne s'envolant d'un plan d'eau" loading="lazy" class="zoomable" onclick="openLightbox(this.src)">
   </div>
 
   <h2 class="article-h2 reveal">Mon sac de randonneuse solo — ce que j'emporte vraiment</h2>
@@ -326,6 +308,12 @@
 
 </main>
 
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox(); event.stopPropagation();">✕</button>
+  <img id="lightbox-img" src="" alt="Vue agrandie">
+</div>
+
 <footer class="footer">
   <svg width="42" height="26" viewBox="0 0 42 26" style="display:block;margin:0 auto 0.5rem">
     <circle cx="21" cy="13" r="4.5" fill="#8B6BB1"/>
@@ -343,6 +331,13 @@ const cur=document.getElementById('cursor-flower');
 let mx=0,my=0,cx=0,cy=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
 (function loop(){cx+=(mx-cx)*0.13;cy+=(my-cy)*0.13;cur.style.left=cx+'px';cur.style.top=cy+'px';requestAnimationFrame(loop)})();
+
+/* ── LIGHTBOX ── */
+const lightbox=document.getElementById('lightbox');
+const lightboxImg=document.getElementById('lightbox-img');
+function openLightbox(src){lightboxImg.src=src;lightbox.classList.add('open');document.body.style.overflow='hidden';}
+function closeLightbox(){lightbox.classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target)}});},{threshold:0.08});
 document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
 document.querySelectorAll('a[href]').forEach(a=>{
