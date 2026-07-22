@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Randonner seule en tant que femme — La Ch'tite Randonneuse · Marine Bernard</title>
+<meta name="description" content="Peur, sécurité, comportements déplacés, liberté, rencontres animales : mes vraies réponses à vos vraies questions sur la randonnée en solo au féminin.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+.article-hero{
+  position:relative;min-height:480px;display:flex;align-items:flex-end;
+  background:#0a1508 url('images/article-randonner-seule-femme-hero.jpg') center/cover no-repeat;
+}
+.article-hero::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(10,15,8,0.05) 0%,rgba(10,15,8,0.35) 45%,rgba(8,12,6,0.88) 100%);
+}
+.article-hero-inner{position:relative;z-index:1;max-width:800px;margin:0 auto;padding:4rem 1.5rem 3.5rem;text-align:center;}
+.article-eyebrow{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:#C0DD97;margin-bottom:0.8rem;}
+.article-hero-title{
+  font-family:'Playfair Display',serif;color:#fff;
+  font-size:2.4rem;line-height:1.2;font-weight:700;
+  text-shadow:0 2px 20px rgba(0,0,0,0.4);
+}
+.article-hero-title em{font-style:italic;color:#C0DD97;display:block;font-size:0.62em;margin-top:0.5rem;}
+
+.keyword-cloud-wrap{
+  display:flex;flex-wrap:wrap;gap:10px;justify-content:center;
+  max-width:800px;margin:-1.8rem auto 2.5rem;padding:0 1.5rem;position:relative;z-index:2;
+}
+.keyword-cloud{
+  background:#fff;color:#5a3d99;font-size:0.72rem;font-weight:500;
+  padding:7px 16px 7px 12px;border-radius:999px;
+  box-shadow:0 6px 18px rgba(45,27,105,0.14);border:1px solid rgba(139,107,177,0.15);
+  display:inline-flex;align-items:center;gap:6px;
+}
+.keyword-cloud svg{width:0.85em;height:0.85em;flex-shrink:0;color:#C9A96E}
+
+.article-body{max-width:700px;margin:0 auto;padding:0 1.5rem 4rem;}
+.article-lead{font-size:1rem;color:#5a4870;line-height:1.9;margin-bottom:2rem;}
+.article-lead em{font-style:italic;color:#8B6BB1}
+.article-h2{
+  font-family:'Playfair Display',serif;font-size:1.5rem;color:#2D1B69;
+  margin:2.8rem 0 1rem;line-height:1.3;
+}
+.article-text{font-size:0.92rem;color:#5a4870;line-height:1.9;margin-bottom:1.3rem;}
+.article-text strong{color:#2D1B69;font-weight:600}
+.article-text em{font-style:italic;color:#8B6BB1}
+.article-text a{color:#8B6BB1;font-weight:600;text-decoration:underline;text-decoration-color:rgba(139,107,177,0.35);transition:color 0.2s;}
+.article-text a:hover{color:#2D1B69}
+
+.article-divider{border:none;border-top:1px solid rgba(139,107,177,0.15);margin:2.5rem 0;}
+
+/* Réflexes sécurité — cartes numérotées */
+.safety-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:1.5rem 0 2rem;}
+.safety-card{background:#fff;border:1px solid rgba(139,107,177,0.15);border-radius:16px;padding:1.2rem;transition:transform 0.22s,box-shadow 0.22s;}
+.safety-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(139,107,177,0.14);}
+.safety-num{font-family:'Playfair Display',serif;font-size:1.4rem;color:#C9A96E;line-height:1;margin-bottom:0.5rem;}
+.safety-title{font-size:0.85rem;font-weight:600;color:#2D1B69;margin-bottom:0.4rem;}
+.safety-desc{font-size:0.78rem;color:#7a6090;line-height:1.6;}
+
+/* Placeholders photo */
+.article-photo-placeholder{
+  width:100%;min-height:220px;border-radius:16px;margin:2rem 0;
+  background:linear-gradient(135deg,#f0ebfa,#FAF8FF);
+  border:1.5px dashed rgba(139,107,177,0.35);
+  display:flex;align-items:center;justify-content:center;
+}
+.article-photo-placeholder-inner{text-align:center;padding:1.2rem;color:#9a88b8;}
+.article-photo-placeholder-inner svg{width:1.8rem;height:1.8rem;margin-bottom:0.5rem;}
+.article-photo-placeholder-inner .pp-text{font-size:0.76rem;letter-spacing:0.04em;line-height:1.6}
+.article-photo-placeholder-inner .pp-file{display:block;opacity:0.7;font-size:0.68rem;margin-top:3px}
+
+/* Listes (sac, matériel) */
+.article-sublist-title{font-size:0.8rem;font-weight:600;color:#C9A96E;letter-spacing:0.06em;text-transform:uppercase;margin:1.3rem 0 0.6rem;}
+.article-list{display:flex;flex-direction:column;gap:6px;margin-bottom:0.5rem;}
+.article-list-item{display:flex;align-items:flex-start;gap:8px;font-size:0.86rem;color:#5a4870;line-height:1.6;}
+.article-list-item::before{content:'✦';color:#C9A96E;font-size:0.7rem;flex-shrink:0;margin-top:3px;}
+
+.article-quote{
+  background:linear-gradient(135deg,#f0ebfa,#FAF8FF);border-left:3px solid #C9A96E;
+  border-radius:0 14px 14px 0;padding:1.3rem 1.5rem;margin:2rem 0;
+  font-size:0.92rem;color:#5a4870;line-height:1.8;font-style:italic;
+}
+
+.article-cta{
+  background:linear-gradient(135deg,#2D1B69,#8B6BB1);border-radius:18px;
+  padding:1.8rem;text-align:center;margin-top:2.5rem;
+}
+.article-cta p{font-size:0.86rem;color:rgba(255,255,255,0.85);line-height:1.7;margin-bottom:1.1rem;}
+.article-cta p a{color:#C9A96E;font-weight:600;text-decoration:underline;}
+.article-cta .cta-btn{display:inline-block;background:#C9A96E;color:#fff;padding:11px 26px;border-radius:20px;font-size:0.76rem;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;text-decoration:none;transition:background 0.2s;}
+.article-cta .cta-btn:hover{background:#b8945a}
+
+@media(max-width:768px){
+  .article-hero{min-height:360px}
+  .article-hero-title{font-size:1.7rem}
+  .safety-grid{grid-template-columns:1fr}
+}
+</style>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KZEHR4YQFQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KZEHR4YQFQ');
+</script>
+</head>
+<body>
+
+<!-- ICÔNES SVG (sprite) -->
+<svg style="display:none" aria-hidden="true">
+<symbol id="icon-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9a1 1 0 0 0 1 1h3v-5h4v5h3a1 1 0 0 0 1-1v-9"/></symbol>
+<symbol id="icon-compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M15 9l-2 5-5 2 2-5z"/></symbol>
+<symbol id="icon-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5.5l4 4L8 20H4v-4z"/><path d="M12.5 7.5l4 4"/></symbol>
+<symbol id="icon-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 18.5a4 4 0 0 1 0-8 5 5 0 0 1 9.6-1.5A4 4 0 0 1 17 18.5z"/></symbol>
+<symbol id="icon-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5a1.5 1.5 0 0 1 1.5-1.5h2l1-2h7l1 2h2A1.5 1.5 0 0 1 20 8.5v9A1.5 1.5 0 0 1 18.5 19h-13A1.5 1.5 0 0 1 4 17.5z"/><circle cx="12" cy="13" r="3.3"/></symbol>
+</svg>
+
+<div id="cursor-flower">
+  <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="15" cy="15" r="4.5" fill="#2D1B69"/>
+    <ellipse cx="15" cy="6.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+    <ellipse cx="15" cy="23.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+    <ellipse cx="6.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
+    <ellipse cx="23.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
+    <ellipse cx="9" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 9 9)"/>
+    <ellipse cx="21" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 21 9)"/>
+    <ellipse cx="9" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 9 21)"/>
+    <ellipse cx="21" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 21 21)"/>
+    <circle cx="15" cy="15" r="3.2" fill="#FAF8FF"/>
+  </svg>
+</div>
+
+<nav class="nav" id="navbar">
+  <a href="index.html" class="nav-logo-wrap">
+    <svg class="logo-mark" viewBox="0 0 30 30" aria-hidden="true">
+      <circle cx="15" cy="15" r="4.5" fill="#2D1B69"/>
+      <ellipse cx="15" cy="6.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+      <ellipse cx="15" cy="23.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+      <ellipse cx="6.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
+      <ellipse cx="23.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
+      <ellipse cx="9" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 9 9)"/>
+      <ellipse cx="21" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 21 9)"/>
+      <ellipse cx="9" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 9 21)"/>
+      <ellipse cx="21" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 21 21)"/>
+      <circle cx="15" cy="15" r="3.2" fill="#FAF8FF"/>
+    </svg>
+    <span class="logo-text">Marine <em>Bernard</em></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="index.html#projets">Projets</a></li>
+    <li><a href="index.html#photos">Photos</a></li>
+    <li><a href="blog.html" class="active">Carnet de randonnée</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="window.location='index.html#contact'">Me contacter</button>
+</nav>
+
+<nav class="breadcrumb" aria-label="Fil d'Ariane"><div class="breadcrumb-inner"><a href="index.html"><svg class="icon bc-icon"><use href="#icon-home"/></svg> Accueil</a><a href="blog.html"><svg class="icon bc-icon"><use href="#icon-compass"/></svg> Carnet de randonnée</a><span class="breadcrumb-current"><svg class="icon bc-icon"><use href="#icon-edit"/></svg> Randonner seule</span></div></nav>
+
+<!-- HERO -->
+<header class="article-hero">
+  <div class="article-hero-inner">
+    <p class="article-eyebrow">Par Marine Bernard · @lachtiterandonneuse</p>
+    <h1 class="article-hero-title">Randonner seule en tant que femme<em>Mes vraies réponses à vos vraies questions</em></h1>
+  </div>
+</header>
+
+<!-- MOTS-CLÉS EN BULLES -->
+<div class="keyword-cloud-wrap">
+  <span class="keyword-cloud"><svg class="icon"><use href="#icon-cloud"/></svg>randonner seule femme</span>
+  <span class="keyword-cloud"><svg class="icon"><use href="#icon-cloud"/></svg>rando seule sécurité</span>
+  <span class="keyword-cloud"><svg class="icon"><use href="#icon-cloud"/></svg>randonnée Hauts-de-France</span>
+  <span class="keyword-cloud"><svg class="icon"><use href="#icon-cloud"/></svg>photo animalière randonnée</span>
+  <span class="keyword-cloud"><svg class="icon"><use href="#icon-cloud"/></svg>matériel randonnée femme</span>
+</div>
+
+<main class="article-body">
+
+  <p class="article-lead reveal">Il y a deux ans, j'ai chaussé mes premières vraies chaussures de rando, mis mon sac sur le dos, et je suis partie. Seule. Sur un sentier que je ne connaissais pas, dans une forêt que je n'avais jamais traversée. Et pendant les dix premières minutes, j'ai eu peur.</p>
+  <p class="article-text reveal">Pas d'une menace précise. Juste cette petite voix dans la tête qui dit <em>« et si quelque chose se passait mal ? »</em></p>
+  <p class="article-text reveal">Aujourd'hui, après des dizaines de sorties solo dans les Hauts-de-France et ailleurs, cette voix s'est tue. Pas parce que le monde est devenu plus sûr, mais parce que j'ai appris à randonner seule intelligemment — et surtout, parce que j'ai compris ce que ça m'apportait de randonner sans personne pour décider à ma place.</p>
+  <p class="article-text reveal">Cet article, c'est tout ce que j'aurais aimé lire avant ma première sortie solo.</p>
+
+  <hr class="article-divider">
+
+  <h2 class="article-h2 reveal">« Mais t'as pas peur ? »</h2>
+  <p class="article-text reveal">C'est la première question qu'on me pose. Toujours.</p>
+  <p class="article-text reveal">La réponse honnête : oui, au début j'avais peur. Une peur diffuse, pas vraiment rationnelle, mais bien réelle. Peur de me perdre. Peur de tomber sans que personne le sache. Peur du regard des autres sur une femme seule sur un sentier.</p>
+  <p class="article-text reveal">Et puis j'ai fait quelque chose de simple : j'ai commencé petit. Très petit. Une heure de marche près de chez moi, sur un sentier balisé que je connaissais vaguement. Puis deux heures. Puis une demi-journée.</p>
+  <p class="article-text reveal">À chaque sortie, la peur s'est rognée un peu. Pas disparue d'un coup — rognée, progressivement, par l'expérience. Aujourd'hui je pars pour des journées entières sans même y penser deux fois. La confiance, ça se construit kilomètre après kilomètre.</p>
+  <p class="article-text reveal">Ce que j'aurais aimé qu'on me dise : la peur que tu ressentiras la première fois n'est pas un signal que tu ne dois pas le faire. C'est juste ton cerveau qui découvre quelque chose de nouveau.</p>
+
+  <h2 class="article-h2 reveal">Ce qu'on ne dit pas assez : les comportements déplacés, ça arrive</h2>
+  <p class="article-text reveal">Autant être honnête là-dessus, parce que les autres articles ne le disent pas et c'est dommage.</p>
+  <p class="article-text reveal">Oui, il m'est arrivé de croiser des hommes au comportement bizarre sur un sentier. Un regard qui s'attarde trop longtemps. Un type qui fait demi-tour et repasse deux fois au même endroit sans raison apparente. Des remarques qu'on n'oserait pas sortir ailleurs mais que certains se permettent quand ils voient une femme seule en forêt, comme si la nature était une zone sans règles sociales.</p>
+  <p class="article-text reveal">Ce n'est pas la majorité des gens qu'on croise — loin de là. La grande majorité des randonneurs sont des gens respectueux, souvent passionnés, avec qui un signe de tête ou un « bonne balade » suffit à créer un lien simple et agréable.</p>
+  <p class="article-text reveal">Mais ces situations existent, et je préfère qu'on en parle plutôt que de faire semblant que les sentiers sont un monde idéal où rien de tout ça n'arrive.</p>
+  <p class="article-text reveal">Ma façon de gérer : je continue. Je ne m'arrête pas, je ne réponds pas, je n'engage pas la conversation. Je garde mon rythme, je garde ma trajectoire, et je passe. Pas question de changer mes plans ou de rentrer plus tôt à cause de ça. Ces comportements sont le problème de ceux qui les ont, pas le mien — et certainement pas une raison de rester chez moi.</p>
+  <p class="article-text reveal">Ce qui m'aide concrètement dans ces moments : avoir mon téléphone accessible (pas au fond du sac), connaître l'itinéraire par cœur pour ne pas avoir l'air perdue ou hésitante, et marcher avec une posture assurée. Pas de la frime — juste ne pas donner l'impression d'être vulnérable.</p>
+  <p class="article-text reveal">Ça ne m'a jamais empêchée de repartir le week-end suivant. Et ça ne m'empêchera jamais.</p>
+
+  <!-- PHOTO À AJOUTER -->
+  <div class="article-photo-placeholder reveal">
+    <div class="article-photo-placeholder-inner">
+      <svg><use href="#icon-camera"/></svg>
+      <div class="pp-text">Photo à ajouter — une sortie solo, un sentier</div>
+      <span class="pp-file">images/article-randonner-seule-photo-1.jpg</span>
+    </div>
+  </div>
+
+  <h2 class="article-h2 reveal">Mes réflexes sécurité — ceux que j'applique à chaque sortie</h2>
+  <p class="article-text reveal">Je ne pars jamais sans avoir fait ces quatre choses. Pas par anxiété — par habitude, comme on vérifie ses clés avant de fermer la porte.</p>
+  <div class="safety-grid">
+    <div class="safety-card reveal">
+      <div class="safety-num">1</div>
+      <div class="safety-title">Prévenir quelqu'un</div>
+      <div class="safety-desc">Toujours. Un message à une amie, à ma famille : « je pars sur tel sentier, retour prévu à telle heure. » C'est la règle numéro un, et elle ne souffre aucune exception.</div>
+    </div>
+    <div class="safety-card reveal">
+      <div class="safety-num">2</div>
+      <div class="safety-title">Télécharger la trace <a href="blog.html">Komoot</a> hors ligne</div>
+      <div class="safety-desc">Dans le Nord, le réseau peut disparaître en forêt ou dans certaines vallées. Avoir la trace téléchargée sur mon téléphone m'évite de me retrouver sans GPS au milieu de nulle part.</div>
+    </div>
+    <div class="safety-card reveal">
+      <div class="safety-num">3</div>
+      <div class="safety-title">Vérifier la météo la veille ET le matin</div>
+      <div class="safety-desc">Dans les Hauts-de-France, le temps peut basculer en deux heures. J'ai appris à ne jamais partir sans vérifier les prévisions à l'heure — pas juste la météo du jour.</div>
+    </div>
+    <div class="safety-card reveal">
+      <div class="safety-num">4</div>
+      <div class="safety-title">Batterie externe chargée</div>
+      <div class="safety-desc">Mon téléphone, c'est ma carte, mon GPS, mon moyen d'appeler les secours. Je ne pars jamais avec moins de 80% de batterie, et j'ai toujours ma batterie externe dans le sac.</div>
+    </div>
+  </div>
+  <p class="article-text reveal">Rien de révolutionnaire. Mais ces quatre réflexes, appliqués systématiquement, m'ont permis de ne jamais me retrouver dans une situation vraiment délicate. Retrouve d'ailleurs plus de conseils comme ceux-ci dans mes <a href="blog.html#bonsplans">bons plans de randonneuse</a>.</p>
+
+  <h2 class="article-h2 reveal">Ce que randonner seule m'a appris que randonner à plusieurs ne m'aurait jamais appris</h2>
+  <p class="article-text reveal">C'est là que ça devient intéressant.</p>
+  <p class="article-text reveal">Quand on marche en groupe, on parle. On commente. On regarde son téléphone entre deux échanges. On suit le rythme des autres, on s'arrête quand les autres s'arrêtent, on repart quand les autres repartent.</p>
+  <p class="article-text reveal">Quand on marche seule, il se passe quelque chose de différent. Le silence n'est plus un vide à remplir — il devient une matière. On commence à entendre des choses qu'on n'entendait pas. Un pic épeiche qui tape dans un tronc à cinquante mètres. Le bruit de ses propres pas qui change selon le sol. Le vent dans les herbes hautes juste avant qu'il arrive sur soi.</p>
+  <p class="article-text reveal">Et on se retrouve face à soi-même d'une façon que la vie quotidienne ne permet presque jamais.</p>
+  <p class="article-text reveal">Je ne dis pas ça pour faire poétique. Je dis ça parce que certaines de mes meilleures décisions personnelles ont été prises sur un sentier. Parce que des choses que je n'arrivais pas à démêler dans ma tête se sont clarifiées toutes seules en marchant trois heures dans le bois de Saint-Pierre.</p>
+
+  <div class="article-quote reveal">Il y a quelque chose de profondément libérateur dans le fait de n'avoir à rendre de comptes à personne. Tu t'arrêtes quand tu veux. Tu manges ta barre de céréales là où la vue est belle, même si c'est pas l'heure. Tu fais demi-tour si t'en as envie, tu continues si tu te sens bien. Tu es la seule patronne de ta sortie.</div>
+
+  <p class="article-text reveal">Cette liberté-là, une fois qu'on l'a goûtée, on ne peut plus s'en passer.</p>
+
+  <h2 class="article-h2 reveal">Ce que je préfère aux rencontres humaines : les rencontres animales</h2>
+  <p class="article-text reveal">Je vais être honnête : la rando solo ne m'a pas encore convaincue sur l'aspect rencontres humaines. Je suis bien toute seule dans ma bulle, et je n'ai pas spécialement envie qu'on vienne la percer.</p>
+  <p class="article-text reveal">Ce qui me fait vraiment m'arrêter net au milieu d'un sentier, c'est tout autre chose.</p>
+  <p class="article-text reveal">Un matin de novembre dans le bois de Saint-Pierre, j'ai entendu un bruissement dans les fougères à une dizaine de mètres. J'ai ralenti. Puis stoppé. Et là, un chevreuil a traversé le sentier à moins de quinze mètres de moi, s'est arrêté une seconde — juste une seconde — a tourné la tête dans ma direction, et a disparu dans les arbres.</p>
+  <p class="article-text reveal">C'est pour ça que j'emporte mon appareil photo et mon gros téléobjectif à chaque sortie. Pas pour les paysages — enfin, pas seulement. Pour <em>ça</em>. Ces fractions de seconde où un animal décide de te laisser entrer dans son monde.</p>
+  <p class="article-text reveal">Randonner seule change tout pour la faune. Pas de voix, pas de groupe, pas de bruits parasites. Tu deviens presque transparente. Les oiseaux ne s'envolent pas à ton approche. Les chevreuils restent plus longtemps. J'ai photographié des hérons en vol rasant, des buses en train de chasser, un écureuil qui ne m'avait pas entendue arriver — retrouve certaines de ces photos dans ma <a href="index.html#photos">galerie</a>.</p>
+
+  <p class="article-sublist-title">Mon matériel photo pour la rando</p>
+  <div class="article-list">
+    <div class="article-list-item">Mon appareil reflex avec le téléobjectif — oui ça pèse, oui je l'emporte quand même</div>
+    <div class="article-list-item">Une sangle bandoulière plutôt que dans le sac, pour dégainer vite</div>
+    <div class="article-list-item">Le mode silencieux activé en permanence</div>
+    <div class="article-list-item">Et beaucoup, beaucoup de patience</div>
+  </div>
+
+  <p class="article-text reveal">La patience, c'est d'ailleurs quelque chose que la rando solo t'apprend mieux que n'importe quelle autre activité. Quand tu es seule, tu peux t'arrêter vingt minutes sans que personne soupire. Tu peux attendre qu'un héron reprenne son envol. Tu peux t'asseoir sur un tronc et observer sans avoir à justifier pourquoi.</p>
+
+  <!-- PHOTO À AJOUTER -->
+  <div class="article-photo-placeholder reveal">
+    <div class="article-photo-placeholder-inner">
+      <svg><use href="#icon-camera"/></svg>
+      <div class="pp-text">Photo à ajouter — une rencontre animale ou le matériel photo</div>
+      <span class="pp-file">images/article-randonner-seule-photo-2.jpg</span>
+    </div>
+  </div>
+
+  <h2 class="article-h2 reveal">Mon sac de randonneuse solo — ce que j'emporte vraiment</h2>
+  <p class="article-text reveal">Pas de liste exhaustive avec cinquante items. Ce que j'ai réellement dans mon sac pour une journée dans les Hauts-de-France :</p>
+
+  <p class="article-sublist-title">Indispensables (jamais sans)</p>
+  <div class="article-list">
+    <div class="article-list-item">Chaussures imperméables Gore-Tex — dans le Nord, c'est pas une option même en juillet</div>
+    <div class="article-list-item">Coupe-vent imperméable compact — tient dans une poche, sauve des sorties</div>
+    <div class="article-list-item">Batterie externe chargée</div>
+    <div class="article-list-item">Trousse de premiers secours basique (pansements, compresses, bande)</div>
+    <div class="article-list-item">Eau — minimum 1,5L pour une journée</div>
+    <div class="article-list-item">Barres céréales maison ou fruits secs</div>
+  </div>
+
+  <p class="article-sublist-title">Pour la photo (toujours)</p>
+  <div class="article-list">
+    <div class="article-list-item">Appareil reflex + téléobjectif — pour les chevreuils, les hérons, les buses et tout ce qui passe</div>
+    <div class="article-list-item">Sangle bandoulière pour dégainer rapidement sans ouvrir le sac</div>
+    <div class="article-list-item">Batterie de rechange pour l'appareil</div>
+    <div class="article-list-item">Lightroom mobile pour les retouches rapides sur le terrain si besoin</div>
+  </div>
+
+  <p class="article-sublist-title">Ce que j'ai arrêté d'emporter</p>
+  <div class="article-list">
+    <div class="article-list-item">Le matériel « au cas où » qui n'a jamais servi et qui pèse inutilement</div>
+    <div class="article-list-item">La deuxième paire de chaussettes (pour une journée, une suffit)</div>
+    <div class="article-list-item">Les snacks sucrés industriels — je digère mal en marchant, j'ai mis du temps à l'admettre</div>
+  </div>
+
+  <p class="article-text reveal" style="margin-top:1rem">Le poids de mon sac tourne autour de 5-6 kg avec le matériel photo. C'est plus lourd que la moyenne, mais je ne partirai jamais sans mon objectif.</p>
+
+  <h2 class="article-h2 reveal">Ce que j'ai envie de te dire si tu hésites encore</h2>
+  <p class="article-text reveal">Si tu lis cet article en te demandant si tu peux le faire, la réponse est oui.</p>
+  <p class="article-text reveal">Pas « oui mais seulement si tu es sportive. » Pas « oui mais seulement si tu connais déjà bien la rando. » Juste oui.</p>
+  <p class="article-text reveal">Tu commences petit. Un sentier balisé, une heure, proche de chez toi. Tu préviens quelqu'un. Tu rentres. Et tu te demandes pourquoi tu ne l'as pas fait avant.</p>
+  <p class="article-text reveal">Est-ce que tu croiseras peut-être des comportements déplacés ? Peut-être, oui. Est-ce que ça doit t'arrêter ? Non. Ces comportements ne définissent pas la rando — ils définissent ceux qui les ont.</p>
+  <p class="article-text reveal">La rando solo féminine, c'est une façon de se retrouver. D'aller à son rythme. De prouver à soi-même, encore et encore, qu'on est capable. Et de se retrouver face à un chevreuil dans la lumière du matin en se disant que c'est pour ça qu'on fait tout ça.</p>
+  <p class="article-text reveal">Et ça, ça n'a pas de prix.</p>
+
+  <div class="article-cta reveal">
+    <p>Retrouve toutes mes traces GPS et mes sorties sur mon <a href="blog.html">Carnet de randonnée</a>, et mes photos sur <a href="https://www.instagram.com/lachtiterandonneuse" target="_blank" rel="noopener">Instagram</a> et <a href="https://www.facebook.com/profile.php?id=61576448918841" target="_blank" rel="noopener">Facebook</a> — <span>@lachtiterandonneuse</span>.</p>
+    <a href="blog.html" class="cta-btn">Voir mes parcours Komoot →</a>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <svg width="42" height="26" viewBox="0 0 42 26" style="display:block;margin:0 auto 0.5rem">
+    <circle cx="21" cy="13" r="4.5" fill="#8B6BB1"/>
+    <ellipse cx="21" cy="4" rx="3" ry="4.3" fill="#d4b8f0"/>
+    <ellipse cx="21" cy="22" rx="3" ry="4.3" fill="#d4b8f0"/>
+    <ellipse cx="12" cy="13" rx="4.3" ry="3" fill="#C9A96E"/>
+    <ellipse cx="30" cy="13" rx="4.3" ry="3" fill="#C9A96E"/>
+    <circle cx="21" cy="13" r="2.8" fill="#F0E6FF"/>
+  </svg>
+  Marine Bernard · La Ch'tite Randonneuse · 2026 · Hauts-de-France
+</footer>
+
+<script>
+const cur=document.getElementById('cursor-flower');
+let mx=0,my=0,cx=0,cy=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function loop(){cx+=(mx-cx)*0.13;cy+=(my-cy)*0.13;cur.style.left=cx+'px';cur.style.top=cy+'px';requestAnimationFrame(loop)})();
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target)}});},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+document.querySelectorAll('a[href]').forEach(a=>{
+  a.addEventListener('click',function(e){
+    const href=this.getAttribute('href');
+    if(!href||!href.startsWith('#')||href==='#') return;
+    const target=document.getElementById(href.slice(1));
+    if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth'});}
+  });
+});
+</script>
+</body>
+</html>

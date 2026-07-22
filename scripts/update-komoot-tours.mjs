@@ -48,7 +48,7 @@ async function fetchCoverPhoto(tourId) {
     if (items.length === 0) return null;
     const chosen = items.find((it) => it.cover === 1) || items[0];
     if (!chosen?.src) return null;
-    return chosen.src.replace('{width}', '640').replace('{height}', '360').replace('{crop}', 'fill');
+    return chosen.src.replace('{width}', '640').replace('{height}', '360').replace('{crop}', 'true');
   } catch {
     return null; // une photo indisponible ne doit jamais faire échouer la mise à jour
   }
