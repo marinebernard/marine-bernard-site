@@ -35,22 +35,21 @@ jobs:
             git push
           fi
 
-      # Étape de publication FTP — désactivée par défaut.
+      # Étape de publication — désactivée par défaut.
+      # IONOS n'accepte que le SFTP (le FTP classique est refusé par leur serveur).
       # Pour l'activer : Settings > Secrets and variables > Actions
       #   - Variable "FTP_ENABLED" = true
-      #   - Variable "FTP_SERVER_DIR" = dossier distant (ex. "./" ou "/marine-bernard.fr/")
+      #   - Variable "FTP_SERVER_DIR" = dossier distant (ex. "/" ou "/marine-bernard.fr/")
       #   - Secrets "FTP_SERVER", "FTP_USERNAME", "FTP_PASSWORD"
-      - name: Publication sur l'hébergeur (FTP)
+      - name: Publication sur l'hébergeur (SFTP)
         if: ${{ vars.FTP_ENABLED == 'true' }}
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
           server: ${{ secrets.FTP_SERVER }}
+          port: 22
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./
-          server-dir: ${{ vars.FTP_SERVER_DIR || './' }}
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/.github/**
-            **/scripts/**
+          local_path: './*'
+          remote_path: ${{ vars.FTP_SERVER_DIR || '/' }}
+          sftp_only: true
+          rsyncArgs: '--exclude=.git/ --exclude=.github/ --exclude=scripts/'
