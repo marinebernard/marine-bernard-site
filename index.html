@@ -88,6 +88,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
   <button class="nav-cta" onclick="window.location='index.html#contact'">Me contacter</button>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- HERO -->
@@ -490,6 +493,18 @@ filterBtns.forEach(btn=>{
     });
   });
 });
+
+/* ── MENU MOBILE ── */
+const navToggle=document.getElementById('navToggle');
+const navLinksEl=document.querySelector('.nav-links');
+navToggle?.addEventListener('click',()=>{
+  navToggle.classList.toggle('open');
+  navLinksEl.classList.toggle('open');
+});
+navLinksEl?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+  navToggle?.classList.remove('open');
+  navLinksEl.classList.remove('open');
+}));
 </script>
 </body>
 </html>

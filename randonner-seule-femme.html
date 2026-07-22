@@ -160,6 +160,9 @@
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
   <button class="nav-cta" onclick="window.location='index.html#contact'">Me contacter</button>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <nav class="breadcrumb" aria-label="Fil d'Ariane"><div class="breadcrumb-inner"><a href="index.html"><svg class="icon bc-icon"><use href="#icon-home"/></svg> Accueil</a><a href="blog.html"><svg class="icon bc-icon"><use href="#icon-compass"/></svg> Carnet de randonnée</a><span class="breadcrumb-current"><svg class="icon bc-icon"><use href="#icon-edit"/></svg> Randonner seule</span></div></nav>
@@ -350,6 +353,18 @@ document.querySelectorAll('a[href]').forEach(a=>{
     if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth'});}
   });
 });
+
+/* ── MENU MOBILE ── */
+const navToggle=document.getElementById('navToggle');
+const navLinksEl=document.querySelector('.nav-links');
+navToggle?.addEventListener('click',()=>{
+  navToggle.classList.toggle('open');
+  navLinksEl.classList.toggle('open');
+});
+navLinksEl?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+  navToggle?.classList.remove('open');
+  navLinksEl.classList.remove('open');
+}));
 </script>
 </body>
 </html>

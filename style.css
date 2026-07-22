@@ -112,6 +112,28 @@ html,body{
 }
 .nav-cta:hover{background:#8B6BB1}
 
+.nav-toggle{
+  display:none;
+  background:none;
+  border:none;
+  cursor:none;
+  padding:6px;
+  flex-direction:column;
+  justify-content:center;
+  gap:5px;
+  flex-shrink:0;
+}
+.nav-toggle span{
+  display:block;
+  width:24px;height:2px;
+  background:#2D1B69;
+  border-radius:2px;
+  transition:transform 0.25s,opacity 0.25s;
+}
+.nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle.open span:nth-child(2){opacity:0}
+.nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
 /* ── FOOTER ─────────────────────────────────────────────────── */
 .footer{
   text-align:center;
@@ -703,7 +725,24 @@ html,body{
 /* ── RESPONSIVE INDEX ───────────────────────────────────────── */
 @media(max-width:768px){
   .nav{padding:0 1.5rem}
-  .nav-links{display:none}
+  .nav-toggle{display:flex}
+  .nav-cta{display:none}
+  .nav-links{
+    display:none;
+    position:absolute;
+    top:66px;left:0;right:0;
+    flex-direction:column;
+    background:#FAF8FF;
+    border-bottom:1px solid rgba(139,107,177,0.18);
+    border-radius:0;
+    padding:8px;
+    gap:4px;
+    box-shadow:0 12px 24px rgba(45,27,105,0.12);
+    z-index:99;
+  }
+  .nav-links.open{display:flex}
+  .nav-links li{width:100%}
+  .nav-links li a{display:block;text-align:center;padding:12px;border-radius:10px;}
   .logo-text{font-size:0.98rem}
   .logo-mark{width:20px;height:20px}
   .hero-split-grid{grid-template-columns:1fr;padding:2.5rem 1.5rem 3rem;gap:1.5rem;min-height:auto}

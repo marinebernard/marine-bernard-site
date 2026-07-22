@@ -83,6 +83,9 @@
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
   <button class="nav-cta" onclick="window.location='index.html#contact'">Me contacter</button>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <nav class="breadcrumb" aria-label="Fil d'Ariane"><div class="breadcrumb-inner"><a href="index.html"><svg class="icon bc-icon"><use href="#icon-home"/></svg> Accueil</a><span class="breadcrumb-current"><svg class="icon bc-icon"><use href="#icon-compass"/></svg> Carnet de randonnée</span></div></nav>
@@ -222,7 +225,7 @@
     <div class="blog-hero-content">
       <p class="blog-hero-eyebrow">La Ch'tite Randonneuse · Hauts-de-France</p>
       <h1 class="blog-hero-title">Des instants saisis<br><em>au fil des sentiers</em></h1>
-      <p class="blog-hero-desc">Lieux oubliés, faune discrète et lumières du Nord — carnets de rando, patrimoine, bons plans et événements à venir dans les Hauts-de-France.</p>
+      <p class="blog-hero-desc">Lieux oubliés et lumières du Nord — carnets de rando, patrimoine et récits au fil des sentiers des Hauts-de-France.</p>
       <div class="blog-hero-stats">
         <div class="blog-stat"><span class="blog-stat-num">+200</span><span class="blog-stat-label">Sentiers explorés</span></div>
         <div class="blog-stat"><span class="blog-stat-num">+4000</span><span class="blog-stat-label">Km parcourus</span></div>
@@ -242,14 +245,8 @@
     <button class="blog-subnav-btn" onclick="showPanel('patrimoine',this)">
       <span class="btn-icon"><svg class="icon"><use href="#icon-castle"/></svg></span> Patrimoine &amp; Histoire
     </button>
-    <button class="blog-subnav-btn" onclick="showPanel('faune',this)">
-      <span class="btn-icon"><svg class="icon"><use href="#icon-paw"/></svg></span> Faune &amp; Nature
-    </button>
-    <button class="blog-subnav-btn" onclick="showPanel('evenements',this)">
-      <span class="btn-icon"><svg class="icon"><use href="#icon-calendar"/></svg></span> Événements
-    </button>
-    <button class="blog-subnav-btn" onclick="showPanel('bonsplans',this)">
-      <span class="btn-icon"><svg class="icon"><use href="#icon-star"/></svg></span> Bons plans
+    <button class="blog-subnav-btn" onclick="showPanel('blog',this)">
+      <span class="btn-icon"><svg class="icon"><use href="#icon-edit"/></svg></span> Blog
     </button>
   </nav>
 </div>
@@ -522,9 +519,7 @@
           <div class="sidebar-links">
             <a href="#" class="sidebar-link" onclick="showPanel('carnets',null)"><svg class="icon"><use href="#icon-boot"/></svg> Carnets de rando</a>
             <a href="#" class="sidebar-link" onclick="showPanel('patrimoine',null)"><svg class="icon"><use href="#icon-castle"/></svg> Patrimoine & Histoire</a>
-            <a href="#" class="sidebar-link" onclick="showPanel('faune',null)"><svg class="icon"><use href="#icon-paw"/></svg> Faune & Nature</a>
-            <a href="#" class="sidebar-link" onclick="showPanel('evenements',null)"><svg class="icon"><use href="#icon-calendar"/></svg> Événements</a>
-            <a href="#" class="sidebar-link" onclick="showPanel('bonsplans',null)"><svg class="icon"><use href="#icon-star"/></svg> Bons plans</a>
+            <a href="#" class="sidebar-link" onclick="showPanel('blog',null)"><svg class="icon"><use href="#icon-edit"/></svg> Blog</a>
           </div>
         </div>
         <div class="sidebar-card">
@@ -622,164 +617,25 @@
     </div>
   </div>
 
-  <!-- ═══ FAUNE & NATURE ═══ -->
-  <div class="blog-panel reveal" id="panel-faune">
-    <p class="panel-label">Rencontres inattendues</p>
-    <h2 class="panel-title">Faune & Nature</h2>
-    <p class="panel-sub">La faune locale, pour qui sait s'arrêter et observer — photos prises et retouchées par mes soins</p>
-
-    <div class="blog-quote">
-      On n'a pas besoin de partir loin pour être dépaysée. Le Nord est beau, et peu de gens le savent.
-      <span>Ces instants qu'on ne planifie pas, mais qu'on n'oublie pas.</span>
-    </div>
+  <!-- ═══ BLOG ═══ -->
+  <div class="blog-panel reveal" id="panel-blog">
+    <p class="panel-label">Mes récits</p>
+    <h2 class="panel-title">Blog</h2>
+    <p class="panel-sub">Mes articles de fond — récits, conseils et réflexions autour de la randonnée</p>
 
     <div class="articles-grid">
-      <div class="article-card">
-        <div class="article-thumb" style="background:#EAF3DE">🦢<span class="article-badge">Galerie</span></div>
+      <a href="randonner-seule-femme.html" class="article-card" style="text-decoration:none">
+        <div class="article-thumb" style="height:180px">
+          <img src="images/article-randonner-seule-femme-hero.jpg" alt="Sentier en forêt" style="width:100%;height:100%;object-fit:cover;">
+          <span class="article-badge">Dernier article</span>
+        </div>
         <div class="article-body">
-          <div class="article-cat">Oiseaux · Zones humides</div>
-          <h3 class="article-title">Cygnes & oiseaux des marais</h3>
-          <p class="article-desc">Les zones humides des Hauts-de-France abritent une faune avicole exceptionnelle, à portée d'objectif.</p>
-          <div class="article-meta"><span class="article-tag tag-g">Photo</span><span class="article-tag tag-v">Oiseaux</span></div>
+          <div class="article-cat">Récit · Conseils</div>
+          <h3 class="article-title">Randonner seule en tant que femme</h3>
+          <p class="article-desc">Peur, sécurité, comportements déplacés, liberté et rencontres animales — mes vraies réponses à vos vraies questions.</p>
+          <div class="article-meta"><span class="article-tag tag-v">Sécurité</span><span class="article-tag tag-g">Solo</span></div>
         </div>
-      </div>
-      <div class="article-card">
-        <div class="article-thumb" style="background:#fef5e7">🦋<span class="article-badge">Printemps</span></div>
-        <div class="article-body">
-          <div class="article-cat">Insectes · Fleurs</div>
-          <h3 class="article-title">Papillons de la forêt de Nieppe</h3>
-          <p class="article-desc">Le Papillon Belle-Dame et ses congénères — une diversité surprenante dans nos forêts du Nord.</p>
-          <div class="article-meta"><span class="article-tag tag-g">Macro</span><span class="article-tag tag-o">Forêt</span></div>
-        </div>
-      </div>
-      <div class="article-card">
-        <div class="article-thumb" style="background:#d4b8f0">🐦<span class="article-badge">Côte d'Opale</span></div>
-        <div class="article-body">
-          <div class="article-cat">Oiseaux marins · Littoral</div>
-          <h3 class="article-title">Fous de Bassan au Cap Blanc-Nez</h3>
-          <p class="article-desc">Ces plongeurs spectaculaires en vol au-dessus des falaises — une rencontre inoubliable sur la Côte d'Opale.</p>
-          <div class="article-meta"><span class="article-tag tag-v">Oiseaux marins</span><span class="article-tag tag-g">Côte</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══ ÉVÉNEMENTS ═══ -->
-  <div class="blog-panel reveal" id="panel-evenements">
-    <p class="panel-label">À venir</p>
-    <h2 class="panel-title">Événements</h2>
-    <p class="panel-sub">Randonnées, fêtes locales et journées patrimoine — les prochains rendez-vous dans les Hauts-de-France</p>
-
-    <div class="events-list">
-	<div class="event-card">
-        <div class="event-date"><div class="event-day">04</div><div class="event-month">Juil</div></div>
-        <div class="event-info">
-          <div class="event-title">Marche colorée </div>
-          <div class="event-where">📍 Isbergues (62)· Inscription obligatoire</div>
-          <div class="event-tags"><span class="article-tag tag-g">Famille</span><span class="article-tag tag-o">Amusant</span><span class="article-tag tag-o">Bonne cause</span></div>
-        </div>
-      </div>
-	<div class="event-card">
-        <div class="event-date"><div class="event-day">13</div><div class="event-month">Sep</div></div>
-        <div class="event-info">
-          <div class="event-title">Trèfle du Diable</div>
-          <div class="event-where">📍 Valhuon (62) · 10, 15, 25, 35, 40 ou 50 km · Inscription obligatoire</div>
-          <div class="event-tags"><span class="article-tag tag-g">Rando</span><span class="article-tag tag-v">Défi</span><span class="article-tag tag-o">Bonne cause</span></div>
-        </div>
-      </div>
-      <div class="event-card">
-        <div class="event-date"><div class="event-day">31</div><div class="event-month">Oct</div></div>
-        <div class="event-info">
-          <div class="event-title">La Marche de la mort </div>
-          <div class="event-where">📍 Ham-En-Artois (62) · 50 km · Inscription obligatoire</div>
-          <div class="event-tags"><span class="article-tag tag-g">Rando</span><span class="article-tag tag-v">Défi</span><span class="article-tag tag-o">Bonne cause</span></div>
-        </div>
-      </div>
-      
-    </div>
-
-    <div class="partner-box">
-      <div>
-        <div class="partner-eyebrow">Vous organisez un événement ?</div>
-        <h3 class="partner-title">Faites-le découvrir ici</h3>
-        <p class="partner-desc">Je référence les événements rando, patrimoine et nature des Hauts-de-France. Contactez-moi pour ajouter votre événement à l'agenda.</p>
-        <div class="partner-tags">
-          <span class="ptag">Randonnées</span><span class="ptag">Patrimoine</span><span class="ptag">Nature</span><span class="ptag">Gastronomie</span>
-        </div>
-      </div>
-      <div>
-        <a href="index.html#contact" class="partner-cta">Me contacter →</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══ BONS PLANS ═══ -->
-  <div class="blog-panel reveal" id="panel-bonsplans">
-    <p class="panel-label">Mes conseils</p>
-    <h2 class="panel-title">Bons plans</h2>
-    <p class="panel-sub">Mes conseils de randonneuse pour profiter au mieux des Hauts-de-France — et ramener de belles photos</p>
-
-    <div class="tips-grid">
-      <div class="tip-card">
-        <div class="tip-icon"><svg class="icon"><use href="#icon-sun"/></svg></div>
-        <div>
-          <div class="tip-title">La lumière du matin</div>
-          <div class="tip-desc">Toujours vérifier la météo la veille — la golden hour du matin est parfaite pour la photo de patrimoine et de faune. Le soleil rasant sublime les textures de pierre.</div>
-        </div>
-      </div>
-      <div class="tip-card">
-        <div class="tip-icon"><svg class="icon"><use href="#icon-map"/></svg></div>
-        <div>
-          <div class="tip-title">Komoot pour les traces GPS</div>
-          <div class="tip-desc">L'application incontournable pour préparer ses itinéraires, télécharger les traces offline et lire les avis de la communauté de randonneurs locaux.</div>
-        </div>
-      </div>
-      <div class="tip-card">
-        <div class="tip-icon"><svg class="icon"><use href="#icon-coffee"/></svg></div>
-        <div>
-          <div class="tip-title">Le ravitaillement maison</div>
-          <div class="tip-desc">Un bon thermos de café, des energy bars faites maison et quelques fruits secs — indispensables sur les longues sorties. Les estaminets pour les étapes méritées.</div>
-        </div>
-      </div>
-      <div class="tip-card">
-        <div class="tip-icon"><svg class="icon"><use href="#icon-shoe"/></svg></div>
-        <div>
-          <div class="tip-title">Waterproof toute l'année</div>
-          <div class="tip-desc">Chaussures imperméables même en été dans le Nord — le sol reste souvent humide sous les arbres et dans les zones bocagères. Pas de compromis sur ce point.</div>
-        </div>
-      </div>
-      <div class="tip-card">
-        <div class="tip-icon"><svg class="icon"><use href="#icon-camera"/></svg></div>
-        <div>
-          <div class="tip-title">Patience pour la faune</div>
-          <div class="tip-desc">S'arrêter, attendre, ne pas faire de bruit. La faune des Hauts-de-France est là — il faut juste lui laisser le temps de s'approcher. Les zones humides tôt le matin sont idéales.</div>
-        </div>
-      </div>
-      <div class="tip-card">
-        <div class="tip-icon"><svg class="icon"><use href="#icon-castle"/></svg></div>
-        <div>
-          <div class="tip-title">Les offices de tourisme locaux</div>
-          <div class="tip-desc">Souvent sous-estimés, ils proposent des cartes de sentiers gratuites, des fiches patrimoine et des infos sur les évenements locaux. Un réflexe avant chaque sortie.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="partner-box">
-      <div>
-        <div class="partner-eyebrow">Partenariats & collaborations</div>
-        <h3 class="partner-title">Travaillons ensemble</h3>
-        <p class="partner-desc">Photographe, graphiste et randonneuse locale — je produis des contenus visuels professionnels pour mettre en valeur votre territoire, vos produits ou vos hébergements.</p>
-        <div class="partner-tags">
-          <span class="ptag">🏛️ Offices de tourisme</span>
-          <span class="ptag">🎒 Marques outdoor</span>
-          <span class="ptag">🏡 Hébergements locaux</span>
-          <span class="ptag">🧭 Komoot Ambassador</span>
-          <span class="ptag">🍺 Tables d'hôtes</span>
-        </div>
-      </div>
-      <div>
-        <a href="index.html#contact" class="partner-cta">Me contacter →</a>
-      </div>
+      </a>
     </div>
   </div>
 
@@ -860,6 +716,18 @@ document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
 /* ── PANEL ACTIF AU CHARGEMENT ── */
 const hash=window.location.hash.replace('#','');
 if(hash)showPanel(hash,null);
+
+/* ── MENU MOBILE ── */
+const navToggle=document.getElementById('navToggle');
+const navLinksEl=document.querySelector('.nav-links');
+navToggle?.addEventListener('click',()=>{
+  navToggle.classList.toggle('open');
+  navLinksEl.classList.toggle('open');
+});
+navLinksEl?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+  navToggle?.classList.remove('open');
+  navLinksEl.classList.remove('open');
+}));
 </script>
 </body>
 </html>
