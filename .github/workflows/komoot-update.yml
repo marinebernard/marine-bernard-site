@@ -32,6 +32,7 @@ jobs:
             echo "Aucun nouveau parcours aujourd'hui."
           else
             git commit -m "Mise à jour automatique des parcours Komoot"
+            git pull --rebase origin main
             git push
           fi
 
