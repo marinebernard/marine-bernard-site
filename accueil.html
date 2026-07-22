@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marine Bernard — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;overflow-x:hidden;}
+body{font-family:'Inter',sans-serif;cursor:none;background:#FAF8FF;}
+a,button{cursor:none;}
+
+/* ── CURSEUR FLEUR ── */
+#cursor-flower{
+  position:fixed;
+  width:30px;height:30px;
+  pointer-events:none;
+  z-index:9999;
+  transform:translate(-50%,-50%);
+  top:-100px;left:-100px;
+}
+#cursor-flower svg{
+  width:100%;height:100%;
+  animation:spinFlower 6s linear infinite;
+}
+@keyframes spinFlower{to{transform:rotate(360deg)}}
+
+/* ── BARRE HAUT ── */
+.top-bar{
+  height:52px;
+  background:rgba(250,248,255,0.95);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(139,107,177,0.18);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2rem;
+  position:relative;z-index:20;
+}
+.top-logo{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:15px;color:#2D1B69;text-decoration:none;
+}
+.skip-link{
+  font-size:11px;color:#9a88b8;
+  border:0.5px solid rgba(212,194,239,0.6);
+  border-radius:12px;padding:4px 12px;
+  text-decoration:none;
+  transition:background 0.2s,color 0.2s;
+}
+.skip-link:hover{background:#F0E6FF;color:#2D1B69;}
+
+/* ── SPLIT SCREEN ── */
+.split-container{display:flex;position:relative;width:100%;}
+.panel{
+  width:50vw;height:100vh;
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  text-decoration:none;
+}
+.panel-left{background:#2D1B69;transition:background 0.35s;}
+.panel-left:hover{background:#3d2580;}
+.panel-right{background:#27500A;}
+
+.panel-content{
+  position:relative;z-index:5;
+  text-align:center;max-width:320px;
+  padding:0 1.5rem;
+  display:flex;flex-direction:column;align-items:center;
+}
+.panel-eyebrow{
+  font-size:11px;letter-spacing:0.15em;text-transform:uppercase;
+  margin-bottom:1rem;
+}
+.panel-eyebrow.left{color:#d4b8f0;}
+.panel-eyebrow.right{color:#C0DD97;}
+
+.panel-title{
+  font-family:'Playfair Display',serif;font-weight:700;
+  font-size:28px;color:#fff;line-height:1.3;
+  margin-bottom:1rem;
+}
+.panel-title em{font-style:italic;}
+.panel-title em.left{color:#8B6BB1;}
+.panel-title em.right{color:#97C459;}
+
+.panel-desc{
+  font-size:13px;line-height:1.6;color:rgba(255,255,255,0.65);
+  margin-bottom:1.5rem;
+}
+
+.panel-tags{
+  display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+  margin-bottom:1.75rem;
+}
+.tag-pill{
+  font-size:11px;color:#fff;
+  background:rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,0.2);
+  border-radius:20px;padding:5px 14px;
+}
+
+.panel-btn{
+  display:inline-block;
+  font-size:12px;color:#fff;
+  background:rgba(255,255,255,0.12);
+  border:1px solid rgba(255,255,255,0.25);
+  border-radius:22px;padding:9px 22px;
+  text-decoration:none;
+  transition:background 0.25s;
+}
+.panel-btn:hover{background:rgba(255,255,255,0.22);}
+
+/* ── FLEURS FLOTTANTES (panneau gauche) ── */
+.floating-flowers{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1;}
+.floating-flower{position:absolute;opacity:0.18;animation-name:floatUp;animation-timing-function:linear;animation-iteration-count:infinite;}
+@keyframes floatUp{
+  from{transform:translateY(0);}
+  to{transform:translateY(-130vh);}
+}
+
+/* ── SÉPARATEUR CENTRAL ── */
+.separator-line{
+  position:absolute;top:0;bottom:0;left:50%;
+  width:1px;background:rgba(255,255,255,0.15);
+  z-index:10;pointer-events:none;
+}
+.separator-flower{
+  position:absolute;top:50%;left:50%;
+  width:44px;height:44px;
+  transform:translate(-50%,-50%) rotate(0deg);
+  background:#FAF8FF;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 18px rgba(0,0,0,0.18);
+  z-index:11;
+  animation:spinSeparator 10s linear infinite;
+}
+.separator-flower svg{width:28px;height:28px;}
+@keyframes spinSeparator{
+  from{transform:translate(-50%,-50%) rotate(0deg);}
+  to{transform:translate(-50%,-50%) rotate(360deg);}
+}
+
+/* ── PLUIE (panneau droit, au survol) ── */
+.rain-container{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:2;}
+.rain-drop{
+  position:absolute;top:-20px;width:1px;
+  background:rgba(255,255,255,0.22);
+  opacity:0;
+  animation-name:rainFall;
+  animation-timing-function:linear;
+  animation-iteration-count:infinite;
+  transition:opacity 0.3s;
+}
+.panel-right.raining .rain-drop{opacity:1;}
+@keyframes rainFall{
+  from{transform:rotate(20deg) translateY(-20px);}
+  to{transform:rotate(20deg) translateY(110vh);}
+}
+
+/* ── HERBES (panneau droit, toujours visibles) ── */
+.grass-container{position:absolute;bottom:0;left:0;right:0;height:90px;pointer-events:none;overflow:visible;z-index:2;}
+.grass-blade{
+  position:absolute;bottom:0;
+  transform-origin:bottom center;
+  opacity:0.7;
+  animation-name:sway;
+  animation-timing-function:ease-in-out;
+  animation-iteration-count:infinite;
+  animation-direction:alternate;
+}
+@keyframes sway{
+  from{transform:rotate(-8deg);}
+  to{transform:rotate(8deg);}
+}
+
+/* ── BARRE BAS ── */
+.bottom-bar{
+  background:#FAF8FF;padding:14px;
+  border-top:0.5px solid rgba(139,107,177,0.12);
+  text-align:center;position:relative;z-index:20;
+}
+.bottom-flower{width:28px;height:28px;display:block;margin:0 auto 6px;}
+.bottom-text{font-size:11px;color:#b0a0c8;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .split-container{flex-direction:column;}
+  .panel{width:100%;height:50vh;}
+  .separator-line,.separator-flower{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- CURSEUR FLEUR -->
+<div id="cursor-flower">
+  <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="15" cy="15" r="4.5" fill="#2D1B69"/>
+    <ellipse cx="15" cy="6.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+    <ellipse cx="15" cy="23.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+    <ellipse cx="6.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
+    <ellipse cx="23.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
+    <ellipse cx="9" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 9 9)"/>
+    <ellipse cx="21" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 21 9)"/>
+    <ellipse cx="9" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 9 21)"/>
+    <ellipse cx="21" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 21 21)"/>
+    <circle cx="15" cy="15" r="3.2" fill="#FAF8FF"/>
+  </svg>
+</div>
+
+<!-- BARRE HAUT -->
+<div class="top-bar">
+  <a href="index.html" class="top-logo">Marine Bernard</a>
+  <a href="index.html" class="skip-link">Passer cette étape →</a>
+</div>
+
+<!-- SPLIT SCREEN -->
+<div class="split-container">
+
+  <!-- PANNEAU GAUCHE — PRO -->
+  <section class="panel panel-left" onclick="location.href='index.html'">
+    <div class="floating-flowers" id="flowersLeft"></div>
+
+    <div class="panel-content">
+      <p class="panel-eyebrow left">Professionnel / Entreprise</p>
+      <h1 class="panel-title">Vous cherchez<br><em class="left">une graphiste ?</em></h1>
+      <p class="panel-desc">Projets e-commerce, identité visuelle, refonte de sites web, communication digitale</p>
+      <div class="panel-tags">
+        <span class="tag-pill">UX/UI</span>
+        <span class="tag-pill">WordPress</span>
+        <span class="tag-pill">Graphisme</span>
+        <span class="tag-pill">Community</span>
+      </div>
+      <a href="index.html" class="panel-btn">Voir le portfolio →</a>
+    </div>
+  </section>
+
+  <!-- SÉPARATEUR -->
+  <div class="separator-line"></div>
+  <div class="separator-flower">
+    <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="15" cy="15" r="4.5" fill="#2D1B69"/>
+      <ellipse cx="15" cy="6.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+      <ellipse cx="15" cy="23.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+      <ellipse cx="6.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
+      <ellipse cx="23.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
+      <ellipse cx="9" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 9 9)"/>
+      <ellipse cx="21" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 21 9)"/>
+      <ellipse cx="9" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 9 21)"/>
+      <ellipse cx="21" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 21 21)"/>
+      <circle cx="15" cy="15" r="3.2" fill="#FAF8FF"/>
+    </svg>
+  </div>
+
+  <!-- PANNEAU DROIT — RANDO -->
+  <section class="panel panel-right" id="panelRight" onclick="location.href='parcours-komoot.html'">
+    <div class="rain-container" id="rainRight"></div>
+    <div class="grass-container" id="grassRight"></div>
+
+    <div class="panel-content">
+      <p class="panel-eyebrow right">Randonneur / Passionné nature</p>
+      <h1 class="panel-title">Vous cherchez<br><em class="right">des sentiers ?</em></h1>
+      <p class="panel-desc">Blog rando, photos de nature, traces Komoot, bons plans dans les Hauts-de-France</p>
+      <div class="panel-tags">
+        <span class="tag-pill">Randonnée</span>
+        <span class="tag-pill">Photo nature</span>
+        <span class="tag-pill">Komoot</span>
+        <span class="tag-pill">Hauts-de-France</span>
+      </div>
+      <a href="parcours-komoot.html" class="panel-btn">Découvrir le blog →</a>
+    </div>
+  </section>
+
+</div>
+
+<!-- BARRE BAS -->
+<div class="bottom-bar">
+  <svg class="bottom-flower" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="15" cy="15" r="4.5" fill="#2D1B69"/>
+    <ellipse cx="15" cy="6.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+    <ellipse cx="15" cy="23.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+    <ellipse cx="6.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
+    <ellipse cx="23.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
+    <ellipse cx="9" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 9 9)"/>
+    <ellipse cx="21" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 21 9)"/>
+    <ellipse cx="9" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 9 21)"/>
+    <ellipse cx="21" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 21 21)"/>
+    <circle cx="15" cy="15" r="3.2" fill="#FAF8FF"/>
+  </svg>
+  <p class="bottom-text">Marine Bernard · portfolio · 2026 · Hauts-de-France</p>
+</div>
+
+<script>
+/* ── CURSEUR FLEUR ── */
+const cur=document.getElementById('cursor-flower');
+let mx=0,my=0,cx=0,cy=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function loop(){
+  cx+=(mx-cx)*0.13;cy+=(my-cy)*0.13;
+  cur.style.left=cx+'px';cur.style.top=cy+'px';
+  requestAnimationFrame(loop);
+})();
+
+/* ── FLEURS FLOTTANTES (panneau gauche) ── */
+function makeFlowers(container,count){
+  const palette=['#8B6BB1','#C9A96E','#d4b8f0'];
+  for(let i=0;i<count;i++){
+    const sz=16+Math.random()*16;
+    const s=document.createElementNS('http://www.w3.org/2000/svg','svg');
+    s.setAttribute('viewBox','0 0 30 30');
+    s.setAttribute('width',sz);s.setAttribute('height',sz);
+    s.classList.add('floating-flower');
+    s.style.left=Math.random()*100+'%';
+    s.style.top=Math.random()*100+'%';
+    s.style.animationDuration=(10+Math.random()*10)+'s';
+    s.style.animationDelay=(Math.random()*8)+'s';
+    s.innerHTML=`
+      <circle cx="15" cy="15" r="4.5" fill="#2D1B69"/>
+      <ellipse cx="15" cy="6.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+      <ellipse cx="15" cy="23.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+      <ellipse cx="6.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
+      <ellipse cx="23.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
+      <ellipse cx="9" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 9 9)"/>
+      <ellipse cx="21" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 21 9)"/>
+      <ellipse cx="9" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 9 21)"/>
+      <ellipse cx="21" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 21 21)"/>
+      <circle cx="15" cy="15" r="3.2" fill="#FAF8FF"/>`;
+    container.appendChild(s);
+  }
+}
+makeFlowers(document.getElementById('flowersLeft'),12);
+
+/* ── PLUIE (panneau droit) ── */
+function makeRain(container,count){
+  for(let i=0;i<count;i++){
+    const d=document.createElement('div');
+    d.classList.add('rain-drop');
+    d.style.left=Math.random()*100+'%';
+    d.style.height=(12+Math.random()*16)+'px';
+    d.style.animationDuration=(0.7+Math.random()*0.7)+'s';
+    d.style.animationDelay=(Math.random()*2)+'s';
+    container.appendChild(d);
+  }
+}
+makeRain(document.getElementById('rainRight'), 40+Math.floor(Math.random()*21));
+
+const panelRight=document.getElementById('panelRight');
+panelRight.addEventListener('mouseenter',()=>panelRight.classList.add('raining'));
+panelRight.addEventListener('mouseleave',()=>panelRight.classList.remove('raining'));
+
+/* ── HERBES (panneau droit) ── */
+function makeGrass(container,count){
+  for(let i=0;i<count;i++){
+    const h=45+Math.random()*40;
+    const left=3+(i/(count-1))*94+(Math.random()*3-1.5);
+    const s=document.createElementNS('http://www.w3.org/2000/svg','svg');
+    s.setAttribute('viewBox','0 0 3 100');
+    s.setAttribute('width','3');s.setAttribute('height',h);
+    s.classList.add('grass-blade');
+    s.style.left=left+'%';
+    s.style.animationDuration=(1.8+Math.random()*1.4)+'s';
+    s.style.animationDelay=(Math.random()*1.5)+'s';
+    s.innerHTML='<rect x="0" y="0" width="3" height="100" rx="1.5" fill="#C0DD97"/>';
+    container.appendChild(s);
+  }
+}
+makeGrass(document.getElementById('grassRight'),10);
+</script>
+
+</body>
+</html>
