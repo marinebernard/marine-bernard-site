@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BlaBlaPattes — Logo &amp; Site Web — Marine Bernard</title>
+<title>Refonte Jouvence — Marine Bernard</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <style>
 .projet-hero{padding:4rem 3rem 3rem;border-bottom:1px solid rgba(139,107,177,0.12);max-width:1000px;margin:0 auto;}
 .projet-back{display:inline-flex;align-items:center;gap:6px;font-size:0.74rem;color:#8B6BB1;text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;font-weight:500;margin-bottom:2rem;transition:color 0.2s;}
@@ -21,19 +21,12 @@
 .projet-tag{display:inline-block;font-size:0.7rem;padding:5px 14px;border-radius:20px;font-weight:500;background:#F0E6FF;color:#5a3d99;border:1px solid rgba(139,107,177,0.2);}
 .projet-tag.dark{background:#2D1B69;color:#fff;border-color:#2D1B69}
 .projet-tag.vert{background:#EAF3DE;color:#27500A;border-color:rgba(59,109,17,0.2)}
-.projet-tag.orange{background:#fdeee3;color:#a34413;border-color:rgba(232,99,28,0.25)}
 
 .projet-body{max-width:1000px;margin:0 auto;padding:3rem;display:grid;grid-template-columns:1fr 320px;gap:3rem;align-items:start;}
 
 .projet-visual{border-radius:20px;overflow:hidden;border:1px solid rgba(139,107,177,0.15);box-shadow:0 20px 60px rgba(45,27,105,0.12);}
 .projet-visual img{width:100%;display:block;}
 .mockup-label{font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:#9a88b8;margin-top:0.6rem;text-align:center;}
-
-/* Logo + galerie */
-.logo-showcase{display:flex;align-items:center;gap:1.5rem;background:#fff;border:1px solid rgba(139,107,177,0.15);border-radius:16px;padding:1.3rem;}
-.logo-showcase img{width:110px;height:110px;border-radius:50%;flex-shrink:0;box-shadow:0 8px 24px rgba(232,99,28,0.18);}
-.logo-showcase-text .info-card-title{margin-bottom:0.4rem}
-.logo-showcase-text p{font-size:0.8rem;color:#5a4870;line-height:1.6}
 
 .screenshot-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:1.5rem;}
 .screenshot-item{border-radius:12px;overflow:hidden;border:1px solid rgba(139,107,177,0.12);}
@@ -54,17 +47,22 @@
 .competences-list{display:flex;flex-direction:column;gap:6px}
 .comp-item{display:flex;align-items:center;gap:8px;font-size:0.8rem;color:#5a4870;}
 .comp-item::before{content:'✦';color:#C9A96E;font-size:0.65rem;flex-shrink:0}
+
 .projet-cta{background:linear-gradient(135deg,#2D1B69,#8B6BB1);border-radius:16px;padding:1.3rem;text-align:center;}
 .projet-cta p{font-size:0.8rem;color:rgba(255,255,255,0.78);margin-bottom:0.9rem;line-height:1.6}
 .cta-btn{display:inline-block;background:#C9A96E;color:#fff;padding:10px 22px;border-radius:20px;font-size:0.74rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;text-decoration:none;transition:background 0.2s;}
 .cta-btn:hover{background:#b8945a}
+.cta-btn-outline{display:inline-block;background:transparent;color:#C9A96E;padding:10px 22px;border-radius:20px;font-size:0.74rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;text-decoration:none;border:1.5px solid #C9A96E;margin-top:8px;transition:all 0.2s;}
+.cta-btn-outline:hover{background:#C9A96E;color:#fff}
 
 .projet-desc-section{max-width:1000px;margin:0 auto;padding:0 3rem 3rem;}
 .desc-title{font-family:'Playfair Display',serif;font-size:1.3rem;color:#2D1B69;margin-bottom:0.8rem;}
 .desc-text{font-size:0.86rem;color:#5a4870;line-height:1.82;margin-bottom:1.5rem;}
-.brief-box{background:linear-gradient(135deg,#fdeee3,#FAF8FF);border:1px solid rgba(232,99,28,0.15);border-left:3px solid #C9A96E;border-radius:0 14px 14px 0;padding:1.3rem 1.5rem;margin-bottom:2rem;font-size:0.86rem;color:#5a4870;line-height:1.8;font-style:italic;}
+
+.brief-box{background:linear-gradient(135deg,#f0ebfa,#FAF8FF);border:1px solid rgba(139,107,177,0.15);border-left:3px solid #C9A96E;border-radius:0 14px 14px 0;padding:1.3rem 1.5rem;margin-bottom:2rem;font-size:0.86rem;color:#5a4870;line-height:1.8;font-style:italic;}
 .brief-box strong{display:block;font-style:normal;font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:#C9A96E;font-weight:600;margin-bottom:0.4rem;}
 
+/* Résultats chiffrés */
 .resultats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:1.5rem 0;}
 .resultat-card{background:linear-gradient(135deg,#2D1B69,#5a3d99);border-radius:14px;padding:1.2rem;text-align:center;}
 .resultat-num{font-family:'Playfair Display',serif;font-size:1.8rem;color:#C9A96E;line-height:1;margin-bottom:4px;}
@@ -76,12 +74,16 @@
 .choix-title{font-size:0.78rem;font-weight:600;color:#2D1B69;margin-bottom:0.3rem}
 .choix-desc{font-size:0.74rem;color:#7a6090;line-height:1.55}
 
+.lien-site{display:inline-flex;align-items:center;gap:8px;background:#2D1B69;color:#fff;padding:12px 24px;border-radius:22px;font-size:0.76rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;text-decoration:none;transition:background 0.2s;margin-top:1rem;}
+.lien-site:hover{background:#8B6BB1}
+.lien-site::after{content:'↗';font-size:1rem}
+
 @media(max-width:768px){
   .projet-hero{padding:2.5rem 1.5rem 2rem}
   .projet-body{grid-template-columns:1fr;padding:2rem 1.5rem}
   .projet-desc-section{padding:0 1.5rem 2rem}
-  .choix-grid,.resultats-grid,.screenshot-grid{grid-template-columns:1fr}
-  .logo-showcase{flex-direction:column;text-align:center}
+  .choix-grid,.resultats-grid{grid-template-columns:1fr}
+  .screenshot-grid{grid-template-columns:1fr}
   .projet-title{font-size:2rem}
 }
 </style>
@@ -101,8 +103,10 @@
 <svg style="display:none" aria-hidden="true">
 <symbol id="icon-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9a1 1 0 0 0 1 1h3v-5h4v5h3a1 1 0 0 0 1-1v-9"/></symbol>
 <symbol id="icon-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.2"/><rect x="13" y="4" width="7" height="7" rx="1.2"/><rect x="4" y="13" width="7" height="7" rx="1.2"/><rect x="13" y="13" width="7" height="7" rx="1.2"/></symbol>
-<symbol id="icon-paw" viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="15" r="3.2"/><circle cx="6.5" cy="9" r="1.7"/><circle cx="10.2" cy="6" r="1.7"/><circle cx="13.8" cy="6" r="1.7"/><circle cx="17.5" cy="9" r="1.7"/></symbol>
-<symbol id="icon-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5.5l4 4L8 20H4v-4z"/><path d="M12.5 7.5l4 4"/></symbol>
+<symbol id="icon-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9.5" cy="19.5" r="1.3"/><circle cx="17" cy="19.5" r="1.3"/><path d="M3.5 4h2.2l1.9 11h10.4l1.9-8H7"/></symbol>
+<symbol id="icon-building" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V9l6-4v16"/><path d="M10 21V5l6 3v13"/><path d="M16 21V10l4 2v9"/><path d="M4 21h16"/></symbol>
+<symbol id="icon-palette" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5a8.5 8.5 0 1 0 0 17c1 0 1.6-.7 1.6-1.5 0-.4-.15-.7-.4-1-.25-.3-.4-.6-.4-1 0-.8.65-1.5 1.5-1.5H16a4 4 0 0 0 4-4c0-4.7-3.8-8-8-8z"/><circle cx="7.5" cy="11" r="1.05" fill="currentColor" stroke="none"/><circle cx="9.5" cy="7.2" r="1.05" fill="currentColor" stroke="none"/><circle cx="14.5" cy="7.2" r="1.05" fill="currentColor" stroke="none"/><circle cx="16.7" cy="11" r="1.05" fill="currentColor" stroke="none"/></symbol>
+<symbol id="icon-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3 5 13h5l-1 8 8-11h-5z"/></symbol>
 <symbol id="icon-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3.5" cy="6" r="1" fill="currentColor" stroke="none"/><circle cx="3.5" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="3.5" cy="18" r="1" fill="currentColor" stroke="none"/></symbol>
 </svg>
 
@@ -120,9 +124,8 @@
     <circle cx="15" cy="15" r="3.2" fill="#FAF8FF"/>
   </svg>
 </div>
-
 <nav class="nav" id="navbar">
-  <a href="index.html" class="nav-logo-wrap">
+  <a href="../index.html" class="nav-logo-wrap">
     <svg class="logo-mark" viewBox="0 0 30 30" aria-hidden="true">
       <circle cx="15" cy="15" r="4.5" fill="#2D1B69"/>
       <ellipse cx="15" cy="6.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
@@ -138,11 +141,11 @@
     <span class="logo-text">Marine <em>Bernard</em></span>
   </a>
   <ul class="nav-links">
-    <li><a href="index.html">Accueil</a></li>
-    <li><a href="index.html#projets"  class="active">Projets</a></li>
-    <li><a href="index.html#photos">Photos</a></li>
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#projets"  class="active">Projets</a></li>
+    <li><a href="../index.html#photos">Photos</a></li>
     <li><a href="blog.html">Carnet de randonnée</a></li>
-    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
   </ul>
   <button class="nav-cta" onclick="window.location='index.html#contact'">Me contacter</button>
   <button class="nav-toggle" id="navToggle" aria-label="Menu">
@@ -150,20 +153,20 @@
   </button>
 </nav>
 
-<nav class="breadcrumb" aria-label="Fil d'Ariane"><div class="breadcrumb-inner"><a href="index.html"><svg class="icon bc-icon"><use href="#icon-home"/></svg> Accueil</a><a href="index.html#projets"><svg class="icon bc-icon"><use href="#icon-grid"/></svg> Projets</a><span class="breadcrumb-current"><svg class="icon bc-icon"><use href="#icon-paw"/></svg> BlaBlaPattes</span></div></nav>
+<nav class="breadcrumb" aria-label="Fil d'Ariane"><div class="breadcrumb-inner"><a href="../index.html"><svg class="icon bc-icon"><use href="#icon-home"/></svg> Accueil</a><a href="../index.html#projets"><svg class="icon bc-icon"><use href="#icon-grid"/></svg> Projets</a><span class="breadcrumb-current"><svg class="icon bc-icon"><use href="#icon-cart"/></svg> Refonte Jouvence</span></div></nav>
 
 <div class="projet-hero reveal">
-  <a href="index.html#projets" class="projet-back">Retour aux projets</a>
-  <p class="projet-eyebrow">Site Web · Logo · Identité visuelle</p>
-  <h1 class="projet-title">BlaBlaPattes<br><em>Taxi animalier &amp; promenades canines</em></h1>
-  <p class="projet-sub">Création de zéro du logo et du site vitrine de BlaBlaPattes, entreprise de services aux animaux (visites à domicile, taxi animalier, promenades canines) lancée par une ancienne collègue. Identité visuelle complète et architecture du site.</p>
+  <a href="../index.html#projets" class="projet-back">Retour aux projets</a>
+  <p class="projet-eyebrow">E-commerce · UX/UI · WordPress</p>
+  <h1 class="projet-title">Refonte site Jouvence<br><em>Volets roulants &amp; moustiquaires</em></h1>
+  <p class="projet-sub">Refonte complète du site e-commerce de Jouvence, fabricant français de volets roulants et moustiquaires. Nouvelle architecture UX, charte graphique modernisée, intégration des deux marques Mousti-Kit et France Combi.</p>
   <div class="projet-tags">
-    <span class="projet-tag">Site Web</span>
+    <span class="projet-tag">E-commerce</span>
     <span class="projet-tag">WordPress</span>
-    <span class="projet-tag orange">Création logo</span>
-    <span class="projet-tag vert">Orange · Vert · Blanc</span>
-    <span class="projet-tag">Identité de marque</span>
-    <span class="projet-tag dark">Création de zéro</span>
+    <span class="projet-tag">UX/UI</span>
+    <span class="projet-tag vert">Fabrication française</span>
+    <span class="projet-tag">Charte graphique</span>
+    <span class="projet-tag dark">Mission 2022–2024</span>
   </div>
 </div>
 
@@ -171,28 +174,21 @@
   <div>
     <!-- Mockup principal -->
     <div class="projet-visual reveal">
-      <img src="images/mockup-blablapattes.png" alt="Site BlaBlaPattes — MacBook Pro mockup bureau" class="zoomable" onclick="openLightbox(this.src)">
+      <img src="../images/projets/mockup-jouvence.png" alt="Refonte site Jouvence — MacBook Pro mockup bureau épuré" class="zoomable" onclick="openLightbox(this.src)">
     </div>
-    <p class="mockup-label">Site refondu · MacBook Pro · Mise en situation</p>
+    <p class="mockup-label">Mise en situation · MacBook Pro · Bureau épuré</p>
 
-    <!-- Logo -->
-    <div class="logo-showcase reveal" style="margin-top:1.5rem">
-      <img src="images/blablapattes-logo.png" alt="Logo BlaBlaPattes rond orange et vert avec chien, chat et lapin" class="zoomable" onclick="openLightbox(this.src)">
-      <div class="logo-showcase-text">
-        <div class="info-card-title">Le logo créé de zéro</div>
-        <p>Un médaillon rond illustré réunissant chien, chat et lapin en silhouette blanche — les trois familles d'animaux accompagnés par BlaBlaPattes — sur un dégradé orange &amp; vert nature, avec une typographie manuscrite chaleureuse.</p>
-      </div>
-    </div>
-
-    <!-- Captures du site -->
-    <div class="screenshot-grid reveal">
+    <!-- Capture réelle du site -->
+    <div class="screenshot-grid reveal" style="margin-top:1.5rem">
       <div class="screenshot-item">
-        <img src="images/blablapattes-home.jpg" alt="Capture page d'accueil BlaBlaPattes" class="zoomable" onclick="openLightbox(this.src)">
-        <div class="screenshot-label">Page d'accueil</div>
+        <img src="../images/jouvence.webp" alt="Capture écran site Jouvence refonté" class="zoomable" onclick="openLightbox(this.src)">
+        <div class="screenshot-label">Vue complète du site</div>
       </div>
-      <div class="screenshot-item">
-        <img src="images/blablapattes-promenades.png" alt="Capture page Promenades Canines BlaBlaPattes" class="zoomable" onclick="openLightbox(this.src)">
-        <div class="screenshot-label">Page Promenades Canines</div>
+      <div class="screenshot-item" style="background:#f0ebfa;display:flex;align-items:center;justify-content:center;min-height:180px;">
+        <div style="text-align:center;padding:1rem">
+          <div style="font-size:2rem;margin-bottom:0.5rem">🔗</div>
+          <a href="https://jouvence.fr/" target="_blank" rel="noopener" style="font-size:0.76rem;color:#8B6BB1;font-weight:600;text-decoration:none;letter-spacing:0.06em">Voir le site live →</a>
+        </div>
       </div>
     </div>
 
@@ -200,9 +196,10 @@
     <div class="info-card reveal" style="margin-top:1rem">
       <div class="info-card-title">Palette graphique</div>
       <div class="palette">
-        <div><div class="swatch" style="background:#e8631c"></div><div class="swatch-label">Orange</div></div>
-        <div><div class="swatch" style="background:#b3cc5a"></div><div class="swatch-label">Vert anis</div></div>
-        <div><div class="swatch" style="background:#2c3e50"></div><div class="swatch-label">Bleu nuit</div></div>
+        <div><div class="swatch" style="background:#1a1f2e"></div><div class="swatch-label">Marine</div></div>
+        <div><div class="swatch" style="background:#e8b800"></div><div class="swatch-label">Jaune</div></div>
+        <div><div class="swatch" style="background:#e0006a"></div><div class="swatch-label">Rose</div></div>
+        <div><div class="swatch" style="background:#00a99d"></div><div class="swatch-label">Teal</div></div>
         <div><div class="swatch" style="background:#ffffff;border:1.5px solid #ddd"></div><div class="swatch-label">Blanc</div></div>
       </div>
     </div>
@@ -212,7 +209,7 @@
     <div class="info-card projet-toc reveal">
       <div class="info-card-title projet-toc-title"><svg class="icon"><use href="#icon-list"/></svg> Sur cette page</div>
       <div class="projet-toc-list">
-        <a href="#mission" class="projet-toc-link">Le brief</a>
+        <a href="#mission" class="projet-toc-link">La mission</a>
         <a href="#resultats" class="projet-toc-link">Les résultats</a>
         <a href="#demarche" class="projet-toc-link">La démarche</a>
         <a href="#choix" class="projet-toc-link">Les choix graphiques</a>
@@ -221,33 +218,35 @@
 
     <div class="info-card reveal">
       <div class="info-card-title">Détails du projet</div>
-      <div class="info-row"><span class="info-label">Client</span><span class="info-val">BlaBlaPattes</span></div>
-      <div class="info-row"><span class="info-label">Secteur</span><span class="info-val">Services aux animaux</span></div>
+      <div class="info-row"><span class="info-label">Client</span><span class="info-val">Jouvence, Lestrem (62)</span></div>
+      <div class="info-row"><span class="info-label">Période</span><span class="info-val">2022 – 2024</span></div>
       <div class="info-row"><span class="info-label">CMS</span><span class="info-val">WordPress</span></div>
-      <div class="info-row"><span class="info-label">Livrables</span><span class="info-val">Logo + site complet</span></div>
-      <div class="info-row"><span class="info-label">Services du site</span><span class="info-val">Visites, taxi, promenades</span></div>
+      <div class="info-row"><span class="info-label">Marques</span><span class="info-val">Mousti-Kit · France Combi</span></div>
+      <div class="info-row"><span class="info-label">Secteur</span><span class="info-val">BtoB &amp; BtoC · Industrie</span></div>
     </div>
 
     <div class="info-card reveal">
       <div class="info-card-title">Compétences mobilisées</div>
       <div class="competences-list">
-        <div class="comp-item">Création de logo &amp; identité visuelle</div>
-        <div class="comp-item">Conception UX d'un site vitrine</div>
-        <div class="comp-item">Architecture de l'offre de services</div>
+        <div class="comp-item">Audit UX &amp; analyse de l'existant</div>
+        <div class="comp-item">Architecture de l'information</div>
+        <div class="comp-item">Maquettage Figma &amp; prototypage</div>
         <div class="comp-item">Intégration WordPress</div>
-        <div class="comp-item">Charte graphique complète</div>
+        <div class="comp-item">Charte graphique &amp; identité visuelle</div>
+        <div class="comp-item">Optimisation SEO on-page</div>
         <div class="comp-item">Responsive design mobile</div>
       </div>
     </div>
 
     <div class="info-card reveal" style="text-align:center">
-      <div class="info-card-title">Statut du site</div>
-      <p style="font-size:0.78rem;color:#7a6090;line-height:1.6">L'entreprise BlaBlaPattes a depuis fermé — le site n'est plus en ligne.</p>
+      <div class="info-card-title">Voir le projet en ligne</div>
+      <p style="font-size:0.78rem;color:#7a6090;margin-bottom:0.8rem;line-height:1.6">Le site refondu est en ligne et actif depuis 2023.</p>
+      <a href="https://jouvence.fr/" target="_blank" rel="noopener" class="lien-site">Visiter jouvence.fr</a>
     </div>
 
     <div class="projet-cta reveal">
-      <p>Besoin d'un logo et d'un site pour lancer votre activité ?</p>
-      <a href="index.html#contact" class="cta-btn">Me contacter →</a>
+      <p>Besoin d'une refonte de site e-commerce ou d'une nouvelle charte graphique ?</p>
+      <a href="../index.html#contact" class="cta-btn">Me contacter →</a>
     </div>
   </aside>
 </div>
@@ -255,19 +254,19 @@
 <div class="projet-desc-section">
 
   <div class="brief-box reveal" id="mission">
-    <strong>Le brief</strong>
-    Une ancienne collègue se lançait à son compte dans les services aux animaux — visites à domicile, taxi animalier et promenades canines. Elle n'avait ni logo, ni site : tout était à créer de zéro. L'objectif : construire une identité de marque rassurante et chaleureuse, puis un site clair qui présente chaque service avec ses tarifs, pour convertir les visiteurs en clients dès la prise de contact.
+    <strong>La mission</strong>
+    En poste chez Jouvence de 2022 à 2024 comme Designer / Graphiste, j'ai pris en charge la refonte complète de 3 sites e-commerce. L'objectif : moderniser l'image de marque, améliorer l'expérience utilisateur et structurer la présentation des deux marques du groupe — Mousti-Kit pour les moustiquaires et France Combi pour les volets roulants.
   </div>
 
   <h2 class="desc-title reveal" id="resultats">Les résultats</h2>
   <div class="resultats-grid">
     <div class="resultat-card reveal">
-      <div class="resultat-num">1</div>
-      <div class="resultat-label">Identité de marque créée</div>
+      <div class="resultat-num">3</div>
+      <div class="resultat-label">Sites e-commerce refondu</div>
     </div>
     <div class="resultat-card reveal">
-      <div class="resultat-num">3</div>
-      <div class="resultat-label">Services structurés en pages</div>
+      <div class="resultat-num">2</div>
+      <div class="resultat-label">Marques intégrées</div>
     </div>
     <div class="resultat-card reveal">
       <div class="resultat-num">100%</div>
@@ -275,26 +274,26 @@
     </div>
   </div>
 
-  <h2 class="desc-title reveal" id="demarche">La démarche</h2>
-  <p class="desc-text reveal">Confier son animal à quelqu'un demande de la confiance : le logo devait immédiatement rassurer. Le choix s'est porté sur un médaillon rond illustré réunissant un chien, un chat et un lapin en silhouette blanche — pour montrer d'un coup d'œil que BlaBlaPattes s'occupe de toutes les familles d'animaux, pas seulement des chiens.</p>
-  <p class="desc-text reveal">Le site a ensuite été structuré autour des trois offres de la jeune entreprise — visites à domicile, taxi animalier, promenades canines — chacune avec sa propre page détaillant le déroulé du service et une grille de tarifs claire, pour que le visiteur trouve rapidement l'information et prenne contact en confiance.</p>
+  <h2 class="desc-title reveal" id="demarche" style="margin-top:1rem">La démarche UX</h2>
+  <p class="desc-text reveal">Le site existant souffrait d'une hiérarchie visuelle peu claire et d'une navigation complexe entre les deux marques du groupe. La refonte a commencé par un audit complet de l'existant, suivi d'une restructuration de l'architecture de l'information pour guider l'utilisateur vers les produits qui correspondent à son besoin.</p>
+  <p class="desc-text reveal">Le nouveau hero en plein écran avec fond photo d'immeuble ancre immédiatement le visiteur dans l'univers de l'habitat. Les trois cartes colorées (gris foncé, rose fuchsia, teal) permettent une entrée intuitive par usage — qualité, design, service — sans jargon technique.</p>
 
   <h2 class="desc-title reveal" id="choix">Les choix graphiques</h2>
   <div class="choix-grid">
     <div class="choix-card reveal">
-      <div class="choix-icon"><svg class="icon"><use href="#icon-paw"/></svg></div>
-      <div class="choix-title">Logo médaillon multi-animaux</div>
-      <div class="choix-desc">Chien, chat et lapin réunis en silhouette — un symbole immédiatement compris et mémorisable pour la marque.</div>
+      <div class="choix-icon"><svg class="icon"><use href="#icon-building"/></svg></div>
+      <div class="choix-title">Hero plein écran sombre</div>
+      <div class="choix-desc">Fond photo architectural crédibilise l'offre produit et positionne Jouvence comme expert de l'habitat haut de gamme.</div>
     </div>
     <div class="choix-card reveal">
-      <div class="choix-icon"><svg class="icon"><use href="#icon-edit"/></svg></div>
-      <div class="choix-title">Typographie manuscrite</div>
-      <div class="choix-desc">Une police à la main, chaleureuse et ludique, qui casse le côté institutionnel souvent associé aux services animaliers.</div>
+      <div class="choix-icon"><svg class="icon"><use href="#icon-palette"/></svg></div>
+      <div class="choix-title">Cartes colorées distinctes</div>
+      <div class="choix-desc">Rose (Mousti-Kit) et teal (France Combi) — chaque marque garde son identité tout en restant cohérente dans le groupe.</div>
     </div>
     <div class="choix-card reveal">
-      <div class="choix-icon"><svg class="icon"><use href="#icon-grid"/></svg></div>
-      <div class="choix-title">Blocs de service colorés</div>
-      <div class="choix-desc">Chaque service (visites, taxi, promenades) a son bloc orange ou vert sur la page d'accueil pour une lecture immédiate de l'offre.</div>
+      <div class="choix-icon"><svg class="icon"><use href="#icon-zap"/></svg></div>
+      <div class="choix-title">CTA jaune accrocheur</div>
+      <div class="choix-desc">Le jaune "Découvrir nos produits" tranche sur le fond sombre pour guider l'action et maximiser les conversions.</div>
     </div>
   </div>
 
@@ -302,13 +301,13 @@
 
 <!-- NAVIGATION PROJET PRÉCÉDENT / SUIVANT -->
 <div class="projet-nav-adjacent">
-  <a href="refonte-pirus" class="projet-nav-link prev">
+  <a href="worldcleanupday.html" class="projet-nav-link prev">
     <span class="projet-nav-label">← Projet précédent</span>
-    <span class="projet-nav-name">Refonte Pirus Composites</span>
+    <span class="projet-nav-name">World Cleanup Day</span>
   </a>
-  <a href="noces-diamant" class="projet-nav-link next">
+  <a href="refonte-moustikit.html" class="projet-nav-link next">
     <span class="projet-nav-label">Projet suivant →</span>
-    <span class="projet-nav-name">Invitation Noces de Diamant</span>
+    <span class="projet-nav-name">Refonte Mousti-Kit</span>
   </a>
 </div>
 

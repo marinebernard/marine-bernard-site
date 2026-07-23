@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Refonte Jouvence — Marine Bernard</title>
+<title>Site Colorale Club — Marine Bernard</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <style>
 .projet-hero{padding:4rem 3rem 3rem;border-bottom:1px solid rgba(139,107,177,0.12);max-width:1000px;margin:0 auto;}
 .projet-back{display:inline-flex;align-items:center;gap:6px;font-size:0.74rem;color:#8B6BB1;text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;font-weight:500;margin-bottom:2rem;transition:color 0.2s;}
@@ -28,11 +28,6 @@
 .projet-visual img{width:100%;display:block;}
 .mockup-label{font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:#9a88b8;margin-top:0.6rem;text-align:center;}
 
-.screenshot-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:1.5rem;}
-.screenshot-item{border-radius:12px;overflow:hidden;border:1px solid rgba(139,107,177,0.12);}
-.screenshot-item img{width:100%;display:block;}
-.screenshot-label{font-size:0.66rem;color:#9a88b8;letter-spacing:0.1em;text-transform:uppercase;margin-top:4px;text-align:center;}
-
 .palette{display:flex;gap:8px;margin:1rem 0 0.4rem;}
 .swatch{width:36px;height:36px;border-radius:50%;border:2px solid rgba(255,255,255,0.8);box-shadow:0 2px 8px rgba(0,0,0,0.12);flex-shrink:0;}
 .swatch-label{font-size:0.68rem;color:#9a88b8;text-align:center;margin-top:3px}
@@ -47,22 +42,20 @@
 .competences-list{display:flex;flex-direction:column;gap:6px}
 .comp-item{display:flex;align-items:center;gap:8px;font-size:0.8rem;color:#5a4870;}
 .comp-item::before{content:'✦';color:#C9A96E;font-size:0.65rem;flex-shrink:0}
-
 .projet-cta{background:linear-gradient(135deg,#2D1B69,#8B6BB1);border-radius:16px;padding:1.3rem;text-align:center;}
 .projet-cta p{font-size:0.8rem;color:rgba(255,255,255,0.78);margin-bottom:0.9rem;line-height:1.6}
 .cta-btn{display:inline-block;background:#C9A96E;color:#fff;padding:10px 22px;border-radius:20px;font-size:0.74rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;text-decoration:none;transition:background 0.2s;}
 .cta-btn:hover{background:#b8945a}
-.cta-btn-outline{display:inline-block;background:transparent;color:#C9A96E;padding:10px 22px;border-radius:20px;font-size:0.74rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;text-decoration:none;border:1.5px solid #C9A96E;margin-top:8px;transition:all 0.2s;}
-.cta-btn-outline:hover{background:#C9A96E;color:#fff}
+.lien-site{display:inline-flex;align-items:center;gap:8px;background:#2D1B69;color:#fff;padding:12px 24px;border-radius:22px;font-size:0.76rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;text-decoration:none;transition:background 0.2s;margin-top:1rem;}
+.lien-site:hover{background:#8B6BB1}
+.lien-site::after{content:'↗';font-size:1rem}
 
 .projet-desc-section{max-width:1000px;margin:0 auto;padding:0 3rem 3rem;}
 .desc-title{font-family:'Playfair Display',serif;font-size:1.3rem;color:#2D1B69;margin-bottom:0.8rem;}
 .desc-text{font-size:0.86rem;color:#5a4870;line-height:1.82;margin-bottom:1.5rem;}
-
 .brief-box{background:linear-gradient(135deg,#f0ebfa,#FAF8FF);border:1px solid rgba(139,107,177,0.15);border-left:3px solid #C9A96E;border-radius:0 14px 14px 0;padding:1.3rem 1.5rem;margin-bottom:2rem;font-size:0.86rem;color:#5a4870;line-height:1.8;font-style:italic;}
 .brief-box strong{display:block;font-style:normal;font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:#C9A96E;font-weight:600;margin-bottom:0.4rem;}
 
-/* Résultats chiffrés */
 .resultats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:1.5rem 0;}
 .resultat-card{background:linear-gradient(135deg,#2D1B69,#5a3d99);border-radius:14px;padding:1.2rem;text-align:center;}
 .resultat-num{font-family:'Playfair Display',serif;font-size:1.8rem;color:#C9A96E;line-height:1;margin-bottom:4px;}
@@ -74,20 +67,14 @@
 .choix-title{font-size:0.78rem;font-weight:600;color:#2D1B69;margin-bottom:0.3rem}
 .choix-desc{font-size:0.74rem;color:#7a6090;line-height:1.55}
 
-.lien-site{display:inline-flex;align-items:center;gap:8px;background:#2D1B69;color:#fff;padding:12px 24px;border-radius:22px;font-size:0.76rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;text-decoration:none;transition:background 0.2s;margin-top:1rem;}
-.lien-site:hover{background:#8B6BB1}
-.lien-site::after{content:'↗';font-size:1rem}
-
 @media(max-width:768px){
   .projet-hero{padding:2.5rem 1.5rem 2rem}
   .projet-body{grid-template-columns:1fr;padding:2rem 1.5rem}
   .projet-desc-section{padding:0 1.5rem 2rem}
   .choix-grid,.resultats-grid{grid-template-columns:1fr}
-  .screenshot-grid{grid-template-columns:1fr}
   .projet-title{font-size:2rem}
 }
 </style>
-
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-KZEHR4YQFQ"></script>
 <script>
@@ -103,10 +90,9 @@
 <svg style="display:none" aria-hidden="true">
 <symbol id="icon-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9a1 1 0 0 0 1 1h3v-5h4v5h3a1 1 0 0 0 1-1v-9"/></symbol>
 <symbol id="icon-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.2"/><rect x="13" y="4" width="7" height="7" rx="1.2"/><rect x="4" y="13" width="7" height="7" rx="1.2"/><rect x="13" y="13" width="7" height="7" rx="1.2"/></symbol>
-<symbol id="icon-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9.5" cy="19.5" r="1.3"/><circle cx="17" cy="19.5" r="1.3"/><path d="M3.5 4h2.2l1.9 11h10.4l1.9-8H7"/></symbol>
-<symbol id="icon-building" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V9l6-4v16"/><path d="M10 21V5l6 3v13"/><path d="M16 21V10l4 2v9"/><path d="M4 21h16"/></symbol>
+<symbol id="icon-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16.5l1.5-5.5a2 2 0 0 1 2-1.5h9a2 2 0 0 1 2 1.5l1.5 5.5"/><path d="M4 16.5h16v2a1 1 0 0 1-1 1h-1.5a1 1 0 0 1-1-1v-1H7.5v1a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/><circle cx="7.5" cy="16.5" r="1.3"/><circle cx="16.5" cy="16.5" r="1.3"/></symbol>
 <symbol id="icon-palette" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5a8.5 8.5 0 1 0 0 17c1 0 1.6-.7 1.6-1.5 0-.4-.15-.7-.4-1-.25-.3-.4-.6-.4-1 0-.8.65-1.5 1.5-1.5H16a4 4 0 0 0 4-4c0-4.7-3.8-8-8-8z"/><circle cx="7.5" cy="11" r="1.05" fill="currentColor" stroke="none"/><circle cx="9.5" cy="7.2" r="1.05" fill="currentColor" stroke="none"/><circle cx="14.5" cy="7.2" r="1.05" fill="currentColor" stroke="none"/><circle cx="16.7" cy="11" r="1.05" fill="currentColor" stroke="none"/></symbol>
-<symbol id="icon-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3 5 13h5l-1 8 8-11h-5z"/></symbol>
+<symbol id="icon-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5a1.5 1.5 0 0 1 1.5-1.5h2l1-2h7l1 2h2A1.5 1.5 0 0 1 20 8.5v9A1.5 1.5 0 0 1 18.5 19h-13A1.5 1.5 0 0 1 4 17.5z"/><circle cx="12" cy="13" r="3.3"/></symbol>
 <symbol id="icon-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3.5" cy="6" r="1" fill="currentColor" stroke="none"/><circle cx="3.5" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="3.5" cy="18" r="1" fill="currentColor" stroke="none"/></symbol>
 </svg>
 
@@ -124,8 +110,9 @@
     <circle cx="15" cy="15" r="3.2" fill="#FAF8FF"/>
   </svg>
 </div>
+
 <nav class="nav" id="navbar">
-  <a href="index.html" class="nav-logo-wrap">
+  <a href="../index.html" class="nav-logo-wrap">
     <svg class="logo-mark" viewBox="0 0 30 30" aria-hidden="true">
       <circle cx="15" cy="15" r="4.5" fill="#2D1B69"/>
       <ellipse cx="15" cy="6.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
@@ -141,11 +128,11 @@
     <span class="logo-text">Marine <em>Bernard</em></span>
   </a>
   <ul class="nav-links">
-    <li><a href="index.html">Accueil</a></li>
-    <li><a href="index.html#projets"  class="active">Projets</a></li>
-    <li><a href="index.html#photos">Photos</a></li>
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#projets"  class="active">Projets</a></li>
+    <li><a href="../index.html#photos">Photos</a></li>
     <li><a href="blog.html">Carnet de randonnée</a></li>
-    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
   </ul>
   <button class="nav-cta" onclick="window.location='index.html#contact'">Me contacter</button>
   <button class="nav-toggle" id="navToggle" aria-label="Menu">
@@ -153,54 +140,37 @@
   </button>
 </nav>
 
-<nav class="breadcrumb" aria-label="Fil d'Ariane"><div class="breadcrumb-inner"><a href="index.html"><svg class="icon bc-icon"><use href="#icon-home"/></svg> Accueil</a><a href="index.html#projets"><svg class="icon bc-icon"><use href="#icon-grid"/></svg> Projets</a><span class="breadcrumb-current"><svg class="icon bc-icon"><use href="#icon-cart"/></svg> Refonte Jouvence</span></div></nav>
+<nav class="breadcrumb" aria-label="Fil d'Ariane"><div class="breadcrumb-inner"><a href="../index.html"><svg class="icon bc-icon"><use href="#icon-home"/></svg> Accueil</a><a href="../index.html#projets"><svg class="icon bc-icon"><use href="#icon-grid"/></svg> Projets</a><span class="breadcrumb-current"><svg class="icon bc-icon"><use href="#icon-car"/></svg> Colorale Club</span></div></nav>
 
 <div class="projet-hero reveal">
-  <a href="index.html#projets" class="projet-back">Retour aux projets</a>
-  <p class="projet-eyebrow">E-commerce · UX/UI · WordPress</p>
-  <h1 class="projet-title">Refonte site Jouvence<br><em>Volets roulants &amp; moustiquaires</em></h1>
-  <p class="projet-sub">Refonte complète du site e-commerce de Jouvence, fabricant français de volets roulants et moustiquaires. Nouvelle architecture UX, charte graphique modernisée, intégration des deux marques Mousti-Kit et France Combi.</p>
+  <a href="../index.html#projets" class="projet-back">Retour aux projets</a>
+  <p class="projet-eyebrow">Site Web · WordPress · Association</p>
+  <h1 class="projet-title">Site Colorale Club<br><em>Association de passionnés de Renault Colorale</em></h1>
+  <p class="projet-sub">Conception et création du site web du Colorale Club, association née en 1996 réunissant les passionnés de la Renault Colorale, véhicule emblématique des années 50. Galerie, gamme de modèles, manifestations et forum communautaire.</p>
   <div class="projet-tags">
-    <span class="projet-tag">E-commerce</span>
+    <span class="projet-tag">Site Web</span>
     <span class="projet-tag">WordPress</span>
-    <span class="projet-tag">UX/UI</span>
-    <span class="projet-tag vert">Fabrication française</span>
-    <span class="projet-tag">Charte graphique</span>
-    <span class="projet-tag dark">Mission 2022–2024</span>
+    <span class="projet-tag vert">Association</span>
+    <span class="projet-tag vert">Patrimoine automobile</span>
+    <span class="projet-tag">Vitrine + Galerie</span>
+    <span class="projet-tag dark">Site en ligne</span>
   </div>
 </div>
 
 <div class="projet-body">
   <div>
-    <!-- Mockup principal -->
     <div class="projet-visual reveal">
-      <img src="images/mockup-jouvence.png" alt="Refonte site Jouvence — MacBook Pro mockup bureau épuré" class="zoomable" onclick="openLightbox(this.src)">
+      <img src="../images/projets/mockup-colorale.png" alt="Site Colorale Club — mockup MacBook Pro atelier vintage" class="zoomable" onclick="openLightbox(this.src)">
     </div>
-    <p class="mockup-label">Mise en situation · MacBook Pro · Bureau épuré</p>
+    <p class="mockup-label">Mise en situation · Atelier vintage, palette de couleurs &amp; photos d'époque</p>
 
-    <!-- Capture réelle du site -->
-    <div class="screenshot-grid reveal" style="margin-top:1.5rem">
-      <div class="screenshot-item">
-        <img src="images/jouvence.webp" alt="Capture écran site Jouvence refonté" class="zoomable" onclick="openLightbox(this.src)">
-        <div class="screenshot-label">Vue complète du site</div>
-      </div>
-      <div class="screenshot-item" style="background:#f0ebfa;display:flex;align-items:center;justify-content:center;min-height:180px;">
-        <div style="text-align:center;padding:1rem">
-          <div style="font-size:2rem;margin-bottom:0.5rem">🔗</div>
-          <a href="https://jouvence.fr/" target="_blank" rel="noopener" style="font-size:0.76rem;color:#8B6BB1;font-weight:600;text-decoration:none;letter-spacing:0.06em">Voir le site live →</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Palette -->
-    <div class="info-card reveal" style="margin-top:1rem">
+    <div class="info-card reveal" style="margin-top:1.5rem">
       <div class="info-card-title">Palette graphique</div>
       <div class="palette">
-        <div><div class="swatch" style="background:#1a1f2e"></div><div class="swatch-label">Marine</div></div>
-        <div><div class="swatch" style="background:#e8b800"></div><div class="swatch-label">Jaune</div></div>
-        <div><div class="swatch" style="background:#e0006a"></div><div class="swatch-label">Rose</div></div>
-        <div><div class="swatch" style="background:#00a99d"></div><div class="swatch-label">Teal</div></div>
+        <div><div class="swatch" style="background:#111111"></div><div class="swatch-label">Noir</div></div>
+        <div><div class="swatch" style="background:#6bbd45"></div><div class="swatch-label">Vert</div></div>
         <div><div class="swatch" style="background:#ffffff;border:1.5px solid #ddd"></div><div class="swatch-label">Blanc</div></div>
+        <div><div class="swatch" style="background:#888888"></div><div class="swatch-label">Gris</div></div>
       </div>
     </div>
   </div>
@@ -209,7 +179,7 @@
     <div class="info-card projet-toc reveal">
       <div class="info-card-title projet-toc-title"><svg class="icon"><use href="#icon-list"/></svg> Sur cette page</div>
       <div class="projet-toc-list">
-        <a href="#mission" class="projet-toc-link">La mission</a>
+        <a href="#mission" class="projet-toc-link">Le brief</a>
         <a href="#resultats" class="projet-toc-link">Les résultats</a>
         <a href="#demarche" class="projet-toc-link">La démarche</a>
         <a href="#choix" class="projet-toc-link">Les choix graphiques</a>
@@ -218,35 +188,34 @@
 
     <div class="info-card reveal">
       <div class="info-card-title">Détails du projet</div>
-      <div class="info-row"><span class="info-label">Client</span><span class="info-val">Jouvence, Lestrem (62)</span></div>
-      <div class="info-row"><span class="info-label">Période</span><span class="info-val">2022 – 2024</span></div>
-      <div class="info-row"><span class="info-label">CMS</span><span class="info-val">WordPress</span></div>
-      <div class="info-row"><span class="info-label">Marques</span><span class="info-val">Mousti-Kit · France Combi</span></div>
-      <div class="info-row"><span class="info-label">Secteur</span><span class="info-val">BtoB &amp; BtoC · Industrie</span></div>
+      <div class="info-row"><span class="info-label">Client</span><span class="info-val">Colorale Club</span></div>
+      <div class="info-row"><span class="info-label">Association</span><span class="info-val">Fondée en 1996</span></div>
+      <div class="info-row"><span class="info-label">CMS</span><span class="info-val">WordPress / Elementor</span></div>
+      <div class="info-row"><span class="info-label">Secteur</span><span class="info-val">Patrimoine automobile</span></div>
+      <div class="info-row"><span class="info-label">Pages</span><span class="info-val">Accueil, gamme, miniatures, forum</span></div>
     </div>
 
     <div class="info-card reveal">
       <div class="info-card-title">Compétences mobilisées</div>
       <div class="competences-list">
-        <div class="comp-item">Audit UX &amp; analyse de l'existant</div>
-        <div class="comp-item">Architecture de l'information</div>
-        <div class="comp-item">Maquettage Figma &amp; prototypage</div>
-        <div class="comp-item">Intégration WordPress</div>
-        <div class="comp-item">Charte graphique &amp; identité visuelle</div>
-        <div class="comp-item">Optimisation SEO on-page</div>
+        <div class="comp-item">Conception UX site associatif</div>
+        <div class="comp-item">Création du logo &amp; identité visuelle</div>
+        <div class="comp-item">Intégration WordPress / Elementor</div>
+        <div class="comp-item">Galerie photo &amp; mise en valeur patrimoine</div>
+        <div class="comp-item">Architecture multi-rubriques (forum inclus)</div>
         <div class="comp-item">Responsive design mobile</div>
       </div>
     </div>
 
     <div class="info-card reveal" style="text-align:center">
-      <div class="info-card-title">Voir le projet en ligne</div>
-      <p style="font-size:0.78rem;color:#7a6090;margin-bottom:0.8rem;line-height:1.6">Le site refondu est en ligne et actif depuis 2023.</p>
-      <a href="https://jouvence.fr/" target="_blank" rel="noopener" class="lien-site">Visiter jouvence.fr</a>
+      <div class="info-card-title">Voir le site en ligne</div>
+      <p style="font-size:0.78rem;color:#7a6090;margin-bottom:0.8rem;line-height:1.6">Le site est actif et utilisé par les membres de l'association.</p>
+      <a href="https://colorale.org" target="_blank" rel="noopener" class="lien-site">Visiter colorale.org</a>
     </div>
 
     <div class="projet-cta reveal">
-      <p>Besoin d'une refonte de site e-commerce ou d'une nouvelle charte graphique ?</p>
-      <a href="index.html#contact" class="cta-btn">Me contacter →</a>
+      <p>Un site vitrine pour votre association ou club passion ?</p>
+      <a href="../index.html#contact" class="cta-btn">Me contacter →</a>
     </div>
   </aside>
 </div>
@@ -254,19 +223,19 @@
 <div class="projet-desc-section">
 
   <div class="brief-box reveal" id="mission">
-    <strong>La mission</strong>
-    En poste chez Jouvence de 2022 à 2024 comme Designer / Graphiste, j'ai pris en charge la refonte complète de 3 sites e-commerce. L'objectif : moderniser l'image de marque, améliorer l'expérience utilisateur et structurer la présentation des deux marques du groupe — Mousti-Kit pour les moustiquaires et France Combi pour les volets roulants.
+    <strong>Le brief</strong>
+    Créer un site vitrine pour le Colorale Club, association de passionnés de la Renault Colorale née en 1996. L'objectif : présenter l'histoire du véhicule, mettre en valeur la galerie photo des membres, centraliser les informations sur les manifestations, et rediriger vers le forum communautaire existant.
   </div>
 
   <h2 class="desc-title reveal" id="resultats">Les résultats</h2>
   <div class="resultats-grid">
     <div class="resultat-card reveal">
-      <div class="resultat-num">3</div>
-      <div class="resultat-label">Sites e-commerce refondu</div>
+      <div class="resultat-num">1996</div>
+      <div class="resultat-label">Année de fondation du club</div>
     </div>
     <div class="resultat-card reveal">
-      <div class="resultat-num">2</div>
-      <div class="resultat-label">Marques intégrées</div>
+      <div class="resultat-num">5</div>
+      <div class="resultat-label">Rubriques principales</div>
     </div>
     <div class="resultat-card reveal">
       <div class="resultat-num">100%</div>
@@ -274,26 +243,26 @@
     </div>
   </div>
 
-  <h2 class="desc-title reveal" id="demarche" style="margin-top:1rem">La démarche UX</h2>
-  <p class="desc-text reveal">Le site existant souffrait d'une hiérarchie visuelle peu claire et d'une navigation complexe entre les deux marques du groupe. La refonte a commencé par un audit complet de l'existant, suivi d'une restructuration de l'architecture de l'information pour guider l'utilisateur vers les produits qui correspondent à son besoin.</p>
-  <p class="desc-text reveal">Le nouveau hero en plein écran avec fond photo d'immeuble ancre immédiatement le visiteur dans l'univers de l'habitat. Les trois cartes colorées (gris foncé, rose fuchsia, teal) permettent une entrée intuitive par usage — qualité, design, service — sans jargon technique.</p>
+  <h2 class="desc-title reveal" id="demarche">La démarche</h2>
+  <p class="desc-text reveal">Le défi de ce projet était de transmettre l'authenticité et la passion d'un club automobile vintage tout en gardant une navigation moderne et claire. Le hero plein écran avec photo de Colorale en situation ancre immédiatement le visiteur dans l'univers du véhicule, tandis que le bandeau "La Colorale dans tous les détails" pose le ton pédagogique du site.</p>
+  <p class="desc-text reveal">La structure du site répond aux besoins concrets de la communauté : une page dédiée à la gamme de modèles pour les curieux, une rubrique miniatures pour les collectionneurs, un agenda des manifestations pour les membres actifs, et un lien direct vers le forum existant pour ne pas dupliquer les échanges déjà en place.</p>
 
   <h2 class="desc-title reveal" id="choix">Les choix graphiques</h2>
   <div class="choix-grid">
     <div class="choix-card reveal">
-      <div class="choix-icon"><svg class="icon"><use href="#icon-building"/></svg></div>
-      <div class="choix-title">Hero plein écran sombre</div>
-      <div class="choix-desc">Fond photo architectural crédibilise l'offre produit et positionne Jouvence comme expert de l'habitat haut de gamme.</div>
+      <div class="choix-icon"><svg class="icon"><use href="#icon-car"/></svg></div>
+      <div class="choix-title">Hero plein écran authentique</div>
+      <div class="choix-desc">Photo réelle de Colorales en rassemblement plutôt qu'un visuel généré — crédibilise immédiatement la communauté.</div>
     </div>
     <div class="choix-card reveal">
       <div class="choix-icon"><svg class="icon"><use href="#icon-palette"/></svg></div>
-      <div class="choix-title">Cartes colorées distinctes</div>
-      <div class="choix-desc">Rose (Mousti-Kit) et teal (France Combi) — chaque marque garde son identité tout en restant cohérente dans le groupe.</div>
+      <div class="choix-title">Vert signature du club</div>
+      <div class="choix-desc">Couleur d'accent vive sur fond sombre, cohérente avec le logo historique de l'association et ses supports existants.</div>
     </div>
     <div class="choix-card reveal">
-      <div class="choix-icon"><svg class="icon"><use href="#icon-zap"/></svg></div>
-      <div class="choix-title">CTA jaune accrocheur</div>
-      <div class="choix-desc">Le jaune "Découvrir nos produits" tranche sur le fond sombre pour guider l'action et maximiser les conversions.</div>
+      <div class="choix-icon"><svg class="icon"><use href="#icon-camera"/></svg></div>
+      <div class="choix-title">Galerie mise en avant</div>
+      <div class="choix-desc">La galerie photo des membres occupe une place centrale — le patrimoine visuel est le cœur de l'expérience du site.</div>
     </div>
   </div>
 
@@ -301,13 +270,13 @@
 
 <!-- NAVIGATION PROJET PRÉCÉDENT / SUIVANT -->
 <div class="projet-nav-adjacent">
-  <a href="worldcleanupday" class="projet-nav-link prev">
+  <a href="invitation-60ans.html" class="projet-nav-link prev">
     <span class="projet-nav-label">← Projet précédent</span>
-    <span class="projet-nav-name">World Cleanup Day</span>
+    <span class="projet-nav-name">Invitation anniversaire 60 ans</span>
   </a>
-  <a href="refonte-moustikit" class="projet-nav-link next">
+  <a href="worldcleanupday.html" class="projet-nav-link next">
     <span class="projet-nav-label">Projet suivant →</span>
-    <span class="projet-nav-name">Refonte Mousti-Kit</span>
+    <span class="projet-nav-name">World Cleanup Day</span>
   </a>
 </div>
 

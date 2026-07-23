@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Régénère la grille "derniers parcours" du panneau Carnet de randonnée
- * de blog.html à partir de l'API publique Komoot (aucune authentification
+ * de pages/blog.html à partir de l'API publique Komoot (aucune authentification
  * requise). Ajoute une vraie photo de la sortie quand Komoot en propose une.
  *
  * Ne touche jamais aux blocs rédigés à la main (coups de cœur, bons plans…) —
@@ -21,7 +21,7 @@ const INITIAL_VISIBLE = 4;
 const START_MARKER = '<!-- AUTO-KOMOOT:START (généré automatiquement, ne pas éditer à la main) -->';
 const END_MARKER = '<!-- AUTO-KOMOOT:END -->';
 
-const TARGET_FILE = { path: path.join(SITE_DIR, 'blog.html'), headingTag: 'h3', indent: '          ' };
+const TARGET_FILE = { path: path.join(SITE_DIR, 'pages', 'blog.html'), headingTag: 'h3', indent: '          ' };
 
 const FETCH_HEADERS = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) marine-bernard-site-bot/1.0' };
 
