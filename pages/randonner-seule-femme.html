@@ -6,12 +6,12 @@
 <title>Randonner seule en tant que femme — La Ch'tite Randonneuse · Marine Bernard</title>
 <meta name="description" content="Peur, sécurité, comportements déplacés, liberté, rencontres animales : mes vraies réponses à vos vraies questions sur la randonnée en solo au féminin.">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <style>
 .article-hero{
   position:relative;min-height:480px;display:flex;align-items:flex-end;
-  background:#0a1508 url('images/article-randonner-seule-femme-hero.jpg') center/cover no-repeat;
+  background:#0a1508 url('../images/article-randonner-seule-femme-hero.jpg') center/cover no-repeat;
 }
 .article-hero::before{
   content:'';position:absolute;inset:0;
@@ -102,7 +102,8 @@
   gtag('config', 'G-KZEHR4YQFQ');
 </script>
 </head>
-<body>
+<body class="rando">
+<div id="header"></div>
 
 <!-- ICÔNES SVG (sprite) -->
 <svg style="display:none" aria-hidden="true">
@@ -128,36 +129,8 @@
   </svg>
 </div>
 
-<nav class="nav" id="navbar">
-  <a href="index.html" class="nav-logo-wrap">
-    <svg class="logo-mark" viewBox="0 0 30 30" aria-hidden="true">
-      <circle cx="15" cy="15" r="4.5" fill="#2D1B69"/>
-      <ellipse cx="15" cy="6.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
-      <ellipse cx="15" cy="23.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
-      <ellipse cx="6.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
-      <ellipse cx="23.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
-      <ellipse cx="9" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 9 9)"/>
-      <ellipse cx="21" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 21 9)"/>
-      <ellipse cx="9" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 9 21)"/>
-      <ellipse cx="21" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 21 21)"/>
-      <circle cx="15" cy="15" r="3.2" fill="#FAF8FF"/>
-    </svg>
-    <span class="logo-text">Marine <em>Bernard</em></span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="index.html">Accueil</a></li>
-    <li><a href="index.html#projets">Projets</a></li>
-    <li><a href="index.html#photos">Photos</a></li>
-    <li><a href="pages/blog.html" class="active">Carnet de randonnée</a></li>
-    <li><a href="index.html#contact">Contact</a></li>
-  </ul>
-  <button class="nav-cta" onclick="window.location='index.html#contact'">Me contacter</button>
-  <button class="nav-toggle" id="navToggle" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
 
-<nav class="breadcrumb" aria-label="Fil d'Ariane"><div class="breadcrumb-inner"><a href="index.html"><svg class="icon bc-icon"><use href="#icon-home"/></svg> Accueil</a><a href="pages/blog.html"><svg class="icon bc-icon"><use href="#icon-compass"/></svg> Carnet de randonnée</a><span class="breadcrumb-current"><svg class="icon bc-icon"><use href="#icon-edit"/></svg> Randonner seule</span></div></nav>
+<nav class="breadcrumb" aria-label="Fil d'Ariane"><div class="breadcrumb-inner"><a href="../index.html"><svg class="icon bc-icon"><use href="#icon-home"/></svg> Accueil</a><a href="blog.html"><svg class="icon bc-icon"><use href="#icon-edit"/></svg> Blog</a><span class="breadcrumb-current"><svg class="icon bc-icon"><use href="#icon-edit"/></svg> Randonner seule</span></div></nav>
 
 <!-- HERO -->
 <header class="article-hero">
@@ -202,7 +175,7 @@
   <p class="article-text reveal">Ça ne m'a jamais empêchée de repartir le week-end suivant. Et ça ne m'empêchera jamais.</p>
 
   <div class="article-photo reveal">
-    <img src="images/article-randonner-seule-photo-1.jpg" alt="Sentier en sous-bois longeant un petit ruisseau" loading="lazy" class="zoomable" onclick="openLightbox(this.src)">
+    <img src="../images/article-randonner-seule-photo-1.jpg" alt="Sentier en sous-bois longeant un petit ruisseau" loading="lazy" class="zoomable" onclick="openLightbox(this.src)">
   </div>
 
   <h2 class="article-h2 reveal">Mes réflexes sécurité — ceux que j'applique à chaque sortie</h2>
@@ -215,7 +188,7 @@
     </div>
     <div class="safety-card reveal">
       <div class="safety-num">2</div>
-      <div class="safety-title">Télécharger la trace <a href="pages/blog.html">Komoot</a> hors ligne</div>
+      <div class="safety-title">Télécharger la trace <a href="parcours-komoot.html">Komoot</a> hors ligne</div>
       <div class="safety-desc">Dans le Nord, le réseau peut disparaître en forêt ou dans certaines vallées. Avoir la trace téléchargée sur mon téléphone m'évite de me retrouver sans GPS au milieu de nulle part.</div>
     </div>
     <div class="safety-card reveal">
@@ -229,7 +202,7 @@
       <div class="safety-desc">Mon téléphone, c'est ma carte, mon GPS, mon moyen d'appeler les secours. Je ne pars jamais avec moins de 80% de batterie, et j'ai toujours ma batterie externe dans le sac.</div>
     </div>
   </div>
-  <p class="article-text reveal">Rien de révolutionnaire. Mais ces quatre réflexes, appliqués systématiquement, m'ont permis de ne jamais me retrouver dans une situation vraiment délicate. Retrouve d'ailleurs plus de conseils comme ceux-ci dans mes <a href="pages/blog.html#bonsplans">bons plans de randonneuse</a>.</p>
+  <p class="article-text reveal">Rien de révolutionnaire. Mais ces quatre réflexes, appliqués systématiquement, m'ont permis de ne jamais me retrouver dans une situation vraiment délicate. Retrouve d'ailleurs plus de conseils comme ceux-ci dans mes <a href="blog.html">bons plans de randonneuse</a>.</p>
 
   <h2 class="article-h2 reveal">Ce que randonner seule m'a appris que randonner à plusieurs ne m'aurait jamais appris</h2>
   <p class="article-text reveal">C'est là que ça devient intéressant.</p>
@@ -247,7 +220,7 @@
   <p class="article-text reveal">Ce qui me fait vraiment m'arrêter net au milieu d'un sentier, c'est tout autre chose.</p>
   <p class="article-text reveal">Un matin de novembre dans le bois de Saint-Pierre, j'ai entendu un bruissement dans les fougères à une dizaine de mètres. J'ai ralenti. Puis stoppé. Et là, un chevreuil a traversé le sentier à moins de quinze mètres de moi, s'est arrêté une seconde — juste une seconde — a tourné la tête dans ma direction, et a disparu dans les arbres.</p>
   <p class="article-text reveal">C'est pour ça que j'emporte mon appareil photo et mon gros téléobjectif à chaque sortie. Pas pour les paysages — enfin, pas seulement. Pour <em>ça</em>. Ces fractions de seconde où un animal décide de te laisser entrer dans son monde.</p>
-  <p class="article-text reveal">Randonner seule change tout pour la faune. Pas de voix, pas de groupe, pas de bruits parasites. Tu deviens presque transparente. Les oiseaux ne s'envolent pas à ton approche. Les chevreuils restent plus longtemps. J'ai photographié des hérons en vol rasant, des buses en train de chasser, un écureuil qui ne m'avait pas entendue arriver — retrouve certaines de ces photos dans ma <a href="index.html#photos">galerie</a>.</p>
+  <p class="article-text reveal">Randonner seule change tout pour la faune. Pas de voix, pas de groupe, pas de bruits parasites. Tu deviens presque transparente. Les oiseaux ne s'envolent pas à ton approche. Les chevreuils restent plus longtemps. J'ai photographié des hérons en vol rasant, des buses en train de chasser, un écureuil qui ne m'avait pas entendue arriver — retrouve certaines de ces photos dans ma <a href="../index.html#photos">galerie</a>.</p>
 
   <p class="article-sublist-title">Mon matériel photo pour la rando</p>
   <div class="article-list">
@@ -260,7 +233,7 @@
   <p class="article-text reveal">La patience, c'est d'ailleurs quelque chose que la rando solo t'apprend mieux que n'importe quelle autre activité. Quand tu es seule, tu peux t'arrêter vingt minutes sans que personne soupire. Tu peux attendre qu'un héron reprenne son envol. Tu peux t'asseoir sur un tronc et observer sans avoir à justifier pourquoi.</p>
 
   <div class="article-photo reveal">
-    <img src="images/article-randonner-seule-photo-2.jpg" alt="Cygne s'envolant d'un plan d'eau" loading="lazy" class="zoomable" onclick="openLightbox(this.src)">
+    <img src="../images/article-randonner-seule-photo-2.jpg" alt="Cygne s'envolant d'un plan d'eau" loading="lazy" class="zoomable" onclick="openLightbox(this.src)">
   </div>
 
   <h2 class="article-h2 reveal">Mon sac de randonneuse solo — ce que j'emporte vraiment</h2>
@@ -302,8 +275,8 @@
   <p class="article-text reveal">Et ça, ça n'a pas de prix.</p>
 
   <div class="article-cta reveal">
-    <p>Retrouve toutes mes traces GPS et mes sorties sur mon <a href="pages/blog.html">Carnet de randonnée</a>, et mes photos sur <a href="https://www.instagram.com/lachtiterandonneuse" target="_blank" rel="noopener">Instagram</a> et <a href="https://www.facebook.com/profile.php?id=61576448918841" target="_blank" rel="noopener">Facebook</a> — <span>@lachtiterandonneuse</span>.</p>
-    <a href="pages/blog.html" class="cta-btn">Voir mes parcours Komoot →</a>
+    <p>Retrouve toutes mes traces GPS et mes sorties sur mon <a href="parcours-komoot.html">Carnet de randonnée</a>, et mes photos sur <a href="https://www.instagram.com/lachtiterandonneuse" target="_blank" rel="noopener">Instagram</a> et <a href="https://www.facebook.com/profile.php?id=61576448918841" target="_blank" rel="noopener">Facebook</a> — <span>@lachtiterandonneuse</span>.</p>
+    <a href="parcours-komoot.html" class="cta-btn">Voir mes parcours Komoot →</a>
   </div>
 
 </main>
@@ -314,17 +287,8 @@
   <img id="lightbox-img" src="" alt="Vue agrandie">
 </div>
 
-<footer class="footer">
-  <svg width="42" height="26" viewBox="0 0 42 26" style="display:block;margin:0 auto 0.5rem">
-    <circle cx="21" cy="13" r="4.5" fill="#8B6BB1"/>
-    <ellipse cx="21" cy="4" rx="3" ry="4.3" fill="#d4b8f0"/>
-    <ellipse cx="21" cy="22" rx="3" ry="4.3" fill="#d4b8f0"/>
-    <ellipse cx="12" cy="13" rx="4.3" ry="3" fill="#C9A96E"/>
-    <ellipse cx="30" cy="13" rx="4.3" ry="3" fill="#C9A96E"/>
-    <circle cx="21" cy="13" r="2.8" fill="#F0E6FF"/>
-  </svg>
-  Marine Bernard · La Ch'tite Randonneuse · 2026 · Hauts-de-France
-</footer>
+<div id="footer"></div>
+<script src="/js/include.js"></script>
 
 <script>
 const cur=document.getElementById('cursor-flower');

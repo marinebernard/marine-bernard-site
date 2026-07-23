@@ -27,7 +27,7 @@ jobs:
         run: |
           git config user.name "Komoot Bot"
           git config user.email "actions@github.com"
-          git add pages/blog.html
+          git add pages/parcours-komoot.html
           if git diff --cached --quiet; then
             echo "Aucun nouveau parcours aujourd'hui."
           else
