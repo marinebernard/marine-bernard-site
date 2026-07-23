@@ -12,3 +12,6 @@ Thumbs.db
 
 # Config locale Claude
 .claude/
+
+# Identifiants base de données — jamais dans Git, uploadé à la main sur le serveur
+api/config.php

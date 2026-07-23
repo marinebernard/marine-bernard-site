@@ -72,6 +72,13 @@
   font-size:0.85rem;margin-top:1.2rem;
 }
 .form-confirm.show{display:block;}
+.form-error{
+  display:none;text-align:center;padding:1rem;
+  background:#fef2ea;border-radius:14px;color:#9a4a1a;
+  font-size:0.82rem;margin-top:1.2rem;
+}
+.form-error.show{display:block;}
+.form-submit:disabled{opacity:0.6;}
 
 .contact-alt{
   margin-top:2.5rem;padding-top:2rem;
@@ -154,8 +161,9 @@
       <textarea id="rf-message" name="message" required></textarea>
     </div>
     <button type="submit" class="form-submit">Envoyer le message ✿</button>
-    <p class="form-note">L'envoi ouvre ta messagerie avec le message pré-rempli, prêt à partir vers contact@marine-bernard.fr.</p>
-    <div class="form-confirm" id="rfConfirm">Ta messagerie s'est ouverte avec le message prêt à envoyer 🌿</div>
+    <p class="form-note">Ton message est enregistré directement, je le lis dès que possible.</p>
+    <div class="form-confirm" id="rfConfirm">Message envoyé, merci ! Je te réponds au plus vite 🌿</div>
+    <div class="form-error" id="rfError"></div>
   </form>
 
   <div class="contact-alt">
@@ -184,16 +192,47 @@ const obs=new IntersectionObserver(entries=>{
 },{threshold:0.08});
 document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
 
-/* ── FORMULAIRE (envoi via mailto, pas de backend sur ce site statique) ── */
-document.getElementById('randoContactForm').addEventListener('submit', function(e){
+/* ── FORMULAIRE (enregistré en base via api/contact-handler.php) ── */
+document.getElementById('randoContactForm').addEventListener('submit', async function(e){
   e.preventDefault();
-  const name = document.getElementById('rf-name').value;
-  const email = document.getElementById('rf-email').value;
-  const subject = document.getElementById('rf-subject').value || 'Contact depuis marine-bernard.fr';
-  const message = document.getElementById('rf-message').value;
-  const body = `${message}\n\n—\n${name}\n${email}`;
-  window.location.href = `mailto:contact@marine-bernard.fr?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  document.getElementById('rfConfirm').classList.add('show');
+  const btn = this.querySelector('.form-submit');
+  const confirmEl = document.getElementById('rfConfirm');
+  const errorEl = document.getElementById('rfError');
+  confirmEl.classList.remove('show');
+  errorEl.classList.remove('show');
+
+  const payload = {
+    name: document.getElementById('rf-name').value,
+    email: document.getElementById('rf-email').value,
+    subject: document.getElementById('rf-subject').value,
+    message: document.getElementById('rf-message').value,
+  };
+
+  btn.disabled = true;
+  const originalLabel = btn.textContent;
+  btn.textContent = 'Envoi en cours…';
+
+  try {
+    const res = await fetch('/api/contact-handler.php', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (data.success) {
+      confirmEl.classList.add('show');
+      this.reset();
+    } else {
+      errorEl.textContent = data.error || 'Une erreur est survenue, réessaie plus tard.';
+      errorEl.classList.add('show');
+    }
+  } catch (err) {
+    errorEl.textContent = 'Impossible d’envoyer le message pour le moment. Réessaie plus tard ou écris-moi directement par email.';
+    errorEl.classList.add('show');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = originalLabel;
+  }
 });
 
 /* ── MENU MOBILE ── */
