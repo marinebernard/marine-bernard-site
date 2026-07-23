@@ -183,7 +183,8 @@
   gtag('config', 'G-KZEHR4YQFQ');
 </script>
 </head>
-<body>
+<body class="pro">
+<div id="header"></div>
 
 <!-- ICÔNES SVG (sprite) -->
 <svg style="display:none" aria-hidden="true">
@@ -213,34 +214,6 @@
 </div>
 
 <!-- NAVIGATION -->
-<nav class="nav" id="navbar">
-  <a href="../index.html" class="nav-logo-wrap">
-    <svg class="logo-mark" viewBox="0 0 30 30" aria-hidden="true">
-      <circle cx="15" cy="15" r="4.5" fill="#2D1B69"/>
-      <ellipse cx="15" cy="6.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
-      <ellipse cx="15" cy="23.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
-      <ellipse cx="6.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
-      <ellipse cx="23.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
-      <ellipse cx="9" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 9 9)"/>
-      <ellipse cx="21" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 21 9)"/>
-      <ellipse cx="9" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 9 21)"/>
-      <ellipse cx="21" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 21 21)"/>
-      <circle cx="15" cy="15" r="3.2" fill="#FAF8FF"/>
-    </svg>
-    <span class="logo-text">Marine <em>Bernard</em></span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="../index.html">Accueil</a></li>
-    <li><a href="../index.html#projets"  class="active">Projets</a></li>
-    <li><a href="../index.html#photos">Photos</a></li>
-    <li><a href="blog.html">Carnet de randonnée</a></li>
-    <li><a href="../index.html#contact">Contact</a></li>
-  </ul>
-  <button class="nav-cta" onclick="window.location='index.html#contact'">Me contacter</button>
-  <button class="nav-toggle" id="navToggle" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
 
 <nav class="breadcrumb" aria-label="Fil d'Ariane"><div class="breadcrumb-inner"><a href="../index.html"><svg class="icon bc-icon"><use href="#icon-home"/></svg> Accueil</a><a href="../index.html#projets"><svg class="icon bc-icon"><use href="#icon-grid"/></svg> Projets</a><span class="breadcrumb-current"><svg class="icon bc-icon"><use href="#icon-gift"/></svg> Invitation 60 ans</span></div></nav>
 
@@ -395,17 +368,8 @@
 </div>
 
 <!-- FOOTER -->
-<footer class="footer">
-  <svg width="42" height="26" viewBox="0 0 42 26" style="display:block;margin:0 auto 0.5rem">
-    <circle cx="21" cy="13" r="4.5" fill="#8B6BB1"/>
-    <ellipse cx="21" cy="4" rx="3" ry="4.3" fill="#d4b8f0"/>
-    <ellipse cx="21" cy="22" rx="3" ry="4.3" fill="#d4b8f0"/>
-    <ellipse cx="12" cy="13" rx="4.3" ry="3" fill="#C9A96E"/>
-    <ellipse cx="30" cy="13" rx="4.3" ry="3" fill="#C9A96E"/>
-    <circle cx="21" cy="13" r="2.8" fill="#F0E6FF"/>
-  </svg>
-  Marine Bernard · Portfolio · 2026 · Hauts-de-France
-</footer>
+<div id="footer"></div>
+<script src="/js/include.js"></script>
 
 <script>
 const cur=document.getElementById('cursor-flower');
