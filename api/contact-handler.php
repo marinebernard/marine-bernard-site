@@ -1,10 +1,11 @@
 <?php
 /**
- * Reçoit le formulaire de contact (pages/contact-rando.html) en JSON
- * et enregistre le message dans la base MariaDB/MySQL. Crée la table
- * automatiquement au premier envoi — aucune manipulation phpMyAdmin
- * nécessaire au départ. Les messages reçus sont consultables ensuite
- * via phpMyAdmin (fourni par IONOS) sur la table contact_messages.
+ * Reçoit le formulaire de contact (pages/contact-rando.html) en JSON,
+ * enregistre le message dans la base MariaDB/MySQL (table créée
+ * automatiquement au premier envoi) puis envoie une notification à
+ * contact@marine-bernard.fr. L'enregistrement en base reste la
+ * référence : si l'email échoue, le message n'est pas perdu pour
+ * autant, il reste consultable via phpMyAdmin.
  */
 
 header('Content-Type: application/json; charset=utf-8');
@@ -25,9 +26,11 @@ require $configPath;
 
 $input = json_decode(file_get_contents('php://input'), true) ?? [];
 
-$name    = trim($input['name'] ?? '');
-$email   = trim($input['email'] ?? '');
-$subject = trim($input['subject'] ?? '');
+// str_replace retire les retours à la ligne : évite l'injection d'en-têtes
+// email via un champ "sujet" ou "nom" malveillant.
+$name    = str_replace(["\r", "\n"], '', trim($input['name'] ?? ''));
+$email   = str_replace(["\r", "\n"], '', trim($input['email'] ?? ''));
+$subject = str_replace(["\r", "\n"], '', trim($input['subject'] ?? ''));
 $message = trim($input['message'] ?? '');
 
 if ($name === '' || $email === '' || $message === '') {
@@ -62,10 +65,24 @@ try {
         'INSERT INTO contact_messages (name, email, subject, message) VALUES (?, ?, ?, ?)'
     );
     $stmt->execute([$name, $email, $subject, $message]);
-
-    echo json_encode(['success' => true]);
 } catch (PDOException $e) {
     error_log('contact-handler.php DB error: ' . $e->getMessage());
     http_response_code(500);
     echo json_encode(['success' => false, 'error' => "Erreur serveur, réessaie plus tard."]);
+    exit;
 }
+
+// Le message est déjà en sécurité en base à ce stade — l'email n'est
+// qu'une notification "best effort", son échec ne fait pas échouer la requête.
+$mailSubject = $subject !== '' ? $subject : 'Nouveau message depuis marine-bernard.fr';
+$mailBody    = "Nouveau message via le formulaire de contact rando :\n\n"
+             . "Nom : {$name}\n"
+             . "Email : {$email}\n\n"
+             . "{$message}\n";
+$mailHeaders = "From: Site marine-bernard.fr <contact@marine-bernard.fr>\r\n"
+             . "Reply-To: {$name} <{$email}>\r\n"
+             . "Content-Type: text/plain; charset=utf-8";
+
+@mail('contact@marine-bernard.fr', $mailSubject, $mailBody, $mailHeaders);
+
+echo json_encode(['success' => true]);
