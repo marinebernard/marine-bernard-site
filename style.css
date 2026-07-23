@@ -729,6 +729,15 @@ html,body{
 }
 .breadcrumb-current .bc-icon{font-size:0.8rem}
 
+/* Variante verte — univers rando */
+body.rando .breadcrumb{
+  background:linear-gradient(90deg,#C0DD97 0%,#EAF3DE 100%);
+  border-bottom:1px solid rgba(59,109,17,0.12);
+}
+body.rando .breadcrumb a{color:#3B6D11;}
+body.rando .breadcrumb a:hover{background:#EAF3DE;color:#27500A;}
+body.rando .breadcrumb-current{background:#27500A;color:#C0DD97;}
+
 /* ── RESPONSIVE INDEX ───────────────────────────────────────── */
 @media(max-width:768px){
   .nav{padding:0 1.5rem}

@@ -54,3 +54,17 @@ jobs:
           remote_path: ${{ vars.FTP_SERVER_DIR || '/' }}
           sftp_only: true
           rsyncArgs: '--exclude=.git/ --exclude=.github/ --exclude=scripts/'
+
+      # './*' ne remonte pas les fichiers cachés (commençant par un point) —
+      # .htaccess a besoin de son propre envoi explicite pour être publié.
+      - name: Publication de .htaccess (fichier caché, non inclus par './*')
+        if: ${{ vars.FTP_ENABLED == 'true' }}
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          port: 22
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local_path: './.htaccess'
+          remote_path: ${{ vars.FTP_SERVER_DIR || '/' }}
+          sftp_only: true
