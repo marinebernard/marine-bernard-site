@@ -13,6 +13,9 @@
   font-family:'Playfair Display',serif;font-style:italic;
   font-size:15px;color:#27500A;text-decoration:none;
 }
+.site-header-rando .header-nav-wrap{
+  display:flex;align-items:center;gap:1.6rem;
+}
 .site-header-rando .header-menu{
   display:flex;gap:0;list-style:none;margin:0;padding:4px;
   background:#EAF3DE;border:0.5px solid rgba(59,109,17,0.25);
@@ -30,21 +33,50 @@
 }
 .site-header-rando .header-switch{font-size:11px;color:#7a8f5a;text-decoration:none;}
 .site-header-rando .header-switch:hover{text-decoration:underline;}
+.site-header-rando .header-toggle{
+  display:none;background:none;border:none;cursor:none;padding:6px;
+  flex-direction:column;justify-content:center;gap:5px;flex-shrink:0;
+}
+.site-header-rando .header-toggle span{
+  display:block;width:22px;height:2px;background:#27500A;border-radius:2px;
+  transition:transform 0.25s,opacity 0.25s;
+}
+.site-header-rando .header-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.site-header-rando .header-toggle.open span:nth-child(2){opacity:0}
+.site-header-rando .header-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 @media(max-width:768px){
-  .site-header-rando .header-menu{display:none;}
+  .site-header-rando{padding:0 1.2rem;}
+  .site-header-rando .header-toggle{display:flex;}
+  .site-header-rando .header-nav-wrap{
+    display:none;position:absolute;top:64px;left:0;right:0;
+    flex-direction:column;align-items:stretch;gap:10px;
+    background:#FAF8FF;border-bottom:1px solid rgba(59,109,17,0.18);
+    padding:14px;box-shadow:0 12px 24px rgba(39,80,10,0.1);
+  }
+  .site-header-rando .header-nav-wrap.open{display:flex;}
+  .site-header-rando .header-menu{flex-direction:column;background:none;border:none;padding:0;gap:4px;}
+  .site-header-rando .header-menu li a{text-align:center;padding:10px;}
+  .site-header-rando .header-right{flex-direction:column;gap:8px;}
+  .site-header-rando .header-cta{text-align:center;}
+  .site-header-rando .header-switch{text-align:center;}
 }
 </style>
 <header class="site-header-rando">
   <a href="/pages/parcours-komoot.html" class="header-logo">Marine Bernard</a>
-  <ul class="header-menu">
-    <li><a href="/pages/parcours-komoot.html">Accueil</a></li>
-    <li><a href="/pages/parcours-komoot.html">Sentiers</a></li>
-    <li><a href="/index.html#photos">Galerie</a></li>
-    <li><a href="/pages/blog.html">Blog</a></li>
-    <li><a href="/index.html#contact">Contact</a></li>
-  </ul>
-  <div class="header-right">
-    <a href="/index.html#contact" class="header-cta">Me suivre</a>
-    <a href="/index.html" class="header-switch">→ Univers pro</a>
+  <div class="header-nav-wrap">
+    <ul class="header-menu">
+      <li><a href="/pages/parcours-komoot.html">Accueil</a></li>
+      <li><a href="/pages/parcours-komoot.html">Sentiers</a></li>
+      <li><a href="/index.html#photos">Galerie</a></li>
+      <li><a href="/pages/blog.html">Blog</a></li>
+      <li><a href="/index.html#contact">Contact</a></li>
+    </ul>
+    <div class="header-right">
+      <a href="/index.html#contact" class="header-cta">Me suivre</a>
+      <a href="/index.html" class="header-switch">→ Univers pro</a>
+    </div>
   </div>
+  <button class="header-toggle" id="headerToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </header>

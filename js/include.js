@@ -10,11 +10,23 @@ async function loadComponent(id, path) {
 
 document.addEventListener('DOMContentLoaded', () => {
   const body = document.body;
-  if (body.classList.contains('rando')) {
-    loadComponent('header', '/components/header-rando.html');
-  } else {
-    loadComponent('header', '/components/header-pro.html');
-  }
+  const headerPath = body.classList.contains('rando')
+    ? '/components/header-rando.html'
+    : '/components/header-pro.html';
+
+  loadComponent('header', headerPath).then(() => {
+    const toggle = document.getElementById('headerToggle');
+    const navWrap = document.querySelector('.header-nav-wrap');
+    toggle?.addEventListener('click', () => {
+      toggle.classList.toggle('open');
+      navWrap?.classList.toggle('open');
+    });
+    navWrap?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      toggle?.classList.remove('open');
+      navWrap.classList.remove('open');
+    }));
+  });
+
   loadComponent('footer', '/components/footer.html');
   setTimeout(() => {
     const footer = document.getElementById('footer');

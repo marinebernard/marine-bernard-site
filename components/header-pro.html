@@ -13,6 +13,9 @@
   font-family:'Playfair Display',serif;font-style:italic;
   font-size:15px;color:#2D1B69;text-decoration:none;
 }
+.site-header .header-nav-wrap{
+  display:flex;align-items:center;gap:1.6rem;
+}
 .site-header .header-menu{
   display:flex;gap:0;list-style:none;margin:0;padding:4px;
   background:#F0E6FF;border:0.5px solid rgba(139,107,177,0.25);
@@ -30,21 +33,50 @@
 }
 .site-header .header-switch{font-size:11px;color:#9a88b8;text-decoration:none;}
 .site-header .header-switch:hover{text-decoration:underline;}
+.site-header .header-toggle{
+  display:none;background:none;border:none;cursor:none;padding:6px;
+  flex-direction:column;justify-content:center;gap:5px;flex-shrink:0;
+}
+.site-header .header-toggle span{
+  display:block;width:22px;height:2px;background:#2D1B69;border-radius:2px;
+  transition:transform 0.25s,opacity 0.25s;
+}
+.site-header .header-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.site-header .header-toggle.open span:nth-child(2){opacity:0}
+.site-header .header-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 @media(max-width:768px){
-  .site-header .header-menu{display:none;}
+  .site-header{padding:0 1.2rem;}
+  .site-header .header-toggle{display:flex;}
+  .site-header .header-nav-wrap{
+    display:none;position:absolute;top:64px;left:0;right:0;
+    flex-direction:column;align-items:stretch;gap:10px;
+    background:#FAF8FF;border-bottom:1px solid rgba(139,107,177,0.18);
+    padding:14px;box-shadow:0 12px 24px rgba(45,27,105,0.1);
+  }
+  .site-header .header-nav-wrap.open{display:flex;}
+  .site-header .header-menu{flex-direction:column;background:none;border:none;padding:0;gap:4px;}
+  .site-header .header-menu li a{text-align:center;padding:10px;}
+  .site-header .header-right{flex-direction:column;gap:8px;}
+  .site-header .header-cta{text-align:center;}
+  .site-header .header-switch{text-align:center;}
 }
 </style>
 <header class="site-header">
   <a href="/index.html" class="header-logo">Marine Bernard</a>
-  <ul class="header-menu">
-    <li><a href="/index.html">Accueil</a></li>
-    <li><a href="/index.html#projets">Projets</a></li>
-    <li><a href="/index.html#photos">Photos</a></li>
-    <li><a href="/pages/blog.html">Blog</a></li>
-    <li><a href="/index.html#contact">Contact</a></li>
-  </ul>
-  <div class="header-right">
-    <a href="/index.html#contact" class="header-cta">Me contacter</a>
-    <a href="/pages/parcours-komoot.html" class="header-switch">→ Univers rando</a>
+  <div class="header-nav-wrap">
+    <ul class="header-menu">
+      <li><a href="/index.html">Accueil</a></li>
+      <li><a href="/index.html#projets">Projets</a></li>
+      <li><a href="/index.html#photos">Photos</a></li>
+      <li><a href="/pages/blog.html">Blog</a></li>
+      <li><a href="/index.html#contact">Contact</a></li>
+    </ul>
+    <div class="header-right">
+      <a href="/index.html#contact" class="header-cta">Me contacter</a>
+      <a href="/pages/parcours-komoot.html" class="header-switch">→ Univers rando</a>
+    </div>
   </div>
+  <button class="header-toggle" id="headerToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </header>
