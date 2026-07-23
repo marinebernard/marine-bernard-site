@@ -28,10 +28,4 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   loadComponent('footer', '/components/footer.html');
-  setTimeout(() => {
-    const footer = document.getElementById('footer');
-    if (footer && body.classList.contains('rando')) {
-      footer.style.background = '#EAF3DE';
-    }
-  }, 100);
 });

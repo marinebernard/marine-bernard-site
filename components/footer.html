@@ -6,6 +6,9 @@
   font-family:'Inter',sans-serif;
 }
 .site-footer .footer-flower{width:36px;height:36px;display:block;margin:0 auto;}
+.site-footer .footer-flower .petal-a{fill:#8B6BB1;}
+.site-footer .footer-flower .petal-b{fill:#C9A96E;}
+.site-footer .footer-flower .center{fill:#2D1B69;}
 .site-footer .footer-name{
   font-family:'Playfair Display',serif;font-style:italic;
   font-size:13px;color:#2D1B69;margin:8px 0 0;
@@ -21,18 +24,29 @@
 .site-footer .s-ig{background:#dc2743;}
 .site-footer .s-km{background:#6AA127;}
 .site-footer .footer-copyright{font-size:11px;color:#b0a0c8;margin:10px 0 0;}
+
+/* Variante verte — univers rando (aucun violet) */
+body.rando .site-footer{
+  border-top:0.5px solid rgba(59,109,17,0.12);
+  background:#EAF3DE;
+}
+body.rando .site-footer .footer-flower .petal-a{fill:#3B6D11;}
+body.rando .site-footer .footer-flower .petal-b{fill:#C0DD97;}
+body.rando .site-footer .footer-flower .center{fill:#27500A;}
+body.rando .site-footer .footer-name{color:#27500A;}
+body.rando .site-footer .footer-copyright{color:#7a9a6a;}
 </style>
 <footer class="site-footer">
   <svg class="footer-flower" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="15" cy="15" r="4.5" fill="#2D1B69"/>
-    <ellipse cx="15" cy="6.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
-    <ellipse cx="15" cy="23.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
-    <ellipse cx="6.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
-    <ellipse cx="23.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
-    <ellipse cx="9" cy="9" rx="3.2" ry="4.8" fill="#8B6BB1" opacity="0.8" transform="rotate(-45 9 9)"/>
-    <ellipse cx="21" cy="9" rx="3.2" ry="4.8" fill="#C9A96E" opacity="0.8" transform="rotate(45 21 9)"/>
-    <ellipse cx="9" cy="21" rx="3.2" ry="4.8" fill="#C9A96E" opacity="0.8" transform="rotate(45 9 21)"/>
-    <ellipse cx="21" cy="21" rx="3.2" ry="4.8" fill="#8B6BB1" opacity="0.8" transform="rotate(-45 21 21)"/>
+    <circle class="center" cx="15" cy="15" r="4.5"/>
+    <ellipse class="petal-a" cx="15" cy="6.5" rx="3.8" ry="5.5" opacity="0.9"/>
+    <ellipse class="petal-a" cx="15" cy="23.5" rx="3.8" ry="5.5" opacity="0.9"/>
+    <ellipse class="petal-b" cx="6.5" cy="15" rx="5.5" ry="3.8" opacity="0.85"/>
+    <ellipse class="petal-b" cx="23.5" cy="15" rx="5.5" ry="3.8" opacity="0.85"/>
+    <ellipse class="petal-a" cx="9" cy="9" rx="3.2" ry="4.8" opacity="0.8" transform="rotate(-45 9 9)"/>
+    <ellipse class="petal-b" cx="21" cy="9" rx="3.2" ry="4.8" opacity="0.8" transform="rotate(45 21 9)"/>
+    <ellipse class="petal-b" cx="9" cy="21" rx="3.2" ry="4.8" opacity="0.8" transform="rotate(45 9 21)"/>
+    <ellipse class="petal-a" cx="21" cy="21" rx="3.2" ry="4.8" opacity="0.8" transform="rotate(-45 21 21)"/>
     <circle cx="15" cy="15" r="3.2" fill="#FAF8FF"/>
   </svg>
   <p class="footer-name">Marine Bernard</p>

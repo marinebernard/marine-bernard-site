@@ -729,7 +729,7 @@ html,body{
 }
 .breadcrumb-current .bc-icon{font-size:0.8rem}
 
-/* Variante verte — univers rando */
+/* ═══ VARIANTE VERTE — UNIVERS RANDO (aucun violet) ═══ */
 body.rando .breadcrumb{
   background:linear-gradient(90deg,#C0DD97 0%,#EAF3DE 100%);
   border-bottom:1px solid rgba(59,109,17,0.12);
@@ -737,6 +737,36 @@ body.rando .breadcrumb{
 body.rando .breadcrumb a{color:#3B6D11;}
 body.rando .breadcrumb a:hover{background:#EAF3DE;color:#27500A;}
 body.rando .breadcrumb-current{background:#27500A;color:#C0DD97;}
+
+body.rando .panel-title{color:#27500A;}
+body.rando .panel-sub{color:#5a7a4a;}
+
+body.rando .article-card{border-color:rgba(59,109,17,0.16);}
+body.rando .article-card:hover{box-shadow:0 16px 42px rgba(39,80,10,0.11);}
+body.rando .article-badge{background:rgba(39,80,10,0.84);}
+body.rando .article-title{color:#27500A;}
+body.rando .article-desc{color:#5a7a4a;}
+body.rando .article-meta{color:#7a9a6a;}
+body.rando .tag-v{background:#EAF3DE;color:#27500A;}
+
+body.rando .sidebar-card{border-color:rgba(59,109,17,0.16);}
+body.rando .sidebar-link{color:#3d5a30;}
+body.rando .sidebar-link:hover{background:#EAF3DE;color:#27500A;}
+
+body.rando .profil-title{color:#27500A;}
+
+body.rando .parcours-card{border-color:rgba(59,109,17,0.15);}
+body.rando .parcours-card:hover{box-shadow:0 14px 38px rgba(39,80,10,0.1);}
+body.rando .parcours-card-title{color:#27500A;}
+body.rando .parcours-card-date{color:#7a9a6a;}
+body.rando .meta-item{color:#3d5a30;border-right-color:rgba(59,109,17,0.15);}
+body.rando .komoot-embed{border-top-color:rgba(59,109,17,0.1);}
+body.rando .parcours-card-footer{border-top-color:rgba(59,109,17,0.08);}
+
+/* Curseur fleur — recoloré en vert, plus aucun violet à l'écran */
+body.rando #cursor-flower [fill="#2D1B69"]{fill:#27500A;}
+body.rando #cursor-flower [fill="#8B6BB1"]{fill:#3B6D11;}
+body.rando #cursor-flower [fill="#d4b8f0"]{fill:#8fc55f;}
 
 /* ── RESPONSIVE INDEX ───────────────────────────────────────── */
 @media(max-width:768px){
