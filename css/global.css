@@ -9,3 +9,10 @@
   --vert-clair: #EAF3DE;
   --vert-doux: #C0DD97;
 }
+
+body.pro {
+  background-color: #FAF8FF;
+}
+body.rando {
+  background-color: #EAF3DE;
+}

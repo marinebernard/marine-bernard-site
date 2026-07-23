@@ -6,7 +6,7 @@
   backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
   border-bottom:1px solid rgba(139,107,177,0.18);
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 2rem;
+  padding:0 2.5rem;
   font-family:'Inter',sans-serif;
 }
 .site-header .header-logo{
@@ -16,16 +16,18 @@
 .site-header .header-nav-wrap{
   display:flex;align-items:center;gap:1.6rem;
 }
-.site-header .header-menu{
+.site-header .nav-links{
+  position:absolute;left:50%;transform:translateX(-50%);
   display:flex;gap:0;list-style:none;margin:0;padding:4px;
   background:#F0E6FF;border:0.5px solid rgba(139,107,177,0.25);
   border-radius:30px;
 }
-.site-header .header-menu li a{
-  display:block;font-size:12px;color:#8B6BB1;text-decoration:none;
+.site-header .nav-links li a{
+  display:block;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;
+  color:#8B6BB1;text-decoration:none;
   padding:6px 16px;border-radius:22px;transition:background 0.2s,color 0.2s;
 }
-.site-header .header-menu li a:hover{background:#2D1B69;color:#fff;}
+.site-header .nav-links li a:hover{background:#2D1B69;color:#fff;}
 .site-header .header-right{display:flex;align-items:center;gap:14px;}
 .site-header .header-cta{
   background:#2D1B69;color:#fff;text-decoration:none;
@@ -54,8 +56,11 @@
     padding:14px;box-shadow:0 12px 24px rgba(45,27,105,0.1);
   }
   .site-header .header-nav-wrap.open{display:flex;}
-  .site-header .header-menu{flex-direction:column;background:none;border:none;padding:0;gap:4px;}
-  .site-header .header-menu li a{text-align:center;padding:10px;}
+  .site-header .nav-links{
+    position:static;left:auto;transform:none;
+    flex-direction:column;background:none;border:none;padding:0;gap:4px;
+  }
+  .site-header .nav-links li a{text-align:center;padding:10px;}
   .site-header .header-right{flex-direction:column;gap:8px;}
   .site-header .header-cta{text-align:center;}
   .site-header .header-switch{text-align:center;}
@@ -64,7 +69,7 @@
 <header class="site-header">
   <a href="/index.html" class="header-logo">Marine Bernard</a>
   <div class="header-nav-wrap">
-    <ul class="header-menu">
+    <ul class="nav-links">
       <li><a href="/index.html">Accueil</a></li>
       <li><a href="/index.html#projets">Projets</a></li>
       <li><a href="/index.html#photos">Photos</a></li>

@@ -6,7 +6,7 @@
   backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
   border-bottom:1px solid rgba(59,109,17,0.18);
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 2rem;
+  padding:0 2.5rem;
   font-family:'Inter',sans-serif;
 }
 .site-header-rando .header-logo{
@@ -16,16 +16,18 @@
 .site-header-rando .header-nav-wrap{
   display:flex;align-items:center;gap:1.6rem;
 }
-.site-header-rando .header-menu{
+.site-header-rando .nav-links{
+  position:absolute;left:50%;transform:translateX(-50%);
   display:flex;gap:0;list-style:none;margin:0;padding:4px;
-  background:#EAF3DE;border:0.5px solid rgba(59,109,17,0.25);
+  background:#C0DD97;border:0.5px solid rgba(59,109,17,0.25);
   border-radius:30px;
 }
-.site-header-rando .header-menu li a{
-  display:block;font-size:12px;color:#3B6D11;text-decoration:none;
+.site-header-rando .nav-links li a{
+  display:block;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;
+  color:#3B6D11;text-decoration:none;
   padding:6px 16px;border-radius:22px;transition:background 0.2s,color 0.2s;
 }
-.site-header-rando .header-menu li a:hover{background:#27500A;color:#fff;}
+.site-header-rando .nav-links li a:hover{background:#27500A;color:#fff;}
 .site-header-rando .header-right{display:flex;align-items:center;gap:14px;}
 .site-header-rando .header-cta{
   background:#27500A;color:#fff;text-decoration:none;
@@ -54,8 +56,11 @@
     padding:14px;box-shadow:0 12px 24px rgba(39,80,10,0.1);
   }
   .site-header-rando .header-nav-wrap.open{display:flex;}
-  .site-header-rando .header-menu{flex-direction:column;background:none;border:none;padding:0;gap:4px;}
-  .site-header-rando .header-menu li a{text-align:center;padding:10px;}
+  .site-header-rando .nav-links{
+    position:static;left:auto;transform:none;
+    flex-direction:column;background:none;border:none;padding:0;gap:4px;
+  }
+  .site-header-rando .nav-links li a{text-align:center;padding:10px;}
   .site-header-rando .header-right{flex-direction:column;gap:8px;}
   .site-header-rando .header-cta{text-align:center;}
   .site-header-rando .header-switch{text-align:center;}
@@ -64,7 +69,7 @@
 <header class="site-header-rando">
   <a href="/pages/parcours-komoot.html" class="header-logo">Marine Bernard</a>
   <div class="header-nav-wrap">
-    <ul class="header-menu">
+    <ul class="nav-links">
       <li><a href="/pages/parcours-komoot.html">Accueil</a></li>
       <li><a href="/pages/parcours-komoot.html">Sentiers</a></li>
       <li><a href="/index.html#photos">Galerie</a></li>
