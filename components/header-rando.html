@@ -1,1 +1,50 @@
-<!-- Header univers rando - vert #27500A -->
+<style>
+.site-header-rando{
+  height:64px;
+  background:rgba(234,243,222,0.95);
+  position:sticky;top:0;z-index:100;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(59,109,17,0.18);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2rem;
+  font-family:'Inter',sans-serif;
+}
+.site-header-rando .header-logo{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:15px;color:#27500A;text-decoration:none;
+}
+.site-header-rando .header-menu{
+  display:flex;gap:0;list-style:none;margin:0;padding:4px;
+  background:#EAF3DE;border:0.5px solid rgba(59,109,17,0.25);
+  border-radius:30px;
+}
+.site-header-rando .header-menu li a{
+  display:block;font-size:12px;color:#3B6D11;text-decoration:none;
+  padding:6px 16px;border-radius:22px;transition:background 0.2s,color 0.2s;
+}
+.site-header-rando .header-menu li a:hover{background:#27500A;color:#fff;}
+.site-header-rando .header-right{display:flex;align-items:center;gap:14px;}
+.site-header-rando .header-cta{
+  background:#27500A;color:#fff;text-decoration:none;
+  border-radius:22px;padding:8px 20px;font-size:12px;
+}
+.site-header-rando .header-switch{font-size:11px;color:#7a8f5a;text-decoration:none;}
+.site-header-rando .header-switch:hover{text-decoration:underline;}
+@media(max-width:768px){
+  .site-header-rando .header-menu{display:none;}
+}
+</style>
+<header class="site-header-rando">
+  <a href="/pages/parcours-komoot.html" class="header-logo">Marine Bernard</a>
+  <ul class="header-menu">
+    <li><a href="/pages/parcours-komoot.html">Accueil</a></li>
+    <li><a href="/pages/parcours-komoot.html">Sentiers</a></li>
+    <li><a href="/index.html#photos">Galerie</a></li>
+    <li><a href="/pages/blog.html">Blog</a></li>
+    <li><a href="/index.html#contact">Contact</a></li>
+  </ul>
+  <div class="header-right">
+    <a href="/index.html#contact" class="header-cta">Me suivre</a>
+    <a href="/index.html" class="header-switch">→ Univers pro</a>
+  </div>
+</header>
