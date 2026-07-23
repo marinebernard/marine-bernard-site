@@ -9,9 +9,38 @@
   padding:0 2.5rem;
   font-family:'Inter',sans-serif;
 }
+.site-header-rando .header-logo-wrap{
+  display:inline-flex;align-items:center;gap:6px;
+  position:relative;text-decoration:none;
+}
 .site-header-rando .header-logo{
   font-family:'Playfair Display',serif;font-style:italic;
   font-size:15px;color:#27500A;text-decoration:none;
+}
+.site-header-rando .logo-grass{flex-shrink:0;overflow:visible;}
+.site-header-rando .logo-grass .blade{
+  stroke-width:1.6;stroke-linecap:round;
+  transform-box:fill-box;transform-origin:50% 100%;
+  animation-name:logoSway;animation-timing-function:ease-in-out;
+  animation-iteration-count:infinite;animation-direction:alternate;
+}
+.site-header-rando .logo-grass .blade-1{stroke:#27500A;animation-duration:2.1s;}
+.site-header-rando .logo-grass .blade-2{stroke:#3B6D11;animation-duration:2.6s;animation-delay:0.2s;}
+.site-header-rando .logo-grass .blade-3{stroke:#27500A;animation-duration:2.3s;animation-delay:0.4s;}
+@keyframes logoSway{from{transform:rotate(-9deg)}to{transform:rotate(9deg)}}
+.site-header-rando .logo-rain{
+  position:absolute;top:-8px;left:0;width:100%;height:18px;
+  pointer-events:none;overflow:visible;
+}
+.site-header-rando .logo-drop{
+  position:absolute;top:-8px;width:1px;height:7px;
+  background:rgba(59,109,17,0.55);opacity:0;
+  animation:logoRainFall 0.9s linear infinite;
+}
+.site-header-rando .header-logo-wrap:hover .logo-drop{opacity:1;}
+@keyframes logoRainFall{
+  from{transform:translateY(0)}
+  to{transform:translateY(26px)}
 }
 .site-header-rando .header-nav-wrap{
   display:flex;align-items:center;gap:1.6rem;
@@ -67,7 +96,20 @@
 }
 </style>
 <header class="site-header-rando">
-  <a href="/pages/parcours-komoot.html" class="header-logo">Marine Bernard</a>
+  <a href="/pages/parcours-komoot.html" class="header-logo-wrap">
+    <span class="header-logo">Marine Bernard</span>
+    <span class="logo-rain" aria-hidden="true">
+      <span class="logo-drop" style="left:4%;animation-delay:0s"></span>
+      <span class="logo-drop" style="left:38%;animation-delay:0.25s"></span>
+      <span class="logo-drop" style="left:70%;animation-delay:0.5s"></span>
+      <span class="logo-drop" style="left:92%;animation-delay:0.15s"></span>
+    </span>
+    <svg class="logo-grass" viewBox="0 0 20 16" width="15" height="13" aria-hidden="true">
+      <line x1="4" y1="16" x2="3" y2="6" class="blade blade-1"/>
+      <line x1="10" y1="16" x2="10" y2="3" class="blade blade-2"/>
+      <line x1="16" y1="16" x2="17" y2="6" class="blade blade-3"/>
+    </svg>
+  </a>
   <div class="header-nav-wrap">
     <ul class="nav-links">
       <li><a href="/pages/parcours-komoot.html">Accueil</a></li>
