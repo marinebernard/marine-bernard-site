@@ -4,6 +4,10 @@
 # ═══════════════════════════════════════════════════════════════
 
 Options -Indexes
+
+# ── Page servie par défaut sur / (sans renommer ni écraser index.html) ──
+DirectoryIndex accueil.html index.html
+
 RewriteEngine On
 
 # ── Redirection .html → URL propre ──────────────────────────
