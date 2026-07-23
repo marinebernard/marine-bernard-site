@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — La Ch'tite Randonneuse · Marine Bernard</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../css/global.css">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+.contact-rando-hero{
+  background:linear-gradient(135deg,#27500A,#3B6D11);
+  padding:3.5rem 1.5rem;text-align:center;
+}
+.contact-rando-eyebrow{
+  font-size:0.7rem;letter-spacing:0.22em;text-transform:uppercase;
+  color:#C0DD97;margin-bottom:0.7rem;
+}
+.contact-rando-title{
+  font-family:'Playfair Display',serif;font-style:italic;color:#fff;
+  font-size:2.1rem;margin-bottom:0.7rem;
+}
+.contact-rando-desc{
+  font-size:0.9rem;color:rgba(255,255,255,0.85);
+  max-width:520px;margin:0 auto;line-height:1.7;
+}
+
+.contact-rando-wrap{
+  max-width:640px;margin:0 auto;padding:3rem 1.5rem 4rem;
+}
+
+.contact-form{
+  background:#fff;border:1px solid rgba(59,109,17,0.16);
+  border-radius:20px;padding:2rem;
+  box-shadow:0 16px 42px rgba(39,80,10,0.08);
+}
+.form-row{margin-bottom:1.2rem;}
+.form-row label{
+  display:block;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;
+  color:#3B6D11;font-weight:600;margin-bottom:6px;
+}
+.form-row input,.form-row textarea{
+  width:100%;font-family:'Inter',sans-serif;font-size:0.9rem;color:#2d3a25;
+  background:#FAF8FF;border:1px solid rgba(59,109,17,0.2);
+  border-radius:12px;padding:11px 14px;
+  transition:border-color 0.2s,box-shadow 0.2s;
+}
+.form-row input:focus,.form-row textarea:focus{
+  outline:none;border-color:#3B6D11;
+  box-shadow:0 0 0 3px rgba(59,109,17,0.12);
+}
+.form-row textarea{resize:vertical;min-height:120px;font-family:inherit;}
+
+.form-submit{
+  width:100%;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  background:#27500A;color:#fff;border:none;
+  padding:13px 24px;border-radius:22px;
+  font-family:'Inter',sans-serif;font-size:0.8rem;font-weight:600;
+  letter-spacing:0.08em;text-transform:uppercase;
+  cursor:none;transition:background 0.2s;
+}
+.form-submit:hover{background:#3B6D11;}
+
+.form-note{
+  font-size:0.72rem;color:#7a9a6a;text-align:center;
+  margin-top:0.9rem;line-height:1.6;
+}
+.form-confirm{
+  display:none;text-align:center;padding:1.2rem;
+  background:#EAF3DE;border-radius:14px;color:#27500A;
+  font-size:0.85rem;margin-top:1.2rem;
+}
+.form-confirm.show{display:block;}
+
+.contact-alt{
+  margin-top:2.5rem;padding-top:2rem;
+  border-top:1px solid rgba(59,109,17,0.14);
+  text-align:center;
+}
+.contact-alt p{font-size:0.8rem;color:#5a7a4a;margin-bottom:1rem;}
+.contact-alt-btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;}
+.contact-alt-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:#EAF3DE;color:#27500A;text-decoration:none;
+  padding:9px 18px;border-radius:20px;font-size:0.76rem;font-weight:600;
+  transition:background 0.2s;
+}
+.contact-alt-btn:hover{background:#C0DD97;}
+
+@media(max-width:768px){
+  .contact-rando-title{font-size:1.7rem}
+}
+</style>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KZEHR4YQFQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KZEHR4YQFQ');
+</script>
+</head>
+<body class="rando">
+<div id="header"></div>
+
+<!-- ICÔNES SVG (sprite) -->
+<svg style="display:none" aria-hidden="true">
+<symbol id="icon-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9a1 1 0 0 0 1 1h3v-5h4v5h3a1 1 0 0 0 1-1v-9"/></symbol>
+<symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="M4.5 7l7.5 6 7.5-6"/></symbol>
+</svg>
+
+<!-- CURSEUR FLEUR -->
+<div id="cursor-flower">
+  <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="15" cy="15" r="4.5" fill="#2D1B69"/>
+    <ellipse cx="15" cy="6.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+    <ellipse cx="15" cy="23.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+    <ellipse cx="6.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
+    <ellipse cx="23.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
+    <ellipse cx="9" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 9 9)"/>
+    <ellipse cx="21" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 21 9)"/>
+    <ellipse cx="9" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 9 21)"/>
+    <ellipse cx="21" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 21 21)"/>
+    <circle cx="15" cy="15" r="3.2" fill="#FAF8FF"/>
+  </svg>
+</div>
+
+<nav class="breadcrumb" aria-label="Fil d'Ariane"><div class="breadcrumb-inner"><a href="../index.html">Accueil</a><span class="breadcrumb-current">Contact</span></div></nav>
+
+<header class="contact-rando-hero">
+  <p class="contact-rando-eyebrow">La Ch'tite Randonneuse</p>
+  <h1 class="contact-rando-title">Une question, une envie de balade ?</h1>
+  <p class="contact-rando-desc">Partenariat, conseil d'itinéraire, ou juste envie d'échanger sur nos prochaines sorties — écris-moi.</p>
+</header>
+
+<div class="contact-rando-wrap">
+  <form class="contact-form reveal" id="randoContactForm">
+    <div class="form-row">
+      <label for="rf-name">Nom</label>
+      <input type="text" id="rf-name" name="name" required>
+    </div>
+    <div class="form-row">
+      <label for="rf-email">Email</label>
+      <input type="email" id="rf-email" name="email" required>
+    </div>
+    <div class="form-row">
+      <label for="rf-subject">Sujet</label>
+      <input type="text" id="rf-subject" name="subject">
+    </div>
+    <div class="form-row">
+      <label for="rf-message">Message</label>
+      <textarea id="rf-message" name="message" required></textarea>
+    </div>
+    <button type="submit" class="form-submit">Envoyer le message ✿</button>
+    <p class="form-note">L'envoi ouvre ta messagerie avec le message pré-rempli, prêt à partir vers contact@marine-bernard.fr.</p>
+    <div class="form-confirm" id="rfConfirm">Ta messagerie s'est ouverte avec le message prêt à envoyer 🌿</div>
+  </form>
+
+  <div class="contact-alt">
+    <p>Tu préfères un autre chemin ?</p>
+    <div class="contact-alt-btns">
+      <a class="contact-alt-btn" href="mailto:contact@marine-bernard.fr"><svg class="icon"><use href="#icon-mail"/></svg> contact@marine-bernard.fr</a>
+      <a class="contact-alt-btn" href="https://www.instagram.com/lachtiterandonneuse" target="_blank" rel="noopener">Instagram</a>
+      <a class="contact-alt-btn" href="https://www.facebook.com/lachtiterandonneuse" target="_blank" rel="noopener">Facebook</a>
+    </div>
+  </div>
+</div>
+
+<div id="footer"></div>
+<script src="/js/include.js"></script>
+
+<script>
+/* ── CURSEUR FLEUR ── */
+const cur=document.getElementById('cursor-flower');
+let mx=0,my=0,cx=0,cy=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function loop(){cx+=(mx-cx)*0.13;cy+=(my-cy)*0.13;cur.style.left=cx+'px';cur.style.top=cy+'px';requestAnimationFrame(loop)})();
+
+/* ── REVEAL ── */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target)}});
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+
+/* ── FORMULAIRE (envoi via mailto, pas de backend sur ce site statique) ── */
+document.getElementById('randoContactForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const name = document.getElementById('rf-name').value;
+  const email = document.getElementById('rf-email').value;
+  const subject = document.getElementById('rf-subject').value || 'Contact depuis marine-bernard.fr';
+  const message = document.getElementById('rf-message').value;
+  const body = `${message}\n\n—\n${name}\n${email}`;
+  window.location.href = `mailto:contact@marine-bernard.fr?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  document.getElementById('rfConfirm').classList.add('show');
+});
+
+/* ── MENU MOBILE ── */
+const navToggle=document.getElementById('navToggle');
+const navLinksEl=document.querySelector('.nav-links');
+navToggle?.addEventListener('click',()=>{
+  navToggle.classList.toggle('open');
+  navLinksEl.classList.toggle('open');
+});
+navLinksEl?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+  navToggle?.classList.remove('open');
+  navLinksEl.classList.remove('open');
+}));
+</script>
+</body>
+</html>

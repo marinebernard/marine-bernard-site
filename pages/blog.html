@@ -47,12 +47,150 @@
 
 <nav class="breadcrumb" aria-label="Fil d'Ariane"><div class="breadcrumb-inner"><a href="../index.html">Accueil</a><span class="breadcrumb-current">Blog</span></div></nav>
 
+<!-- HERO BLOG -->
+<header class="blog-hero">
+  <div class="blog-hero-scene">
+
+    <!-- ILLUSTRATION SVG ANIMÉE -->
+    <svg class="blog-hero-svg" viewBox="0 0 1200 260" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <radialGradient id="moonHalo" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#fffde0" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#fffde0" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#060d04"/>
+          <stop offset="100%" stop-color="#1a3a0d"/>
+        </linearGradient>
+        <linearGradient id="terrilGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a3d1e"/>
+          <stop offset="100%" stop-color="#0f1a08"/>
+        </linearGradient>
+        <linearGradient id="terril2Grad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1e2d14"/>
+          <stop offset="100%" stop-color="#0a1206"/>
+        </linearGradient>
+        <linearGradient id="groundGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2d5a10"/>
+          <stop offset="100%" stop-color="#1a3a08"/>
+        </linearGradient>
+        <clipPath id="heroClipBlog">
+          <rect width="1200" height="260"/>
+        </clipPath>
+      </defs>
+
+      <g clip-path="url(#heroClipBlog)">
+
+        <!-- CIEL -->
+        <rect width="1200" height="260" fill="url(#skyGrad)"/>
+
+        <!-- ÉTOILES -->
+        <circle cx="80" cy="18" r="1.2" fill="#fff" opacity="0.9" style="animation:twinkle 2.1s ease-in-out infinite"/>
+        <circle cx="155" cy="35" r="0.9" fill="#fff" opacity="0.7" style="animation:twinkle 3.4s 0.5s ease-in-out infinite"/>
+        <circle cx="230" cy="12" r="1.4" fill="#fff" opacity="0.95" style="animation:twinkle 1.8s 1s ease-in-out infinite"/>
+        <circle cx="310" cy="28" r="0.8" fill="#fff" opacity="0.6" style="animation:twinkle 2.8s 0.3s ease-in-out infinite"/>
+        <circle cx="390" cy="8" r="1.1" fill="#fff" opacity="0.85" style="animation:twinkle 3.1s 1.5s ease-in-out infinite"/>
+        <circle cx="460" cy="22" r="0.9" fill="#fff" opacity="0.75" style="animation:twinkle 2.3s 0.8s ease-in-out infinite"/>
+        <circle cx="540" cy="14" r="1.3" fill="#fff" opacity="0.9" style="animation:twinkle 1.6s 2s ease-in-out infinite"/>
+        <circle cx="620" cy="32" r="0.7" fill="#fff" opacity="0.5" style="animation:twinkle 4s 0.2s ease-in-out infinite"/>
+        <circle cx="700" cy="9" r="1.0" fill="#fff" opacity="0.8" style="animation:twinkle 2.5s 1.2s ease-in-out infinite"/>
+        <circle cx="780" cy="25" r="1.2" fill="#fff" opacity="0.9" style="animation:twinkle 1.9s 0.7s ease-in-out infinite"/>
+        <circle cx="860" cy="15" r="0.8" fill="#fff" opacity="0.6" style="animation:twinkle 3.3s 1.8s ease-in-out infinite"/>
+        <circle cx="940" cy="38" r="1.1" fill="#fff" opacity="0.85" style="animation:twinkle 2.0s 0.4s ease-in-out infinite"/>
+        <circle cx="1020" cy="11" r="0.9" fill="#fff" opacity="0.7" style="animation:twinkle 2.7s 1.1s ease-in-out infinite"/>
+        <circle cx="1100" cy="28" r="1.3" fill="#fff" opacity="0.9" style="animation:twinkle 1.7s 0.9s ease-in-out infinite"/>
+        <circle cx="1160" cy="18" r="0.7" fill="#fff" opacity="0.55" style="animation:twinkle 3.6s 2.2s ease-in-out infinite"/>
+        <circle cx="42" cy="44" r="0.8" fill="#C0DD97" opacity="0.5" style="animation:twinkle 4.2s 0.6s ease-in-out infinite"/>
+        <circle cx="500" cy="42" r="0.7" fill="#C0DD97" opacity="0.45" style="animation:twinkle 3.8s 1.4s ease-in-out infinite"/>
+        <circle cx="900" cy="45" r="0.9" fill="#C0DD97" opacity="0.4" style="animation:twinkle 4.5s 0.1s ease-in-out infinite"/>
+
+        <!-- LUNE -->
+        <circle cx="980" cy="48" r="32" fill="url(#moonHalo)"/>
+        <circle cx="980" cy="48" r="22" fill="#fffde0" opacity="0.15" style="animation:moonGlow 4s ease-in-out infinite"/>
+        <circle cx="980" cy="48" r="16" fill="#fff8cc" opacity="0.9" style="animation:moonGlow 4s ease-in-out infinite"/>
+        <circle cx="985" cy="44" r="4" fill="#e8e0a0" opacity="0.4"/>
+        <circle cx="974" cy="52" r="3" fill="#e8e0a0" opacity="0.3"/>
+        <circle cx="990" cy="54" r="2" fill="#e8e0a0" opacity="0.25"/>
+
+        <!-- NUAGES -->
+        <g style="animation:cloudDrift 28s linear infinite;opacity:0.18">
+          <ellipse cx="200" cy="55" rx="55" ry="14" fill="#fff"/>
+          <ellipse cx="175" cy="52" rx="32" ry="12" fill="#fff"/>
+          <ellipse cx="228" cy="50" rx="38" ry="11" fill="#fff"/>
+        </g>
+        <g style="animation:cloudDrift 38s 6s linear infinite;opacity:0.12">
+          <ellipse cx="650" cy="42" rx="70" ry="16" fill="#fff"/>
+          <ellipse cx="618" cy="40" rx="40" ry="13" fill="#fff"/>
+          <ellipse cx="685" cy="38" rx="48" ry="12" fill="#fff"/>
+        </g>
+
+        <!-- TERRIL PRINCIPAL (grand, arrière-plan) -->
+        <polygon points="400,240 640,60 880,240" fill="url(#terril2Grad)" opacity="0.85"/>
+        <line x1="640" y1="60" x2="580" y2="180" stroke="#3a5a22" stroke-width="0.5" opacity="0.3"/>
+        <line x1="640" y1="60" x2="700" y2="180" stroke="#3a5a22" stroke-width="0.5" opacity="0.3"/>
+        <line x1="640" y1="60" x2="620" y2="140" stroke="#4a7a2a" stroke-width="0.4" opacity="0.2"/>
+        <path d="M640,60 Q630,120 610,200" stroke="#4a8a20" stroke-width="2" fill="none" opacity="0.4" stroke-dasharray="4 3"/>
+
+        <!-- TERRIL SECONDAIRE (droite) -->
+        <polygon points="850,240 1050,95 1200,240" fill="url(#terrilGrad)" opacity="0.9"/>
+        <line x1="1050" y1="95" x2="990" y2="190" stroke="#3a5a22" stroke-width="0.5" opacity="0.3"/>
+        <line x1="1050" y1="95" x2="1110" y2="190" stroke="#3a5a22" stroke-width="0.5" opacity="0.3"/>
+
+        <!-- TERRIL GAUCHE (petit) -->
+        <polygon points="0,240 120,140 280,240" fill="url(#terril2Grad)" opacity="0.95"/>
+        <line x1="120" y1="140" x2="80" y2="210" stroke="#3a5a22" stroke-width="0.5" opacity="0.25"/>
+        <line x1="120" y1="140" x2="160" y2="210" stroke="#3a5a22" stroke-width="0.5" opacity="0.25"/>
+
+        <!-- VÉGÉTATION COLLINES -->
+        <ellipse cx="200" cy="238" rx="60" ry="12" fill="#1e4010" opacity="0.8"/>
+        <ellipse cx="500" cy="242" rx="80" ry="10" fill="#234a12" opacity="0.7"/>
+        <ellipse cx="750" cy="240" rx="70" ry="11" fill="#1e4010" opacity="0.75"/>
+
+        <!-- SOL / CHEMIN -->
+        <rect x="0" y="230" width="1200" height="30" fill="url(#groundGrad)"/>
+        <path d="M0,242 Q300,235 600,240 Q900,245 1200,238" stroke="#639922" stroke-width="2.5" fill="none" opacity="0.5"/>
+        <path d="M0,246 Q300,239 600,244 Q900,249 1200,242" stroke="#4a7a18" stroke-width="1" fill="none" opacity="0.3"/>
+
+        <!-- HERBES AU PREMIER PLAN -->
+        <g opacity="0.7">
+          <line x1="30" y1="232" x2="26" y2="220" stroke="#639922" stroke-width="1.5"/>
+          <line x1="33" y1="232" x2="37" y2="219" stroke="#4a8a20" stroke-width="1.2"/>
+          <line x1="90" y1="234" x2="86" y2="222" stroke="#639922" stroke-width="1.5"/>
+          <line x1="93" y1="234" x2="97" y2="221" stroke="#4a8a20" stroke-width="1.2"/>
+          <line x1="200" y1="233" x2="196" y2="220" stroke="#639922" stroke-width="1.5"/>
+          <line x1="203" y1="233" x2="207" y2="219" stroke="#4a8a20" stroke-width="1.2"/>
+          <line x1="340" y1="232" x2="336" y2="219" stroke="#639922" stroke-width="1.5"/>
+          <line x1="343" y1="232" x2="347" y2="218" stroke="#4a8a20" stroke-width="1.2"/>
+          <line x1="500" y1="233" x2="496" y2="221" stroke="#639922" stroke-width="1.5"/>
+          <line x1="503" y1="233" x2="507" y2="220" stroke="#4a8a20" stroke-width="1.2"/>
+          <line x1="660" y1="233" x2="656" y2="221" stroke="#639922" stroke-width="1.5"/>
+          <line x1="663" y1="233" x2="667" y2="220" stroke="#4a8a20" stroke-width="1.2"/>
+          <line x1="820" y1="232" x2="816" y2="219" stroke="#639922" stroke-width="1.5"/>
+          <line x1="823" y1="232" x2="827" y2="218" stroke="#4a8a20" stroke-width="1.2"/>
+          <line x1="980" y1="233" x2="976" y2="221" stroke="#639922" stroke-width="1.5"/>
+          <line x1="983" y1="233" x2="987" y2="220" stroke="#4a8a20" stroke-width="1.2"/>
+          <line x1="1100" y1="233" x2="1096" y2="221" stroke="#639922" stroke-width="1.5"/>
+          <line x1="1103" y1="233" x2="1107" y2="220" stroke="#4a8a20" stroke-width="1.2"/>
+        </g>
+
+    </svg>
+
+    <!-- TEXTE PAR DESSUS -->
+    <div class="blog-hero-content">
+      <p class="blog-hero-eyebrow">La Ch'tite Randonneuse · Récits &amp; Conseils</p>
+      <h1 class="blog-hero-title">Des mots<br><em>après les sentiers</em></h1>
+      <p class="blog-hero-desc">Récits, conseils et réflexions glanés au fil de mes sorties dans les Hauts-de-France.</p>
+    </div>
+
+  </div>
+</header>
+
 <!-- CONTENU BLOG -->
 <main class="blog-body">
   <div style="max-width:820px;margin:0 auto;padding:3rem 1.5rem 4rem">
-    <p class="panel-label">Mes récits</p>
-    <h1 class="panel-title">Blog</h1>
-    <p class="panel-sub">Récits, conseils et réflexions au fil de mes sorties dans les Hauts-de-France</p>
+    <p class="panel-label">Publications</p>
+    <h2 class="panel-title">Mes articles</h2>
+    <p class="panel-sub">Retrouvez ici tous mes récits, un par un</p>
 
     <div class="articles-grid" style="grid-template-columns:repeat(2,1fr)">
       <a href="randonner-seule-femme.html" class="article-card" style="text-decoration:none">
