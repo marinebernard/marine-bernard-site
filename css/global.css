@@ -18,8 +18,11 @@ body.rando {
 }
 
 /* ── TRANSITION ENTRE PAGES ── */
+/* Pas de "forwards" : body doit retrouver transform:none une fois l'animation
+   terminée, sinon il devient le containing block du curseur fixed (#cursor-flower)
+   et celui-ci arrête de suivre le viewport au scroll. */
 body {
-  animation: pageFadeIn 0.35s ease forwards;
+  animation: pageFadeIn 0.35s ease;
 }
 @keyframes pageFadeIn {
   from { opacity: 0; transform: translateY(12px); }

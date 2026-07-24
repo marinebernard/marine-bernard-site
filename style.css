@@ -432,12 +432,18 @@ html,body{
 /* ── PROJETS : BENTO ── */
 .proj-bento{
   aspect-ratio:auto;min-height:190px;
-  display:flex;
+  display:flex;flex-direction:column;
 }
-.proj-bento .proj-thumb{display:none;}
+.proj-bento .proj-thumb{
+  display:block;position:static;
+  width:100%;height:100px;overflow:hidden;
+  border-radius:10px 10px 0 0;flex-shrink:0;
+}
+.proj-bento .proj-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.proj-bento-hero .proj-thumb{height:150px;}
 .proj-bento .proj-body{
   position:relative;inset:auto;background:none;opacity:1;
-  padding:1.6rem 1.8rem;width:100%;
+  padding:1.6rem 1.8rem;width:100%;flex:1;
   display:flex;flex-direction:column;justify-content:space-between;
 }
 .proj-bento .proj-arrow{opacity:1;transform:none;}
