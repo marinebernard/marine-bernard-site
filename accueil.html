@@ -193,13 +193,13 @@ a,button{cursor:none;}
 </div>
 
 <!-- BOUTON FIXE -->
-<a href="index.html" class="skip-fixed">Passer cette étape →</a>
+<a href="index.html" class="skip-fixed" data-track="passer-etape">Passer cette étape →</a>
 
 <!-- SPLIT SCREEN -->
 <div class="split-container">
 
   <!-- PANNEAU GAUCHE — PRO -->
-  <section class="panel panel-left" onclick="location.href='index.html'">
+  <section class="panel panel-left" onclick="location.href='index.html'" data-track="choix-univers" data-value="pro">
     <div class="floating-flowers" id="flowersLeft"></div>
 
     <div class="panel-content">
@@ -234,7 +234,7 @@ a,button{cursor:none;}
   </div>
 
   <!-- PANNEAU DROIT — RANDO -->
-  <section class="panel panel-right" id="panelRight" onclick="location.href='parcours-komoot.html'">
+  <section class="panel panel-right" id="panelRight" onclick="location.href='parcours-komoot.html'" data-track="choix-univers" data-value="rando">
     <div class="rain-container" id="rainRight"></div>
     <div class="grass-container" id="grassRight"></div>
 
@@ -331,5 +331,6 @@ function makeGrass(container,count){
 makeGrass(document.getElementById('grassRight'),10);
 </script>
 
+<script src="/js/tracking.js"></script>
 </body>
 </html>

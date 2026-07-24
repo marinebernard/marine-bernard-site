@@ -28,6 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   loadComponent('footer', '/components/footer.html');
+
+  const trackingScript = document.createElement('script');
+  trackingScript.src = '/js/tracking.js';
+  document.body.appendChild(trackingScript);
 });
 
 /* ── TRANSITION ENTRE PAGES (fondu de sortie) ── */
