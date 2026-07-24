@@ -504,6 +504,13 @@ html,body{
   font-size:0.86rem;color:rgba(255,255,255,0.85);line-height:1.7;
   max-width:480px;position:relative;z-index:1;margin-bottom:1.4rem;
 }
+.rando-teaser-btns{display:flex;flex-wrap:wrap;align-items:center;gap:1.2rem;position:relative;z-index:1;}
+.rando-teaser-link{
+  display:inline-flex;align-items:center;gap:6px;
+  color:#fff;font-size:0.78rem;font-weight:600;
+  text-decoration:none;opacity:0.85;transition:opacity 0.2s;
+}
+.rando-teaser-link:hover{opacity:1;text-decoration:underline}
 .rando-teaser-btn{
   display:inline-flex;align-items:center;gap:8px;
   background:#fff;color:#27500A;padding:12px 26px;border-radius:22px;
@@ -1112,6 +1119,92 @@ body.rando #cursor-flower [fill="#d4b8f0"]{fill:#8fc55f;}
   .blog-body{padding:2rem 1.5rem}
   .articles-grid{grid-template-columns:1fr}
   .blog-hero-stats{gap:1.5rem}
+}
+
+/* ── PAGE LISTE BLOG (pages/blog.html) ─────────────────────────
+   Classes dédiées "bloglist-*" / "blog-card*" : distinctes de
+   .blog-hero / .article-card (partagées avec parcours-komoot.html)
+   pour ne pas impacter cette dernière. ── */
+.bloglist-hero{
+  position:relative;overflow:hidden;
+  background:#27500A;
+  padding:3rem 2.5rem;
+}
+.bloglist-flowers{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0;}
+.bloglist-hero-content{position:relative;z-index:1;max-width:640px;margin:0 auto;text-align:center;}
+.bloglist-eyebrow{
+  font-size:11px;letter-spacing:0.2em;text-transform:uppercase;
+  color:#C0DD97;margin-bottom:0.6rem;
+}
+.bloglist-title{
+  font-family:'Playfair Display',serif;
+  font-size:36px;color:#fff;margin-bottom:0.6rem;line-height:1.15;
+}
+.bloglist-sub{
+  font-style:italic;color:rgba(255,255,255,0.65);
+  font-size:0.92rem;margin-bottom:1.4rem;
+}
+.bloglist-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+.bloglist-chip{
+  background:rgba(255,255,255,0.1);color:#fff;
+  font-size:0.72rem;padding:6px 14px;border-radius:20px;
+}
+
+.bloglist-filters{
+  background:#EAF3DE;padding:1rem 2.5rem;
+  display:flex;flex-wrap:wrap;gap:8px;
+}
+.bloglist-filter{
+  font-family:'Inter',sans-serif;font-size:0.76rem;font-weight:500;
+  padding:8px 18px;border-radius:20px;cursor:none;
+  background:#fff;color:#3B6D11;border:1px solid rgba(59,109,17,0.25);
+  transition:background 0.2s,color 0.2s,border-color 0.2s;
+}
+.bloglist-filter:hover{border-color:#3B6D11}
+.bloglist-filter.active{background:#27500A;color:#fff;border-color:#27500A}
+
+.blog-cards-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;padding:2.5rem}
+.blog-card.hide{display:none}
+
+.blog-card{
+  background:#fff;border-radius:16px;overflow:hidden;
+  border:0.5px solid rgba(59,109,17,0.15);
+  transition:transform 0.25s,box-shadow 0.25s;
+  cursor:none;
+}
+.blog-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(39,80,10,0.12)}
+.blog-card-soon{opacity:0.65}
+.blog-card-soon:hover{transform:none;box-shadow:none}
+.blog-card a{text-decoration:none;display:block}
+.blog-card-img{height:220px;background-size:cover;background-position:center;transition:transform 0.4s}
+.blog-card:hover .blog-card-img{transform:scale(1.04)}
+.blog-card-body{padding:1.2rem}
+.blog-card-meta{display:flex;align-items:center;gap:8px;margin-bottom:0.6rem}
+.blog-cat{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#3B6D11;font-weight:600}
+.blog-date{font-size:10px;color:#9a88b8}
+.blog-soon-badge{font-size:10px;padding:2px 8px;border-radius:10px;background:#EAF3DE;color:#3B6D11;font-weight:500}
+.blog-card-title{font-family:'Playfair Display',serif;font-size:17px;color:#27500A;margin-bottom:0.5rem;line-height:1.3}
+.blog-card-excerpt{font-size:13px;color:#5a7a4a;line-height:1.6;margin-bottom:0.8rem}
+.blog-card-read{font-size:12px;color:#3B6D11;font-weight:500}
+
+.blog-komoot-banner{
+  background:#27500A;border-radius:16px;padding:2rem;
+  margin:0 2.5rem 2.5rem;text-align:center;
+}
+.blog-komoot-title{font-family:'Playfair Display',serif;color:#fff;font-size:1.5rem;margin-bottom:0.4rem}
+.blog-komoot-sub{color:#C0DD97;font-size:0.85rem;margin-bottom:1.3rem}
+.blog-komoot-btn{
+  display:inline-block;background:#C9A96E;color:#27500A;
+  padding:11px 26px;border-radius:22px;font-size:0.78rem;font-weight:600;
+  letter-spacing:0.06em;text-decoration:none;transition:background 0.2s;
+}
+.blog-komoot-btn:hover{background:#dab989}
+
+@media(max-width:768px){
+  .bloglist-hero{padding:2rem 1.5rem}
+  .bloglist-filters{padding:1rem 1.5rem}
+  .blog-cards-grid{grid-template-columns:1fr;padding:1.5rem}
+  .blog-komoot-banner{margin:0 1.5rem 1.5rem}
 }
 
 
