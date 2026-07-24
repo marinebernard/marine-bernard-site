@@ -14,6 +14,47 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="css/global.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+/* ── LIGHTBOX GALERIE PHOTOS ── */
+.photo-lightbox{
+  display:none;position:fixed;inset:0;z-index:999;
+  background:rgba(0,0,0,0.9);
+  align-items:center;justify-content:center;
+  cursor:none;
+}
+.photo-lightbox.open{display:flex;}
+.photo-lightbox-figure{
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  max-width:90vw;max-height:90vh;
+  opacity:0;transform:translateY(10px);
+  transition:opacity 0.25s ease,transform 0.25s ease;
+}
+.photo-lightbox.open .photo-lightbox-figure{opacity:1;transform:translateY(0);}
+.photo-lightbox-img{
+  display:block;max-width:90vw;max-height:80vh;
+  border-radius:8px;object-fit:contain;
+}
+.photo-lightbox-caption{
+  font-family:'Playfair Display',serif;font-style:italic;
+  color:#fff;font-size:14px;text-align:center;
+}
+.photo-lightbox-close{
+  position:absolute;top:1.5rem;right:1.5rem;
+  background:none;border:none;color:#fff;font-size:28px;
+  cursor:none;line-height:1;padding:6px;
+}
+.photo-lightbox-prev,.photo-lightbox-next{
+  position:absolute;top:50%;transform:translateY(-50%);
+  background:none;border:none;color:#fff;font-size:32px;
+  cursor:none;padding:6px 12px;
+}
+.photo-lightbox-prev{left:0.5rem;}
+.photo-lightbox-next{right:0.5rem;}
+@media(max-width:768px){
+  .photo-lightbox-prev,.photo-lightbox-next{font-size:26px;}
+  .photo-lightbox-close{font-size:24px;top:1rem;right:1rem;}
+}
+</style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-KZEHR4YQFQ"></script>
 <script>
@@ -280,24 +321,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h2 class="section-title">Photographies</h2>
   <p class="section-sub">Chaque sortie est une nouvelle image. Patrimoine, animaux, paysages — les Hauts-de-France ont bien plus à offrir qu'on ne le croit.</p>
   <div class="photo-grid">
-    <div class="photo-cell" style="background:#F0E6FF"><img src="images/rando/papillon.webp" alt="Papillon" style="width:100%;height:100%;object-fit:cover;">
+    <div class="photo-cell" style="background:#F0E6FF"><img src="images/rando/papillon.webp" alt="Papillon" style="width:100%;height:100%;object-fit:cover;" class="gallery-photo" data-caption="Papillon Belle-Dame" onclick="openPhotoLightbox(this)">
     <div class="photo-overlay"><span class="photo-overlay-text">Papillon Belle-Dame</span></div></div>
-	<div class="photo-cell" style="background:#F0E6FF"><img src="images/rando/dragoncalais.webp" alt="dragon de calais" style="width:100%;height:100%;object-fit:cover;">
+	<div class="photo-cell" style="background:#F0E6FF"><img src="images/rando/dragoncalais.webp" alt="dragon de calais" style="width:100%;height:100%;object-fit:cover;" class="gallery-photo" data-caption="Dragon de Calais" onclick="openPhotoLightbox(this)">
     <div class="photo-overlay"><span class="photo-overlay-text">Dragon de Calais</span></div>
 	</div>
-    <div class="photo-cell" style="background:#F0E6FF"><img src="images/rando/cygne.webp" alt="Cygne" style="width:100%;height:100%;object-fit:cover;">
+    <div class="photo-cell" style="background:#F0E6FF"><img src="images/rando/cygne.webp" alt="Cygne" style="width:100%;height:100%;object-fit:cover;" class="gallery-photo" data-caption="Cygne" onclick="openPhotoLightbox(this)">
     <div class="photo-overlay"><span class="photo-overlay-text">Cygne</span></div></div>
-	<div class="photo-cell" style="background:#F0E6FF"><img src="images/rando/montsaintmichel.webp" alt="meandre mont saint michel" style="width:100%;height:100%;object-fit:cover;">
+	<div class="photo-cell" style="background:#F0E6FF"><img src="images/rando/montsaintmichel.webp" alt="meandre mont saint michel" style="width:100%;height:100%;object-fit:cover;" class="gallery-photo" data-caption="Les Méandres du Mont" onclick="openPhotoLightbox(this)">
     <div class="photo-overlay"><span class="photo-overlay-text">Les Méandres du Mont</span></div>
 	</div>
-    <div class="photo-cell" style="background:#F0E6FF"><img src="images/rando/foudebassan.webp" alt="foudebassan" style="width:100%;height:100%;object-fit:cover;">
+    <div class="photo-cell" style="background:#F0E6FF"><img src="images/rando/foudebassan.webp" alt="foudebassan" style="width:100%;height:100%;object-fit:cover;" class="gallery-photo" data-caption="Fou de Bassan" onclick="openPhotoLightbox(this)">
     <div class="photo-overlay"><span class="photo-overlay-text">Fou de Bassan</span></div>
 	</div>
-     
-    <div class="photo-cell" style="background:#F0E6FF"><img src="images/rando/areche.webp" alt="areche" style="width:100%;height:100%;object-fit:cover;">
+
+    <div class="photo-cell" style="background:#F0E6FF"><img src="images/rando/areche.webp" alt="areche" style="width:100%;height:100%;object-fit:cover;" class="gallery-photo" data-caption="Arêches-Beaufort" onclick="openPhotoLightbox(this)">
     <div class="photo-overlay"><span class="photo-overlay-text">Arêches-Beaufort</span></div>
 	</div>
-    
+
   </div>
 </section>
 
@@ -371,6 +412,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 </section>
+
+<!-- LIGHTBOX GALERIE PHOTOS -->
+<div class="photo-lightbox" id="photoLightbox" onclick="if(event.target===this)closePhotoLightbox()">
+  <button class="photo-lightbox-close" onclick="closePhotoLightbox()" aria-label="Fermer">×</button>
+  <button class="photo-lightbox-prev" onclick="event.stopPropagation();navPhotoLightbox(-1)" aria-label="Photo précédente">‹</button>
+  <figure class="photo-lightbox-figure">
+    <img class="photo-lightbox-img" id="photoLightboxImg" src="" alt="">
+    <figcaption class="photo-lightbox-caption" id="photoLightboxCaption"></figcaption>
+  </figure>
+  <button class="photo-lightbox-next" onclick="event.stopPropagation();navPhotoLightbox(1)" aria-label="Photo suivante">›</button>
+</div>
 
 <div id="footer"></div>
 <script src="/js/include.js"></script>
@@ -473,6 +525,34 @@ navLinksEl?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
   navToggle?.classList.remove('open');
   navLinksEl.classList.remove('open');
 }));
+
+/* ── LIGHTBOX GALERIE PHOTOS ── */
+const galleryPhotos=[...document.querySelectorAll('.gallery-photo')];
+let photoLightboxIndex=0;
+function openPhotoLightbox(img){
+  photoLightboxIndex=galleryPhotos.indexOf(img);
+  showPhotoLightbox();
+  document.getElementById('photoLightbox').classList.add('open');
+}
+function showPhotoLightbox(){
+  const img=galleryPhotos[photoLightboxIndex];
+  document.getElementById('photoLightboxImg').src=img.src;
+  document.getElementById('photoLightboxImg').alt=img.alt;
+  document.getElementById('photoLightboxCaption').textContent=img.dataset.caption||'';
+}
+function navPhotoLightbox(dir){
+  photoLightboxIndex=(photoLightboxIndex+dir+galleryPhotos.length)%galleryPhotos.length;
+  showPhotoLightbox();
+}
+function closePhotoLightbox(){
+  document.getElementById('photoLightbox').classList.remove('open');
+}
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('photoLightbox').classList.contains('open'))return;
+  if(e.key==='Escape')closePhotoLightbox();
+  if(e.key==='ArrowLeft')navPhotoLightbox(-1);
+  if(e.key==='ArrowRight')navPhotoLightbox(1);
+});
 </script>
 </body>
 </html>
