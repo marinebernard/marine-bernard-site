@@ -29,3 +29,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   loadComponent('footer', '/components/footer.html');
 });
+
+/* ── TRANSITION ENTRE PAGES (fondu de sortie) ── */
+document.addEventListener('click', function(e) {
+  const link = e.target.closest('a');
+  if (!link) return;
+  if (link.hostname !== window.location.hostname) return;
+  if (link.target === '_blank') return;
+  // Ancre vers la même page (ex: #contact) : laisse le défilement fluide
+  // déjà en place gérer le clic, pas de fondu de sortie.
+  if (link.pathname === window.location.pathname && link.hash) return;
+  e.preventDefault();
+  document.body.style.opacity = '0';
+  document.body.style.transform = 'translateY(-8px)';
+  document.body.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+  setTimeout(() => { window.location = link.href; }, 260);
+});
