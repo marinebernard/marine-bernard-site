@@ -798,7 +798,8 @@ body.rando #cursor-flower [fill="#d4b8f0"]{fill:#8fc55f;}
   .hero-chips{justify-content:center}
   .hero-desc{max-width:100%}
   .section{padding:2.5rem 1.5rem}
-  .skills-grid,.projects-grid,.rando-grid,.photo-grid{grid-template-columns:1fr}
+  .skills-grid,.projects-grid,.rando-grid{grid-template-columns:1fr}
+  .photo-grid{grid-template-columns:repeat(2,1fr)}
   .rando-hero{padding:2rem}
   .contact-box{padding:2rem 1.5rem}
 }
