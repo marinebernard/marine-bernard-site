@@ -24,17 +24,8 @@
 
 <!-- ICÔNES SVG (sprite) -->
 <svg style="display:none" aria-hidden="true">
-<symbol id="icon-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9a1 1 0 0 0 1 1h3v-5h4v5h3a1 1 0 0 0 1-1v-9"/></symbol>
 <symbol id="icon-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5.5l4 4L8 20H4v-4z"/><path d="M12.5 7.5l4 4"/></symbol>
-<symbol id="icon-boot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v8.5l-4.5 3A2 2 0 0 0 2.5 16v2.5A1.5 1.5 0 0 0 4 20h16a1.5 1.5 0 0 0 1.5-1.5c0-2.5-2-4-5-4h-2.5l-2-2V3z"/><path d="M8 3h6"/></symbol>
 <symbol id="icon-compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M15 9l-2 5-5 2 2-5z"/></symbol>
-<symbol id="icon-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4.5L4 6.5v13l5-2 6 2 5-2v-13l-5 2-6-2z"/><path d="M9 4.5v13M15 6.5v13"/></symbol>
-<symbol id="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/></symbol>
-<symbol id="icon-arrow-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M6 11l6-6 6 6"/></symbol>
-<symbol id="icon-arrow-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M6 13l6 6 6-6"/></symbol>
-<symbol id="icon-wheat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V9"/><path d="M12 9c-2 0-3-1-3-3s1-3 3-3 3 1 3 3-1 3-3 3z"/><path d="M9 13c-1.5 0-3-.8-3-2.5M15 13c1.5 0 3-.8 3-2.5M9 17c-1.5 0-3-.8-3-2.5M15 17c1.5 0 3-.8 3-2.5"/></symbol>
-<symbol id="icon-waves" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 8c1.5-1.5 3.5-1.5 5 0s3.5 1.5 5 0 3.5-1.5 5 0 3.5 1.5 5 0"/><path d="M2.5 13.5c1.5-1.5 3.5-1.5 5 0s3.5 1.5 5 0 3.5-1.5 5 0 3.5 1.5 5 0"/><path d="M2.5 19c1.5-1.5 3.5-1.5 5 0s3.5 1.5 5 0 3.5-1.5 5 0 3.5 1.5 5 0"/></symbol>
-<symbol id="icon-tree" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-7"/><path d="M12 15 7 10h3l-4-5h3l-3-4h11.5l-3 4h3l-4 5h3z"/></symbol>
 </svg>
 
 <!-- CURSEUR FLEUR -->
@@ -194,7 +185,7 @@
       <h1 class="blog-hero-title">Des instants saisis<br><em>au fil des sentiers</em></h1>
       <p class="blog-hero-desc">Mes itinéraires enregistrés en live — cartes interactives et traces GPS dans les Hauts-de-France.</p>
       <div class="blog-hero-stats">
-        <div class="blog-stat"><span class="blog-stat-num">12</span><span class="blog-stat-label">Sentiers explorés</span></div>
+        <div class="blog-stat"><span class="blog-stat-num" id="hero-total">12</span><span class="blog-stat-label">Sentiers explorés</span></div>
         <div class="blog-stat"><span class="blog-stat-num">340</span><span class="blog-stat-label">Km parcourus</span></div>
         <div class="blog-stat"><span class="blog-stat-num">8</span><span class="blog-stat-label">Régions visitées</span></div>
       </div>
@@ -226,330 +217,36 @@
         </div>
       </a>
 
-      <!-- GRILLE PARCOURS -->
-      <p class="komoot-notice">💡 Clique sur une carte pour charger l'itinéraire interactif</p>
-      <div class="parcours-grid" id="blog-parcours-grid">
-        <!-- AUTO-KOMOOT:START (généré automatiquement, ne pas éditer à la main) -->
-          <div class="parcours-card reveal" data-cat="campagne">
-            <div class="parcours-card-header">
-              <div>
-                <div class="parcours-card-cat"><svg class="icon"><use href="#icon-wheat"/></svg> Campagne</div>
-                <h3 class="parcours-card-title">Randonnée · 3,01 km</h3>
-              </div>
-              <div class="parcours-card-date">il y a 19h</div>
-            </div>
-            <div class="parcours-meta">
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-map"/></svg></span> 3,01 km</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-clock"/></svg></span> 0h38</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-arrow-up"/></svg></span> 38m</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-arrow-down"/></svg></span> 37m</div>
-            </div>
-            <div class="komoot-lazy" data-src="https://www.komoot.com/tour/3164305152/embed?profile=1" data-tour-id="3164305152">
-              <div class="komoot-placeholder">
-                <div class="komoot-placeholder-inner">
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <circle cx="16" cy="16" r="15" stroke="#6AA127" stroke-width="1.5"/>
-                    <path d="M16 8 L20 14 L16 12 L12 14 Z" fill="#6AA127"/>
-                    <circle cx="16" cy="20" r="3" fill="#6AA127"/>
-                  </svg>
-                  <span>Cliquer pour charger la carte</span>
-                </div>
-              </div>
-            </div>
-            <div class="parcours-card-footer">
-              <a href="https://www.komoot.com/fr-fr/tour/3164305152" target="_blank" rel="noopener" class="komoot-link">Ouvrir sur Komoot</a>
-              <span class="diff-badge diff-facile">Facile</span>
-            </div>
-          </div>
-
-          <div class="parcours-card reveal" data-cat="campagne">
-            <div class="parcours-card-header">
-              <div>
-                <div class="parcours-card-cat"><svg class="icon"><use href="#icon-wheat"/></svg> Campagne</div>
-                <h3 class="parcours-card-title">La baie d’Authie 🌊</h3>
-              </div>
-              <div class="parcours-card-date">il y a 19h</div>
-            </div>
-            <div class="parcours-meta">
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-map"/></svg></span> 3,21 km</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-clock"/></svg></span> 0h38</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-arrow-up"/></svg></span> 8m</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-arrow-down"/></svg></span> 16m</div>
-            </div>
-            <div class="komoot-lazy" data-src="https://www.komoot.com/tour/3164304348/embed?profile=1" data-tour-id="3164304348">
-              <div class="komoot-placeholder">
-                <div class="komoot-placeholder-inner">
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <circle cx="16" cy="16" r="15" stroke="#6AA127" stroke-width="1.5"/>
-                    <path d="M16 8 L20 14 L16 12 L12 14 Z" fill="#6AA127"/>
-                    <circle cx="16" cy="20" r="3" fill="#6AA127"/>
-                  </svg>
-                  <span>Cliquer pour charger la carte</span>
-                </div>
-              </div>
-            </div>
-            <div class="parcours-card-footer">
-              <a href="https://www.komoot.com/fr-fr/tour/3164304348" target="_blank" rel="noopener" class="komoot-link">Ouvrir sur Komoot</a>
-              <span class="diff-badge diff-facile">Facile</span>
-            </div>
-          </div>
-
-          <div class="parcours-card reveal" data-cat="campagne">
-            <div class="parcours-card-header">
-              <div>
-                <div class="parcours-card-cat"><svg class="icon"><use href="#icon-wheat"/></svg> Campagne</div>
-                <h3 class="parcours-card-title">Randonnée · 2,71 km</h3>
-              </div>
-              <div class="parcours-card-date">il y a 23h</div>
-            </div>
-            <div class="parcours-meta">
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-map"/></svg></span> 2,71 km</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-clock"/></svg></span> 0h26</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-arrow-up"/></svg></span> 45m</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-arrow-down"/></svg></span> 38m</div>
-            </div>
-            <div class="komoot-lazy" data-src="https://www.komoot.com/tour/3163245769/embed?profile=1" data-tour-id="3163245769">
-              <div class="komoot-placeholder">
-                <div class="komoot-placeholder-inner">
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <circle cx="16" cy="16" r="15" stroke="#6AA127" stroke-width="1.5"/>
-                    <path d="M16 8 L20 14 L16 12 L12 14 Z" fill="#6AA127"/>
-                    <circle cx="16" cy="20" r="3" fill="#6AA127"/>
-                  </svg>
-                  <span>Cliquer pour charger la carte</span>
-                </div>
-              </div>
-            </div>
-            <div class="parcours-card-footer">
-              <a href="https://www.komoot.com/fr-fr/tour/3163245769" target="_blank" rel="noopener" class="komoot-link">Ouvrir sur Komoot</a>
-              <span class="diff-badge diff-facile">Facile</span>
-            </div>
-          </div>
-
-          <div class="parcours-card reveal" data-cat="campagne">
-            <div class="parcours-card-header">
-              <div>
-                <div class="parcours-card-cat"><svg class="icon"><use href="#icon-wheat"/></svg> Campagne</div>
-                <h3 class="parcours-card-title">Randonnée · 9,51 km</h3>
-              </div>
-              <div class="parcours-card-date">il y a 2 jours</div>
-            </div>
-            <div class="parcours-meta">
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-map"/></svg></span> 9,51 km</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-clock"/></svg></span> 2h11</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-arrow-up"/></svg></span> 150m</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-arrow-down"/></svg></span> 160m</div>
-            </div>
-            <div class="komoot-lazy" data-src="https://www.komoot.com/tour/3159773511/embed?profile=1" data-tour-id="3159773511">
-              <div class="komoot-placeholder">
-                <div class="komoot-placeholder-inner">
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <circle cx="16" cy="16" r="15" stroke="#6AA127" stroke-width="1.5"/>
-                    <path d="M16 8 L20 14 L16 12 L12 14 Z" fill="#6AA127"/>
-                    <circle cx="16" cy="20" r="3" fill="#6AA127"/>
-                  </svg>
-                  <span>Cliquer pour charger la carte</span>
-                </div>
-              </div>
-            </div>
-            <div class="parcours-card-footer">
-              <a href="https://www.komoot.com/fr-fr/tour/3159773511" target="_blank" rel="noopener" class="komoot-link">Ouvrir sur Komoot</a>
-              <span class="diff-badge diff-facile">Facile</span>
-            </div>
-          </div>
-
-          <div class="parcours-card reveal hidden" data-cat="campagne">
-            <div class="parcours-card-header">
-              <div>
-                <div class="parcours-card-cat"><svg class="icon"><use href="#icon-wheat"/></svg> Campagne</div>
-                <h3 class="parcours-card-title">Randonnée · 6,05 km</h3>
-              </div>
-              <div class="parcours-card-date">il y a 2 jours</div>
-            </div>
-            <div class="parcours-meta">
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-map"/></svg></span> 6,05 km</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-clock"/></svg></span> 0h58</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-arrow-up"/></svg></span> 90m</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-arrow-down"/></svg></span> 87m</div>
-            </div>
-            <div class="komoot-lazy" data-src="https://www.komoot.com/tour/3157301559/embed?profile=1" data-tour-id="3157301559">
-              <div class="komoot-placeholder">
-                <div class="komoot-placeholder-inner">
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <circle cx="16" cy="16" r="15" stroke="#6AA127" stroke-width="1.5"/>
-                    <path d="M16 8 L20 14 L16 12 L12 14 Z" fill="#6AA127"/>
-                    <circle cx="16" cy="20" r="3" fill="#6AA127"/>
-                  </svg>
-                  <span>Cliquer pour charger la carte</span>
-                </div>
-              </div>
-            </div>
-            <div class="parcours-card-footer">
-              <a href="https://www.komoot.com/fr-fr/tour/3157301559" target="_blank" rel="noopener" class="komoot-link">Ouvrir sur Komoot</a>
-              <span class="diff-badge diff-facile">Facile</span>
-            </div>
-          </div>
-
-          <div class="parcours-card reveal hidden" data-cat="campagne">
-            <div class="parcours-card-header">
-              <div>
-                <div class="parcours-card-cat"><svg class="icon"><use href="#icon-wheat"/></svg> Campagne</div>
-                <h3 class="parcours-card-title">Randonnée · 5,39 km</h3>
-              </div>
-              <div class="parcours-card-date">il y a 3 jours</div>
-            </div>
-            <div class="parcours-meta">
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-map"/></svg></span> 5,39 km</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-clock"/></svg></span> 0h53</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-arrow-up"/></svg></span> 83m</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-arrow-down"/></svg></span> 77m</div>
-            </div>
-            <div class="komoot-lazy" data-src="https://www.komoot.com/tour/3155268283/embed?profile=1" data-tour-id="3155268283">
-              <div class="komoot-placeholder">
-                <div class="komoot-placeholder-inner">
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <circle cx="16" cy="16" r="15" stroke="#6AA127" stroke-width="1.5"/>
-                    <path d="M16 8 L20 14 L16 12 L12 14 Z" fill="#6AA127"/>
-                    <circle cx="16" cy="20" r="3" fill="#6AA127"/>
-                  </svg>
-                  <span>Cliquer pour charger la carte</span>
-                </div>
-              </div>
-            </div>
-            <div class="parcours-card-footer">
-              <a href="https://www.komoot.com/fr-fr/tour/3155268283" target="_blank" rel="noopener" class="komoot-link">Ouvrir sur Komoot</a>
-              <span class="diff-badge diff-facile">Facile</span>
-            </div>
-          </div>
-
-          <div class="parcours-card reveal hidden" data-cat="campagne">
-            <div class="parcours-card-photo"><img src="https://d2exd72xrrp1s7.cloudfront.net/www/1x/1xtdqrmbjhnqg8t9ziqrs98n75varl231-p753061947-full/19fadd86153?width=640&height=360&crop=true" alt="Sentier de la Haute Vallée de la Lawe" loading="lazy"></div>
-            <div class="parcours-card-header">
-              <div>
-                <div class="parcours-card-cat"><svg class="icon"><use href="#icon-wheat"/></svg> Campagne</div>
-                <h3 class="parcours-card-title">Sentier de la Haute Vallée de la Lawe</h3>
-              </div>
-              <div class="parcours-card-date">il y a 5 jours</div>
-            </div>
-            <div class="parcours-meta">
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-map"/></svg></span> 12,8 km</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-clock"/></svg></span> 2h39</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-arrow-up"/></svg></span> 165m</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-arrow-down"/></svg></span> 157m</div>
-            </div>
-            <div class="parcours-card-footer">
-              <a href="https://www.komoot.com/fr-fr/tour/3151941226" target="_blank" rel="noopener" class="komoot-link">Voir le tracé sur Komoot</a>
-              <span class="diff-badge diff-modere">Modéré</span>
-            </div>
-          </div>
-
-          <div class="parcours-card reveal hidden" data-cat="cote">
-            <div class="parcours-card-header">
-              <div>
-                <div class="parcours-card-cat"><svg class="icon"><use href="#icon-waves"/></svg> Côte d'Opale</div>
-                <h3 class="parcours-card-title">Boucle Petit pont sur la Wimereux – Sentier de la Pointe de la Crèche au départ de Boulogne - Tintelleries</h3>
-              </div>
-              <div class="parcours-card-date">il y a 5 jours</div>
-            </div>
-            <div class="parcours-meta">
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-map"/></svg></span> 15,8 km</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-clock"/></svg></span> 4h02</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-arrow-up"/></svg></span> 228m</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-arrow-down"/></svg></span> 227m</div>
-            </div>
-            <div class="komoot-lazy" data-src="https://www.komoot.com/tour/3149472232/embed?profile=1" data-tour-id="3149472232">
-              <div class="komoot-placeholder">
-                <div class="komoot-placeholder-inner">
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <circle cx="16" cy="16" r="15" stroke="#6AA127" stroke-width="1.5"/>
-                    <path d="M16 8 L20 14 L16 12 L12 14 Z" fill="#6AA127"/>
-                    <circle cx="16" cy="20" r="3" fill="#6AA127"/>
-                  </svg>
-                  <span>Cliquer pour charger la carte</span>
-                </div>
-              </div>
-            </div>
-            <div class="parcours-card-footer">
-              <a href="https://www.komoot.com/fr-fr/tour/3149472232" target="_blank" rel="noopener" class="komoot-link">Ouvrir sur Komoot</a>
-              <span class="diff-badge diff-modere">Modéré</span>
-            </div>
-          </div>
-
-          <div class="parcours-card reveal hidden" data-cat="campagne">
-            <div class="parcours-card-header">
-              <div>
-                <div class="parcours-card-cat"><svg class="icon"><use href="#icon-wheat"/></svg> Campagne</div>
-                <h3 class="parcours-card-title">Boucle Tours Broel – Porte de Groeninge au départ de Courtrai 🇧🇪</h3>
-              </div>
-              <div class="parcours-card-date">il y a 6 jours</div>
-            </div>
-            <div class="parcours-meta">
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-map"/></svg></span> 6,77 km</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-clock"/></svg></span> 1h27</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-arrow-up"/></svg></span> 185m</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-arrow-down"/></svg></span> 212m</div>
-            </div>
-            <div class="komoot-lazy" data-src="https://www.komoot.com/tour/3146425977/embed?profile=1" data-tour-id="3146425977">
-              <div class="komoot-placeholder">
-                <div class="komoot-placeholder-inner">
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <circle cx="16" cy="16" r="15" stroke="#6AA127" stroke-width="1.5"/>
-                    <path d="M16 8 L20 14 L16 12 L12 14 Z" fill="#6AA127"/>
-                    <circle cx="16" cy="20" r="3" fill="#6AA127"/>
-                  </svg>
-                  <span>Cliquer pour charger la carte</span>
-                </div>
-              </div>
-            </div>
-            <div class="parcours-card-footer">
-              <a href="https://www.komoot.com/fr-fr/tour/3146425977" target="_blank" rel="noopener" class="komoot-link">Ouvrir sur Komoot</a>
-              <span class="diff-badge diff-modere">Modéré</span>
-            </div>
-          </div>
-
-          <div class="parcours-card reveal hidden" data-cat="campagne">
-            <div class="parcours-card-header">
-              <div>
-                <div class="parcours-card-cat"><svg class="icon"><use href="#icon-wheat"/></svg> Campagne</div>
-                <h3 class="parcours-card-title">Randonnée · 1,98 km</h3>
-              </div>
-              <div class="parcours-card-date">26 juillet 2026</div>
-            </div>
-            <div class="parcours-meta">
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-map"/></svg></span> 1,98 km</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-clock"/></svg></span> 0h20</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-arrow-up"/></svg></span> 27m</div>
-              <div class="meta-item"><span class="meta-icon"><svg class="icon"><use href="#icon-arrow-down"/></svg></span> 28m</div>
-            </div>
-            <div class="komoot-lazy" data-src="https://www.komoot.com/tour/3144423051/embed?profile=1" data-tour-id="3144423051">
-              <div class="komoot-placeholder">
-                <div class="komoot-placeholder-inner">
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <circle cx="16" cy="16" r="15" stroke="#6AA127" stroke-width="1.5"/>
-                    <path d="M16 8 L20 14 L16 12 L12 14 Z" fill="#6AA127"/>
-                    <circle cx="16" cy="20" r="3" fill="#6AA127"/>
-                  </svg>
-                  <span>Cliquer pour charger la carte</span>
-                </div>
-              </div>
-            </div>
-            <div class="parcours-card-footer">
-              <a href="https://www.komoot.com/fr-fr/tour/3144423051" target="_blank" rel="noopener" class="komoot-link">Ouvrir sur Komoot</a>
-              <span class="diff-badge diff-facile">Facile</span>
-            </div>
-          </div>
-<!-- AUTO-KOMOOT:END -->
+      <!-- GRILLE PARCOURS : SCROLL INFINI -->
+      <div class="rando-filters">
+        <button class="rando-filter active" data-filter="all">Toutes</button>
+        <button class="rando-filter" data-filter="easy">Facile</button>
+        <button class="rando-filter" data-filter="moderate">Modéré</button>
+        <button class="rando-filter" data-filter="short">- de 5 km</button>
+        <button class="rando-filter" data-filter="long">+ de 10 km</button>
       </div>
 
-      <div style="text-align:center;margin-top:1.5rem">
-        <button type="button" class="parcours-load-more-btn" id="parcours-load-more" onclick="revealMoreParcours()">Voir plus de parcours ↓</button>
+      <div class="rando-stats-bar">
+        <span id="total-count">Chargement...</span>
+        <span id="total-km">...</span>
       </div>
 
-      <div style="text-align:center;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(59,109,17,0.12)">
-        <a href="https://www.komoot.com/fr-fr/user/4969537527049" target="_blank" rel="noopener"
-           style="display:inline-flex;align-items:center;gap:8px;background:#3B6D11;color:#fff;padding:11px 24px;border-radius:22px;font-size:0.76rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;text-decoration:none;">
-          Voir tous mes parcours sur Komoot ↗
-        </a>
+      <div class="rando-grid" id="randoGrid"></div>
+
+      <div class="rando-loader" id="randoLoader">
+        <svg width="32" height="32" viewBox="0 0 32 32" style="animation:spinFlower 1.2s linear infinite">
+          <circle cx="16" cy="16" r="5" fill="#3B6D11"/>
+          <ellipse cx="16" cy="5" rx="3" ry="4.5" fill="#C0DD97" opacity=".8"/>
+          <ellipse cx="16" cy="27" rx="3" ry="4.5" fill="#C0DD97" opacity=".8"/>
+          <ellipse cx="5" cy="16" rx="4.5" ry="3" fill="#C9A96E" opacity=".7"/>
+          <ellipse cx="27" cy="16" rx="4.5" ry="3" fill="#C9A96E" opacity=".7"/>
+        </svg>
+        <span>Chargement des parcours...</span>
+      </div>
+
+      <div class="rando-end" id="randoEnd" style="display:none">
+        <p>✦ Tous les parcours sont affichés</p>
+        <a href="https://www.komoot.com/fr-fr/user/4969537527049" target="_blank" rel="noopener" class="rando-komoot-btn">Voir mon profil Komoot complet ↗</a>
       </div>
 
     </div>
@@ -608,32 +305,175 @@ let mx=0,my=0,cx=0,cy=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
 (function loop(){cx+=(mx-cx)*0.13;cy+=(my-cy)*0.13;cur.style.left=cx+'px';cur.style.top=cy+'px';requestAnimationFrame(loop)})();
 
-/* ── LAZY LOAD IFRAMES KOMOOT ── */
-document.querySelectorAll('.komoot-lazy').forEach(el => {
-  el.addEventListener('click', function() {
-    if (this.querySelector('iframe')) return;
-    const src = this.getAttribute('data-src');
-    const placeholder = this.querySelector('.komoot-placeholder');
-    if (placeholder) placeholder.remove();
-    const iframe = document.createElement('iframe');
-    iframe.src = src;
-    iframe.setAttribute('frameborder', '0');
-    iframe.setAttribute('scrolling', 'no');
-    iframe.setAttribute('loading', 'lazy');
-    iframe.setAttribute('allowfullscreen', '');
-    this.appendChild(iframe);
-  });
-});
+/* ── SCROLL INFINI PARCOURS KOMOOT ── */
+(function() {
+  const USER_ID = '4969537527049';
+  const PAGE_SIZE = 20;
+  let page = 0;
+  let loading = false;
+  let allLoaded = false;
+  let activeFilter = 'all';
+  let totalTours = 0;
+  let totalKm = 0;
+  const grid = document.getElementById('randoGrid');
+  const loader = document.getElementById('randoLoader');
+  const endEl = document.getElementById('randoEnd');
+  const countEl = document.getElementById('total-count');
+  const kmEl = document.getElementById('total-km');
+  const heroTotalEl = document.getElementById('hero-total');
 
-/* ── VOIR PLUS DE PARCOURS ── */
-function revealMoreParcours(){
-  document.querySelectorAll('#blog-parcours-grid .parcours-card.hidden').forEach(card=>{
-    card.classList.remove('hidden');
-    card.classList.add('reveal');
-    obs.observe(card);
+  // L'API Komoot ne renvoie pas de champ "difficulty" exploitable — on
+  // retombe sur la même heuristique distance/dénivelé que le reste du site.
+  function getDifficulty(tour) {
+    const km = (tour.distance || 0) / 1000;
+    const up = tour.elevation_up || 0;
+    if (km > 12 || up > 150) return { label: 'Modéré', cls: 'diff-moderate', key: 'moderate' };
+    return { label: 'Facile', cls: 'diff-easy', key: 'easy' };
+  }
+
+  function formatDuration(seconds) {
+    if (!seconds) return '';
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    return h > 0 ? `${h}h${m.toString().padStart(2,'0')}` : `${m}min`;
+  }
+
+  function formatDistance(meters) {
+    if (!meters) return '';
+    const km = meters / 1000;
+    return km >= 10 ? `${Math.round(km)} km` : `${km.toFixed(2).replace('.', ',')} km`;
+  }
+
+  function matchesFilter(tour) {
+    if (activeFilter === 'all') return true;
+    const km = (tour.distance || 0) / 1000;
+    const diff = getDifficulty(tour);
+    if (activeFilter === 'easy') return diff.key === 'easy';
+    if (activeFilter === 'moderate') return diff.key === 'moderate';
+    if (activeFilter === 'short') return km < 5;
+    if (activeFilter === 'long') return km >= 10;
+    return true;
+  }
+
+  function createCard(tour) {
+    const diff = getDifficulty(tour);
+    const distance = formatDistance(tour.distance);
+    const duration = formatDuration(tour.duration);
+    const rawName = (tour.name || '').trim();
+    const title = (!rawName || rawName === 'Randonnée') && distance ? `Randonnée · ${distance}` : (rawName || 'Randonnée');
+    const url = `https://www.komoot.com/fr-fr/tour/${tour.id}`;
+    // Pas de vraie photo dans la liste des tours (il faudrait un appel API
+    // par parcours) — on utilise la carte statique Komoot, toujours fournie.
+    const imgUrl = tour.map_image?.src
+      ? tour.map_image.src.replace('{width}', '400').replace('{height}', '300').replace('{crop}', 'true')
+      : null;
+
+    const card = document.createElement('a');
+    card.className = 'rando-card-new';
+    card.href = url;
+    card.target = '_blank';
+    card.rel = 'noopener';
+    card.setAttribute('data-diff', diff.key);
+    card.setAttribute('data-km', (tour.distance || 0) / 1000);
+
+    card.innerHTML = imgUrl
+      ? `<img class="rando-card-img" src="${imgUrl}" alt="${title}" loading="lazy">`
+      : `<div class="rando-card-img-placeholder">🌿</div>`;
+
+    card.innerHTML += `
+      <div class="rando-card-body-new">
+        <p class="rando-card-title-new">${title}</p>
+        <div class="rando-card-meta-new">
+          ${distance ? `<span>🗺 ${distance}</span>` : ''}
+          ${duration ? `<span class="rando-card-dot"></span><span>⏱ ${duration}</span>` : ''}
+          <span class="rando-card-diff ${diff.cls}">${diff.label}</span>
+        </div>
+      </div>
+    `;
+    return card;
+  }
+
+  async function loadTours() {
+    if (loading || allLoaded) return;
+    loading = true;
+    loader.style.display = 'flex';
+
+    try {
+      const res = await fetch(
+        `https://www.komoot.com/api/v007/users/${USER_ID}/tours/?limit=${PAGE_SIZE}&status=public&type=tour_recorded&sort_field=date&sort_direction=desc&offset=${page * PAGE_SIZE}`,
+        { headers: { 'Accept': 'application/json' } }
+      );
+
+      if (!res.ok) throw new Error('API error');
+      const data = await res.json();
+
+      const tours = data._embedded?.tours || [];
+      const total = data.page?.totalElements || 0;
+
+      if (page === 0) {
+        totalTours = total;
+        countEl.textContent = `${total} parcours enregistrés`;
+        if (heroTotalEl) heroTotalEl.textContent = total;
+      }
+
+      tours.forEach(tour => {
+        totalKm += (tour.distance || 0) / 1000;
+        if (matchesFilter(tour)) {
+          grid.appendChild(createCard(tour));
+        }
+      });
+
+      kmEl.textContent = `${Math.round(totalKm)} km au total`;
+      page++;
+
+      if (tours.length < PAGE_SIZE || page * PAGE_SIZE >= total) {
+        allLoaded = true;
+        loader.style.display = 'none';
+        endEl.style.display = 'block';
+      }
+
+    } catch(err) {
+      console.error('Erreur API Komoot:', err);
+      loader.innerHTML = `
+        <p style="color:#7a6090;font-size:13px;text-align:center">
+          Impossible de charger les parcours automatiquement.<br>
+          <a href="https://www.komoot.com/fr-fr/user/4969537527049" target="_blank" rel="noopener" style="color:#3B6D11">
+            Voir tous mes parcours sur Komoot ↗
+          </a>
+        </p>
+      `;
+      if (page === 0) {
+        countEl.textContent = 'Parcours indisponibles ici';
+        kmEl.textContent = '';
+      }
+      allLoaded = true;
+    } finally {
+      loading = false;
+      if (!allLoaded) loader.style.display = 'none';
+    }
+  }
+
+  const komootObserver = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) loadTours();
+  }, { rootMargin: '300px' });
+  komootObserver.observe(loader);
+
+  document.querySelectorAll('.rando-filter').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.rando-filter').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      activeFilter = this.getAttribute('data-filter');
+      grid.innerHTML = '';
+      page = 0;
+      allLoaded = false;
+      totalKm = 0;
+      endEl.style.display = 'none';
+      loadTours();
+    });
   });
-  document.getElementById('parcours-load-more')?.remove();
-}
+
+  loadTours();
+})();
 
 /* ── REVEAL ── */
 const obs=new IntersectionObserver(entries=>{

@@ -1,4 +1,10 @@
-name: Mise à jour quotidienne des parcours Komoot
+name: Déploiement quotidien du site
+
+# Anciennement dédié à la mise à jour automatique des parcours Komoot
+# (scripts/update-komoot-tours.mjs) — ce système a été remplacé par un
+# scroll infini côté navigateur qui interroge l'API Komoot en direct
+# (voir pages/parcours-komoot.html). Ce workflow ne sert plus qu'au
+# déploiement quotidien du site.
 
 on:
   schedule:
@@ -6,35 +12,14 @@ on:
   workflow_dispatch:        # bouton "Run workflow" manuel dans l'onglet Actions
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  update-komoot:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout du site
         uses: actions/checkout@v4
-
-      - name: Installer Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Récupérer les derniers parcours Komoot et régénérer les pages
-        run: node scripts/update-komoot-tours.mjs
-
-      - name: Commit et push si changements
-        run: |
-          git config user.name "Komoot Bot"
-          git config user.email "actions@github.com"
-          git add pages/parcours-komoot.html
-          if git diff --cached --quiet; then
-            echo "Aucun nouveau parcours aujourd'hui."
-          else
-            git commit -m "Mise à jour automatique des parcours Komoot"
-            git pull --rebase origin main
-            git push
-          fi
 
       # Étape de publication — désactivée par défaut.
       # IONOS n'accepte que le SFTP (le FTP classique est refusé par leur serveur).
