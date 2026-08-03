@@ -226,6 +226,10 @@ makeFloatUpFlowers(document.getElementById('komootHeroFlowers'),12,['rgba(192,22
   function applyFilter(filtre) {
     let filtered = allParcours;
     if (filtre === 'coeur') filtered = allParcours.filter(p => p.coup_de_coeur == 1);
+    else if (filtre.startsWith('region-')) {
+      const region = filtre.replace('region-', '');
+      filtered = allParcours.filter(p => p.region === region);
+    }
     else if (filtre !== 'all') filtered = allParcours.filter(p => p.difficulte === filtre);
     renderCards(filtered);
   }
@@ -248,6 +252,21 @@ makeFloatUpFlowers(document.getElementById('komootHeroFlowers'),12,['rgba(192,22
       if (statTotal) statTotal.textContent = allParcours.length;
       if (statKm) statKm.textContent = Math.round(totalKm);
       if (statCoeurs) statCoeurs.textContent = coeurs;
+
+      const regions = [...new Set(allParcours.map(p => p.region).filter(Boolean))].sort();
+      const filterBar = document.querySelector('.rando-filters');
+      regions.forEach(region => {
+        const btn = document.createElement('button');
+        btn.className = 'rando-filter';
+        btn.setAttribute('data-filtre', 'region-' + region);
+        btn.textContent = region;
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.rando-filter').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          applyFilter(this.getAttribute('data-filtre'));
+        });
+        filterBar.appendChild(btn);
+      });
 
       renderCards(allParcours);
     } catch(err) {

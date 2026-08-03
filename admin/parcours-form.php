@@ -130,9 +130,138 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <div class="form-group">
             <label>Région</label>
             <select name="region">
-              <?php foreach (['Côte d\'Opale','Artois','Flandre','Picardie','Autre'] as $r): ?>
-              <option value="<?= $r ?>" <?= ($parcours['region'] ?? '') === $r ? 'selected' : '' ?>><?= $r ?></option>
-              <?php endforeach; ?>
+              <optgroup label="Hauts-de-France">
+                <option value="Nord" <?= ($parcours['region'] ?? '') === 'Nord' ? 'selected' : '' ?>>Nord</option>
+                <option value="Pas-de-Calais" <?= ($parcours['region'] ?? '') === 'Pas-de-Calais' ? 'selected' : '' ?>>Pas-de-Calais</option>
+                <option value="Somme" <?= ($parcours['region'] ?? '') === 'Somme' ? 'selected' : '' ?>>Somme</option>
+                <option value="Aisne" <?= ($parcours['region'] ?? '') === 'Aisne' ? 'selected' : '' ?>>Aisne</option>
+                <option value="Oise" <?= ($parcours['region'] ?? '') === 'Oise' ? 'selected' : '' ?>>Oise</option>
+              </optgroup>
+              <optgroup label="Normandie">
+                <option value="Calvados" <?= ($parcours['region'] ?? '') === 'Calvados' ? 'selected' : '' ?>>Calvados</option>
+                <option value="Eure" <?= ($parcours['region'] ?? '') === 'Eure' ? 'selected' : '' ?>>Eure</option>
+                <option value="Manche" <?= ($parcours['region'] ?? '') === 'Manche' ? 'selected' : '' ?>>Manche</option>
+                <option value="Orne" <?= ($parcours['region'] ?? '') === 'Orne' ? 'selected' : '' ?>>Orne</option>
+                <option value="Seine-Maritime" <?= ($parcours['region'] ?? '') === 'Seine-Maritime' ? 'selected' : '' ?>>Seine-Maritime</option>
+              </optgroup>
+              <optgroup label="Bretagne">
+                <option value="Côtes-d'Armor" <?= ($parcours['region'] ?? '') === "Côtes-d'Armor" ? 'selected' : '' ?>>Côtes-d'Armor</option>
+                <option value="Finistère" <?= ($parcours['region'] ?? '') === 'Finistère' ? 'selected' : '' ?>>Finistère</option>
+                <option value="Ille-et-Vilaine" <?= ($parcours['region'] ?? '') === 'Ille-et-Vilaine' ? 'selected' : '' ?>>Ille-et-Vilaine</option>
+                <option value="Morbihan" <?= ($parcours['region'] ?? '') === 'Morbihan' ? 'selected' : '' ?>>Morbihan</option>
+              </optgroup>
+              <optgroup label="Pays de la Loire">
+                <option value="Loire-Atlantique" <?= ($parcours['region'] ?? '') === 'Loire-Atlantique' ? 'selected' : '' ?>>Loire-Atlantique</option>
+                <option value="Maine-et-Loire" <?= ($parcours['region'] ?? '') === 'Maine-et-Loire' ? 'selected' : '' ?>>Maine-et-Loire</option>
+                <option value="Mayenne" <?= ($parcours['region'] ?? '') === 'Mayenne' ? 'selected' : '' ?>>Mayenne</option>
+                <option value="Sarthe" <?= ($parcours['region'] ?? '') === 'Sarthe' ? 'selected' : '' ?>>Sarthe</option>
+                <option value="Vendée" <?= ($parcours['region'] ?? '') === 'Vendée' ? 'selected' : '' ?>>Vendée</option>
+              </optgroup>
+              <optgroup label="Centre-Val de Loire">
+                <option value="Cher" <?= ($parcours['region'] ?? '') === 'Cher' ? 'selected' : '' ?>>Cher</option>
+                <option value="Eure-et-Loir" <?= ($parcours['region'] ?? '') === 'Eure-et-Loir' ? 'selected' : '' ?>>Eure-et-Loir</option>
+                <option value="Indre" <?= ($parcours['region'] ?? '') === 'Indre' ? 'selected' : '' ?>>Indre</option>
+                <option value="Indre-et-Loire" <?= ($parcours['region'] ?? '') === 'Indre-et-Loire' ? 'selected' : '' ?>>Indre-et-Loire</option>
+                <option value="Loir-et-Cher" <?= ($parcours['region'] ?? '') === 'Loir-et-Cher' ? 'selected' : '' ?>>Loir-et-Cher</option>
+                <option value="Loiret" <?= ($parcours['region'] ?? '') === 'Loiret' ? 'selected' : '' ?>>Loiret</option>
+              </optgroup>
+              <optgroup label="Île-de-France">
+                <option value="Paris" <?= ($parcours['region'] ?? '') === 'Paris' ? 'selected' : '' ?>>Paris</option>
+                <option value="Seine-et-Marne" <?= ($parcours['region'] ?? '') === 'Seine-et-Marne' ? 'selected' : '' ?>>Seine-et-Marne</option>
+                <option value="Yvelines" <?= ($parcours['region'] ?? '') === 'Yvelines' ? 'selected' : '' ?>>Yvelines</option>
+                <option value="Essonne" <?= ($parcours['region'] ?? '') === 'Essonne' ? 'selected' : '' ?>>Essonne</option>
+                <option value="Hauts-de-Seine" <?= ($parcours['region'] ?? '') === 'Hauts-de-Seine' ? 'selected' : '' ?>>Hauts-de-Seine</option>
+                <option value="Seine-Saint-Denis" <?= ($parcours['region'] ?? '') === 'Seine-Saint-Denis' ? 'selected' : '' ?>>Seine-Saint-Denis</option>
+                <option value="Val-de-Marne" <?= ($parcours['region'] ?? '') === 'Val-de-Marne' ? 'selected' : '' ?>>Val-de-Marne</option>
+                <option value="Val-d'Oise" <?= ($parcours['region'] ?? '') === "Val-d'Oise" ? 'selected' : '' ?>>Val-d'Oise</option>
+              </optgroup>
+              <optgroup label="Grand Est">
+                <option value="Ardennes" <?= ($parcours['region'] ?? '') === 'Ardennes' ? 'selected' : '' ?>>Ardennes</option>
+                <option value="Aube" <?= ($parcours['region'] ?? '') === 'Aube' ? 'selected' : '' ?>>Aube</option>
+                <option value="Marne" <?= ($parcours['region'] ?? '') === 'Marne' ? 'selected' : '' ?>>Marne</option>
+                <option value="Haute-Marne" <?= ($parcours['region'] ?? '') === 'Haute-Marne' ? 'selected' : '' ?>>Haute-Marne</option>
+                <option value="Meurthe-et-Moselle" <?= ($parcours['region'] ?? '') === 'Meurthe-et-Moselle' ? 'selected' : '' ?>>Meurthe-et-Moselle</option>
+                <option value="Meuse" <?= ($parcours['region'] ?? '') === 'Meuse' ? 'selected' : '' ?>>Meuse</option>
+                <option value="Moselle" <?= ($parcours['region'] ?? '') === 'Moselle' ? 'selected' : '' ?>>Moselle</option>
+                <option value="Bas-Rhin" <?= ($parcours['region'] ?? '') === 'Bas-Rhin' ? 'selected' : '' ?>>Bas-Rhin</option>
+                <option value="Haut-Rhin" <?= ($parcours['region'] ?? '') === 'Haut-Rhin' ? 'selected' : '' ?>>Haut-Rhin</option>
+                <option value="Vosges" <?= ($parcours['region'] ?? '') === 'Vosges' ? 'selected' : '' ?>>Vosges</option>
+              </optgroup>
+              <optgroup label="Bourgogne-Franche-Comté">
+                <option value="Côte-d'Or" <?= ($parcours['region'] ?? '') === "Côte-d'Or" ? 'selected' : '' ?>>Côte-d'Or</option>
+                <option value="Doubs" <?= ($parcours['region'] ?? '') === 'Doubs' ? 'selected' : '' ?>>Doubs</option>
+                <option value="Jura" <?= ($parcours['region'] ?? '') === 'Jura' ? 'selected' : '' ?>>Jura</option>
+                <option value="Nièvre" <?= ($parcours['region'] ?? '') === 'Nièvre' ? 'selected' : '' ?>>Nièvre</option>
+                <option value="Haute-Saône" <?= ($parcours['region'] ?? '') === 'Haute-Saône' ? 'selected' : '' ?>>Haute-Saône</option>
+                <option value="Saône-et-Loire" <?= ($parcours['region'] ?? '') === 'Saône-et-Loire' ? 'selected' : '' ?>>Saône-et-Loire</option>
+                <option value="Yonne" <?= ($parcours['region'] ?? '') === 'Yonne' ? 'selected' : '' ?>>Yonne</option>
+                <option value="Territoire de Belfort" <?= ($parcours['region'] ?? '') === 'Territoire de Belfort' ? 'selected' : '' ?>>Territoire de Belfort</option>
+              </optgroup>
+              <optgroup label="Auvergne-Rhône-Alpes">
+                <option value="Ain" <?= ($parcours['region'] ?? '') === 'Ain' ? 'selected' : '' ?>>Ain</option>
+                <option value="Allier" <?= ($parcours['region'] ?? '') === 'Allier' ? 'selected' : '' ?>>Allier</option>
+                <option value="Ardèche" <?= ($parcours['region'] ?? '') === 'Ardèche' ? 'selected' : '' ?>>Ardèche</option>
+                <option value="Cantal" <?= ($parcours['region'] ?? '') === 'Cantal' ? 'selected' : '' ?>>Cantal</option>
+                <option value="Drôme" <?= ($parcours['region'] ?? '') === 'Drôme' ? 'selected' : '' ?>>Drôme</option>
+                <option value="Isère" <?= ($parcours['region'] ?? '') === 'Isère' ? 'selected' : '' ?>>Isère</option>
+                <option value="Loire" <?= ($parcours['region'] ?? '') === 'Loire' ? 'selected' : '' ?>>Loire</option>
+                <option value="Haute-Loire" <?= ($parcours['region'] ?? '') === 'Haute-Loire' ? 'selected' : '' ?>>Haute-Loire</option>
+                <option value="Puy-de-Dôme" <?= ($parcours['region'] ?? '') === 'Puy-de-Dôme' ? 'selected' : '' ?>>Puy-de-Dôme</option>
+                <option value="Rhône" <?= ($parcours['region'] ?? '') === 'Rhône' ? 'selected' : '' ?>>Rhône</option>
+                <option value="Savoie" <?= ($parcours['region'] ?? '') === 'Savoie' ? 'selected' : '' ?>>Savoie</option>
+                <option value="Haute-Savoie" <?= ($parcours['region'] ?? '') === 'Haute-Savoie' ? 'selected' : '' ?>>Haute-Savoie</option>
+              </optgroup>
+              <optgroup label="Nouvelle-Aquitaine">
+                <option value="Charente" <?= ($parcours['region'] ?? '') === 'Charente' ? 'selected' : '' ?>>Charente</option>
+                <option value="Charente-Maritime" <?= ($parcours['region'] ?? '') === 'Charente-Maritime' ? 'selected' : '' ?>>Charente-Maritime</option>
+                <option value="Corrèze" <?= ($parcours['region'] ?? '') === 'Corrèze' ? 'selected' : '' ?>>Corrèze</option>
+                <option value="Creuse" <?= ($parcours['region'] ?? '') === 'Creuse' ? 'selected' : '' ?>>Creuse</option>
+                <option value="Dordogne" <?= ($parcours['region'] ?? '') === 'Dordogne' ? 'selected' : '' ?>>Dordogne</option>
+                <option value="Gironde" <?= ($parcours['region'] ?? '') === 'Gironde' ? 'selected' : '' ?>>Gironde</option>
+                <option value="Landes" <?= ($parcours['region'] ?? '') === 'Landes' ? 'selected' : '' ?>>Landes</option>
+                <option value="Lot-et-Garonne" <?= ($parcours['region'] ?? '') === 'Lot-et-Garonne' ? 'selected' : '' ?>>Lot-et-Garonne</option>
+                <option value="Pyrénées-Atlantiques" <?= ($parcours['region'] ?? '') === 'Pyrénées-Atlantiques' ? 'selected' : '' ?>>Pyrénées-Atlantiques</option>
+                <option value="Deux-Sèvres" <?= ($parcours['region'] ?? '') === 'Deux-Sèvres' ? 'selected' : '' ?>>Deux-Sèvres</option>
+                <option value="Vienne" <?= ($parcours['region'] ?? '') === 'Vienne' ? 'selected' : '' ?>>Vienne</option>
+                <option value="Haute-Vienne" <?= ($parcours['region'] ?? '') === 'Haute-Vienne' ? 'selected' : '' ?>>Haute-Vienne</option>
+              </optgroup>
+              <optgroup label="Occitanie">
+                <option value="Ariège" <?= ($parcours['region'] ?? '') === 'Ariège' ? 'selected' : '' ?>>Ariège</option>
+                <option value="Aude" <?= ($parcours['region'] ?? '') === 'Aude' ? 'selected' : '' ?>>Aude</option>
+                <option value="Aveyron" <?= ($parcours['region'] ?? '') === 'Aveyron' ? 'selected' : '' ?>>Aveyron</option>
+                <option value="Gard" <?= ($parcours['region'] ?? '') === 'Gard' ? 'selected' : '' ?>>Gard</option>
+                <option value="Haute-Garonne" <?= ($parcours['region'] ?? '') === 'Haute-Garonne' ? 'selected' : '' ?>>Haute-Garonne</option>
+                <option value="Gers" <?= ($parcours['region'] ?? '') === 'Gers' ? 'selected' : '' ?>>Gers</option>
+                <option value="Hérault" <?= ($parcours['region'] ?? '') === 'Hérault' ? 'selected' : '' ?>>Hérault</option>
+                <option value="Lot" <?= ($parcours['region'] ?? '') === 'Lot' ? 'selected' : '' ?>>Lot</option>
+                <option value="Lozère" <?= ($parcours['region'] ?? '') === 'Lozère' ? 'selected' : '' ?>>Lozère</option>
+                <option value="Hautes-Pyrénées" <?= ($parcours['region'] ?? '') === 'Hautes-Pyrénées' ? 'selected' : '' ?>>Hautes-Pyrénées</option>
+                <option value="Pyrénées-Orientales" <?= ($parcours['region'] ?? '') === 'Pyrénées-Orientales' ? 'selected' : '' ?>>Pyrénées-Orientales</option>
+                <option value="Tarn" <?= ($parcours['region'] ?? '') === 'Tarn' ? 'selected' : '' ?>>Tarn</option>
+                <option value="Tarn-et-Garonne" <?= ($parcours['region'] ?? '') === 'Tarn-et-Garonne' ? 'selected' : '' ?>>Tarn-et-Garonne</option>
+              </optgroup>
+              <optgroup label="Provence-Alpes-Côte d'Azur">
+                <option value="Alpes-de-Haute-Provence" <?= ($parcours['region'] ?? '') === 'Alpes-de-Haute-Provence' ? 'selected' : '' ?>>Alpes-de-Haute-Provence</option>
+                <option value="Hautes-Alpes" <?= ($parcours['region'] ?? '') === 'Hautes-Alpes' ? 'selected' : '' ?>>Hautes-Alpes</option>
+                <option value="Alpes-Maritimes" <?= ($parcours['region'] ?? '') === 'Alpes-Maritimes' ? 'selected' : '' ?>>Alpes-Maritimes</option>
+                <option value="Bouches-du-Rhône" <?= ($parcours['region'] ?? '') === 'Bouches-du-Rhône' ? 'selected' : '' ?>>Bouches-du-Rhône</option>
+                <option value="Var" <?= ($parcours['region'] ?? '') === 'Var' ? 'selected' : '' ?>>Var</option>
+                <option value="Vaucluse" <?= ($parcours['region'] ?? '') === 'Vaucluse' ? 'selected' : '' ?>>Vaucluse</option>
+              </optgroup>
+              <optgroup label="Corse">
+                <option value="Corse-du-Sud" <?= ($parcours['region'] ?? '') === 'Corse-du-Sud' ? 'selected' : '' ?>>Corse-du-Sud</option>
+                <option value="Haute-Corse" <?= ($parcours['region'] ?? '') === 'Haute-Corse' ? 'selected' : '' ?>>Haute-Corse</option>
+              </optgroup>
+              <optgroup label="Outre-mer">
+                <option value="Guadeloupe" <?= ($parcours['region'] ?? '') === 'Guadeloupe' ? 'selected' : '' ?>>Guadeloupe</option>
+                <option value="Martinique" <?= ($parcours['region'] ?? '') === 'Martinique' ? 'selected' : '' ?>>Martinique</option>
+                <option value="Guyane" <?= ($parcours['region'] ?? '') === 'Guyane' ? 'selected' : '' ?>>Guyane</option>
+                <option value="La Réunion" <?= ($parcours['region'] ?? '') === 'La Réunion' ? 'selected' : '' ?>>La Réunion</option>
+                <option value="Mayotte" <?= ($parcours['region'] ?? '') === 'Mayotte' ? 'selected' : '' ?>>Mayotte</option>
+              </optgroup>
+              <optgroup label="Autre">
+                <option value="Autre" <?= ($parcours['region'] ?? '') === 'Autre' ? 'selected' : '' ?>>Autre</option>
+              </optgroup>
             </select>
           </div>
           <div class="form-group">
