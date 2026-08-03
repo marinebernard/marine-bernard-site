@@ -1447,3 +1447,77 @@ body.rando #cursor-flower [fill="#d4b8f0"]{fill:#8fc55f;}
   .about-formations{padding:2.5rem 1.5rem}
   .about-cta{padding:1.6rem}
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGE CONTACT (pages/contact.html)
+   ═══════════════════════════════════════════════════════════════ */
+.contact2-hero{background:#2D1B69;padding:3rem 2.5rem;text-align:center;}
+.contact2-hero h1{font-family:'Playfair Display',serif;font-size:32px;color:#fff;margin-bottom:0.5rem;}
+.contact2-hero p{font-style:italic;color:rgba(255,255,255,0.65);font-size:0.9rem;}
+
+.contact2-layout{
+  display:grid;grid-template-columns:1fr 1fr;gap:3rem;
+  padding:3rem 2.5rem;max-width:1000px;margin:0 auto;
+}
+.contact2-col-title{font-family:'Playfair Display',serif;font-size:20px;color:#2D1B69;margin-bottom:1.3rem;}
+
+.contact2-info-block{display:flex;align-items:flex-start;gap:12px;margin-bottom:1.3rem;}
+.contact2-info-icon{
+  width:36px;height:36px;border-radius:10px;background:#F0E6FF;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#2D1B69;
+}
+.contact2-info-icon svg{width:18px;height:18px;}
+.contact2-info-label{font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;color:#8B6BB1;margin-bottom:2px;}
+.contact2-info-value{font-size:0.9rem;color:#2D1B69;font-weight:600;text-decoration:none;}
+.contact2-info-value:hover{text-decoration:underline;}
+
+.contact2-avail{
+  background:#F0E6FF;border-radius:12px;padding:1.2rem;margin-top:1.5rem;
+}
+.contact2-avail-title{font-size:13px;color:#2D1B69;font-weight:600;margin-bottom:0.4rem;}
+.contact2-avail-text{font-size:13px;color:#5a4870;line-height:1.6;}
+
+.contact2-rando-title{font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#9a88b8;margin:1.6rem 0 0.7rem;}
+.contact2-rando-socials{display:flex;gap:8px;}
+.contact2-rando-socials a{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:10px;
+}
+.contact2-rando-socials a svg{width:16px;height:16px;}
+.contact2-rando-socials .s-fb{background:#1877F2;}
+.contact2-rando-socials .s-ig{background:#dc2743;}
+.contact2-rando-socials .s-km{background:#6AA127;}
+
+.contact2-form-field{margin-bottom:1.1rem;}
+.contact2-form-field label{
+  display:block;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;
+  color:#8B6BB1;font-weight:600;margin-bottom:6px;
+}
+.contact2-form-field input,
+.contact2-form-field select,
+.contact2-form-field textarea{
+  width:100%;font-family:'Inter',sans-serif;font-size:14px;color:#2D1B69;
+  border:0.5px solid rgba(139,107,177,0.3);border-radius:10px;
+  padding:10px 14px;outline:none;transition:border-color 0.2s;
+  background:#fff;
+}
+.contact2-form-field input:focus,
+.contact2-form-field select:focus,
+.contact2-form-field textarea:focus{border-color:#8B6BB1;}
+.contact2-form-field textarea{resize:vertical;font-family:inherit;}
+
+.contact2-submit{
+  width:100%;background:#2D1B69;color:#fff;border:none;
+  border-radius:22px;padding:12px 28px;font-size:14px;font-weight:600;
+  cursor:none;transition:background 0.2s;
+}
+.contact2-submit:hover{background:#8B6BB1;}
+
+#form-success{
+  display:none;background:#EAF3DE;border-radius:10px;padding:1rem;
+  text-align:center;color:#27500A;font-size:0.88rem;margin-top:1rem;
+}
+
+@media(max-width:768px){
+  .contact2-layout{grid-template-columns:1fr;padding:2rem 1.5rem;gap:2rem}
+}
