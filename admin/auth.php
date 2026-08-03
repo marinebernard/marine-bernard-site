@@ -1,4 +1,10 @@
 <?php
+// Réglés ici plutôt que via php_flag dans admin/.htaccess : la plupart des
+// hébergeurs mutualisés (dont IONOS) exécutent PHP en FastCGI/PHP-FPM, où
+// php_flag est un directive invalide — Apache renvoie alors une 500 pour
+// tout le dossier admin/ avant même d'atteindre ce fichier.
+ini_set('session.cookie_httponly', 1);
+ini_set('session.cookie_secure', 1);
 session_start();
 
 // Le mot de passe en clair vit dans admin/config.php, jamais commité dans

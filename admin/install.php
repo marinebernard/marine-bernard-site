@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../api/config.php';
+require_once __DIR__ . '/../api/config.php';
 
 try {
   $pdo = new PDO(

@@ -1,7 +1,7 @@
 <?php
-require_once 'auth.php';
-require_once '../api/config.php';
-require_once 'upload.php';
+require_once __DIR__ . '/auth.php';
+require_once __DIR__ . '/../api/config.php';
+require_once __DIR__ . '/upload.php';
 requireLogin();
 
 $pdo = new PDO(
