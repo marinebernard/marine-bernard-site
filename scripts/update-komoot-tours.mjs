@@ -102,7 +102,11 @@ function buildCard(tour, photoUrl, { headingTag, indent }, visible) {
   const dateStr = formatDate(tour.date);
   const { cat, label, icon } = guessCategory(tour.name);
   const diff = guessDifficulty(distanceKm, tour.elevation_up);
-  const name = escapeHtml(tour.name?.trim() || 'Randonnée — Pas-de-Calais');
+  // Komoot donne "Randonnée" comme nom par défaut aux sorties non renommées —
+  // on affiche plutôt un titre générique basé sur la distance jusqu'à ce
+  // qu'elles soient renommées directement sur Komoot.
+  const rawName = tour.name?.trim() || '';
+  const name = escapeHtml(!rawName || rawName === 'Randonnée' ? `Randonnée · ${distanceStr} km` : rawName);
   const i = indent;
   const cardClass = `parcours-card reveal${visible ? '' : ' hidden'}`;
 
@@ -110,9 +114,22 @@ function buildCard(tour, photoUrl, { headingTag, indent }, visible) {
     ? `${i}  <div class="parcours-card-photo"><img src="${photoUrl}" alt="${name}" loading="lazy"></div>\n`
     : '';
 
+  // Iframes Komoot en lazy-load au clic : les charger toutes au chargement de
+  // la page était trop lourd et bloquait l'affichage de la grille.
   const mapOrTrace = photoUrl
     ? ''
-    : `${i}  <iframe class="komoot-embed" src="https://www.komoot.com/tour/${tour.id}/embed?profile=1" height="${headingTag === 'h2' ? 380 : 320}" scrolling="no"></iframe>\n`;
+    : `${i}  <div class="komoot-lazy" data-src="https://www.komoot.com/tour/${tour.id}/embed?profile=1" data-tour-id="${tour.id}">
+${i}    <div class="komoot-placeholder">
+${i}      <div class="komoot-placeholder-inner">
+${i}        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+${i}          <circle cx="16" cy="16" r="15" stroke="#6AA127" stroke-width="1.5"/>
+${i}          <path d="M16 8 L20 14 L16 12 L12 14 Z" fill="#6AA127"/>
+${i}          <circle cx="16" cy="20" r="3" fill="#6AA127"/>
+${i}        </svg>
+${i}        <span>Cliquer pour charger la carte</span>
+${i}      </div>
+${i}    </div>
+${i}  </div>\n`;
 
   return `${i}<div class="${cardClass}" data-cat="${cat}">
 ${photoBlock}${i}  <div class="parcours-card-header">
