@@ -1206,20 +1206,29 @@ body.rando #cursor-flower [fill="#d4b8f0"]{fill:#8fc55f;}
 /* Section filtres + grille */
 .komoot-section{padding:2rem 2.5rem;}
 
-/* ── FILTRES AVANCÉS SENTIERS ── */
-.filtres-wrap{
+/* ── SIDEBAR FILTRES SENTIERS ── */
+.sentiers-layout{
+  display:grid;
+  grid-template-columns:240px 1fr;
+  gap:1.5rem;
+  align-items:flex-start;
+  padding:2rem 2.5rem;
+}
+.sentiers-sidebar{
   background:#fff;
   border:0.5px solid rgba(59,109,17,0.15);
   border-radius:16px;
-  padding:1.2rem 1.4rem;
-  margin-bottom:1.5rem;
+  padding:1.2rem;
+  position:sticky;
+  top:80px;
 }
-.filtres-header{
+.sidebar-header{
   display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:1rem;
+  margin-bottom:0.5rem;padding-bottom:0.8rem;
+  border-bottom:0.5px solid rgba(59,109,17,0.1);
 }
-.filtres-title{
-  font-size:13px;font-weight:600;color:#27500A;letter-spacing:0.04em;
+.sidebar-title{
+  font-family:'Playfair Display',serif;font-size:16px;color:#27500A;font-weight:700;
 }
 .filtres-reset{
   font-size:11px;color:#9a88b8;background:none;
@@ -1230,26 +1239,28 @@ body.rando #cursor-flower [fill="#d4b8f0"]{fill:#8fc55f;}
 .filtres-reset:hover{
   background:#F0E6FF;color:#2D1B69;border-color:#8B6BB1;
 }
-.filtres-grid{
-  display:flex;flex-direction:column;gap:0.9rem;
+.sidebar-result{
+  font-size:12px;color:#7a8f5a;font-style:italic;
+  margin-bottom:1rem;padding-bottom:0.8rem;
+  border-bottom:0.5px solid rgba(59,109,17,0.08);
 }
 .filtre-group{
-  display:flex;flex-direction:column;gap:0.4rem;
+  margin-bottom:1.1rem;
 }
 .filtre-group-label{
   font-size:10px;font-weight:600;letter-spacing:0.14em;
-  text-transform:uppercase;color:#C9A96E;
+  text-transform:uppercase;color:#C9A96E;margin-bottom:0.5rem;
 }
-.filtre-pills{
-  display:flex;flex-wrap:wrap;gap:5px;
+.filtre-pills.vertical{
+  display:flex;flex-direction:column;gap:4px;
 }
 .filtre-pill{
-  padding:5px 12px;border-radius:18px;
+  padding:7px 12px;border-radius:10px;
   font-size:12px;font-weight:500;
-  border:0.5px solid rgba(59,109,17,0.2);
+  border:0.5px solid rgba(59,109,17,0.15);
   background:#FAF8FF;color:#5a7a4a;
   cursor:none;transition:all 0.18s;
-  font-family:'Inter',sans-serif;white-space:nowrap;
+  font-family:'Inter',sans-serif;text-align:left;width:100%;
 }
 .filtre-pill:hover{
   border-color:#3B6D11;color:#27500A;background:#EAF3DE;
@@ -1257,25 +1268,13 @@ body.rando #cursor-flower [fill="#d4b8f0"]{fill:#8fc55f;}
 .filtre-pill.active{
   background:#27500A;color:#fff;border-color:#27500A;
 }
-.filtre-pill.coeur-active{
-  background:#C9A96E;color:#2D1B69;border-color:#C9A96E;
-}
-.filtres-result{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-top:1rem;padding-top:0.8rem;
-  border-top:0.5px solid rgba(59,109,17,0.1);
-}
-#filtresCount{
-  font-size:12px;color:#7a8f5a;font-style:italic;
-}
-@media(max-width:768px){
-  .filtres-wrap{padding:1rem;}
-  .filtre-pill{font-size:11px;padding:4px 10px;}
+.sentiers-main{
+  min-width:0;
 }
 
 .rando-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repeat(2,1fr);
   gap:14px;
 }
 
@@ -1506,6 +1505,13 @@ body.rando #cursor-flower [fill="#d4b8f0"]{fill:#8fc55f;}
 .rando-empty{
   text-align:center;padding:3rem;color:#9a88b8;font-size:13px;font-style:italic;
 }
+.filtres-reset-inline{
+  display:inline-block;margin-top:0.8rem;
+  background:#EAF3DE;color:#27500A;border:none;border-radius:20px;
+  padding:7px 16px;font-size:12px;cursor:none;
+  font-family:'Inter',sans-serif;transition:background 0.2s;
+}
+.filtres-reset-inline:hover{background:#C0DD97;}
 
 /* Bandeau article */
 .komoot-article-banner{
@@ -1547,14 +1553,18 @@ body.rando #cursor-flower [fill="#d4b8f0"]{fill:#8fc55f;}
 .komoot-follow-handle{font-size:0.7rem;opacity:0.85;}
 
 @media(max-width:900px){
-  .rando-grid{grid-template-columns:repeat(2,1fr)}
+  .sentiers-layout{grid-template-columns:1fr;padding:1.5rem;}
+  .sentiers-sidebar{position:static;}
+  .filtre-pills.vertical{flex-direction:row;flex-wrap:wrap;}
+  .filtre-pill{width:auto;}
+  .rando-grid{grid-template-columns:repeat(2,1fr);}
 }
 @media(max-width:768px){
   .komoot-hero{padding:2rem 1.5rem;}
   .komoot-section{padding:1.5rem;}
   .komoot-follow-bar{padding:1.5rem;}
 }
-@media(max-width:600px){
+@media(max-width:480px){
   .rando-grid{grid-template-columns:1fr}
 }
 

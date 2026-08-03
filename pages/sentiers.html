@@ -57,16 +57,21 @@
 
 <!-- SECTION 2 — FILTRES ET GRILLE -->
 <section class="komoot-section" style="background:#FAF8FF">
-  <div class="filtres-wrap">
-    <div class="filtres-header">
-      <p class="filtres-title">Filtrer les sentiers</p>
-      <button class="filtres-reset" id="filtresReset">Réinitialiser</button>
-    </div>
-    <div class="filtres-grid">
+  <div class="sentiers-layout">
+
+    <aside class="sentiers-sidebar">
+      <div class="sidebar-header">
+        <p class="sidebar-title">Filtres</p>
+        <button class="filtres-reset" id="filtresReset">Réinitialiser</button>
+      </div>
+
+      <div class="sidebar-result">
+        <span id="filtresCount">0 sentier</span>
+      </div>
 
       <div class="filtre-group">
         <p class="filtre-group-label">Difficulté</p>
-        <div class="filtre-pills" id="filtreDiff">
+        <div class="filtre-pills vertical" id="filtreDiff">
           <button class="filtre-pill active" data-filtre="diff" data-val="all">Toutes</button>
           <button class="filtre-pill" data-filtre="diff" data-val="facile">🟢 Facile</button>
           <button class="filtre-pill" data-filtre="diff" data-val="modere">🟡 Modéré</button>
@@ -76,7 +81,7 @@
 
       <div class="filtre-group">
         <p class="filtre-group-label">Distance</p>
-        <div class="filtre-pills" id="filtreKm">
+        <div class="filtre-pills vertical" id="filtreKm">
           <button class="filtre-pill active" data-filtre="km" data-val="all">Toutes</button>
           <button class="filtre-pill" data-filtre="km" data-val="court">- de 5 km</button>
           <button class="filtre-pill" data-filtre="km" data-val="moyen">5 à 15 km</button>
@@ -86,9 +91,10 @@
 
       <div class="filtre-group">
         <p class="filtre-group-label">Type de paysage</p>
-        <div class="filtre-pills" id="filtrePaysage">
+        <div class="filtre-pills vertical" id="filtrePaysage">
           <button class="filtre-pill active" data-filtre="paysage" data-val="all">Tous</button>
           <button class="filtre-pill" data-filtre="paysage" data-val="littoral">🌊 Littoral</button>
+          <button class="filtre-pill" data-filtre="paysage" data-val="mer">🌊 Mer</button>
           <button class="filtre-pill" data-filtre="paysage" data-val="foret">🌲 Forêt</button>
           <button class="filtre-pill" data-filtre="paysage" data-val="campagne">🌾 Campagne</button>
           <button class="filtre-pill" data-filtre="paysage" data-val="montagne">⛰️ Montagne</button>
@@ -99,34 +105,31 @@
 
       <div class="filtre-group">
         <p class="filtre-group-label">Région</p>
-        <div class="filtre-pills" id="filtreRegion">
+        <div class="filtre-pills vertical" id="filtreRegion">
           <button class="filtre-pill active" data-filtre="region" data-val="all">Toutes</button>
         </div>
       </div>
 
+    </aside>
+
+    <div class="sentiers-main">
+      <div class="rando-grid" id="randoGrid"></div>
+      <div class="rando-empty" id="randoEmpty" style="display:none">
+        <p>Aucun sentier trouvé avec ces critères.</p>
+        <button class="filtres-reset-inline" onclick="document.getElementById('filtresReset').click()">Réinitialiser les filtres</button>
+      </div>
+      <div class="rando-loader" id="randoLoader">
+        <svg width="32" height="32" viewBox="0 0 32 32" style="animation:spinFlower 1.2s linear infinite">
+          <circle cx="16" cy="16" r="5" fill="#3B6D11"/>
+          <ellipse cx="16" cy="5" rx="3" ry="4.5" fill="#C0DD97" opacity=".8"/>
+          <ellipse cx="16" cy="27" rx="3" ry="4.5" fill="#C0DD97" opacity=".8"/>
+          <ellipse cx="5" cy="16" rx="4.5" ry="3" fill="#C9A96E" opacity=".7"/>
+          <ellipse cx="27" cy="16" rx="4.5" ry="3" fill="#C9A96E" opacity=".7"/>
+        </svg>
+        <span>Chargement des sentiers...</span>
+      </div>
     </div>
 
-    <div class="filtres-result">
-      <span id="filtresCount">0 sentier</span>
-      <span class="filtres-coeur">
-        <button class="filtre-pill" id="filtreCoeur" data-filtre="coeur" data-val="0">✦ Coups de cœur</button>
-      </span>
-    </div>
-  </div>
-
-  <div class="rando-grid" id="randoGrid"></div>
-  <div class="rando-empty" id="randoEmpty" style="display:none">
-    <p>Aucun parcours dans cette catégorie pour le moment.</p>
-  </div>
-  <div class="rando-loader" id="randoLoader">
-    <svg width="32" height="32" viewBox="0 0 32 32" style="animation:spinFlower 1.2s linear infinite">
-      <circle cx="16" cy="16" r="5" fill="#3B6D11"/>
-      <ellipse cx="16" cy="5" rx="3" ry="4.5" fill="#C0DD97" opacity=".8"/>
-      <ellipse cx="16" cy="27" rx="3" ry="4.5" fill="#C0DD97" opacity=".8"/>
-      <ellipse cx="5" cy="16" rx="4.5" ry="3" fill="#C9A96E" opacity=".7"/>
-      <ellipse cx="27" cy="16" rx="4.5" ry="3" fill="#C9A96E" opacity=".7"/>
-    </svg>
-    <span>Chargement des parcours...</span>
   </div>
 
   <!-- SECTION 3 — ARTICLE BLOG MIS EN AVANT -->
@@ -389,8 +392,7 @@ makeFloatUpFlowers(document.getElementById('komootHeroFlowers'),12,['rgba(192,22
     diff: 'all',
     km: 'all',
     paysage: 'all',
-    region: 'all',
-    coeur: 0
+    region: 'all'
   };
 
   function applyFiltres() {
@@ -416,10 +418,6 @@ makeFloatUpFlowers(document.getElementById('komootHeroFlowers'),12,['rgba(192,22
 
     if (filtres.region !== 'all') {
       result = result.filter(p => p.region === filtres.region);
-    }
-
-    if (filtres.coeur === 1) {
-      result = result.filter(p => p.coup_de_coeur == 1);
     }
 
     renderCards(result);
@@ -477,24 +475,15 @@ makeFloatUpFlowers(document.getElementById('komootHeroFlowers'),12,['rgba(192,22
     });
   });
 
-  document.getElementById('filtreCoeur').addEventListener('click', function() {
-    filtres.coeur = filtres.coeur === 1 ? 0 : 1;
-    this.classList.toggle('coeur-active', filtres.coeur === 1);
-    this.classList.toggle('active', false);
-    applyFiltres();
-  });
-
   document.getElementById('filtresReset').addEventListener('click', function() {
     filtres.diff = 'all';
     filtres.km = 'all';
     filtres.paysage = 'all';
     filtres.region = 'all';
-    filtres.coeur = 0;
     document.querySelectorAll('.filtre-pill').forEach(b => {
-      b.classList.remove('active', 'coeur-active');
+      b.classList.remove('active');
       if (b.getAttribute('data-val') === 'all') b.classList.add('active');
     });
-    document.getElementById('filtreCoeur').classList.remove('active', 'coeur-active');
     applyFiltres();
   });
 
