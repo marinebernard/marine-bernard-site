@@ -1,0 +1,5 @@
+Options -Indexes
+<FilesMatch "\.gpx$">
+  Header set Content-Disposition "attachment"
+  Header set Content-Type "application/gpx+xml"
+</FilesMatch>

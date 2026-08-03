@@ -15,3 +15,10 @@ Thumbs.db
 
 # Identifiants base de données — jamais dans Git, uploadé à la main sur le serveur
 api/config.php
+
+# Mot de passe admin du back office — même logique que api/config.php
+admin/config.php
+
+# Contenu envoyé par le back office (photos/GPX) — jamais versionné, vit uniquement sur le serveur
+uploads/parcours/*
+!uploads/parcours/.htaccess
