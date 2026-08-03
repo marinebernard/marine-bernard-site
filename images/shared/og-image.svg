@@ -1,0 +1,20 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#2D1B69"/>
+
+  <!-- fleur décorative -->
+  <g transform="translate(600,220)" opacity="0.9">
+    <circle cx="0" cy="0" r="18" fill="#2D1B69" stroke="#C9A96E" stroke-width="2"/>
+    <ellipse cx="0" cy="-36" rx="15" ry="22" fill="#8B6BB1" opacity="0.9"/>
+    <ellipse cx="0" cy="36" rx="15" ry="22" fill="#8B6BB1" opacity="0.9"/>
+    <ellipse cx="-36" cy="0" rx="22" ry="15" fill="#C9A96E" opacity="0.85"/>
+    <ellipse cx="36" cy="0" rx="22" ry="15" fill="#C9A96E" opacity="0.85"/>
+    <ellipse cx="-25" cy="-25" rx="13" ry="19" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 -25 -25)"/>
+    <ellipse cx="25" cy="-25" rx="13" ry="19" fill="#d4b8f0" opacity="0.8" transform="rotate(45 25 -25)"/>
+    <ellipse cx="-25" cy="25" rx="13" ry="19" fill="#d4b8f0" opacity="0.8" transform="rotate(45 -25 25)"/>
+    <ellipse cx="25" cy="25" rx="13" ry="19" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 25 25)"/>
+    <circle cx="0" cy="0" r="13" fill="#FAF8FF"/>
+  </g>
+
+  <text x="600" y="350" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="64" font-weight="700" fill="#ffffff">Marine Bernard</text>
+  <text x="600" y="400" text-anchor="middle" font-family="'Inter', Arial, sans-serif" font-size="24" fill="#C9A96E" letter-spacing="1">Chargée de communication &amp; création digitale</text>
+</svg>
