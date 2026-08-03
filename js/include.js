@@ -1,3 +1,19 @@
+/* ── LOADER DE PAGE ── */
+const loader = document.createElement('div');
+loader.id = 'page-loader';
+loader.innerHTML = `<svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="15" cy="15" r="4.5" fill="#FAF8FF"/>
+  <ellipse cx="15" cy="6" rx="3.5" ry="5" fill="#8B6BB1" opacity="0.9"/>
+  <ellipse cx="15" cy="24" rx="3.5" ry="5" fill="#8B6BB1" opacity="0.9"/>
+  <ellipse cx="6" cy="15" rx="5" ry="3.5" fill="#C9A96E" opacity="0.85"/>
+  <ellipse cx="24" cy="15" rx="5" ry="3.5" fill="#C9A96E" opacity="0.85"/>
+  <circle cx="15" cy="15" r="3" fill="#2D1B69"/>
+</svg>`;
+document.body.prepend(loader);
+window.addEventListener('load', () => {
+  setTimeout(() => loader.classList.add('hidden'), 300);
+});
+
 async function loadComponent(id, path) {
   try {
     const res = await fetch(path);
