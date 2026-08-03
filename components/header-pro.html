@@ -43,6 +43,9 @@
 }
 .site-header .header-switch{font-size:11px;color:#9a88b8;text-decoration:none;}
 .site-header .header-switch:hover{text-decoration:underline;}
+.site-header .header-linkedin{color:#8B6BB1;display:inline-flex;transition:color 0.2s;}
+.site-header .header-linkedin:hover{color:#2D1B69;}
+.site-header .header-linkedin svg{width:16px;height:16px;}
 .site-header .header-toggle{
   display:none;background:none;border:none;cursor:none;padding:6px;
   flex-direction:column;justify-content:center;gap:5px;flex-shrink:0;
@@ -101,6 +104,10 @@
     </ul>
     <div class="header-right">
       <a href="/pages/contact-pro.html" class="header-cta" data-track="clic-contact-header">Me contacter</a>
+      <!-- URL LinkedIn à confirmer -->
+      <a href="https://www.linkedin.com/in/marine-bnrd" target="_blank" rel="noopener" class="header-linkedin" aria-label="LinkedIn" data-track="clic-reseau" data-value="linkedin">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002zM7 8.48H3v12.02h4V8.48zM13.32 8.48h-3.83v12.02h3.83v-6.32c0-1.67.32-3.29 2.39-3.29 2.05 0 2.07 1.91 2.07 3.4v6.21H21.8v-6.94c0-3.32-.72-5.87-4.59-5.87-1.87 0-3.12 1.02-3.63 1.99h-.05V8.48z"/></svg>
+      </a>
       <a href="/pages/parcours-komoot.html" class="header-switch" data-track="switch-univers" data-value="vers-rando">→ Univers rando</a>
     </div>
   </div>
