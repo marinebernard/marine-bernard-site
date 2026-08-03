@@ -57,12 +57,61 @@
 
 <!-- SECTION 2 — FILTRES ET GRILLE -->
 <section class="komoot-section" style="background:#FAF8FF">
-  <div class="rando-filters">
-    <button class="rando-filter active" data-filtre="all">Tous</button>
-    <button class="rando-filter" data-filtre="facile">Facile</button>
-    <button class="rando-filter" data-filtre="modere">Modéré</button>
-    <button class="rando-filter" data-filtre="difficile">Difficile</button>
-    <button class="rando-filter" data-filtre="coeur">Coups de cœur ✦</button>
+  <div class="filtres-wrap">
+    <div class="filtres-header">
+      <p class="filtres-title">Filtrer les sentiers</p>
+      <button class="filtres-reset" id="filtresReset">Réinitialiser</button>
+    </div>
+    <div class="filtres-grid">
+
+      <div class="filtre-group">
+        <p class="filtre-group-label">Difficulté</p>
+        <div class="filtre-pills" id="filtreDiff">
+          <button class="filtre-pill active" data-filtre="diff" data-val="all">Toutes</button>
+          <button class="filtre-pill" data-filtre="diff" data-val="facile">🟢 Facile</button>
+          <button class="filtre-pill" data-filtre="diff" data-val="modere">🟡 Modéré</button>
+          <button class="filtre-pill" data-filtre="diff" data-val="difficile">🔴 Difficile</button>
+        </div>
+      </div>
+
+      <div class="filtre-group">
+        <p class="filtre-group-label">Distance</p>
+        <div class="filtre-pills" id="filtreKm">
+          <button class="filtre-pill active" data-filtre="km" data-val="all">Toutes</button>
+          <button class="filtre-pill" data-filtre="km" data-val="court">- de 5 km</button>
+          <button class="filtre-pill" data-filtre="km" data-val="moyen">5 à 15 km</button>
+          <button class="filtre-pill" data-filtre="km" data-val="long">+ de 15 km</button>
+        </div>
+      </div>
+
+      <div class="filtre-group">
+        <p class="filtre-group-label">Type de paysage</p>
+        <div class="filtre-pills" id="filtrePaysage">
+          <button class="filtre-pill active" data-filtre="paysage" data-val="all">Tous</button>
+          <button class="filtre-pill" data-filtre="paysage" data-val="littoral">🌊 Littoral</button>
+          <button class="filtre-pill" data-filtre="paysage" data-val="foret">🌲 Forêt</button>
+          <button class="filtre-pill" data-filtre="paysage" data-val="campagne">🌾 Campagne</button>
+          <button class="filtre-pill" data-filtre="paysage" data-val="montagne">⛰️ Montagne</button>
+          <button class="filtre-pill" data-filtre="paysage" data-val="patrimoine">🏛️ Patrimoine</button>
+          <button class="filtre-pill" data-filtre="paysage" data-val="marais">🦢 Zone humide</button>
+        </div>
+      </div>
+
+      <div class="filtre-group">
+        <p class="filtre-group-label">Région</p>
+        <div class="filtre-pills" id="filtreRegion">
+          <button class="filtre-pill active" data-filtre="region" data-val="all">Toutes</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="filtres-result">
+      <span id="filtresCount">0 sentier</span>
+      <span class="filtres-coeur">
+        <button class="filtre-pill" id="filtreCoeur" data-filtre="coeur" data-val="0">✦ Coups de cœur</button>
+      </span>
+    </div>
   </div>
 
   <div class="rando-grid" id="randoGrid"></div>
@@ -336,16 +385,118 @@ makeFloatUpFlowers(document.getElementById('komootHeroFlowers'),12,['rgba(192,22
     parcours.forEach(p => grid.appendChild(createCard(p)));
   }
 
-  function applyFilter(filtre) {
-    let filtered = allParcours;
-    if (filtre === 'coeur') filtered = allParcours.filter(p => p.coup_de_coeur == 1);
-    else if (filtre.startsWith('region-')) {
-      const region = filtre.replace('region-', '');
-      filtered = allParcours.filter(p => p.region === region);
+  const filtres = {
+    diff: 'all',
+    km: 'all',
+    paysage: 'all',
+    region: 'all',
+    coeur: 0
+  };
+
+  function applyFiltres() {
+    let result = allParcours;
+
+    if (filtres.diff !== 'all') {
+      result = result.filter(p => p.difficulte === filtres.diff);
     }
-    else if (filtre !== 'all') filtered = allParcours.filter(p => p.difficulte === filtre);
-    renderCards(filtered);
+
+    if (filtres.km !== 'all') {
+      result = result.filter(p => {
+        const km = parseFloat(p.distance || 0);
+        if (filtres.km === 'court') return km < 5;
+        if (filtres.km === 'moyen') return km >= 5 && km <= 15;
+        if (filtres.km === 'long') return km > 15;
+        return true;
+      });
+    }
+
+    if (filtres.paysage !== 'all') {
+      result = result.filter(p => p.type_paysage === filtres.paysage);
+    }
+
+    if (filtres.region !== 'all') {
+      result = result.filter(p => p.region === filtres.region);
+    }
+
+    if (filtres.coeur === 1) {
+      result = result.filter(p => p.coup_de_coeur == 1);
+    }
+
+    renderCards(result);
+
+    const count = result.length;
+    document.getElementById('filtresCount').textContent =
+      count === 0 ? 'Aucun sentier trouvé'
+      : count === 1 ? '1 sentier trouvé'
+      : `${count} sentiers trouvés`;
   }
+
+  function buildRegionFiltres(parcours) {
+    const regions = [...new Set(parcours.map(p => p.region).filter(Boolean))].sort();
+    const container = document.getElementById('filtreRegion');
+    regions.forEach(region => {
+      const btn = document.createElement('button');
+      btn.className = 'filtre-pill';
+      btn.setAttribute('data-filtre', 'region');
+      btn.setAttribute('data-val', region);
+      btn.textContent = region;
+      container.appendChild(btn);
+      btn.addEventListener('click', function() {
+        container.querySelectorAll('.filtre-pill').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        filtres.region = this.getAttribute('data-val');
+        applyFiltres();
+      });
+    });
+  }
+
+  document.querySelectorAll('.filtre-pill[data-filtre="diff"]').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('[data-filtre="diff"]').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      filtres.diff = this.getAttribute('data-val');
+      applyFiltres();
+    });
+  });
+
+  document.querySelectorAll('.filtre-pill[data-filtre="km"]').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('[data-filtre="km"]').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      filtres.km = this.getAttribute('data-val');
+      applyFiltres();
+    });
+  });
+
+  document.querySelectorAll('.filtre-pill[data-filtre="paysage"]').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('[data-filtre="paysage"]').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      filtres.paysage = this.getAttribute('data-val');
+      applyFiltres();
+    });
+  });
+
+  document.getElementById('filtreCoeur').addEventListener('click', function() {
+    filtres.coeur = filtres.coeur === 1 ? 0 : 1;
+    this.classList.toggle('coeur-active', filtres.coeur === 1);
+    this.classList.toggle('active', false);
+    applyFiltres();
+  });
+
+  document.getElementById('filtresReset').addEventListener('click', function() {
+    filtres.diff = 'all';
+    filtres.km = 'all';
+    filtres.paysage = 'all';
+    filtres.region = 'all';
+    filtres.coeur = 0;
+    document.querySelectorAll('.filtre-pill').forEach(b => {
+      b.classList.remove('active', 'coeur-active');
+      if (b.getAttribute('data-val') === 'all') b.classList.add('active');
+    });
+    document.getElementById('filtreCoeur').classList.remove('active', 'coeur-active');
+    applyFiltres();
+  });
 
   async function loadParcours() {
     loader.style.display = 'flex';
@@ -366,34 +517,16 @@ makeFloatUpFlowers(document.getElementById('komootHeroFlowers'),12,['rgba(192,22
       if (statKm) statKm.textContent = Math.round(totalKm);
       if (statCoeurs) statCoeurs.textContent = coeurs;
 
-      const regions = [...new Set(allParcours.map(p => p.region).filter(Boolean))].sort();
-      const filterBar = document.querySelector('.rando-filters');
-      regions.forEach(region => {
-        const btn = document.createElement('button');
-        btn.className = 'rando-filter';
-        btn.setAttribute('data-filtre', 'region-' + region);
-        btn.textContent = region;
-        btn.addEventListener('click', function() {
-          document.querySelectorAll('.rando-filter').forEach(b => b.classList.remove('active'));
-          this.classList.add('active');
-          applyFilter(this.getAttribute('data-filtre'));
-        });
-        filterBar.appendChild(btn);
-      });
+      buildRegionFiltres(allParcours);
+      const count = allParcours.length;
+      document.getElementById('filtresCount').textContent =
+        count === 1 ? '1 sentier' : `${count} sentiers`;
 
       renderCards(allParcours);
     } catch(err) {
       loader.innerHTML = `<p style="color:#9a88b8;font-size:13px;font-style:italic">Impossible de charger les parcours.<br><a href="https://www.komoot.com/fr-fr/user/4969537527049" target="_blank" style="color:#3B6D11">Voir mon profil Komoot ↗</a></p>`;
     }
   }
-
-  document.querySelectorAll('.rando-filter').forEach(btn => {
-    btn.addEventListener('click', function() {
-      document.querySelectorAll('.rando-filter').forEach(b => b.classList.remove('active'));
-      this.classList.add('active');
-      applyFilter(this.getAttribute('data-filtre'));
-    });
-  });
 
   loadParcours();
 })();

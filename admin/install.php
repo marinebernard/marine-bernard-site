@@ -41,3 +41,9 @@ try {
 } catch(PDOException $e) {
   echo '<p style="font-family:sans-serif;color:red;padding:2rem">Erreur : ' . htmlspecialchars($e->getMessage()) . '</p>';
 }
+
+try {
+  $pdo->exec("ALTER TABLE parcours ADD COLUMN type_paysage VARCHAR(100) DEFAULT NULL");
+} catch(PDOException $e) {
+  // Colonne déjà existante, on ignore
+}

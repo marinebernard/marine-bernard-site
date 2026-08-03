@@ -51,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     'duree' => trim($_POST['duree'] ?? ''),
     'denivele' => !empty($_POST['denivele']) ? (int)$_POST['denivele'] : null,
     'difficulte' => $_POST['difficulte'],
+    'type_paysage' => $_POST['type_paysage'] ?? null,
     'description' => trim($_POST['description'] ?? ''),
     'coup_de_coeur' => isset($_POST['coup_de_coeur']) ? 1 : 0,
     'visible' => isset($_POST['visible']) ? 1 : 0,
@@ -63,10 +64,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   ];
 
   if ($id) {
-    $sql = "UPDATE parcours SET titre=:titre, region=:region, distance=:distance, duree=:duree, denivele=:denivele, difficulte=:difficulte, description=:description, coup_de_coeur=:coup_de_coeur, visible=:visible, photo_principale=:photo_principale, photos_galerie=:photos_galerie, fichier_gpx=:fichier_gpx, lien_komoot=:lien_komoot, tags=:tags, date_rando=:date_rando WHERE id=:id";
+    $sql = "UPDATE parcours SET titre=:titre, region=:region, distance=:distance, duree=:duree, denivele=:denivele, difficulte=:difficulte, type_paysage=:type_paysage, description=:description, coup_de_coeur=:coup_de_coeur, visible=:visible, photo_principale=:photo_principale, photos_galerie=:photos_galerie, fichier_gpx=:fichier_gpx, lien_komoot=:lien_komoot, tags=:tags, date_rando=:date_rando WHERE id=:id";
     $data['id'] = $id;
   } else {
-    $sql = "INSERT INTO parcours (titre, region, distance, duree, denivele, difficulte, description, coup_de_coeur, visible, photo_principale, photos_galerie, fichier_gpx, lien_komoot, tags, date_rando) VALUES (:titre, :region, :distance, :duree, :denivele, :difficulte, :description, :coup_de_coeur, :visible, :photo_principale, :photos_galerie, :fichier_gpx, :lien_komoot, :tags, :date_rando)";
+    $sql = "INSERT INTO parcours (titre, region, distance, duree, denivele, difficulte, type_paysage, description, coup_de_coeur, visible, photo_principale, photos_galerie, fichier_gpx, lien_komoot, tags, date_rando) VALUES (:titre, :region, :distance, :duree, :denivele, :difficulte, :type_paysage, :description, :coup_de_coeur, :visible, :photo_principale, :photos_galerie, :fichier_gpx, :lien_komoot, :tags, :date_rando)";
   }
 
   $stmt = $pdo->prepare($sql);
@@ -286,6 +287,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               <option value="facile" <?= ($parcours['difficulte'] ?? '') === 'facile' ? 'selected' : '' ?>>Facile</option>
               <option value="modere" <?= ($parcours['difficulte'] ?? '') === 'modere' ? 'selected' : '' ?>>Modéré</option>
               <option value="difficile" <?= ($parcours['difficulte'] ?? '') === 'difficile' ? 'selected' : '' ?>>Difficile</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Type de paysage</label>
+            <select name="type_paysage">
+              <option value="">— Non précisé —</option>
+              <option value="littoral" <?= ($parcours['type_paysage'] ?? '') === 'littoral' ? 'selected' : '' ?>>🌊 Littoral</option>
+              <option value="foret" <?= ($parcours['type_paysage'] ?? '') === 'foret' ? 'selected' : '' ?>>🌲 Forêt</option>
+              <option value="campagne" <?= ($parcours['type_paysage'] ?? '') === 'campagne' ? 'selected' : '' ?>>🌾 Campagne</option>
+              <option value="montagne" <?= ($parcours['type_paysage'] ?? '') === 'montagne' ? 'selected' : '' ?>>⛰️ Montagne</option>
+              <option value="patrimoine" <?= ($parcours['type_paysage'] ?? '') === 'patrimoine' ? 'selected' : '' ?>>🏛️ Patrimoine</option>
+              <option value="marais" <?= ($parcours['type_paysage'] ?? '') === 'marais' ? 'selected' : '' ?>>🦢 Zone humide</option>
             </select>
           </div>
           <div class="form-group">
