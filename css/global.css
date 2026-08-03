@@ -28,3 +28,32 @@ body {
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* ── BOUTON RETOUR EN HAUT ── */
+#back-to-top {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #2D1B69;
+  border: none;
+  cursor: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s, transform 0.3s;
+  z-index: 50;
+  box-shadow: 0 4px 16px rgba(45,27,105,0.25);
+}
+#back-to-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+#back-to-top:hover { background: #8B6BB1; }
+#back-to-top svg { width: 18px; height: 18px; }
+body.rando #back-to-top { background: #27500A; }
+body.rando #back-to-top:hover { background: #3B6D11; }

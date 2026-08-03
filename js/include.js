@@ -32,6 +32,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const trackingScript = document.createElement('script');
   trackingScript.src = '/js/tracking.js';
   document.body.appendChild(trackingScript);
+
+  /* ── BOUTON RETOUR EN HAUT ── */
+  const btn = document.createElement('button');
+  btn.id = 'back-to-top';
+  btn.setAttribute('aria-label', 'Retour en haut');
+  btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>`;
+  document.body.appendChild(btn);
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 400);
+  });
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 });
 
 /* ── TRANSITION ENTRE PAGES (fondu de sortie) ── */
