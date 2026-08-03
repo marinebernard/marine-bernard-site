@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page introuvable — Marine Bernard</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/svg+xml" href="/images/shared/favicon.svg">
+<style>
+html,body{height:100%;}
+body{
+  margin:0;min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  background:#2D1B69;position:relative;overflow:hidden;
+  font-family:'Inter',sans-serif;
+}
+.notfound-flowers{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0;}
+.notfound-bignum{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:'Playfair Display',serif;font-size:80px;font-weight:700;
+  color:rgba(255,255,255,0.15);z-index:0;pointer-events:none;white-space:nowrap;
+}
+.notfound-content{position:relative;z-index:1;text-align:center;padding:2rem 1.5rem;max-width:480px;}
+.notfound-ring{
+  width:60px;height:60px;margin:0 auto 1.5rem;
+  animation:spin 12s linear infinite;
+}
+.notfound-title{
+  font-family:'Playfair Display',serif;font-size:28px;color:#fff;
+  margin-bottom:0.6rem;line-height:1.3;
+}
+.notfound-sub{font-size:14px;color:rgba(255,255,255,0.6);line-height:1.6;margin-bottom:1.8rem;}
+.notfound-btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;}
+.notfound-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:11px 24px;border-radius:22px;
+  font-size:0.81rem;font-weight:600;text-decoration:none;
+  transition:background 0.2s,opacity 0.2s;
+}
+.notfound-btn.btn-fill{background:#C9A96E;color:#2D1B69;}
+.notfound-btn.btn-fill:hover{background:#dab989;}
+.notfound-btn.btn-outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,0.5);}
+.notfound-btn.btn-outline:hover{background:rgba(255,255,255,0.1);}
+</style>
+</head>
+<body class="pro">
+
+<div class="notfound-flowers" id="notfoundFlowers"></div>
+<span class="notfound-bignum" aria-hidden="true">404</span>
+
+<!-- CURSEUR FLEUR -->
+<div id="cursor-flower">
+  <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="15" cy="15" r="4.5" fill="#2D1B69"/>
+    <ellipse cx="15" cy="6.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+    <ellipse cx="15" cy="23.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+    <ellipse cx="6.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
+    <ellipse cx="23.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
+    <ellipse cx="9" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 9 9)"/>
+    <ellipse cx="21" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 21 9)"/>
+    <ellipse cx="9" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 9 21)"/>
+    <ellipse cx="21" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 21 21)"/>
+    <circle cx="15" cy="15" r="3.2" fill="#FAF8FF"/>
+  </svg>
+</div>
+
+<div class="notfound-content">
+  <svg class="notfound-ring" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="15" cy="15" r="4.5" fill="#2D1B69"/>
+    <ellipse cx="15" cy="6.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+    <ellipse cx="15" cy="23.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+    <ellipse cx="6.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
+    <ellipse cx="23.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
+    <ellipse cx="9" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 9 9)"/>
+    <ellipse cx="21" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 21 9)"/>
+    <ellipse cx="9" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 9 21)"/>
+    <ellipse cx="21" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 21 21)"/>
+    <circle cx="15" cy="15" r="3.2" fill="#FAF8FF"/>
+  </svg>
+  <h1 class="notfound-title">Cette page s'est perdue en forêt...</h1>
+  <p class="notfound-sub">Le sentier que vous cherchez n'existe pas ou a été déplacé.</p>
+  <div class="notfound-btns">
+    <a href="/accueil.html" class="notfound-btn btn-fill">← Retour à l'accueil</a>
+    <a href="/index.html" class="notfound-btn btn-outline">Voir le portfolio</a>
+  </div>
+</div>
+
+<script>
+/* ── CURSEUR FLEUR ── */
+const cur=document.getElementById('cursor-flower');
+let mx=0,my=0,cx=0,cy=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function loop(){cx+=(mx-cx)*0.13;cy+=(my-cy)*0.13;cur.style.left=cx+'px';cur.style.top=cy+'px';requestAnimationFrame(loop)})();
+
+/* ── FLEURS FLOTTANTES ── */
+function makeFloatUpFlowers(container,count,colors){
+  for(let i=0;i<count;i++){
+    const sz=16+Math.random()*16;
+    const s=document.createElementNS('http://www.w3.org/2000/svg','svg');
+    s.setAttribute('viewBox','0 0 28 28');
+    s.setAttribute('width',sz);s.setAttribute('height',sz);
+    s.classList.add('floating-flower');
+    s.style.left=Math.random()*100+'%';
+    s.style.top=Math.random()*100+'%';
+    s.style.animationDuration=(10+Math.random()*10)+'s';
+    s.style.animationDelay=(Math.random()*8)+'s';
+    const c=colors[Math.floor(Math.random()*colors.length)];
+    s.innerHTML=`<circle cx="14" cy="14" r="4" fill="${c}"/>
+      <ellipse cx="14" cy="5" rx="3" ry="4.5" fill="${c}"/>
+      <ellipse cx="14" cy="23" rx="3" ry="4.5" fill="${c}"/>
+      <ellipse cx="5" cy="14" rx="4.5" ry="3" fill="${c}"/>
+      <ellipse cx="23" cy="14" rx="4.5" ry="3" fill="${c}"/>`;
+    container.appendChild(s);
+  }
+}
+makeFloatUpFlowers(document.getElementById('notfoundFlowers'),14,['rgba(212,184,240,.3)','rgba(201,169,110,.25)']);
+</script>
+</body>
+</html>
