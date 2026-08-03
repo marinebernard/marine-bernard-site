@@ -115,6 +115,28 @@
   <a href="/pages/blog.html">Lire le blog →</a>
 </div>
 
+<!-- LIGHTBOX GALERIE PHOTOS -->
+<div class="lb-overlay" id="lbOverlay">
+  <div class="lb-wrap">
+    <div class="lb-header">
+      <p class="lb-titre" id="lbTitre"></p>
+      <div class="lb-header-right">
+        <span class="lb-counter" id="lbCounter"></span>
+        <button class="lb-close" id="lbClose" aria-label="Fermer">✕</button>
+      </div>
+    </div>
+    <div class="lb-main">
+      <button class="lb-arrow lb-prev" id="lbPrev" aria-label="Photo précédente">‹</button>
+      <div class="lb-img-wrap">
+        <img class="lb-img" id="lbImg" src="" alt="">
+        <div class="lb-loader" id="lbLoader"></div>
+      </div>
+      <button class="lb-arrow lb-next" id="lbNext" aria-label="Photo suivante">›</button>
+    </div>
+    <div class="lb-thumbs" id="lbThumbs"></div>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <div id="footer"></div>
 <script src="/js/include.js"></script>
@@ -170,7 +192,12 @@ makeFloatUpFlowers(document.getElementById('komootHeroFlowers'),12,['rgba(192,22
     card.setAttribute('data-coeur', p.coup_de_coeur);
 
     const imgHtml = p.photo_principale
-      ? `<img class="rando-card-img" src="/${p.photo_principale}" alt="${p.titre}" loading="lazy">`
+      ? `<div class="rando-card-img-wrap" data-photos='${JSON.stringify([p.photo_principale, ...(p.photos_galerie || [])])}' data-titre="${p.titre}">
+           <img class="rando-card-img" src="/${p.photo_principale}" alt="${p.titre}" loading="lazy">
+           ${(p.photos_galerie && p.photos_galerie.length > 0)
+             ? `<span class="rando-card-img-count">+${p.photos_galerie.length} photo${p.photos_galerie.length > 1 ? 's' : ''}</span>`
+             : ''}
+         </div>`
       : `<div class="rando-card-img-placeholder">🌿</div>`;
 
     const metaItems = [];
@@ -212,6 +239,92 @@ makeFloatUpFlowers(document.getElementById('komootHeroFlowers'),12,['rgba(192,22
     `;
     return card;
   }
+
+  const lb = {
+    overlay: document.getElementById('lbOverlay'),
+    img: document.getElementById('lbImg'),
+    titre: document.getElementById('lbTitre'),
+    counter: document.getElementById('lbCounter'),
+    thumbs: document.getElementById('lbThumbs'),
+    loader: document.getElementById('lbLoader'),
+    prev: document.getElementById('lbPrev'),
+    next: document.getElementById('lbNext'),
+    closeBtn: document.getElementById('lbClose'),
+    photos: [],
+    current: 0,
+
+    open(photos, titre, startIndex = 0) {
+      this.photos = photos;
+      this.current = startIndex;
+      this.titre.textContent = titre;
+      this.buildThumbs();
+      this.show(startIndex);
+      this.overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    },
+
+    close() {
+      this.overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    },
+
+    show(index) {
+      this.current = index;
+      const src = '/' + this.photos[index];
+      this.img.classList.add('loading');
+      this.loader.classList.add('active');
+      const tempImg = new Image();
+      tempImg.onload = () => {
+        this.img.src = src;
+        this.img.classList.remove('loading');
+        this.loader.classList.remove('active');
+      };
+      tempImg.src = src;
+      this.counter.textContent = `${index + 1} / ${this.photos.length}`;
+      this.prev.disabled = index === 0;
+      this.next.disabled = index === this.photos.length - 1;
+      document.querySelectorAll('.lb-thumb').forEach((t, i) => {
+        t.classList.toggle('active', i === index);
+      });
+    },
+
+    buildThumbs() {
+      this.thumbs.innerHTML = '';
+      if (this.photos.length <= 1) return;
+      this.photos.forEach((src, i) => {
+        const img = document.createElement('img');
+        img.className = 'lb-thumb' + (i === 0 ? ' active' : '');
+        img.src = '/' + src;
+        img.alt = '';
+        img.loading = 'lazy';
+        img.addEventListener('click', () => this.show(i));
+        this.thumbs.appendChild(img);
+      });
+    }
+  };
+
+  lb.closeBtn.addEventListener('click', () => lb.close());
+  lb.prev.addEventListener('click', () => lb.current > 0 && lb.show(lb.current - 1));
+  lb.next.addEventListener('click', () => lb.current < lb.photos.length - 1 && lb.show(lb.current + 1));
+
+  lb.overlay.addEventListener('click', e => {
+    if (e.target === lb.overlay) lb.close();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (!lb.overlay.classList.contains('active')) return;
+    if (e.key === 'Escape') lb.close();
+    if (e.key === 'ArrowLeft' && lb.current > 0) lb.show(lb.current - 1);
+    if (e.key === 'ArrowRight' && lb.current < lb.photos.length - 1) lb.show(lb.current + 1);
+  });
+
+  document.addEventListener('click', e => {
+    const wrap = e.target.closest('.rando-card-img-wrap');
+    if (!wrap) return;
+    const photos = JSON.parse(wrap.getAttribute('data-photos') || '[]');
+    const titre = wrap.getAttribute('data-titre') || '';
+    if (photos.length > 0) lb.open(photos, titre, 0);
+  });
 
   function renderCards(parcours) {
     grid.innerHTML = '';
