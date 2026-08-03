@@ -3,7 +3,7 @@ name: Déploiement quotidien du site
 # Anciennement dédié à la mise à jour automatique des parcours Komoot
 # (scripts/update-komoot-tours.mjs) — ce système a été remplacé par un
 # scroll infini côté navigateur qui interroge l'API Komoot en direct
-# (voir pages/parcours-komoot.html). Ce workflow ne sert plus qu'au
+# (voir pages/sentiers.html). Ce workflow ne sert plus qu'au
 # déploiement quotidien du site.
 
 on:

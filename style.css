@@ -1050,7 +1050,7 @@ body.rando #cursor-flower [fill="#d4b8f0"]{fill:#8fc55f;}
 
 /* ── PAGE LISTE BLOG (pages/blog.html) ─────────────────────────
    Classes dédiées "bloglist-*" / "blog-card*" : distinctes de
-   .blog-hero / .article-card (partagées avec parcours-komoot.html)
+   .blog-hero / .article-card (plus utilisées ailleurs, à vérifier avant suppression)
    pour ne pas impacter cette dernière. ── */
 .bloglist-hero{
   position:relative;overflow:hidden;
@@ -1067,6 +1067,20 @@ body.rando #cursor-flower [fill="#d4b8f0"]{fill:#8fc55f;}
   font-family:'Playfair Display',serif;
   font-size:36px;color:#fff;margin-bottom:0.6rem;line-height:1.15;
 }
+.bloglist-title em{font-style:italic;}
+
+/* Encarts de renvoi croisé blog ↔ sentiers */
+.blog-to-sentiers,.sentiers-to-blog{
+  background:#EAF3DE;border-radius:12px;padding:1rem 1.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:13px;color:#27500A;margin:2rem 2.5rem;flex-wrap:wrap;gap:0.6rem;
+}
+.blog-to-sentiers a,.sentiers-to-blog a{
+  background:#27500A;color:#fff;border-radius:20px;
+  padding:6px 16px;font-size:12px;text-decoration:none;
+  transition:background 0.2s;
+}
+.blog-to-sentiers a:hover,.sentiers-to-blog a:hover{background:#3B6D11;}
 .bloglist-sub{
   font-style:italic;color:rgba(255,255,255,0.65);
   font-size:0.92rem;margin-bottom:1.4rem;
@@ -1158,7 +1172,7 @@ body.rando #cursor-flower [fill="#d4b8f0"]{fill:#8fc55f;}
 }
 .profil-btn:hover{background:#27500A}
 
-/* ── PAGE PARCOURS : AFFICHAGE DYNAMIQUE API (pages/parcours-komoot.html) ── */
+/* ── PAGE PARCOURS : AFFICHAGE DYNAMIQUE API (pages/sentiers.html) ── */
 
 /* Hero */
 .komoot-hero{

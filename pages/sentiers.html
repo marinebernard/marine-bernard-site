@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mes sentiers & traces GPS | La ch'tite randonneuse — Marine Bernard</title>
+<meta name="description" content="Mes sentiers de randonnée dans les Hauts-de-France — traces GPX téléchargeables, photos, difficulté et itinéraires détaillés. @lachtiterandonneuse">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../css/global.css">
+<link rel="icon" type="image/svg+xml" href="/images/shared/favicon.svg">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KZEHR4YQFQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KZEHR4YQFQ');
+</script>
+</head>
+<body class="rando">
+<div id="header"></div>
+
+<!-- CURSEUR FLEUR -->
+<div id="cursor-flower">
+  <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="15" cy="15" r="4.5" fill="#2D1B69"/>
+    <ellipse cx="15" cy="6.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+    <ellipse cx="15" cy="23.5" rx="3.8" ry="5.5" fill="#8B6BB1" opacity="0.9"/>
+    <ellipse cx="6.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
+    <ellipse cx="23.5" cy="15" rx="5.5" ry="3.8" fill="#C9A96E" opacity="0.85"/>
+    <ellipse cx="9" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 9 9)"/>
+    <ellipse cx="21" cy="9" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 21 9)"/>
+    <ellipse cx="9" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(45 9 21)"/>
+    <ellipse cx="21" cy="21" rx="3.2" ry="4.8" fill="#d4b8f0" opacity="0.8" transform="rotate(-45 21 21)"/>
+    <circle cx="15" cy="15" r="3.2" fill="#FAF8FF"/>
+  </svg>
+</div>
+
+<nav class="breadcrumb" aria-label="Fil d'Ariane"><div class="breadcrumb-inner"><a href="../index.html">Accueil</a><span class="breadcrumb-current">Sentiers</span></div></nav>
+
+<!-- SECTION 1 — HERO -->
+<header class="komoot-hero">
+  <div class="komoot-hero-flowers" id="komootHeroFlowers"></div>
+  <div class="komoot-hero-content">
+    <p class="komoot-hero-eyebrow">La ch'tite randonneuse · Hauts-de-France</p>
+    <h1 class="komoot-hero-title">Mes sentiers<br><em>&amp; traces GPS</em></h1>
+    <p class="komoot-hero-sub">Randonnée, photo nature et grands espaces dans les Hauts-de-France</p>
+    <div class="komoot-hero-stats">
+      <div><span class="komoot-hero-stat-num" id="stat-total">—</span><span class="komoot-hero-stat-label">Parcours</span></div>
+      <div><span class="komoot-hero-stat-num" id="stat-km">—</span><span class="komoot-hero-stat-label">Km parcourus</span></div>
+      <div><span class="komoot-hero-stat-num" id="stat-coeurs">—</span><span class="komoot-hero-stat-label">Coups de cœur</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- SECTION 2 — FILTRES ET GRILLE -->
+<section class="komoot-section" style="background:#FAF8FF">
+  <div class="rando-filters">
+    <button class="rando-filter active" data-filtre="all">Tous</button>
+    <button class="rando-filter" data-filtre="facile">Facile</button>
+    <button class="rando-filter" data-filtre="modere">Modéré</button>
+    <button class="rando-filter" data-filtre="difficile">Difficile</button>
+    <button class="rando-filter" data-filtre="coeur">Coups de cœur ✦</button>
+  </div>
+
+  <div class="rando-grid" id="randoGrid"></div>
+  <div class="rando-empty" id="randoEmpty" style="display:none">
+    <p>Aucun parcours dans cette catégorie pour le moment.</p>
+  </div>
+  <div class="rando-loader" id="randoLoader">
+    <svg width="32" height="32" viewBox="0 0 32 32" style="animation:spinFlower 1.2s linear infinite">
+      <circle cx="16" cy="16" r="5" fill="#3B6D11"/>
+      <ellipse cx="16" cy="5" rx="3" ry="4.5" fill="#C0DD97" opacity=".8"/>
+      <ellipse cx="16" cy="27" rx="3" ry="4.5" fill="#C0DD97" opacity=".8"/>
+      <ellipse cx="5" cy="16" rx="4.5" ry="3" fill="#C9A96E" opacity=".7"/>
+      <ellipse cx="27" cy="16" rx="4.5" ry="3" fill="#C9A96E" opacity=".7"/>
+    </svg>
+    <span>Chargement des parcours...</span>
+  </div>
+
+  <!-- SECTION 3 — ARTICLE BLOG MIS EN AVANT -->
+  <div class="komoot-article-banner">
+    <div style="flex:1;min-width:220px">
+      <span class="komoot-article-badge">Dernier article</span>
+      <h3 class="komoot-article-title">Randonner seule en tant que femme</h3>
+      <p class="komoot-article-desc">Peur, sécurité, comportements déplacés et liberté — mes vraies réponses.</p>
+    </div>
+    <a href="/pages/randonner-seule-femme.html" class="komoot-article-btn">Lire l'article →</a>
+  </div>
+</section>
+
+<!-- SECTION 4 — ME SUIVRE -->
+<div class="komoot-follow-bar">
+  <p class="komoot-follow-text">Retrouve mes aventures sur mes réseaux</p>
+  <div class="komoot-follow-btns">
+    <a class="komoot-follow-btn" style="background:#1877F2" href="https://www.facebook.com/lachtiterandonneuse" target="_blank" rel="noopener" data-track="clic-reseau" data-value="facebook">
+      <svg viewBox="0 0 24 24" fill="white"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+      <div><div class="komoot-follow-name">Facebook</div><div class="komoot-follow-handle">@lachtiterandonneuse</div></div>
+    </a>
+    <a class="komoot-follow-btn" style="background:linear-gradient(135deg,#dc2743,#f09433)" href="https://www.instagram.com/lachtiterandonneuse" target="_blank" rel="noopener" data-track="clic-reseau" data-value="instagram">
+      <svg viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      <div><div class="komoot-follow-name">Instagram</div><div class="komoot-follow-handle">@lachtiterandonneuse</div></div>
+    </a>
+    <a class="komoot-follow-btn" style="background:#6AA127" href="https://www.komoot.com/fr-fr/user/4969537527049" target="_blank" rel="noopener" data-track="clic-reseau" data-value="komoot">
+      <svg viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 4.5c2.003 0 3.837.68 5.297 1.813L6.313 17.297A7.454 7.454 0 014.5 12c0-4.142 3.358-7.5 7.5-7.5zm0 15c-2.003 0-3.837-.68-5.297-1.813l10.984-10.984A7.454 7.454 0 0119.5 12c0 4.142-3.358 7.5-7.5 7.5z"/></svg>
+      <div><div class="komoot-follow-name">Komoot</div><div class="komoot-follow-handle">@lachtiterandonneuse</div></div>
+    </a>
+  </div>
+</div>
+
+<div class="sentiers-to-blog">
+  <p>Tu veux lire mes aventures ?</p>
+  <a href="/pages/blog.html">Lire le blog →</a>
+</div>
+
+<!-- FOOTER -->
+<div id="footer"></div>
+<script src="/js/include.js"></script>
+
+<script>
+/* ── CURSEUR FLEUR ── */
+const cur=document.getElementById('cursor-flower');
+let mx=0,my=0,cx=0,cy=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function loop(){cx+=(mx-cx)*0.13;cy+=(my-cy)*0.13;cur.style.left=cx+'px';cur.style.top=cy+'px';requestAnimationFrame(loop)})();
+
+/* ── FLEURS FLOTTANTES HERO ── */
+function makeFloatUpFlowers(container,count,colors){
+  for(let i=0;i<count;i++){
+    const sz=16+Math.random()*16;
+    const s=document.createElementNS('http://www.w3.org/2000/svg','svg');
+    s.setAttribute('viewBox','0 0 28 28');
+    s.setAttribute('width',sz);s.setAttribute('height',sz);
+    s.classList.add('floating-flower');
+    s.style.left=Math.random()*100+'%';
+    s.style.top=Math.random()*100+'%';
+    s.style.animationDuration=(10+Math.random()*10)+'s';
+    s.style.animationDelay=(Math.random()*8)+'s';
+    const c=colors[Math.floor(Math.random()*colors.length)];
+    s.innerHTML=`<circle cx="14" cy="14" r="4" fill="${c}"/>
+      <ellipse cx="14" cy="5" rx="3" ry="4.5" fill="${c}"/>
+      <ellipse cx="14" cy="23" rx="3" ry="4.5" fill="${c}"/>
+      <ellipse cx="5" cy="14" rx="4.5" ry="3" fill="${c}"/>
+      <ellipse cx="23" cy="14" rx="4.5" ry="3" fill="${c}"/>`;
+    container.appendChild(s);
+  }
+}
+makeFloatUpFlowers(document.getElementById('komootHeroFlowers'),12,['rgba(192,221,151,.25)','rgba(255,255,255,.12)']);
+
+/* ── CHARGEMENT DES PARCOURS DEPUIS L'API ── */
+(function() {
+  const grid = document.getElementById('randoGrid');
+  const loader = document.getElementById('randoLoader');
+  const empty = document.getElementById('randoEmpty');
+  let allParcours = [];
+
+  function formatDistance(km) {
+    if (!km) return '';
+    return parseFloat(km) % 1 === 0
+      ? parseInt(km) + ' km'
+      : parseFloat(km).toFixed(1) + ' km';
+  }
+
+  function createCard(p) {
+    const card = document.createElement('div');
+    card.className = 'rando-card';
+    card.setAttribute('data-diff', p.difficulte);
+    card.setAttribute('data-coeur', p.coup_de_coeur);
+
+    const imgHtml = p.photo_principale
+      ? `<img class="rando-card-img" src="/${p.photo_principale}" alt="${p.titre}" loading="lazy">`
+      : `<div class="rando-card-img-placeholder">🌿</div>`;
+
+    const metaItems = [];
+    if (p.distance) metaItems.push(`🗺 ${formatDistance(p.distance)}`);
+    if (p.duree) metaItems.push(`⏱ ${p.duree}`);
+    if (p.denivele) metaItems.push(`↑ ${p.denivele}m`);
+
+    const tagsHtml = (p.tags || []).length > 0
+      ? `<div class="rando-card-tags">${p.tags.map(t => `<span class="rando-card-tag">${t}</span>`).join('')}</div>`
+      : '';
+
+    const gpxBtn = p.fichier_gpx
+      ? `<a href="/${p.fichier_gpx}" download class="btn-gpx">⬇ GPX</a>`
+      : `<span class="btn-gpx disabled">GPX bientôt</span>`;
+
+    const komootBtn = p.lien_komoot
+      ? `<a href="${p.lien_komoot}" target="_blank" rel="noopener" class="btn-komoot">Komoot ↗</a>`
+      : '';
+
+    card.innerHTML = `
+      ${imgHtml}
+      <div class="rando-card-body">
+        <div class="rando-card-top">
+          <span class="rando-card-region">${p.region || ''}</span>
+          ${p.coup_de_coeur ? '<span class="rando-card-coeur">✦</span>' : ''}
+        </div>
+        <h3 class="rando-card-title">${p.titre}</h3>
+        <div class="rando-card-meta">
+          ${metaItems.join('<span style="opacity:.3">·</span>')}
+          <span class="rando-card-diff diff-${p.difficulte}">${p.difficulte.charAt(0).toUpperCase() + p.difficulte.slice(1)}</span>
+        </div>
+        ${p.description ? `<p class="rando-card-desc">${p.description}</p>` : ''}
+        ${tagsHtml}
+        <div class="rando-card-btns">
+          ${gpxBtn}
+          ${komootBtn}
+        </div>
+      </div>
+    `;
+    return card;
+  }
+
+  function renderCards(parcours) {
+    grid.innerHTML = '';
+    if (parcours.length === 0) {
+      empty.style.display = 'block';
+      return;
+    }
+    empty.style.display = 'none';
+    parcours.forEach(p => grid.appendChild(createCard(p)));
+  }
+
+  function applyFilter(filtre) {
+    let filtered = allParcours;
+    if (filtre === 'coeur') filtered = allParcours.filter(p => p.coup_de_coeur == 1);
+    else if (filtre !== 'all') filtered = allParcours.filter(p => p.difficulte === filtre);
+    renderCards(filtered);
+  }
+
+  async function loadParcours() {
+    loader.style.display = 'flex';
+    try {
+      const res = await fetch('/api/parcours.php');
+      if (!res.ok) throw new Error('API error');
+      const data = await res.json();
+      allParcours = data.parcours || [];
+      loader.style.display = 'none';
+
+      const totalKm = allParcours.reduce((sum, p) => sum + parseFloat(p.distance || 0), 0);
+      const coeurs = allParcours.filter(p => p.coup_de_coeur == 1).length;
+
+      const statTotal = document.getElementById('stat-total');
+      const statKm = document.getElementById('stat-km');
+      const statCoeurs = document.getElementById('stat-coeurs');
+      if (statTotal) statTotal.textContent = allParcours.length;
+      if (statKm) statKm.textContent = Math.round(totalKm);
+      if (statCoeurs) statCoeurs.textContent = coeurs;
+
+      renderCards(allParcours);
+    } catch(err) {
+      loader.innerHTML = `<p style="color:#9a88b8;font-size:13px;font-style:italic">Impossible de charger les parcours.<br><a href="https://www.komoot.com/fr-fr/user/4969537527049" target="_blank" style="color:#3B6D11">Voir mon profil Komoot ↗</a></p>`;
+    }
+  }
+
+  document.querySelectorAll('.rando-filter').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.rando-filter').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      applyFilter(this.getAttribute('data-filtre'));
+    });
+  });
+
+  loadParcours();
+})();
+
+/* ── MENU MOBILE ── */
+const navToggle=document.getElementById('navToggle');
+const navLinksEl=document.querySelector('.nav-links');
+navToggle?.addEventListener('click',()=>{
+  navToggle.classList.toggle('open');
+  navLinksEl.classList.toggle('open');
+});
+navLinksEl?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+  navToggle?.classList.remove('open');
+  navLinksEl.classList.remove('open');
+}));
+</script>
+</body>
+</html>

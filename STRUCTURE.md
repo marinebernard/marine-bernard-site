@@ -8,7 +8,7 @@ Tous les fichiers sont à la racine — c'est correct et simple pour un héberge
 marine-bernard.fr/
 ├── index.html              ← Accueil
 ├── blog.html               ← Blog La Ch'tite Randonneuse
-├── parcours-komoot.html    ← Mes parcours rando en live
+├── sentiers.html           ← Mes parcours rando en live
 │
 ├── Projets web
 │   ├── refonte-jouvence.html
@@ -52,6 +52,6 @@ marine-bernard.fr/
 ## URLs en production
 - https://marine-bernard.fr/            → accueil
 - https://marine-bernard.fr/blog        → blog
-- https://marine-bernard.fr/parcours-komoot → randonnées
+- https://marine-bernard.fr/pages/sentiers → randonnées
 - https://marine-bernard.fr/refonte-jouvence → projet Jouvence
 - etc.
