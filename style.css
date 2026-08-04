@@ -1385,7 +1385,8 @@ body.rando #cursor-flower [fill="#d4b8f0"]{fill:#8fc55f;}
   gap:14px;
 }
 .rando-card-lieu{
-  font-size:11px;color:#7a8f5a;margin-bottom:0.5rem;
+  display:flex;align-items:flex-start;gap:5px;
+  font-size:11px;color:#7a8f5a;margin-bottom:0.5rem;line-height:1.4;
 }
 .rando-card-balisage{
   display:inline-flex;align-items:center;gap:5px;

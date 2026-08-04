@@ -110,6 +110,7 @@ $parcours = $pdo->query("SELECT * FROM parcours ORDER BY date_creation DESC")->f
           <th>Photo</th>
           <th>Titre</th>
           <th>Région</th>
+          <th>Ville</th>
           <th>Distance</th>
           <th>Difficulté</th>
           <th>♥</th>
@@ -130,6 +131,9 @@ $parcours = $pdo->query("SELECT * FROM parcours ORDER BY date_creation DESC")->f
           </td>
           <td><strong><?= htmlspecialchars($p['titre']) ?></strong></td>
           <td><?= htmlspecialchars($p['region']) ?></td>
+          <td style="font-size:12px;color:#7a6090">
+            <?= $p['lieu_ville'] ? htmlspecialchars($p['lieu_ville']) : '<span style="opacity:.3">—</span>' ?>
+          </td>
           <td><?= $p['distance'] ? $p['distance'] . ' km' : '—' ?></td>
           <td><span class="badge badge-<?= $p['difficulte'] ?>"><?= ucfirst($p['difficulte']) ?></span></td>
           <td><?= $p['coup_de_coeur'] ? '<span class="coeur">✦</span>' : '' ?></td>
@@ -145,7 +149,7 @@ $parcours = $pdo->query("SELECT * FROM parcours ORDER BY date_creation DESC")->f
         </tr>
         <?php endforeach; ?>
         <?php if (empty($parcours)): ?>
-        <tr><td colspan="9" style="text-align:center;color:#9a88b8;padding:2rem;font-style:italic">Aucun parcours encore — <a href="/admin/parcours-form.php">Ajouter le premier</a></td></tr>
+        <tr><td colspan="10" style="text-align:center;color:#9a88b8;padding:2rem;font-style:italic">Aucun parcours encore — <a href="/admin/parcours-form.php">Ajouter le premier</a></td></tr>
         <?php endif; ?>
       </tbody>
     </table>

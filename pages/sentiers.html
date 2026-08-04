@@ -481,7 +481,15 @@ document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
           ${p.distance || p.duree ? `<span>⏱ ${dureeLabel}</span>` : ''}
           ${p.denivele ? `<span>↑ ${p.denivele}m</span>` : ''}
         </div>
-        ${p.lieu_depart ? `<div class="rando-card-lieu">📍 ${p.lieu_depart}</div>` : ''}
+        ${(p.lieu_depart || p.lieu_ville) ? `
+          <div class="rando-card-lieu">
+            <span>📍</span>
+            <div>
+              ${p.lieu_depart ? `<span>${p.lieu_depart}</span>` : ''}
+              ${p.lieu_ville ? `<span style="color:#9a88b8;font-size:10px;display:block">${p.lieu_ville}</span>` : ''}
+            </div>
+          </div>
+        ` : ''}
         ${balisageHtml}
         ${p.description ? `<p class="rando-card-desc">${p.description}</p>` : ''}
         <div class="rando-card-btns">

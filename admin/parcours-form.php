@@ -81,6 +81,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     'type_balisage' => isset($_POST['balisage']) ? ($_POST['type_balisage'] ?? null) : null,
     'coup_de_coeur' => isset($_POST['coup_de_coeur']) ? 1 : 0,
     'visible' => isset($_POST['visible']) ? 1 : 0,
+    'lieu_depart' => trim($_POST['lieu_depart'] ?? ''),
+    'lieu_ville' => trim($_POST['lieu_ville'] ?? ''),
     'photo_principale' => $photo_principale,
     'photos_galerie' => json_encode(array_values($photos_galerie)),
     'fichier_gpx' => $fichier_gpx,
@@ -90,10 +92,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   ];
 
   if ($id) {
-    $sql = "UPDATE parcours SET titre=:titre, region=:region, distance=:distance, duree=:duree, denivele=:denivele, difficulte=:difficulte, type_paysage=:type_paysage, description=:description, balisage=:balisage, type_balisage=:type_balisage, coup_de_coeur=:coup_de_coeur, visible=:visible, photo_principale=:photo_principale, photos_galerie=:photos_galerie, fichier_gpx=:fichier_gpx, lien_komoot=:lien_komoot, tags=:tags, date_rando=:date_rando WHERE id=:id";
+    $sql = "UPDATE parcours SET titre=:titre, region=:region, distance=:distance, duree=:duree, denivele=:denivele, difficulte=:difficulte, type_paysage=:type_paysage, description=:description, balisage=:balisage, type_balisage=:type_balisage, coup_de_coeur=:coup_de_coeur, visible=:visible, lieu_depart=:lieu_depart, lieu_ville=:lieu_ville, photo_principale=:photo_principale, photos_galerie=:photos_galerie, fichier_gpx=:fichier_gpx, lien_komoot=:lien_komoot, tags=:tags, date_rando=:date_rando WHERE id=:id";
     $data['id'] = $id;
   } else {
-    $sql = "INSERT INTO parcours (titre, region, distance, duree, denivele, difficulte, type_paysage, description, balisage, type_balisage, coup_de_coeur, visible, photo_principale, photos_galerie, fichier_gpx, lien_komoot, tags, date_rando) VALUES (:titre, :region, :distance, :duree, :denivele, :difficulte, :type_paysage, :description, :balisage, :type_balisage, :coup_de_coeur, :visible, :photo_principale, :photos_galerie, :fichier_gpx, :lien_komoot, :tags, :date_rando)";
+    $sql = "INSERT INTO parcours (titre, region, distance, duree, denivele, difficulte, type_paysage, description, balisage, type_balisage, coup_de_coeur, visible, lieu_depart, lieu_ville, photo_principale, photos_galerie, fichier_gpx, lien_komoot, tags, date_rando) VALUES (:titre, :region, :distance, :duree, :denivele, :difficulte, :type_paysage, :description, :balisage, :type_balisage, :coup_de_coeur, :visible, :lieu_depart, :lieu_ville, :photo_principale, :photos_galerie, :fichier_gpx, :lien_komoot, :tags, :date_rando)";
   }
 
   try {
@@ -422,6 +424,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
           </div>
 
+        </div>
+      </div>
+
+      <div class="form-section">
+        <p class="form-section-title">📍 Point de départ</p>
+        <div class="form-grid">
+          <div class="form-group full">
+            <label>Lieu de départ</label>
+            <input type="text"
+              name="lieu_depart"
+              value="<?= htmlspecialchars($parcours['lieu_depart'] ?? '') ?>"
+              placeholder="Ex: Parking de l'église Saint-Vaast">
+            <p style="font-size:11px;color:#9a88b8;margin-top:.3rem">Nom du parking, du point de repère ou de l'adresse de départ</p>
+          </div>
+          <div class="form-group">
+            <label>Ville / Village</label>
+            <input type="text"
+              name="lieu_ville"
+              value="<?= htmlspecialchars($parcours['lieu_ville'] ?? '') ?>"
+              placeholder="Ex: Avion (62210)">
+            <p style="font-size:11px;color:#9a88b8;margin-top:.3rem">Nom de la commune et code postal</p>
+          </div>
         </div>
       </div>
 
