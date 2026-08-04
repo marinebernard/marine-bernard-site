@@ -103,6 +103,13 @@ $parcours = $pdo->query("SELECT * FROM parcours ORDER BY date_creation DESC")->f
       <span>💡</span>
       <span>Première utilisation ? <a href="/admin/fonts/download-fonts.php" style="color:#2D1B69;font-weight:500">Télécharge les polices →</a> pour des cartes avec les bonnes typographies.</span>
     </div>
+    <div style="background:#FFF8EC;border:.5px solid rgba(201,169,110,.3);border-radius:10px;padding:.7rem 1rem;font-size:12px;color:#633806;margin-bottom:1rem">
+      <strong>Si le téléchargement automatique échoue :</strong> télécharge manuellement
+      <a href="https://fonts.google.com/specimen/Inter" target="_blank" style="color:#2D1B69">Inter</a> et
+      <a href="https://fonts.google.com/specimen/Playfair+Display" target="_blank" style="color:#2D1B69">Playfair Display</a>
+      depuis Google Fonts, puis dépose les fichiers .ttf dans le dossier <code>admin/fonts/</code> via FileZilla.
+      Noms attendus : <code>Inter-Regular.ttf</code>, <code>Inter-Medium.ttf</code>, <code>PlayfairDisplay-BoldItalic.ttf</code>.
+    </div>
     <div class="actions">
       <h1 class="page-title">Mes parcours</h1>
       <a href="/admin/parcours-form.php" class="btn-add">➕ Ajouter un parcours</a>
