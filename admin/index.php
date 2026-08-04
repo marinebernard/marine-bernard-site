@@ -82,6 +82,7 @@ $parcours = $pdo->query("SELECT * FROM parcours ORDER BY date_creation DESC")->f
   <header class="admin-header">
     <span class="admin-logo">Marine Bernard ✿</span>
     <nav class="admin-nav">
+      <a href="/admin/articles.php">✍️ Articles blog</a>
       <a href="/" target="_blank">Voir le site ↗</a>
       <a href="/admin/parcours-form.php" class="btn-add">+ Ajouter un parcours</a>
       <a href="/admin/login.php?logout=1" class="btn-logout">Déconnexion</a>

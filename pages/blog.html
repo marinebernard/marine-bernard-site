@@ -70,7 +70,7 @@
 </div>
 
 <!-- GRILLE ARTICLES -->
-<main class="blog-cards-grid" id="blogCardsGrid">
+<main class="blog-cards-grid" id="blogGrid">
 
   <article class="blog-card" data-category="randonnee">
     <a href="randonner-seule-femme.html">
@@ -154,17 +154,61 @@ makeFloatUpFlowers(document.getElementById('bloglistFlowers'),12,['rgba(192,221,
 
 /* ── FILTRE ARTICLES ── */
 const blogFilterBtns=document.querySelectorAll('.bloglist-filter');
-const blogCards=document.querySelectorAll('.blog-card');
 blogFilterBtns.forEach(btn=>{
   btn.addEventListener('click',()=>{
     blogFilterBtns.forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
     const filter=btn.dataset.filter;
-    blogCards.forEach(card=>{
+    document.querySelectorAll('.blog-card').forEach(card=>{
       card.classList.toggle('hide', filter!=='all' && card.dataset.category!==filter);
     });
   });
 });
+
+/* ── ARTICLES DEPUIS LA BDD ── */
+async function loadArticlesBDD() {
+  try {
+    const res = await fetch('/api/articles.php');
+    const data = await res.json();
+    if (!data.articles || data.articles.length === 0) return;
+    const grille = document.getElementById('blogGrid');
+    if (!grille) return;
+    data.articles.forEach(a => {
+      const catLabels = {
+        randonnee: 'Randonnée', photo: 'Photo nature',
+        conseils: 'Conseils', equipement: 'Équipement', destination: 'Destination'
+      };
+      const date = a.date_publication
+        ? new Date(a.date_publication).toLocaleDateString('fr-FR', {month:'long', year:'numeric'})
+        : '';
+      const article = document.createElement('article');
+      article.className = 'blog-card';
+      article.setAttribute('data-category', a.categorie);
+      article.innerHTML = `
+        <a href="/pages/blog-${a.slug}.html">
+          <div class="blog-card-img" style="${a.photo_principale ? `background-image:url('/${a.photo_principale}');background-size:cover;background-position:center` : 'background:linear-gradient(135deg,#EAF3DE,#27500A)'}">
+            ${!a.photo_principale ? '<span style="font-size:2.5rem">✍️</span>' : ''}
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta">
+              <span class="blog-cat">${catLabels[a.categorie] || a.categorie}</span>
+              ${date ? `<span class="blog-date">${date}</span>` : ''}
+              ${a.temps_lecture ? `<span class="blog-date">· ${a.temps_lecture} min</span>` : ''}
+            </div>
+            <h2 class="blog-card-title">${a.titre}</h2>
+            ${a.extrait ? `<p class="blog-card-excerpt">${a.extrait}</p>` : ''}
+            <span class="blog-card-read">Lire l'article →</span>
+          </div>
+        </a>
+      `;
+      grille.appendChild(article);
+    });
+  } catch(e) {
+    console.error('Erreur chargement articles:', e);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadArticlesBDD);
 
 /* ── REVEAL ── */
 const obs=new IntersectionObserver(entries=>{

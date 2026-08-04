@@ -50,6 +50,28 @@ try {
   $resultats[] = ['err', 'Création table : ' . $e->getMessage()];
 }
 
+$tableArticles = "CREATE TABLE IF NOT EXISTS articles (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  titre VARCHAR(255) NOT NULL,
+  slug VARCHAR(255) NOT NULL UNIQUE,
+  categorie VARCHAR(100) DEFAULT 'randonnee',
+  photo_principale VARCHAR(500) DEFAULT NULL,
+  extrait TEXT DEFAULT NULL,
+  contenu LONGTEXT DEFAULT NULL,
+  visible TINYINT(1) DEFAULT 1,
+  date_publication DATE DEFAULT NULL,
+  temps_lecture INT DEFAULT NULL COMMENT 'en minutes',
+  date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  date_modification TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
+
+try {
+  $pdo->exec($tableArticles);
+  $resultats[] = ['ok', 'Table articles créée ou déjà existante'];
+} catch(PDOException $e) {
+  $resultats[] = ['err', 'Création table articles : ' . $e->getMessage()];
+}
+
 $colonnes = [
   'type_paysage'  => "ALTER TABLE parcours ADD COLUMN type_paysage VARCHAR(100) DEFAULT NULL",
   'lieu_depart'   => "ALTER TABLE parcours ADD COLUMN lieu_depart VARCHAR(255) DEFAULT NULL",

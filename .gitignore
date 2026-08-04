@@ -29,3 +29,7 @@ uploads/cartes/*
 
 # Polices téléchargées à la demande par admin/fonts/download-fonts.php
 admin/fonts/*.ttf
+
+# Photos d'articles envoyées par admin/article-form.php — jamais versionnées
+uploads/articles/*
+!uploads/articles/.htaccess

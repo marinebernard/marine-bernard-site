@@ -1,0 +1,8 @@
+Options -Indexes
+
+# Défense en profondeur : même si un fichier autre qu'une image passait la
+# validation d'upload (admin/upload.php n'autorise que jpg/jpeg/png/webp),
+# ce dossier ne doit jamais pouvoir exécuter de script.
+<FilesMatch "\.(php|phtml|php3|php4|php5|php7|phar|pl|py|cgi)$">
+  Require all denied
+</FilesMatch>
