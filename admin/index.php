@@ -71,6 +71,9 @@ $parcours = $pdo->query("SELECT * FROM parcours ORDER BY date_creation DESC")->f
     .btn-edit:hover{background:#d4b8f0}
     .btn-del{font-size:11px;padding:4px 10px;border-radius:8px;background:#fef2f2;color:#dc2626;border:none;cursor:pointer;transition:background .2s}
     .btn-del:hover{background:#fee2e2}
+    .btn-card{font-size:11px;padding:4px 10px;border-radius:8px;background:#F0E6FF;color:#2D1B69;border:none;cursor:pointer;transition:background .2s}
+    .btn-card:hover{background:#d4b8f0}
+    .btn-card.loading{opacity:.6;cursor:wait}
     .photo-thumb{width:40px;height:40px;object-fit:cover;border-radius:6px}
     .no-photo{width:40px;height:40px;background:#F0E6FF;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.2rem}
   </style>
@@ -95,6 +98,10 @@ $parcours = $pdo->query("SELECT * FROM parcours ORDER BY date_creation DESC")->f
       <div class="stat-card"><div class="stat-num"><?= $total ?></div><div class="stat-label">Parcours total</div></div>
       <div class="stat-card"><div class="stat-num"><?= $coeurs ?></div><div class="stat-label">Coups de cœur</div></div>
       <div class="stat-card"><div class="stat-num"><?= $visibles ?></div><div class="stat-label">Visibles sur le site</div></div>
+    </div>
+    <div style="background:#F0E6FF;border-radius:10px;padding:.7rem 1rem;font-size:12px;color:#5a4870;margin-bottom:1rem;display:flex;align-items:center;gap:8px">
+      <span>💡</span>
+      <span>Première utilisation ? <a href="/admin/fonts/download-fonts.php" style="color:#2D1B69;font-weight:500">Télécharge les polices →</a> pour des cartes avec les bonnes typographies.</span>
     </div>
     <div class="actions">
       <h1 class="page-title">Mes parcours</h1>
@@ -134,6 +141,7 @@ $parcours = $pdo->query("SELECT * FROM parcours ORDER BY date_creation DESC")->f
           <td>
             <div class="td-actions">
               <a href="/admin/parcours-form.php?id=<?= $p['id'] ?>" class="btn-edit">Modifier</a>
+              <button class="btn-card" onclick="genererCarte(<?= $p['id'] ?>, this)" title="Générer carte Facebook/LinkedIn">🖼 Carte</button>
               <button class="btn-del" onclick="if(confirm('Supprimer ce parcours ?')) window.location='/admin/index.php?delete=<?= $p['id'] ?>'">Supprimer</button>
             </div>
           </td>
@@ -145,5 +153,40 @@ $parcours = $pdo->query("SELECT * FROM parcours ORDER BY date_creation DESC")->f
       </tbody>
     </table>
   </div>
+  <script>
+    async function genererCarte(id, btn) {
+      btn.classList.add('loading');
+      btn.textContent = '⏳ Génération...';
+      try {
+        const res = await fetch('/admin/generate-card.php?id=' + id);
+        const data = await res.json();
+        if (data.success) {
+          const a = document.createElement('a');
+          a.href = data.url;
+          a.download = data.filename;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          btn.textContent = '✓ Téléchargée';
+          btn.style.background = '#EAF3DE';
+          btn.style.color = '#27500A';
+          setTimeout(() => {
+            btn.textContent = '🖼 Carte';
+            btn.style.background = '';
+            btn.style.color = '';
+            btn.classList.remove('loading');
+          }, 3000);
+        } else {
+          alert('Erreur : ' + (data.error || 'Génération impossible'));
+          btn.textContent = '🖼 Carte';
+          btn.classList.remove('loading');
+        }
+      } catch(e) {
+        alert('Erreur de connexion');
+        btn.textContent = '🖼 Carte';
+        btn.classList.remove('loading');
+      }
+    }
+  </script>
 </body>
 </html>

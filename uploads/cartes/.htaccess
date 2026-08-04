@@ -1,0 +1,8 @@
+Options -Indexes
+
+# Défense en profondeur : ce dossier ne contient que des JPG générés côté
+# serveur par admin/generate-card.php, mais ne doit jamais pouvoir exécuter
+# de script quelle qu'en soit l'origine.
+<FilesMatch "\.(php|phtml|php3|php4|php5|php7|phar|pl|py|cgi)$">
+  Require all denied
+</FilesMatch>

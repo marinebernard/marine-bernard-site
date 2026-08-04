@@ -109,6 +109,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     .btn-submit:hover{background:#8B6BB1}
     .btn-cancel{background:#F0E6FF;color:#2D1B69;border:none;border-radius:22px;padding:12px 20px;font-size:14px;font-family:'Inter',sans-serif;cursor:pointer;text-decoration:none;display:inline-block}
     .form-actions{display:flex;gap:10px;margin-top:1.5rem}
+    .btn-card-form{background:#F0E6FF;color:#2D1B69;border:none;border-radius:22px;padding:9px 20px;font-size:13px;font-family:'Inter',sans-serif;cursor:pointer;transition:background .2s}
+    .btn-card-form:hover{background:#d4b8f0}
+    .btn-card-form.loading{opacity:.6;cursor:wait}
   </style>
 </head>
 <body>
@@ -363,7 +366,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit" class="btn-submit">Enregistrer le parcours</button>
         <a href="/admin/index.php" class="btn-cancel">Annuler</a>
       </div>
+      <?php if ($id): ?>
+      <div style="margin-top:1rem;padding-top:1rem;border-top:.5px solid #F0E6FF">
+        <p style="font-size:12px;color:#9a88b8;margin-bottom:.6rem">Générer une carte de partage 1200x630px pour Facebook et LinkedIn</p>
+        <button type="button" class="btn-card-form" onclick="genererCarte(<?= $id ?>, this)">🖼 Générer la carte JPG</button>
+      </div>
+      <?php endif; ?>
     </form>
   </div>
+  <script>
+    async function genererCarte(id, btn) {
+      btn.classList.add('loading');
+      btn.textContent = '⏳ Génération...';
+      try {
+        const res = await fetch('/admin/generate-card.php?id=' + id);
+        const data = await res.json();
+        if (data.success) {
+          const a = document.createElement('a');
+          a.href = data.url;
+          a.download = data.filename;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          btn.textContent = '✓ Téléchargée';
+          btn.style.background = '#EAF3DE';
+          btn.style.color = '#27500A';
+          setTimeout(() => {
+            btn.textContent = '🖼 Générer la carte JPG';
+            btn.style.background = '';
+            btn.style.color = '';
+            btn.classList.remove('loading');
+          }, 3000);
+        } else {
+          alert('Erreur : ' + (data.error || 'Génération impossible'));
+          btn.textContent = '🖼 Générer la carte JPG';
+          btn.classList.remove('loading');
+        }
+      } catch(e) {
+        alert('Erreur de connexion');
+        btn.textContent = '🖼 Générer la carte JPG';
+        btn.classList.remove('loading');
+      }
+    }
+  </script>
 </body>
 </html>

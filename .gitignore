@@ -22,3 +22,10 @@ admin/config.php
 # Contenu envoyé par le back office (photos/GPX) — jamais versionné, vit uniquement sur le serveur
 uploads/parcours/*
 !uploads/parcours/.htaccess
+
+# Cartes de partage générées à la volée par admin/generate-card.php
+uploads/cartes/*
+!uploads/cartes/.htaccess
+
+# Polices téléchargées à la demande par admin/fonts/download-fonts.php
+admin/fonts/*.ttf
