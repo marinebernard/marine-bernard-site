@@ -103,9 +103,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     .btn-cancel{background:#F0E6FF;color:#2D1B69;border:none;border-radius:22px;padding:12px 20px;font-size:14px;font-family:'Inter',sans-serif;cursor:pointer;text-decoration:none;display:inline-block}
     .form-actions{display:flex;gap:10px;margin-top:1.5rem}
     .error{background:#fef2f2;color:#dc2626;border-radius:8px;padding:.6rem 1rem;font-size:13px;margin-bottom:1rem}
-    .toolbar{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:.5rem}
-    .toolbar-btn{font-size:11px;padding:4px 8px;border-radius:6px;border:.5px solid rgba(139,107,177,.2);background:#FAF8FF;color:#5a4870;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}
-    .toolbar-btn:hover{background:#F0E6FF;color:#2D1B69}
+    .editor-wrap{border:.5px solid rgba(139,107,177,.3);border-radius:10px;overflow:hidden}
+    .editor-toolbar{display:flex;gap:4px;flex-wrap:wrap;padding:8px;background:#F0E6FF;border-bottom:.5px solid rgba(139,107,177,.2)}
+    .tb{font-size:11px;padding:5px 9px;border-radius:6px;border:.5px solid rgba(139,107,177,.25);background:#fff;color:#5a4870;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;white-space:nowrap}
+    .tb:hover{background:#8B6BB1;color:#fff;border-color:#8B6BB1}
+    .tb-sep{width:1px;background:rgba(139,107,177,.25);margin:2px 4px}
+    .editor-wrap textarea.contenu{border:none;border-radius:0;display:block}
+    .editor-wrap textarea.contenu:focus{border:none}
+    .editor-preview{min-height:400px;padding:1rem 1.2rem;font-family:'Georgia',serif;font-size:14px;line-height:1.8;color:#2D1B69;background:#fff;overflow-y:auto}
+    .editor-preview h2{font-family:'Playfair Display',serif;font-size:20px;margin:1.2rem 0 .6rem}
+    .editor-preview h3{font-family:'Playfair Display',serif;font-size:17px;margin:1rem 0 .5rem}
+    .editor-preview h4{font-size:15px;margin:.8rem 0 .4rem}
+    .editor-preview p{margin-bottom:.8rem}
+    .editor-preview strong{color:#2D1B69}
+    .editor-preview blockquote{border-left:3px solid #C9A96E;padding-left:1rem;margin:.8rem 0;font-style:italic;color:#5a4870}
+    .editor-preview hr{border:none;border-top:.5px solid rgba(139,107,177,.25);margin:1.2rem 0}
+    .editor-preview a{color:#8B6BB1}
+    .editor-preview .puce-or{position:relative;padding-left:1.3rem;margin-bottom:.5rem}
+    .editor-preview .puce-or::before{content:'✦';position:absolute;left:0;color:#C9A96E}
+    .editor-preview .encart-conseil{background:#EAF3DE;border-radius:10px;padding:.8rem 1rem;margin:.8rem 0;font-size:13px}
+    .editor-preview .encart-attention{background:#FAEEDA;border-radius:10px;padding:.8rem 1rem;margin:.8rem 0;font-size:13px}
+    .editor-footer{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;padding:6px 12px;background:#FAF8FF;border-top:.5px solid rgba(139,107,177,.15);font-size:11px;color:#9a88b8}
   </style>
 </head>
 <body>
@@ -146,7 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           </div>
           <div class="form-group">
             <label>Temps de lecture (minutes)</label>
-            <input type="number" name="temps_lecture" min="1" max="60" value="<?= $article['temps_lecture'] ?? '' ?>" placeholder="5">
+            <input type="number" name="temps_lecture" id="temps_lecture" min="1" max="60" value="<?= $article['temps_lecture'] ?? '' ?>" placeholder="5">
           </div>
           <div class="form-group" style="justify-content:flex-end">
             <div class="checkbox-group">
@@ -184,16 +202,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       <div class="form-section">
         <p class="form-section-title">Contenu de l'article</p>
-        <div class="toolbar">
-          <button type="button" class="toolbar-btn" onclick="insert('## ', '')">H2</button>
-          <button type="button" class="toolbar-btn" onclick="insert('### ', '')">H3</button>
-          <button type="button" class="toolbar-btn" onclick="insert('**', '**')"><strong>B</strong></button>
-          <button type="button" class="toolbar-btn" onclick="insert('*', '*')"><em>I</em></button>
-          <button type="button" class="toolbar-btn" onclick="insert('\n✦ ', '')">✦ Liste</button>
-          <button type="button" class="toolbar-btn" onclick="insert('\n> ', '')">Citation</button>
-          <button type="button" class="toolbar-btn" onclick="insert('\n---\n', '')">Séparateur</button>
-        </div>
-        <textarea name="contenu" id="contenuArea" class="contenu" placeholder="Rédige ton article ici...
+        <div class="editor-wrap">
+          <div class="editor-toolbar">
+            <button type="button" class="tb" onclick="fmt('line','## ')">H2</button>
+            <button type="button" class="tb" onclick="fmt('line','### ')">H3</button>
+            <button type="button" class="tb" onclick="fmt('line','#### ')">H4</button>
+            <span class="tb-sep"></span>
+            <button type="button" class="tb" onclick="fmt('wrap','**','**')"><strong>G</strong></button>
+            <button type="button" class="tb" onclick="fmt('wrap','*','*')"><em>I</em></button>
+            <button type="button" class="tb" onclick="fmt('wrap','~~','~~')"><s>B</s></button>
+            <span class="tb-sep"></span>
+            <button type="button" class="tb" onclick="insertLine('✦ ')">✦ Liste</button>
+            <button type="button" class="tb" onclick="insertLine('- ')">– Liste</button>
+            <button type="button" class="tb" onclick="insertLine('1. ')">1. Liste</button>
+            <button type="button" class="tb" onclick="insertLine('&gt; ')">Citation</button>
+            <span class="tb-sep"></span>
+            <button type="button" class="tb" onclick="insertBlock('\n:::conseil\n💡 \n:::\n')">💡 Conseil</button>
+            <button type="button" class="tb" onclick="insertBlock('\n:::attention\n⚠️ \n:::\n')">⚠️ Attention</button>
+            <button type="button" class="tb" onclick="insertBlock('\n---\n')">Séparateur</button>
+            <button type="button" class="tb" onclick="insertLink()">🔗 Lien</button>
+            <span class="tb-sep"></span>
+            <button type="button" class="tb" onclick="calcReadTime()">⏱ Calculer temps de lecture</button>
+            <button type="button" class="tb" id="previewToggleBtn" onclick="togglePreview()">👁 Aperçu</button>
+            <button type="button" class="tb" onclick="copyAll()">📋 Copier</button>
+          </div>
+          <textarea name="contenu" id="contenuArea" class="contenu" oninput="updateCounter()" placeholder="Rédige ton article ici...
 
 ## Titre de section
 
@@ -202,8 +235,17 @@ Paragraphe de texte...
 ✦ Point important
 ✦ Autre point
 
-> Citation ou mise en avant"><?= htmlspecialchars($article['contenu'] ?? '') ?></textarea>
-        <p class="form-hint">Utilise ## pour les titres H2, ### pour H3, **texte** pour le gras, *texte* pour l'italique, ✦ pour les listes.</p>
+> Citation ou mise en avant
+
+:::conseil
+💡 Un conseil utile
+:::"><?= htmlspecialchars($article['contenu'] ?? '') ?></textarea>
+          <div class="editor-preview" id="editorPreview" style="display:none"></div>
+          <div class="editor-footer">
+            <span id="wordCounter">0 mot</span>
+            <span>## H2 · ### H3 · **gras** · *italique* · ~~barré~~ · ✦/- listes · &gt; citation · :::conseil:::/:::attention::: · [texte](url)</span>
+          </div>
+        </div>
       </div>
 
       <div class="form-actions">
@@ -235,15 +277,147 @@ Paragraphe de texte...
     }
   }
 
-  function insert(before, after) {
+  function fmt(mode, a, b) {
     const ta = document.getElementById('contenuArea');
-    const start = ta.selectionStart;
-    const end = ta.selectionEnd;
-    const sel = ta.value.substring(start, end);
-    ta.value = ta.value.substring(0, start) + before + sel + after + ta.value.substring(end);
     ta.focus();
-    ta.setSelectionRange(start + before.length, start + before.length + sel.length);
+    if (mode === 'wrap') {
+      const start = ta.selectionStart, end = ta.selectionEnd;
+      const sel = ta.value.substring(start, end);
+      ta.value = ta.value.substring(0, start) + a + sel + b + ta.value.substring(end);
+      ta.setSelectionRange(start + a.length, start + a.length + sel.length);
+    } else if (mode === 'line') {
+      const start = ta.selectionStart;
+      const lineStart = ta.value.lastIndexOf('\n', start - 1) + 1;
+      let lineEnd = ta.value.indexOf('\n', start);
+      if (lineEnd === -1) lineEnd = ta.value.length;
+      const line = ta.value.substring(lineStart, lineEnd).replace(/^#{1,4}\s*/, '');
+      const newLine = a + line;
+      ta.value = ta.value.substring(0, lineStart) + newLine + ta.value.substring(lineEnd);
+      ta.setSelectionRange(lineStart + newLine.length, lineStart + newLine.length);
+    }
+    updateCounter();
   }
+
+  function insertLine(prefix) {
+    const ta = document.getElementById('contenuArea');
+    ta.focus();
+    const start = ta.selectionStart;
+    const needsNL = start > 0 && ta.value[start - 1] !== '\n';
+    const insertion = (needsNL ? '\n' : '') + prefix;
+    ta.value = ta.value.substring(0, start) + insertion + ta.value.substring(start);
+    const pos = start + insertion.length;
+    ta.setSelectionRange(pos, pos);
+    updateCounter();
+  }
+
+  function insertBlock(block) {
+    const ta = document.getElementById('contenuArea');
+    ta.focus();
+    const start = ta.selectionStart;
+    ta.value = ta.value.substring(0, start) + block + ta.value.substring(start);
+    const pos = start + block.length;
+    ta.setSelectionRange(pos, pos);
+    updateCounter();
+  }
+
+  function insertLink() {
+    const url = prompt('URL du lien :');
+    if (!url) return;
+    const label = prompt('Texte du lien :', url);
+    insertBlock('[' + (label || url) + '](' + url + ')');
+  }
+
+  function updateCounter() {
+    const ta = document.getElementById('contenuArea');
+    const words = ta.value.trim() ? ta.value.trim().split(/\s+/).length : 0;
+    const mins = Math.max(1, Math.round(words / 200));
+    document.getElementById('wordCounter').textContent = words + ' mot' + (words !== 1 ? 's' : '') + ' — environ ' + mins + ' min de lecture';
+  }
+
+  function calcReadTime() {
+    const ta = document.getElementById('contenuArea');
+    const words = ta.value.trim() ? ta.value.trim().split(/\s+/).length : 0;
+    const mins = Math.max(1, Math.round(words / 200));
+    const champ = document.getElementById('temps_lecture');
+    if (champ) champ.value = mins;
+    alert('Temps de lecture estimé : ' + mins + ' min (' + words + ' mots à 200 mots/min)');
+  }
+
+  function parseMarkdownPreview(md) {
+    if (!md || !md.trim()) return '<p style="color:#9a88b8;font-style:italic">Aucun contenu</p>';
+
+    const blocks = [];
+    md = md.replace(/:::(conseil|attention)\n([\s\S]*?)\n:::/g, function(m, type, content) {
+      const idx = blocks.length;
+      blocks.push('<div class="encart-' + type + '">' + content.trim().replace(/\n/g, '<br>') + '</div>');
+      return '\n\n@@BLOCK' + idx + '@@\n\n';
+    });
+
+    let html = md
+      .replace(/^#### (.+)$/gm, '<h4>$1</h4>')
+      .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+      .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/~~(.+?)~~/g, '<s>$1</s>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>')
+      .replace(/^✦ (.+)$/gm, '<div class="puce-or">$1</div>')
+      .replace(/^- (.+)$/gm, '<li style="margin-left:1.2rem">$1</li>')
+      .replace(/^\d+\. (.+)$/gm, '<li style="margin-left:1.2rem;list-style:decimal">$1</li>')
+      .replace(/^&gt; (.+)$/gm, '<blockquote>$1</blockquote>')
+      .replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>')
+      .replace(/^---$/gm, '<hr>')
+      .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+
+    html = html.split(/\n\n+/).map(function(p) {
+      p = p.trim();
+      if (!p) return '';
+      const blockMatch = p.match(/^@@BLOCK(\d+)@@$/);
+      if (blockMatch) return blocks[blockMatch[1]];
+      if (p.match(/^<(h[2-4]|div|blockquote|hr|li)/)) return p;
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+
+    return html;
+  }
+
+  function togglePreview() {
+    const ta = document.getElementById('contenuArea');
+    const preview = document.getElementById('editorPreview');
+    const btn = document.getElementById('previewToggleBtn');
+    const showing = preview.style.display !== 'none';
+    if (showing) {
+      preview.style.display = 'none';
+      ta.style.display = 'block';
+      btn.textContent = '👁 Aperçu';
+    } else {
+      preview.innerHTML = parseMarkdownPreview(ta.value);
+      preview.style.display = 'block';
+      ta.style.display = 'none';
+      btn.textContent = '✏️ Éditer';
+    }
+  }
+
+  function copyAll() {
+    const ta = document.getElementById('contenuArea');
+    ta.select();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(ta.value).then(function() { alert('Contenu copié !'); });
+    } else {
+      document.execCommand('copy');
+      alert('Contenu copié !');
+    }
+  }
+
+  document.getElementById('contenuArea').addEventListener('keydown', function(e) {
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      const start = this.selectionStart, end = this.selectionEnd;
+      this.value = this.value.substring(0, start) + '  ' + this.value.substring(end);
+      this.selectionStart = this.selectionEnd = start + 2;
+    }
+  });
+
+  updateCounter();
   </script>
 </body>
 </html>
