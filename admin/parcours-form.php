@@ -454,6 +454,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="form-group">
           <label>Photo principale</label>
           <input type="file" name="photo_principale" accept="image/*">
+          <p style="font-size:11px;color:#9a88b8;margin-top:.3rem">
+            ✓ Optimisation automatique — toutes les images sont redimensionnées (max 1600px) et compressées en JPG 82% à l'upload
+          </p>
           <?php if (!empty($parcours['photo_principale'])): ?>
           <div style="margin-top:.5rem;display:flex;align-items:center;gap:10px;padding:.7rem;background:#FAF8FF;border-radius:8px;border:.5px solid rgba(139,107,177,.15)">
             <img src="/<?= htmlspecialchars($parcours['photo_principale']) ?>"
@@ -475,6 +478,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="form-group">
           <label>Photos galerie (plusieurs possibles)</label>
           <input type="file" name="photos_galerie[]" accept="image/*" multiple>
+          <p style="font-size:11px;color:#9a88b8;margin-top:.3rem">
+            ✓ Optimisation automatique — toutes les images sont redimensionnées (max 1600px) et compressées en JPG 82% à l'upload
+          </p>
           <?php if (!empty($parcours['photos_galerie'])): ?>
           <div style="margin-top:.6rem">
             <p style="font-size:11px;color:#9a88b8;margin-bottom:.5rem">

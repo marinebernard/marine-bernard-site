@@ -166,6 +166,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="form-group">
           <input type="file" name="photo_principale" accept="image/*" onchange="previewImg(this)">
           <p class="form-hint">Format recommandé : 1200×630px, JPG ou WebP, moins de 2 Mo</p>
+          <p style="font-size:11px;color:#9a88b8;margin-top:.3rem">
+            ✓ Optimisation automatique — toutes les images sont redimensionnées (max 1600px) et compressées en JPG 82% à l'upload
+          </p>
           <?php if (!empty($article['photo_principale'])): ?>
           <div class="upload-preview">
             <img src="/<?= htmlspecialchars($article['photo_principale']) ?>" id="imgPrincipale" alt="">
