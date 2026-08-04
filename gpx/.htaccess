@@ -1,5 +1,7 @@
 Options -Indexes
 <FilesMatch "\.gpx$">
+  ForceType application/octet-stream
   Header set Content-Disposition "attachment"
   Header set Content-Type "application/gpx+xml"
+  Header set X-Content-Type-Options "nosniff"
 </FilesMatch>

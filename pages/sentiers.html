@@ -464,6 +464,10 @@ document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
         ? `<div class="rando-card-balisage"><span class="balisage-dot">✓</span><span>Sentier balisé</span></div>`
         : `<div class="rando-card-balisage non-balise"><span>⚠ Non balisé</span></div>`;
 
+    const gpxBtn = p.fichier_gpx
+      ? `<button onclick="telechargerGPX('/${p.fichier_gpx}', '${p.titre.replace(/'/g, "\\'")}')" class="btn-gpx">⬇ GPX</button>`
+      : `<span class="btn-gpx disabled">GPX bientôt</span>`;
+
     card.innerHTML = `
       ${imgHtml}
       <div class="rando-card-body">
@@ -481,7 +485,7 @@ document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
         ${balisageHtml}
         ${p.description ? `<p class="rando-card-desc">${p.description}</p>` : ''}
         <div class="rando-card-btns">
-          ${p.fichier_gpx ? `<a href="/${p.fichier_gpx}" download class="btn-gpx">⬇ GPX</a>` : `<span class="btn-gpx disabled">GPX bientôt</span>`}
+          ${gpxBtn}
           ${mapsUrl ? `<a href="${mapsUrl}" target="_blank" rel="noopener" class="btn-maps">📍</a>` : ''}
           ${p.lien_komoot ? `<a href="${p.lien_komoot}" target="_blank" rel="noopener" class="btn-komoot">Komoot ↗</a>` : ''}
         </div>
@@ -601,6 +605,25 @@ document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
 
   loadParcours();
 })();
+
+/* ── TÉLÉCHARGEMENT GPX FORCÉ (accessible globalement pour les onclick des cartes) ── */
+async function telechargerGPX(url, titre) {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('Fichier non trouvé');
+    const blob = await res.blob();
+    const blobUrl = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = blobUrl;
+    a.download = titre.replace(/[^a-zA-Z0-9À-ž]/g, '-').toLowerCase() + '.gpx';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(blobUrl);
+  } catch(e) {
+    alert('Impossible de télécharger le fichier GPX. Réessaie dans quelques instants.');
+  }
+}
 
 /* ── MENU MOBILE ── */
 const navToggle=document.getElementById('navToggle');
