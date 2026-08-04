@@ -77,6 +77,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     'difficulte' => $_POST['difficulte'],
     'type_paysage' => $_POST['type_paysage'] ?? null,
     'description' => trim($_POST['description'] ?? ''),
+    'balisage' => isset($_POST['balisage']) ? 1 : 0,
+    'type_balisage' => isset($_POST['balisage']) ? ($_POST['type_balisage'] ?? null) : null,
     'coup_de_coeur' => isset($_POST['coup_de_coeur']) ? 1 : 0,
     'visible' => isset($_POST['visible']) ? 1 : 0,
     'photo_principale' => $photo_principale,
@@ -88,10 +90,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   ];
 
   if ($id) {
-    $sql = "UPDATE parcours SET titre=:titre, region=:region, distance=:distance, duree=:duree, denivele=:denivele, difficulte=:difficulte, type_paysage=:type_paysage, description=:description, coup_de_coeur=:coup_de_coeur, visible=:visible, photo_principale=:photo_principale, photos_galerie=:photos_galerie, fichier_gpx=:fichier_gpx, lien_komoot=:lien_komoot, tags=:tags, date_rando=:date_rando WHERE id=:id";
+    $sql = "UPDATE parcours SET titre=:titre, region=:region, distance=:distance, duree=:duree, denivele=:denivele, difficulte=:difficulte, type_paysage=:type_paysage, description=:description, balisage=:balisage, type_balisage=:type_balisage, coup_de_coeur=:coup_de_coeur, visible=:visible, photo_principale=:photo_principale, photos_galerie=:photos_galerie, fichier_gpx=:fichier_gpx, lien_komoot=:lien_komoot, tags=:tags, date_rando=:date_rando WHERE id=:id";
     $data['id'] = $id;
   } else {
-    $sql = "INSERT INTO parcours (titre, region, distance, duree, denivele, difficulte, type_paysage, description, coup_de_coeur, visible, photo_principale, photos_galerie, fichier_gpx, lien_komoot, tags, date_rando) VALUES (:titre, :region, :distance, :duree, :denivele, :difficulte, :type_paysage, :description, :coup_de_coeur, :visible, :photo_principale, :photos_galerie, :fichier_gpx, :lien_komoot, :tags, :date_rando)";
+    $sql = "INSERT INTO parcours (titre, region, distance, duree, denivele, difficulte, type_paysage, description, balisage, type_balisage, coup_de_coeur, visible, photo_principale, photos_galerie, fichier_gpx, lien_komoot, tags, date_rando) VALUES (:titre, :region, :distance, :duree, :denivele, :difficulte, :type_paysage, :description, :balisage, :type_balisage, :coup_de_coeur, :visible, :photo_principale, :photos_galerie, :fichier_gpx, :lien_komoot, :tags, :date_rando)";
   }
 
   try {
@@ -131,6 +133,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     .upload-preview{margin-top:.5rem}
     .upload-preview img{width:80px;height:60px;object-fit:cover;border-radius:8px;border:.5px solid rgba(139,107,177,.2)}
     .upload-preview .gpx-file{font-size:11px;color:#3B6D11;background:#EAF3DE;padding:3px 8px;border-radius:6px;display:inline-block}
+    .balisage-option{display:flex;align-items:flex-start;gap:10px;padding:.6rem .8rem;border-radius:10px;border:.5px solid rgba(139,107,177,.15);cursor:pointer;transition:background .15s,border-color .15s}
+    .balisage-option:hover{background:#F0E6FF}
+    .balisage-option.selected-balisage{background:#F0E6FF;border-color:#8B6BB1}
+    .balisage-option input[type="radio"]{margin-top:3px;accent-color:#2D1B69;width:auto}
+    .balisage-option-label{font-size:13px;font-weight:500;color:#2D1B69}
+    .balisage-option-desc{font-size:11px;color:#9a88b8;margin-top:1px}
     .form-section{background:#fff;border:.5px solid rgba(139,107,177,.15);border-radius:14px;padding:1.2rem;margin-bottom:1rem}
     .form-section-title{font-size:12px;font-weight:600;color:#8B6BB1;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.8rem;padding-bottom:.5rem;border-bottom:.5px solid #F0E6FF}
     .btn-submit{background:#2D1B69;color:#fff;border:none;border-radius:22px;padding:12px 28px;font-size:14px;font-weight:500;font-family:'Inter',sans-serif;cursor:pointer;transition:background .2s}
@@ -362,6 +370,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               <label for="visible">Visible sur le site</label>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <p class="form-section-title">🔶 Balisage du sentier</p>
+        <div class="form-grid">
+
+          <div class="form-group full">
+            <div class="checkbox-group">
+              <input type="checkbox"
+                name="balisage"
+                id="balisage"
+                value="1"
+                <?= ($parcours['balisage'] ?? 0) ? 'checked' : '' ?>
+                onchange="document.getElementById('typeBalisageWrap').style.display=this.checked?'block':'none'">
+              <label for="balisage" style="font-size:13px;color:#2D1B69;font-weight:500">Ce sentier est balisé</label>
+            </div>
+          </div>
+
+          <div class="form-group full" id="typeBalisageWrap"
+               style="display:<?= ($parcours['balisage'] ?? 0) ? 'block' : 'none' ?>">
+            <label>Type de balisage</label>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:.5rem">
+
+              <?php
+              $balises = [
+                'jaune'       => ['emoji' => '🟡', 'label' => 'Trait jaune', 'desc' => 'Sentier de promenade et randonnée (PR) — moins de 2 jours'],
+                'rouge'       => ['emoji' => '🔴', 'label' => 'Trait rouge', 'desc' => 'Grande randonnée de pays (GRP) — boucles régionales'],
+                'rouge_blanc' => ['emoji' => '🔴⬜', 'label' => 'Trait rouge et blanc', 'desc' => 'Grande randonnée (GR) — longue distance nationale'],
+                'orange'      => ['emoji' => '🟠', 'label' => 'Trait orange', 'desc' => 'Sentier de pays — itinéraires locaux touristiques'],
+                'bleu'        => ['emoji' => '🔵', 'label' => 'Trait bleu', 'desc' => 'Sentier en forêt domaniale ONF'],
+                'vert'        => ['emoji' => '🟢', 'label' => 'Trait vert', 'desc' => 'Véloroute ou voie verte'],
+                'mixte'       => ['emoji' => '🎨', 'label' => 'Balisage mixte', 'desc' => 'Plusieurs types de balisage sur le même sentier'],
+                'autre'       => ['emoji' => '❓', 'label' => 'Autre', 'desc' => 'Signalétique locale ou panneau directionnel'],
+              ];
+              $currentBalisage = $parcours['type_balisage'] ?? '';
+              foreach ($balises as $val => $b):
+              ?>
+              <label class="balisage-option <?= $currentBalisage === $val ? 'selected-balisage' : '' ?>">
+                <input type="radio" name="type_balisage" value="<?= $val ?>"
+                       <?= $currentBalisage === $val ? 'checked' : '' ?>
+                       onchange="document.querySelectorAll('.balisage-option').forEach(l=>l.classList.remove('selected-balisage'));this.closest('.balisage-option').classList.add('selected-balisage')">
+                <div>
+                  <p class="balisage-option-label"><?= $b['emoji'] ?> <?= $b['label'] ?></p>
+                  <p class="balisage-option-desc"><?= $b['desc'] ?></p>
+                </div>
+              </label>
+              <?php endforeach; ?>
+
+            </div>
+          </div>
+
         </div>
       </div>
 

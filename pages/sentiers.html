@@ -419,6 +419,17 @@ document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
     if (e.target === popup) popup.classList.add('hidden');
   });
 
+  const balisageMap = {
+    jaune:       { emoji: '🟡', label: 'Balisage jaune', short: 'PR' },
+    rouge:       { emoji: '🔴', label: 'Balisage rouge', short: 'GRP' },
+    rouge_blanc: { emoji: '🔴⬜', label: 'Rouge & blanc', short: 'GR' },
+    orange:      { emoji: '🟠', label: 'Balisage orange', short: 'Local' },
+    bleu:        { emoji: '🔵', label: 'Balisage bleu', short: 'ONF' },
+    vert:        { emoji: '🟢', label: 'Balisage vert', short: 'Vélo' },
+    mixte:       { emoji: '🎨', label: 'Balisage mixte', short: 'Mixte' },
+    autre:       { emoji: '❓', label: 'Autre balisage', short: '?' },
+  };
+
   function createCard(p) {
     const card = document.createElement('div');
     card.className = 'rando-card';
@@ -444,6 +455,15 @@ document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
       ? `https://www.google.com/maps?q=${p.lieu_lat},${p.lieu_lng}`
       : p.lieu_depart ? `https://www.google.com/maps/search/${encodeURIComponent(p.lieu_depart)}` : null;
 
+    const balisageHtml = p.balisage && p.type_balisage && balisageMap[p.type_balisage]
+      ? `<div class="rando-card-balisage" title="${balisageMap[p.type_balisage].label}">
+           <span class="balisage-dot">${balisageMap[p.type_balisage].emoji}</span>
+           <span>${balisageMap[p.type_balisage].label}</span>
+         </div>`
+      : p.balisage
+        ? `<div class="rando-card-balisage"><span class="balisage-dot">✓</span><span>Sentier balisé</span></div>`
+        : `<div class="rando-card-balisage non-balise"><span>⚠ Non balisé</span></div>`;
+
     card.innerHTML = `
       ${imgHtml}
       <div class="rando-card-body">
@@ -458,6 +478,7 @@ document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
           ${p.denivele ? `<span>↑ ${p.denivele}m</span>` : ''}
         </div>
         ${p.lieu_depart ? `<div class="rando-card-lieu">📍 ${p.lieu_depart}</div>` : ''}
+        ${balisageHtml}
         ${p.description ? `<p class="rando-card-desc">${p.description}</p>` : ''}
         <div class="rando-card-btns">
           ${p.fichier_gpx ? `<a href="/${p.fichier_gpx}" download class="btn-gpx">⬇ GPX</a>` : `<span class="btn-gpx disabled">GPX bientôt</span>`}

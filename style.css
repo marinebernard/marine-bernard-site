@@ -1387,6 +1387,16 @@ body.rando #cursor-flower [fill="#d4b8f0"]{fill:#8fc55f;}
 .rando-card-lieu{
   font-size:11px;color:#7a8f5a;margin-bottom:0.5rem;
 }
+.rando-card-balisage{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:11px;color:#27500A;background:#EAF3DE;
+  border:0.5px solid rgba(59,109,17,0.2);border-radius:8px;
+  padding:3px 8px;margin-bottom:0.5rem;font-weight:500;
+}
+.rando-card-balisage.non-balise{
+  background:#FAEEDA;color:#633806;border-color:rgba(186,117,23,0.2);
+}
+.balisage-dot{font-size:12px;}
 .btn-maps{
   display:inline-flex;align-items:center;justify-content:center;
   background:#EAF3DE;color:#27500A;font-size:13px;
