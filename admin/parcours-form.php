@@ -25,34 +25,38 @@ if ($id) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $photo_principale = $parcours['photo_principale'] ?? null;
 
-  if (isset($_POST['supprimer_photo_principale'])) {
-    if ($photo_principale && file_exists(__DIR__ . '/../' . $photo_principale)) {
-      @unlink(__DIR__ . '/../' . $photo_principale);
+  if (!empty($_POST['supprimer_photo_principale'])) {
+    if ($photo_principale) {
+      $full = __DIR__ . '/../' . $photo_principale;
+      if (file_exists($full)) @unlink($full);
     }
     $photo_principale = null;
   }
 
   if (isset($_FILES['photo_principale']) && $_FILES['photo_principale']['error'] === UPLOAD_ERR_OK) {
-    $uploaded = uploadImage($_FILES['photo_principale']);
-    if ($uploaded) $photo_principale = $uploaded;
+    $new = uploadImage($_FILES['photo_principale']);
+    if ($new) $photo_principale = $new;
   }
 
-  $photos_existantes = $_POST['photos_existantes'] ?? [];
-  $photos_supprimer  = $_POST['photos_supprimer'] ?? [];
-  $photos_galerie    = [];
+  $photos_conserver = $_POST['photos_conserver'] ?? [];
+  $photos_supprimer = $_POST['photos_supprimer'] ?? [];
+  $photos_galerie   = [];
 
-  foreach ($photos_existantes as $idx => $photo) {
-    if (!in_array((string)$idx, $photos_supprimer)) {
-      $photos_galerie[] = $photo;
-    } else {
-      $full_path = __DIR__ . '/../' . $photo;
-      if (file_exists($full_path)) @unlink($full_path);
+  foreach ($photos_conserver as $i => $photo) {
+    if (!empty($photo)) {
+      $a_supprimer = isset($photos_supprimer[$i]) && $photos_supprimer[$i] === '1';
+      if ($a_supprimer) {
+        $full = __DIR__ . '/../' . $photo;
+        if (file_exists($full)) @unlink($full);
+      } else {
+        $photos_galerie[] = $photo;
+      }
     }
   }
 
   if (isset($_FILES['photos_galerie']) && !empty($_FILES['photos_galerie']['name'][0])) {
-    $new_photos = uploadMultipleImages($_FILES['photos_galerie']);
-    $photos_galerie = array_merge($photos_galerie, $new_photos);
+    $nouvelles = uploadMultipleImages($_FILES['photos_galerie']);
+    $photos_galerie = array_merge($photos_galerie, $nouvelles);
   }
 
   $fichier_gpx = $parcours['fichier_gpx'] ?? null;
@@ -367,13 +371,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <label>Photo principale</label>
           <input type="file" name="photo_principale" accept="image/*">
           <?php if (!empty($parcours['photo_principale'])): ?>
-          <div style="margin-top:.5rem;display:flex;align-items:center;gap:10px">
+          <div style="margin-top:.5rem;display:flex;align-items:center;gap:10px;padding:.7rem;background:#FAF8FF;border-radius:8px;border:.5px solid rgba(139,107,177,.15)">
             <img src="/<?= htmlspecialchars($parcours['photo_principale']) ?>"
-                 style="width:100px;height:70px;object-fit:cover;border-radius:8px;border:.5px solid rgba(139,107,177,.2)">
-            <label style="font-size:12px;color:#7a6090;display:flex;align-items:center;gap:6px;cursor:pointer">
-              <input type="checkbox" name="supprimer_photo_principale" value="1">
-              Supprimer cette photo et en uploader une nouvelle
-            </label>
+                 style="width:90px;height:65px;object-fit:cover;border-radius:8px"
+                 id="imgPrincipale">
+            <div>
+              <p style="font-size:12px;color:#5a4870;margin-bottom:.4rem;font-weight:500">Photo principale actuelle</p>
+              <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:#dc2626;cursor:pointer">
+                <input type="checkbox"
+                       name="supprimer_photo_principale"
+                       value="1"
+                       onchange="document.getElementById('imgPrincipale').style.opacity=this.checked?'0.3':'1'">
+                Supprimer et remplacer par une nouvelle
+              </label>
+            </div>
           </div>
           <?php endif; ?>
         </div>
@@ -382,20 +393,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <input type="file" name="photos_galerie[]" accept="image/*" multiple>
           <?php if (!empty($parcours['photos_galerie'])): ?>
           <div style="margin-top:.6rem">
-            <p style="font-size:11px;color:#9a88b8;margin-bottom:.5rem">Photos actuelles — coche pour supprimer :</p>
-            <div style="display:flex;gap:8px;flex-wrap:wrap" id="photosActuelles">
-              <?php foreach ($parcours['photos_galerie'] as $idx => $photo): ?>
+            <p style="font-size:11px;color:#9a88b8;margin-bottom:.5rem">
+              Photos actuelles — coche ✕ pour supprimer :
+            </p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <?php foreach ($parcours['photos_galerie'] as $photo): ?>
               <div style="position:relative;display:inline-block">
                 <img src="/<?= htmlspecialchars($photo) ?>"
-                     style="width:80px;height:70px;object-fit:cover;border-radius:8px;border:.5px solid rgba(139,107,177,.2);display:block">
-                <label style="position:absolute;top:4px;right:4px;background:rgba(220,38,38,.85);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:11px;color:#fff"
-                       title="Supprimer cette photo">
-                  <input type="checkbox" name="photos_supprimer[]" value="<?= $idx ?>"
-                         style="display:none"
-                         onchange="this.parentElement.style.background=this.checked?'rgba(220,38,38,1)':'rgba(220,38,38,.85)'">
-                  ✕
-                </label>
-                <input type="hidden" name="photos_existantes[]" value="<?= htmlspecialchars($photo) ?>">
+                     style="width:80px;height:70px;object-fit:cover;border-radius:8px;border:.5px solid rgba(139,107,177,.2);display:block;transition:opacity .2s"
+                     id="img-<?= md5($photo) ?>">
+                <input type="hidden"
+                       name="photos_conserver[]"
+                       value="<?= htmlspecialchars($photo) ?>"
+                       id="keep-<?= md5($photo) ?>">
+                <button type="button"
+                        onclick="supprimerPhoto('<?= md5($photo) ?>')"
+                        style="position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:#dc2626;border:2px solid #fff;color:#fff;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:700;line-height:1;padding:0"
+                        title="Supprimer cette photo">✕</button>
+                <input type="hidden"
+                       name="photos_supprimer[]"
+                       value=""
+                       id="del-<?= md5($photo) ?>">
               </div>
               <?php endforeach; ?>
             </div>
@@ -478,6 +496,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         alert('Erreur de connexion');
         btn.textContent = '🖼 Générer les cartes JPG (Facebook + Instagram)';
         btn.classList.remove('loading');
+      }
+    }
+
+    function supprimerPhoto(hash) {
+      const img = document.getElementById('img-' + hash);
+      const del = document.getElementById('del-' + hash);
+      if (!img) return;
+      if (del.value === '1') {
+        del.value = '';
+        img.style.opacity = '1';
+        img.parentElement.querySelector('button').style.background = '#dc2626';
+      } else {
+        del.value = '1';
+        img.style.opacity = '0.3';
+        img.parentElement.querySelector('button').style.background = '#6b7280';
       }
     }
   </script>
