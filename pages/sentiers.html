@@ -113,6 +113,35 @@
     </aside>
 
     <div class="sentiers-main">
+      <div class="vitesse-wrap" id="vitesseWrap">
+        <div class="vitesse-inner">
+          <div class="vitesse-left">
+            <span class="vitesse-icon" aria-hidden="true">🏃</span>
+            <div>
+              <p class="vitesse-title">Adapter les durées à mon rythme</p>
+              <p class="vitesse-sub">Les durées affichées seront recalculées selon ta vitesse</p>
+            </div>
+          </div>
+          <div class="vitesse-right">
+            <div class="vitesse-presets">
+              <button class="vitesse-preset" data-v="2.5">🐢 Tranquille<span>2.5 km/h</span></button>
+              <button class="vitesse-preset active" data-v="4">🚶 Normal<span>4 km/h</span></button>
+              <button class="vitesse-preset" data-v="5.5">⚡ Rapide<span>5.5 km/h</span></button>
+              <button class="vitesse-preset" data-v="custom">✏️ Perso<span id="customLabel">—</span></button>
+            </div>
+            <div class="vitesse-custom" id="vitesseCustom" style="display:none">
+              <label for="vitesseInput">Ma vitesse :</label>
+              <input type="number" id="vitesseInput" min="1" max="12" step="0.5" value="4" placeholder="4">
+              <span>km/h</span>
+              <button class="vitesse-apply" id="vitesseApply">OK</button>
+            </div>
+          </div>
+        </div>
+        <div class="vitesse-active-info" id="vitesseInfo">
+          Durées calculées pour <strong id="vitesseVal">4 km/h</strong> — <span id="vitesseReset" style="cursor:none;text-decoration:underline">Réinitialiser</span>
+        </div>
+      </div>
+
       <div class="rando-grid" id="randoGrid"></div>
       <div class="rando-empty" id="randoEmpty" style="display:none">
         <p>Aucun sentier trouvé avec ces critères.</p>
@@ -237,11 +266,117 @@ makeFloatUpFlowers(document.getElementById('komootHeroFlowers'),12,['rgba(192,22
       : parseFloat(km).toFixed(1) + ' km';
   }
 
+  /* ── CALCULATEUR DE DURÉE ── */
+  let vitesseActive = 4;
+  let vitessePersonnalisee = false;
+
+  function formatDureeCalculee(km, vitesse) {
+    if (!km || !vitesse) return null;
+    const heures = parseFloat(km) / vitesse;
+    const h = Math.floor(heures);
+    const m = Math.round((heures - h) * 60);
+    if (h === 0) return `${m} min`;
+    if (m === 0) return `${h}h`;
+    return `${h}h${m.toString().padStart(2, '0')}`;
+  }
+
+  function updateDurees() {
+    document.querySelectorAll('.rando-card').forEach(card => {
+      const km = parseFloat(card.getAttribute('data-km') || 0);
+      const dureeCalc = card.querySelector('.rando-duree-calc');
+      const dureeOrig = card.querySelector('.rando-duree-orig');
+      if (!dureeCalc) return;
+      if (vitessePersonnalisee && km > 0) {
+        dureeCalc.textContent = '⏱ ' + formatDureeCalculee(km, vitesseActive);
+        dureeCalc.style.display = 'inline';
+        if (dureeOrig) dureeOrig.style.display = 'none';
+      } else {
+        dureeCalc.style.display = 'none';
+        if (dureeOrig) dureeOrig.style.display = 'inline';
+      }
+    });
+
+    const info = document.getElementById('vitesseInfo');
+    const val = document.getElementById('vitesseVal');
+    if (vitessePersonnalisee) {
+      info.classList.add('visible');
+      val.textContent = vitesseActive + ' km/h';
+    } else {
+      info.classList.remove('visible');
+    }
+  }
+
+  function setVitesse(v) {
+    vitesseActive = v;
+    vitessePersonnalisee = true;
+    localStorage.setItem('rando_vitesse', v);
+    updateDurees();
+  }
+
+  document.querySelectorAll('.vitesse-preset').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const v = this.getAttribute('data-v');
+      document.querySelectorAll('.vitesse-preset').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      if (v === 'custom') {
+        document.getElementById('vitesseCustom').style.display = 'flex';
+      } else {
+        document.getElementById('vitesseCustom').style.display = 'none';
+        setVitesse(parseFloat(v));
+      }
+    });
+  });
+
+  document.getElementById('vitesseApply').addEventListener('click', () => {
+    const input = document.getElementById('vitesseInput');
+    const v = parseFloat(input.value);
+    if (v >= 1 && v <= 12) {
+      document.getElementById('customLabel').textContent = v + ' km/h';
+      setVitesse(v);
+    } else {
+      input.style.borderColor = '#E24B4A';
+      setTimeout(() => input.style.borderColor = '', 1500);
+    }
+  });
+
+  document.getElementById('vitesseInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('vitesseApply').click();
+  });
+
+  document.getElementById('vitesseReset').addEventListener('click', () => {
+    vitessePersonnalisee = false;
+    vitesseActive = 4;
+    localStorage.removeItem('rando_vitesse');
+    document.querySelectorAll('.vitesse-preset').forEach(b => b.classList.remove('active'));
+    document.querySelector('.vitesse-preset[data-v="4"]').classList.add('active');
+    document.getElementById('vitesseCustom').style.display = 'none';
+    updateDurees();
+  });
+
+  const savedVitesse = localStorage.getItem('rando_vitesse');
+  if (savedVitesse) {
+    const v = parseFloat(savedVitesse);
+    vitesseActive = v;
+    vitessePersonnalisee = true;
+    const preset = document.querySelector(`.vitesse-preset[data-v="${v}"]`);
+    if (preset) {
+      document.querySelectorAll('.vitesse-preset').forEach(b => b.classList.remove('active'));
+      preset.classList.add('active');
+    } else {
+      document.querySelectorAll('.vitesse-preset').forEach(b => b.classList.remove('active'));
+      document.querySelector('.vitesse-preset[data-v="custom"]').classList.add('active');
+      document.getElementById('customLabel').textContent = v + ' km/h';
+      document.getElementById('vitesseCustom').style.display = 'flex';
+      document.getElementById('vitesseInput').value = v;
+    }
+  }
+
   function createCard(p) {
     const card = document.createElement('div');
     card.className = 'rando-card';
     card.setAttribute('data-diff', p.difficulte);
     card.setAttribute('data-coeur', p.coup_de_coeur);
+    card.setAttribute('data-km', parseFloat(p.distance || 0));
 
     const imgHtml = p.photo_principale
       ? `<div class="rando-card-img-wrap" data-photos='${JSON.stringify([p.photo_principale, ...(p.photos_galerie || [])])}' data-titre="${p.titre}">
@@ -252,9 +387,14 @@ makeFloatUpFlowers(document.getElementById('komootHeroFlowers'),12,['rgba(192,22
          </div>`
       : `<div class="rando-card-img-placeholder">🌿</div>`;
 
+    const dureeHtml = p.distance ? `
+      <span class="rando-duree-orig" ${vitessePersonnalisee ? 'style="display:none"' : ''}>⏱ ${p.duree || '—'}</span>
+      <span class="rando-duree-calc" ${!vitessePersonnalisee ? 'style="display:none"' : ''}>⏱ ${vitessePersonnalisee ? formatDureeCalculee(p.distance, vitesseActive) : ''}</span>
+    ` : (p.duree ? `<span>⏱ ${p.duree}</span>` : '');
+
     const metaItems = [];
     if (p.distance) metaItems.push(`🗺 ${formatDistance(p.distance)}`);
-    if (p.duree) metaItems.push(`⏱ ${p.duree}`);
+    if (dureeHtml) metaItems.push(dureeHtml);
     if (p.denivele) metaItems.push(`↑ ${p.denivele}m`);
 
     const tagsHtml = (p.tags || []).length > 0
@@ -386,6 +526,7 @@ makeFloatUpFlowers(document.getElementById('komootHeroFlowers'),12,['rgba(192,22
     }
     empty.style.display = 'none';
     parcours.forEach(p => grid.appendChild(createCard(p)));
+    updateDurees();
   }
 
   const filtres = {
