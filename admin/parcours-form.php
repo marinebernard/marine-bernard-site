@@ -368,8 +368,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
       <?php if ($id): ?>
       <div style="margin-top:1rem;padding-top:1rem;border-top:.5px solid #F0E6FF">
-        <p style="font-size:12px;color:#9a88b8;margin-bottom:.6rem">Générer une carte de partage 1200x630px pour Facebook et LinkedIn</p>
-        <button type="button" class="btn-card-form" onclick="genererCarte(<?= $id ?>, this)">🖼 Générer la carte JPG</button>
+        <button type="button" class="btn-card-form" onclick="genererCarte(<?= $id ?>, this)">
+          🖼 Générer les cartes JPG (Facebook + Instagram)
+        </button>
+        <p style="font-size:11px;color:#9a88b8;margin-top:.4rem">
+          Génère 2 formats : 1200×630px (Facebook/LinkedIn) et 1080×1080px (Instagram)
+        </p>
       </div>
       <?php endif; ?>
     </form>
@@ -381,30 +385,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       try {
         const res = await fetch('/admin/generate-card.php?id=' + id);
         const data = await res.json();
-        if (data.success) {
-          const a = document.createElement('a');
-          a.href = data.url;
-          a.download = data.filename;
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          btn.textContent = '✓ Téléchargée';
+        if (data.success && data.cards) {
+          btn.textContent = '✓ Prêtes !';
           btn.style.background = '#EAF3DE';
           btn.style.color = '#27500A';
+
+          const existing = document.getElementById('dl-menu-' + id);
+          if (existing) existing.remove();
+
+          const menu = document.createElement('div');
+          menu.id = 'dl-menu-' + id;
+          menu.style.cssText = 'display:flex;gap:6px;margin-top:6px;flex-wrap:wrap';
+
+          Object.values(data.cards).forEach(card => {
+            const a = document.createElement('a');
+            a.href = card.url;
+            a.download = card.filename;
+            a.textContent = '⬇ ' + card.label;
+            a.style.cssText = 'font-size:11px;padding:4px 10px;border-radius:8px;background:#F0E6FF;color:#2D1B69;text-decoration:none;display:inline-block;transition:background .2s';
+            a.onmouseover = () => a.style.background = '#d4b8f0';
+            a.onmouseout = () => a.style.background = '#F0E6FF';
+            menu.appendChild(a);
+          });
+
+          btn.parentElement.appendChild(menu);
+
           setTimeout(() => {
-            btn.textContent = '🖼 Générer la carte JPG';
+            btn.textContent = '🖼 Générer les cartes JPG (Facebook + Instagram)';
             btn.style.background = '';
             btn.style.color = '';
             btn.classList.remove('loading');
-          }, 3000);
+          }, 4000);
         } else {
           alert('Erreur : ' + (data.error || 'Génération impossible'));
-          btn.textContent = '🖼 Générer la carte JPG';
+          btn.textContent = '🖼 Générer les cartes JPG (Facebook + Instagram)';
           btn.classList.remove('loading');
         }
       } catch(e) {
         alert('Erreur de connexion');
-        btn.textContent = '🖼 Générer la carte JPG';
+        btn.textContent = '🖼 Générer les cartes JPG (Facebook + Instagram)';
         btn.classList.remove('loading');
       }
     }
