@@ -20,232 +20,234 @@ $stmt->execute([$id]);
 $p = $stmt->fetch();
 if (!$p) { http_response_code(404); echo json_encode(['error' => 'Parcours non trouvé']); exit; }
 
+$W = 1080;
+$H = 1080;
+
 $font_dir    = __DIR__ . '/fonts/';
 $font_reg    = $font_dir . 'Inter-Regular.ttf';
 $font_med    = $font_dir . 'Inter-Medium.ttf';
 $font_bold_i = $font_dir . 'PlayfairDisplay-BoldItalic.ttf';
-$has_fonts   = file_exists($font_reg) && file_exists($font_med) && file_exists($font_bold_i);
+$has_fonts   = file_exists($font_reg) && file_exists($font_bold_i) && file_exists($font_med);
+
+function mb_convert_for_gd($text) {
+  $map = [
+    'é'=>'e','è'=>'e','ê'=>'e','ë'=>'e',
+    'à'=>'a','â'=>'a','ä'=>'a','á'=>'a',
+    'î'=>'i','ï'=>'i','í'=>'i','ì'=>'i',
+    'ô'=>'o','ö'=>'o','ó'=>'o','ò'=>'o',
+    'ù'=>'u','û'=>'u','ü'=>'u','ú'=>'u',
+    'ç'=>'c','ñ'=>'n',
+    'É'=>'E','È'=>'E','Ê'=>'E','Ë'=>'E',
+    'À'=>'A','Â'=>'A','Ä'=>'A',
+    'Î'=>'I','Ï'=>'I',
+    'Ô'=>'O','Ö'=>'O',
+    'Ù'=>'U','Û'=>'U','Ü'=>'U',
+    'Ç'=>'C','Ñ'=>'N',
+    '’'=>"'",'‘'=>"'",'“'=>'"','”'=>'"','–'=>'-','—'=>'-',
+  ];
+  return strtr($text, $map);
+}
+
+function safe_text($text, $has_fonts) {
+  if (!$has_fonts) return mb_convert_for_gd($text);
+  return $text;
+}
+
+function wrap_text($text, $max_chars) {
+  if (mb_strlen($text) <= $max_chars) return [$text];
+  $words = explode(' ', $text);
+  $lines = [];
+  $current = '';
+  foreach ($words as $word) {
+    $test = $current ? $current . ' ' . $word : $word;
+    if (mb_strlen($test) <= $max_chars) {
+      $current = $test;
+    } else {
+      if ($current) $lines[] = $current;
+      $current = $word;
+    }
+  }
+  if ($current) $lines[] = $current;
+  return array_slice($lines, 0, 3);
+}
+
+$img = imagecreatetruecolor($W, $H);
+imagealphablending($img, true);
+imagesavealpha($img, true);
+
+$bg = imagecolorallocate($img, 20, 10, 40);
+imagefilledrectangle($img, 0, 0, $W, $H, $bg);
+
+$photo_path = !empty($p['photo_principale']) ? __DIR__ . '/../' . $p['photo_principale'] : null;
+if ($photo_path && file_exists($photo_path)) {
+  $ext = strtolower(pathinfo($photo_path, PATHINFO_EXTENSION));
+  $src = null;
+  if (in_array($ext, ['jpg','jpeg'])) $src = @imagecreatefromjpeg($photo_path);
+  elseif ($ext === 'png') $src = @imagecreatefrompng($photo_path);
+  elseif ($ext === 'webp') $src = @imagecreatefromwebp($photo_path);
+
+  if ($src) {
+    $sw = imagesx($src); $sh = imagesy($src);
+    $ratio = $sw / $sh;
+    if ($ratio > 1) { $nw = (int)($H * $ratio); $nh = $H; }
+    else { $nw = $W; $nh = (int)($W / $ratio); }
+    $tmp = imagecreatetruecolor($nw, $nh);
+    imagecopyresampled($tmp, $src, 0, 0, 0, 0, $nw, $nh, $sw, $sh);
+    $ox = (int)(($nw - $W) / 2);
+    $oy = (int)(($nh - $H) / 2);
+    imagecopy($img, $tmp, 0, 0, $ox, $oy, $W, $H);
+    imagedestroy($src);
+    imagedestroy($tmp);
+  }
+} else {
+  for ($y = 0; $y < $H; $y++) {
+    $t = $y / $H;
+    $r = (int)(27 + $t * 12);
+    $g = (int)(80 + $t * (-80 + 10));
+    $b_c = (int)(10 + $t * 30);
+    $col = imagecolorallocate($img, $r, max(0,$g), $b_c);
+    imageline($img, 0, $y, $W, $y, $col);
+  }
+}
+
+for ($y = 0; $y < $H; $y++) {
+  $t = $y / $H;
+  $alpha = 0;
+  if ($t < 0.25) $alpha = (int)(20 * ($t / 0.25));
+  elseif ($t < 0.55) $alpha = (int)(20 + 30 * (($t - 0.25) / 0.30));
+  else $alpha = (int)(50 + 77 * (($t - 0.55) / 0.45));
+  $alpha = min(127, max(0, $alpha));
+  $oc = imagecolorallocatealpha($img, 10, 6, 30, $alpha);
+  imageline($img, 0, $y, $W, $y, $oc);
+}
+
+$pad = 60;
+
+$blanc       = imagecolorallocate($img, 255, 255, 255);
+$blanc_soft  = imagecolorallocatealpha($img, 255, 255, 255, 25);
+$or          = imagecolorallocate($img, 201, 169, 110);
+$or_bg       = imagecolorallocatealpha($img, 201, 169, 110, 85);
+$vert_clair  = imagecolorallocate($img, 192, 221, 151);
+$amber       = imagecolorallocate($img, 250, 199, 117);
+$rouge_clair = imagecolorallocate($img, 240, 149, 149);
+$gris_pale   = imagecolorallocatealpha($img, 255, 255, 255, 55);
+$noir_soft   = imagecolorallocatealpha($img, 0, 0, 0, 30);
+
+$diff_colors = ['facile' => $vert_clair, 'modere' => $amber, 'difficile' => $rouge_clair];
+$diff_labels = ['facile' => 'Facile', 'modere' => 'Modere', 'difficile' => 'Difficile'];
+$diff_key    = $p['difficulte'] ?? '';
+$diff_color  = $diff_colors[$diff_key] ?? $vert_clair;
+$diff_label  = $diff_labels[$diff_key] ?? '';
+
+function draw_flower_gd($img, $cx, $cy, $size, $violet, $or, $white) {
+  $s = $size / 11;
+  imagefilledellipse($img, $cx, $cy - (int)(8*$s), (int)(10*$s), (int)(15*$s), $violet);
+  imagefilledellipse($img, $cx, $cy + (int)(8*$s), (int)(10*$s), (int)(15*$s), $violet);
+  imagefilledellipse($img, $cx - (int)(8*$s), $cy, (int)(15*$s), (int)(10*$s), $or);
+  imagefilledellipse($img, $cx + (int)(8*$s), $cy, (int)(15*$s), (int)(10*$s), $or);
+  imagefilledellipse($img, $cx, $cy, (int)(14*$s), (int)(14*$s), $violet);
+  imagefilledellipse($img, $cx, $cy, (int)(8*$s), (int)(8*$s), $white);
+}
+
+$violet_f = imagecolorallocate($img, 139, 107, 177);
+$white_f  = imagecolorallocate($img, 250, 248, 255);
+draw_flower_gd($img, $W - $pad - 5, $pad + 5, 28, $violet_f, $or, $white_f);
+
+$dot = imagecolorallocate($img, 201, 169, 110);
+imagefilledellipse($img, $pad, $pad + 12, 8, 8, $dot);
+$handle = '@lachtiterandonneuse';
+if ($has_fonts) {
+  imagettftext($img, 16, 0, $pad + 16, $pad + 18, $blanc_soft, $font_med, $handle);
+} else {
+  imagestring($img, 3, $pad + 16, $pad + 4, $handle, $blanc_soft);
+}
+
+$titre_raw = $p['titre'] ?? 'Sentier';
+$titre_lines = wrap_text($titre_raw, 28);
+$region_raw = strtoupper($p['region'] ?? 'Hauts-de-France');
+
+$stats = [
+  ['ico'=>'km',   'val'=> ($p['distance'] ? $p['distance'].' km' : '-'),         'lbl'=>'Distance'],
+  ['ico'=>'time', 'val'=> ($p['duree'] ?: '-'),                                   'lbl'=>'Duree'],
+  ['ico'=>'up',   'val'=> ($p['denivele'] ? '+'.$p['denivele'].'m' : '-'),        'lbl'=>'Denivele'],
+  ['ico'=>'diff', 'val'=> $diff_label,                                            'lbl'=>'Difficulte', 'color'=>$diff_color],
+];
+
+$stat_h    = 110;
+$stat_w    = (int)(($W - $pad*2 - 12) / 4);
+$stats_y   = $H - $pad - $stat_h;
+$titre_y   = $stats_y - 30;
+$region_y  = $titre_y - (count($titre_lines) * 70) - 20;
+$line_y    = $region_y - 20;
+
+$line_col = imagecolorallocatealpha($img, 255, 255, 255, 80);
+imageline($img, $pad, $line_y, $W - $pad, $line_y, $line_col);
+
+$reg_bg = imagecolorallocatealpha($img, 30, 20, 80, 60);
+imagefilledrectangle($img, $pad, $line_y + 12, $pad + 340, $line_y + 46, $reg_bg);
+if ($has_fonts) {
+  imagettftext($img, 14, 0, $pad + 12, $line_y + 36, $or, $font_med, safe_text($region_raw, $has_fonts));
+} else {
+  imagestring($img, 3, $pad + 10, $line_y + 16, mb_convert_for_gd($region_raw), $or);
+}
+
+$ty = $region_y + 20;
+foreach ($titre_lines as $line) {
+  $shadow = imagecolorallocatealpha($img, 0, 0, 0, 60);
+  if ($has_fonts) {
+    imagettftext($img, 52, 0, $pad + 2, $ty + 2, $shadow, $font_bold_i, safe_text($line, $has_fonts));
+    imagettftext($img, 52, 0, $pad, $ty, $blanc, $font_bold_i, safe_text($line, $has_fonts));
+  } else {
+    imagestring($img, 5, $pad, $ty - 52, mb_convert_for_gd($line), $blanc);
+  }
+  $ty += 68;
+}
+
+for ($i = 0; $i < 4; $i++) {
+  $sx = $pad + $i * ($stat_w + 4);
+  $sy = $stats_y;
+  $stat_bg = imagecolorallocatealpha($img, 15, 8, 40, 35);
+  imagefilledrectangle($img, $sx, $sy, $sx + $stat_w, $sy + $stat_h, $stat_bg);
+  $border = imagecolorallocatealpha($img, 255, 255, 255, 95);
+  imagerectangle($img, $sx, $sy, $sx + $stat_w, $sy + $stat_h, $border);
+
+  $val_color = isset($stats[$i]['color']) ? $stats[$i]['color'] : $blanc;
+  $val_text  = safe_text($stats[$i]['val'], $has_fonts);
+  $lbl_text  = safe_text($stats[$i]['lbl'], $has_fonts);
+
+  if ($has_fonts) {
+    $shadow2 = imagecolorallocatealpha($img, 0, 0, 0, 50);
+    imagettftext($img, 22, 0, $sx + 14, $sy + 44, $shadow2, $font_bold_i, $val_text);
+    imagettftext($img, 22, 0, $sx + 12, $sy + 42, $val_color, $font_bold_i, $val_text);
+    imagettftext($img, 13, 0, $sx + 12, $sy + 68, $gris_pale, $font_med, strtoupper($lbl_text));
+  } else {
+    imagestring($img, 4, $sx + 10, $sy + 18, mb_convert_for_gd($val_text), $val_color);
+    imagestring($img, 2, $sx + 10, $sy + 42, mb_convert_for_gd(strtoupper($lbl_text)), $gris_pale);
+  }
+}
+
+$url_col = imagecolorallocatealpha($img, 255, 255, 255, 80);
+$url_text = 'marine-bernard.fr';
+$gpx_text = $p['fichier_gpx'] ? '  |  Trace GPX disponible' : '';
+if ($has_fonts) {
+  imagettftext($img, 14, 0, $pad, $H - $pad + 28, $url_col, $font_reg, $url_text . $gpx_text);
+} else {
+  imagestring($img, 2, $pad, $H - $pad + 10, $url_text . $gpx_text, $url_col);
+}
 
 $output_dir = __DIR__ . '/../uploads/cartes/';
 if (!is_dir($output_dir)) mkdir($output_dir, 0755, true);
+$filename = 'instagram_' . $id . '_' . time() . '.jpg';
+imagejpeg($img, $output_dir . $filename, 95);
+imagedestroy($img);
 
-function loadPhoto($path) {
-  if (!$path || !file_exists($path)) return null;
-  $ext = strtolower(pathinfo($path, PATHINFO_EXTENSION));
-  if ($ext === 'jpg' || $ext === 'jpeg') return @imagecreatefromjpeg($path);
-  if ($ext === 'png') return @imagecreatefrompng($path);
-  if ($ext === 'webp') return @imagecreatefromwebp($path);
-  return null;
-}
-
-function cropPhoto($src, $dstW, $dstH) {
-  if (!$src) return null;
-  $sw = imagesx($src); $sh = imagesy($src);
-  $ratioSrc = $sw / $sh;
-  $ratioDst = $dstW / $dstH;
-  if ($ratioSrc > $ratioDst) {
-    $newH = $dstH; $newW = (int)($dstH * $ratioSrc);
-  } else {
-    $newW = $dstW; $newH = (int)($dstW / $ratioSrc);
-  }
-  $tmp = imagecreatetruecolor($newW, $newH);
-  imagecopyresampled($tmp, $src, 0, 0, 0, 0, $newW, $newH, $sw, $sh);
-  $dst = imagecreatetruecolor($dstW, $dstH);
-  $ox = (int)(($newW - $dstW) / 2);
-  $oy = (int)(($newH - $dstH) / 2);
-  imagecopy($dst, $tmp, 0, 0, $ox, $oy, $dstW, $dstH);
-  imagedestroy($tmp);
-  return $dst;
-}
-
-function applyGradientOverlay($img, $w, $h, $strength = 0.97) {
-  for ($y = 0; $y < $h; $y++) {
-    $progress = $y / $h;
-    if ($progress < 0.35) {
-      $alpha = (int)(115 * ($progress / 0.35));
-    } elseif ($progress < 0.65) {
-      $alpha = (int)(115 - 90 * (($progress - 0.35) / 0.30));
-    } else {
-      $alpha = (int)(25 + 102 * (($progress - 0.65) / 0.35) * $strength);
-    }
-    $alpha = min(127, max(0, $alpha));
-    $col = imagecolorallocatealpha($img, 10, 6, 30, $alpha);
-    imageline($img, 0, $y, $w, $y, $col);
-  }
-}
-
-function drawFlower($img, $x, $y, $size = 22) {
-  $violet = imagecolorallocatealpha($img, 139, 107, 177, 10);
-  $or     = imagecolorallocatealpha($img, 201, 169, 110, 10);
-  $center = imagecolorallocate($img, 45, 27, 105);
-  $white  = imagecolorallocate($img, 250, 248, 255);
-  $s = $size / 22;
-  imagefilledellipse($img, $x, $y - (int)(8*$s), (int)(10*$s), (int)(15*$s), $violet);
-  imagefilledellipse($img, $x, $y + (int)(8*$s), (int)(10*$s), (int)(15*$s), $violet);
-  imagefilledellipse($img, $x - (int)(8*$s), $y, (int)(15*$s), (int)(10*$s), $or);
-  imagefilledellipse($img, $x + (int)(8*$s), $y, (int)(15*$s), (int)(10*$s), $or);
-  imagefilledellipse($img, $x, $y, (int)(14*$s), (int)(14*$s), $center);
-  imagefilledellipse($img, $x, $y, (int)(9*$s), (int)(9*$s), $white);
-}
-
-function drawDot($img, $x, $y, $col) {
-  imagefilledellipse($img, $x, $y, 6, 6, $col);
-}
-
-function getDiffColor($img, $diff) {
-  if ($diff === 'facile')    return ['val' => imagecolorallocate($img, 192, 221, 151), 'label' => '● Facile'];
-  if ($diff === 'modere')    return ['val' => imagecolorallocate($img, 250, 199, 117), 'label' => '● Modéré'];
-  if ($diff === 'difficile') return ['val' => imagecolorallocate($img, 240, 149, 149), 'label' => '● Difficile'];
-  return ['val' => imagecolorallocate($img, 192, 221, 151), 'label' => '● —'];
-}
-
-function drawStatBlock($img, $x, $y, $w, $h, $val, $label, $valColor, $labelColor, $font_bold, $font_reg, $hasFonts) {
-  $bg = imagecolorallocatealpha($img, 255, 255, 255, 102);
-  $border = imagecolorallocatealpha($img, 255, 255, 255, 110);
-  imagefilledrectangle($img, $x, $y, $x+$w, $y+$h, $bg);
-  imagerectangle($img, $x, $y, $x+$w, $y+$h, $border);
-  if ($hasFonts) {
-    imagettftext($img, 18, 0, $x+14, $y+28, $valColor, $font_bold, $val);
-    imagettftext($img, 9, 0, $x+14, $y+42, $labelColor, $font_reg, strtoupper($label));
-  } else {
-    imagestring($img, 4, $x+10, $y+8, $val, $valColor);
-    imagestring($img, 1, $x+10, $y+26, strtoupper($label), $labelColor);
-  }
-}
-
-$photo_src = loadPhoto(__DIR__ . '/../' . ($p['photo_principale'] ?? ''));
-
-$cards = [
-  'facebook' => ['w' => 1200, 'h' => 630],
-  'instagram' => ['w' => 1080, 'h' => 1080],
-];
-
-$generated = [];
-
-foreach ($cards as $format => $dims) {
-  $W = $dims['w'];
-  $H = $dims['h'];
-  $img = imagecreatetruecolor($W, $H);
-  imagealphablending($img, true);
-  imagesavealpha($img, true);
-
-  $bg_dark = imagecolorallocate($img, 20, 10, 40);
-  imagefilledrectangle($img, 0, 0, $W, $H, $bg_dark);
-
-  if ($photo_src) {
-    $photo = cropPhoto($photo_src, $W, $H);
-    if ($photo) {
-      imagecopy($img, $photo, 0, 0, 0, 0, $W, $H);
-      imagedestroy($photo);
-    }
-  } else {
-    $grad1 = imagecolorallocate($img, 12, 68, 124);
-    $grad2 = imagecolorallocate($img, 39, 80, 10);
-    for ($y = 0; $y < $H; $y++) {
-      $r = (int)(12 + ($y / $H) * 27);
-      $g = (int)(68 + ($y / $H) * 12);
-      $b = (int)(124 - ($y / $H) * 114);
-      $col = imagecolorallocate($img, $r, $g, $b);
-      imageline($img, 0, $y, $W, $y, $col);
-    }
-  }
-
-  applyGradientOverlay($img, $W, $H);
-
-  $blanc      = imagecolorallocate($img, 255, 255, 255);
-  $blanc_70   = imagecolorallocatealpha($img, 255, 255, 255, 38);
-  $blanc_40   = imagecolorallocatealpha($img, 255, 255, 255, 77);
-  $or         = imagecolorallocate($img, 201, 169, 110);
-  $or_pale    = imagecolorallocatealpha($img, 201, 169, 110, 60);
-  $blanc_pale = imagecolorallocatealpha($img, 255, 255, 255, 90);
-  $blanc_25   = imagecolorallocatealpha($img, 255, 255, 255, 102);
-  $diff       = getDiffColor($img, $p['difficulte'] ?? '');
-
-  $pad = $format === 'instagram' ? 36 : 40;
-  $bottom_pad = $format === 'instagram' ? 30 : 28;
-
-  drawFlower($img, $W - $pad - 10, $pad + 8, $format === 'instagram' ? 26 : 24);
-
-  $dot_col = imagecolorallocate($img, 201, 169, 110);
-  drawDot($img, $pad, $pad + 10, $dot_col);
-  $handle = '@lachtiterandonneuse';
-  if ($has_fonts) {
-    imagettftext($img, 12, 0, $pad + 14, $pad + 16, $blanc_70, $font_reg, $handle);
-  } else {
-    imagestring($img, 2, $pad + 14, $pad, $handle, $blanc_70);
-  }
-
-  $stats_h  = 58;
-  $stat_count = 4;
-  $stat_gap   = 4;
-  $total_stat_w = $W - ($pad * 2);
-  $stat_w = (int)(($total_stat_w - ($stat_count - 1) * $stat_gap) / $stat_count);
-
-  $region_text = strtoupper($p['region'] ?? 'Hauts-de-France');
-  $titre = $p['titre'] ?? 'Sentier';
-  if (mb_strlen($titre) > 45) $titre = mb_substr($titre, 0, 43) . '...';
-
-  $titre_size = $format === 'instagram' ? 32 : 34;
-  $titre_h    = $format === 'instagram' ? 80 : 72;
-
-  $url_y      = $H - $bottom_pad;
-  $stats_y    = $url_y - $stats_h - 14;
-  $titre_y    = $stats_y - $titre_h;
-  $region_y   = $titre_y - 28;
-  $sep_y      = $region_y - 14;
-
-  imageline($img, $pad, $sep_y, $W - $pad, $sep_y, $blanc_25);
-
-  $region_bg = imagecolorallocatealpha($img, 201, 169, 110, 100);
-  $region_border = imagecolorallocatealpha($img, 201, 169, 110, 70);
-  imagefilledrectangle($img, $pad, $region_y - 20, $pad + 260, $region_y + 4, $region_bg);
-
-  if ($has_fonts) {
-    imagettftext($img, 10, 0, $pad + 10, $region_y, $or, $font_med, '📍 ' . $region_text);
-  } else {
-    imagestring($img, 2, $pad + 8, $region_y - 16, $region_text, $or);
-  }
-
-  if ($has_fonts) {
-    imagettftext($img, $titre_size, 0, $pad, $titre_y + $titre_h - 10, $blanc, $font_bold_i, $titre);
-  } else {
-    imagestring($img, 5, $pad, $titre_y, $titre, $blanc);
-  }
-
-  $label_col = imagecolorallocatealpha($img, 255, 255, 255, 80);
-  $stats = [
-    ['val' => ($p['distance'] ? $p['distance'] . ' km' : '—'), 'label' => 'Distance'],
-    ['val' => ($p['duree'] ?: '—'),                            'label' => 'Durée'],
-    ['val' => ($p['denivele'] ? '↑ ' . $p['denivele'] . 'm' : '—'), 'label' => 'Dénivelé'],
-    ['val' => $diff['label'],                                  'label' => 'Difficulté', 'color' => $diff['val']],
-  ];
-
-  foreach ($stats as $i => $stat) {
-    $sx = $pad + $i * ($stat_w + $stat_gap);
-    $valColor = isset($stat['color']) ? $stat['color'] : $blanc;
-    drawStatBlock($img, $sx, $stats_y, $stat_w, $stats_h, $stat['val'], $stat['label'], $valColor, $label_col, $font_bold_i, $font_reg, $has_fonts);
-  }
-
-  $url_text = 'marine-bernard.fr';
-  $gpx_text = $p['fichier_gpx'] ? '  ·  Trace GPX disponible' : '';
-  if ($has_fonts) {
-    imagettftext($img, 11, 0, $pad, $url_y, $blanc_pale, $font_reg, $url_text . $gpx_text);
-  } else {
-    imagestring($img, 2, $pad, $url_y - 14, $url_text . $gpx_text, $blanc_pale);
-  }
-
-  $filename = $format . '_' . $id . '_' . time() . '.jpg';
-  $filepath = $output_dir . $filename;
-  imagejpeg($img, $filepath, 94);
-  imagedestroy($img);
-
-  $generated[$format] = [
-    'url'      => '/uploads/cartes/' . $filename,
-    'filename' => $filename,
-    'label'    => $format === 'facebook' ? 'Facebook / LinkedIn 1200×630' : 'Instagram 1080×1080',
-  ];
-}
-
-if ($photo_src) imagedestroy($photo_src);
-
-echo json_encode(['success' => true, 'cards' => $generated]);
+echo json_encode([
+  'success'  => true,
+  'cards'    => [
+    'instagram' => [
+      'url'      => '/uploads/cartes/' . $filename,
+      'filename' => $filename,
+      'label'    => 'Instagram 1080×1080',
+    ]
+  ]
+]);

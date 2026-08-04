@@ -149,7 +149,7 @@ $parcours = $pdo->query("SELECT * FROM parcours ORDER BY date_creation DESC")->f
           <td>
             <div class="td-actions">
               <a href="/admin/parcours-form.php?id=<?= $p['id'] ?>" class="btn-edit">Modifier</a>
-              <button class="btn-card" onclick="genererCarte(<?= $p['id'] ?>, this)" title="Générer carte Facebook/LinkedIn">🖼 Carte</button>
+              <button class="btn-card" onclick="genererCarte(<?= $p['id'] ?>, this)">📸 Instagram</button>
               <button class="btn-del" onclick="if(confirm('Supprimer ce parcours ?')) window.location='/admin/index.php?delete=<?= $p['id'] ?>'">Supprimer</button>
             </div>
           </td>
@@ -168,45 +168,34 @@ $parcours = $pdo->query("SELECT * FROM parcours ORDER BY date_creation DESC")->f
       try {
         const res = await fetch('/admin/generate-card.php?id=' + id);
         const data = await res.json();
-        if (data.success && data.cards) {
-          btn.textContent = '✓ Prêtes !';
+        if (data.success && data.cards && data.cards.instagram) {
+          const card = data.cards.instagram;
+          btn.textContent = '✓ Prête !';
           btn.style.background = '#EAF3DE';
           btn.style.color = '#27500A';
-
           const existing = document.getElementById('dl-menu-' + id);
           if (existing) existing.remove();
-
-          const menu = document.createElement('div');
-          menu.id = 'dl-menu-' + id;
-          menu.style.cssText = 'display:flex;gap:6px;margin-top:6px;flex-wrap:wrap';
-
-          Object.values(data.cards).forEach(card => {
-            const a = document.createElement('a');
-            a.href = card.url;
-            a.download = card.filename;
-            a.textContent = '⬇ ' + card.label;
-            a.style.cssText = 'font-size:11px;padding:4px 10px;border-radius:8px;background:#F0E6FF;color:#2D1B69;text-decoration:none;display:inline-block;transition:background .2s';
-            a.onmouseover = () => a.style.background = '#d4b8f0';
-            a.onmouseout = () => a.style.background = '#F0E6FF';
-            menu.appendChild(a);
-          });
-
-          btn.parentElement.appendChild(menu);
-
+          const a = document.createElement('a');
+          a.id = 'dl-menu-' + id;
+          a.href = card.url;
+          a.download = card.filename;
+          a.textContent = '⬇ Télécharger ' + card.label;
+          a.style.cssText = 'font-size:11px;padding:4px 12px;border-radius:8px;background:#27500A;color:#fff;text-decoration:none;display:inline-block;margin-top:6px;transition:background .2s';
+          btn.parentElement.appendChild(a);
           setTimeout(() => {
-            btn.textContent = '🖼 Carte';
+            btn.textContent = '📸 Instagram';
             btn.style.background = '';
             btn.style.color = '';
             btn.classList.remove('loading');
-          }, 4000);
+          }, 5000);
         } else {
           alert('Erreur : ' + (data.error || 'Génération impossible'));
-          btn.textContent = '🖼 Carte';
+          btn.textContent = '📸 Instagram';
           btn.classList.remove('loading');
         }
       } catch(e) {
         alert('Erreur de connexion');
-        btn.textContent = '🖼 Carte';
+        btn.textContent = '📸 Instagram';
         btn.classList.remove('loading');
       }
     }
