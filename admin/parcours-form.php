@@ -24,12 +24,32 @@ if ($id) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $photo_principale = $parcours['photo_principale'] ?? null;
+
+  if (isset($_POST['supprimer_photo_principale'])) {
+    if ($photo_principale && file_exists(__DIR__ . '/../' . $photo_principale)) {
+      @unlink(__DIR__ . '/../' . $photo_principale);
+    }
+    $photo_principale = null;
+  }
+
   if (isset($_FILES['photo_principale']) && $_FILES['photo_principale']['error'] === UPLOAD_ERR_OK) {
     $uploaded = uploadImage($_FILES['photo_principale']);
     if ($uploaded) $photo_principale = $uploaded;
   }
 
-  $photos_galerie = $parcours['photos_galerie'] ?? [];
+  $photos_existantes = $_POST['photos_existantes'] ?? [];
+  $photos_supprimer  = $_POST['photos_supprimer'] ?? [];
+  $photos_galerie    = [];
+
+  foreach ($photos_existantes as $idx => $photo) {
+    if (!in_array((string)$idx, $photos_supprimer)) {
+      $photos_galerie[] = $photo;
+    } else {
+      $full_path = __DIR__ . '/../' . $photo;
+      if (file_exists($full_path)) @unlink($full_path);
+    }
+  }
+
   if (isset($_FILES['photos_galerie']) && !empty($_FILES['photos_galerie']['name'][0])) {
     $new_photos = uploadMultipleImages($_FILES['photos_galerie']);
     $photos_galerie = array_merge($photos_galerie, $new_photos);
@@ -70,10 +90,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sql = "INSERT INTO parcours (titre, region, distance, duree, denivele, difficulte, type_paysage, description, coup_de_coeur, visible, photo_principale, photos_galerie, fichier_gpx, lien_komoot, tags, date_rando) VALUES (:titre, :region, :distance, :duree, :denivele, :difficulte, :type_paysage, :description, :coup_de_coeur, :visible, :photo_principale, :photos_galerie, :fichier_gpx, :lien_komoot, :tags, :date_rando)";
   }
 
-  $stmt = $pdo->prepare($sql);
-  $stmt->execute($data);
-  header('Location: /admin/index.php?saved=1');
-  exit;
+  try {
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($data);
+    header('Location: /admin/index.php?saved=1');
+    exit;
+  } catch (PDOException $e) {
+    $form_error = 'Erreur base de données : ' . $e->getMessage();
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -123,6 +147,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </header>
   <div class="content">
     <h1 class="page-title"><?= $id ? 'Modifier le parcours' : 'Ajouter un parcours' ?></h1>
+    <?php if (!empty($form_error)): ?>
+    <div style="background:#FCEBEB;color:#A32D2D;border-radius:8px;padding:.7rem 1rem;font-size:13px;margin-bottom:1rem">
+      <?= htmlspecialchars($form_error) ?>
+    </div>
+    <?php endif; ?>
     <form method="POST" enctype="multipart/form-data">
       <div class="form-section">
         <p class="form-section-title">Informations générales</p>
@@ -302,6 +331,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               <option value="montagne" <?= ($parcours['type_paysage'] ?? '') === 'montagne' ? 'selected' : '' ?>>⛰️ Montagne</option>
               <option value="patrimoine" <?= ($parcours['type_paysage'] ?? '') === 'patrimoine' ? 'selected' : '' ?>>🏛️ Patrimoine</option>
               <option value="marais" <?= ($parcours['type_paysage'] ?? '') === 'marais' ? 'selected' : '' ?>>🦢 Zone humide</option>
+              <option value="parc" <?= ($parcours['type_paysage'] ?? '') === 'parc' ? 'selected' : '' ?>>🌳 Parc</option>
+              <option value="ville" <?= ($parcours['type_paysage'] ?? '') === 'ville' ? 'selected' : '' ?>>🏙️ Ville</option>
+              <option value="terril" <?= ($parcours['type_paysage'] ?? '') === 'terril' ? 'selected' : '' ?>>⛏️ Terril</option>
             </select>
           </div>
           <div class="form-group">
@@ -335,17 +367,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <label>Photo principale</label>
           <input type="file" name="photo_principale" accept="image/*">
           <?php if (!empty($parcours['photo_principale'])): ?>
-          <div class="upload-preview"><img src="/<?= htmlspecialchars($parcours['photo_principale']) ?>" alt="Photo actuelle"> <span style="font-size:11px;color:#9a88b8">Photo actuelle</span></div>
+          <div style="margin-top:.5rem;display:flex;align-items:center;gap:10px">
+            <img src="/<?= htmlspecialchars($parcours['photo_principale']) ?>"
+                 style="width:100px;height:70px;object-fit:cover;border-radius:8px;border:.5px solid rgba(139,107,177,.2)">
+            <label style="font-size:12px;color:#7a6090;display:flex;align-items:center;gap:6px;cursor:pointer">
+              <input type="checkbox" name="supprimer_photo_principale" value="1">
+              Supprimer cette photo et en uploader une nouvelle
+            </label>
+          </div>
           <?php endif; ?>
         </div>
         <div class="form-group">
           <label>Photos galerie (plusieurs possibles)</label>
           <input type="file" name="photos_galerie[]" accept="image/*" multiple>
           <?php if (!empty($parcours['photos_galerie'])): ?>
-          <div class="upload-preview" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:.5rem">
-            <?php foreach ($parcours['photos_galerie'] as $photo): ?>
-            <img src="/<?= htmlspecialchars($photo) ?>" alt="">
-            <?php endforeach; ?>
+          <div style="margin-top:.6rem">
+            <p style="font-size:11px;color:#9a88b8;margin-bottom:.5rem">Photos actuelles — coche pour supprimer :</p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap" id="photosActuelles">
+              <?php foreach ($parcours['photos_galerie'] as $idx => $photo): ?>
+              <div style="position:relative;display:inline-block">
+                <img src="/<?= htmlspecialchars($photo) ?>"
+                     style="width:80px;height:70px;object-fit:cover;border-radius:8px;border:.5px solid rgba(139,107,177,.2);display:block">
+                <label style="position:absolute;top:4px;right:4px;background:rgba(220,38,38,.85);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:11px;color:#fff"
+                       title="Supprimer cette photo">
+                  <input type="checkbox" name="photos_supprimer[]" value="<?= $idx ?>"
+                         style="display:none"
+                         onchange="this.parentElement.style.background=this.checked?'rgba(220,38,38,1)':'rgba(220,38,38,.85)'">
+                  ✕
+                </label>
+                <input type="hidden" name="photos_existantes[]" value="<?= htmlspecialchars($photo) ?>">
+              </div>
+              <?php endforeach; ?>
+            </div>
           </div>
           <?php endif; ?>
         </div>
