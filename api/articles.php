@@ -17,11 +17,18 @@ try {
 
 $categorie = $_GET['categorie'] ?? 'all';
 $id = isset($_GET['id']) && is_numeric($_GET['id']) ? (int)$_GET['id'] : null;
+$slug = $_GET['slug'] ?? null;
 
-if ($id) {
-  $stmt = $pdo->prepare("SELECT * FROM articles WHERE id = ? AND visible = 1");
-  $stmt->execute([$id]);
+if ($id || $slug) {
+  if ($id) {
+    $stmt = $pdo->prepare("SELECT * FROM articles WHERE id = ? AND visible = 1");
+    $stmt->execute([$id]);
+  } else {
+    $stmt = $pdo->prepare("SELECT * FROM articles WHERE slug = ? AND visible = 1");
+    $stmt->execute([$slug]);
+  }
   $a = $stmt->fetch();
+  if (!$a) http_response_code(404);
   echo json_encode($a ?: ['error' => 'Non trouvé'], JSON_UNESCAPED_UNICODE);
 } else {
   $sql = "SELECT id, titre, slug, categorie, photo_principale, extrait, date_publication, temps_lecture FROM articles WHERE visible = 1";

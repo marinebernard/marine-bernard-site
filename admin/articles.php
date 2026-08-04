@@ -99,7 +99,7 @@ $total = count($articles);
               <div class="no-photo">✍️</div>
             <?php endif; ?>
           </td>
-          <td><strong><?= htmlspecialchars($a['titre']) ?></strong><br><span style="font-size:11px;color:#9a88b8">/pages/blog-<?= htmlspecialchars($a['slug']) ?>.html</span></td>
+          <td><strong><?= htmlspecialchars($a['titre']) ?></strong><br><span style="font-size:11px;color:#9a88b8">/pages/blog-article.html?slug=<?= htmlspecialchars($a['slug']) ?></span></td>
           <td><span class="badge-cat"><?= htmlspecialchars($a['categorie']) ?></span></td>
           <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;color:#7a6090"><?= htmlspecialchars($a['extrait'] ?? '') ?></td>
           <td><?= $a['visible'] ? '✓' : '<span class="badge-cat badge-hidden">Masqué</span>' ?></td>
@@ -107,7 +107,7 @@ $total = count($articles);
           <td>
             <div class="td-actions">
               <a href="/admin/article-form.php?id=<?= $a['id'] ?>" class="btn-edit">Modifier</a>
-              <a href="/pages/blog-<?= htmlspecialchars($a['slug']) ?>.html" target="_blank" class="btn-view">Voir</a>
+              <a href="/pages/blog-article.html?slug=<?= htmlspecialchars($a['slug']) ?>" target="_blank" class="btn-view">Voir</a>
               <button class="btn-del" onclick="if(confirm('Supprimer cet article ?')) window.location='/admin/articles.php?delete=<?= $a['id'] ?>'">Supprimer</button>
             </div>
           </td>

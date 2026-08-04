@@ -185,7 +185,7 @@ async function loadArticlesBDD() {
       article.className = 'blog-card';
       article.setAttribute('data-category', a.categorie);
       article.innerHTML = `
-        <a href="/pages/blog-${a.slug}.html">
+        <a href="/pages/blog-article.html?slug=${encodeURIComponent(a.slug)}">
           <div class="blog-card-img" style="${a.photo_principale ? `background-image:url('/${a.photo_principale}');background-size:cover;background-position:center` : 'background:linear-gradient(135deg,#EAF3DE,#27500A)'}">
             ${!a.photo_principale ? '<span style="font-size:2.5rem">✍️</span>' : ''}
           </div>

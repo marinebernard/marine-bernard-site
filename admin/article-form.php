@@ -130,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <div class="form-group full">
             <label>Slug URL (généré automatiquement)</label>
             <input type="text" name="slug" id="slugInput" value="<?= htmlspecialchars($article['slug'] ?? '') ?>" placeholder="comprendre-les-balisages">
-            <p class="form-hint">URL finale : /pages/blog-<span id="slugPreview"><?= htmlspecialchars($article['slug'] ?? 'votre-slug') ?></span>.html</p>
+            <p class="form-hint">URL finale : /pages/blog-article.html?slug=<span id="slugPreview"><?= htmlspecialchars($article['slug'] ?? 'votre-slug') ?></span></p>
           </div>
           <div class="form-group">
             <label>Catégorie</label>
