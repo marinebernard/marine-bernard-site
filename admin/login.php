@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin — Marine Bernard</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232D1B69'/><circle cx='16' cy='16' r='4' fill='%23FAF8FF'/><ellipse cx='16' cy='7' rx='3' ry='4.5' fill='%238B6BB1' opacity='.9'/><ellipse cx='16' cy='25' rx='3' ry='4.5' fill='%238B6BB1' opacity='.9'/><ellipse cx='7' cy='16' rx='4.5' ry='3' fill='%23C9A96E' opacity='.85'/><ellipse cx='25' cy='16' rx='4.5' ry='3' fill='%23C9A96E' opacity='.85'/><ellipse cx='9.5' cy='9.5' rx='2.8' ry='4' fill='%23d4b8f0' opacity='.8' transform='rotate(-45 9.5 9.5)'/><ellipse cx='22.5' cy='9.5' rx='2.8' ry='4' fill='%23d4b8f0' opacity='.8' transform='rotate(45 22.5 9.5)'/><ellipse cx='9.5' cy='22.5' rx='2.8' ry='4' fill='%23d4b8f0' opacity='.8' transform='rotate(45 9.5 22.5)'/><ellipse cx='22.5' cy='22.5' rx='2.8' ry='4' fill='%23d4b8f0' opacity='.8' transform='rotate(-45 22.5 22.5)'/><circle cx='16' cy='16' r='2.5' fill='%232D1B69'/></svg>">
   <style>
     *{box-sizing:border-box;margin:0;padding:0}
     body{background:#2D1B69;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif}
