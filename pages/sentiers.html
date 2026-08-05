@@ -692,16 +692,23 @@ async function telechargerGPX(url, titre) {
     const res = await fetch(url);
     if (!res.ok) throw new Error('Fichier non trouvé');
     const blob = await res.blob();
+    const nomFichier = titre
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[̀-ͯ]/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '')
+      + '.gpx';
     const blobUrl = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = blobUrl;
-    a.download = titre.replace(/[^a-zA-Z0-9À-ž]/g, '-').toLowerCase() + '.gpx';
+    a.download = nomFichier;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    URL.revokeObjectURL(blobUrl);
+    setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
   } catch(e) {
-    alert('Impossible de télécharger le fichier GPX. Réessaie dans quelques instants.');
+    alert('Impossible de télécharger ce fichier GPX. Réessaie dans quelques instants.');
   }
 }
 
