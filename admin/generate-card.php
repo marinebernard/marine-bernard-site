@@ -113,16 +113,14 @@ if ($photo_path && file_exists($photo_path)) {
 for ($y = 0; $y < $H; $y++) {
   $t = $y / $H;
   $alpha = 0;
-  if ($t < 0.15) {
-    $alpha = (int)(18 * ($t / 0.15));
-  } elseif ($t < 0.5) {
-    $alpha = (int)(18 - 10 * (($t - 0.15) / 0.35));
-  } elseif ($t < 0.65) {
-    $alpha = (int)(8 + 40 * (($t - 0.5) / 0.15));
+  if ($t < 0.5) {
+    $alpha = (int)(8 * $t / 0.5);
+  } elseif ($t < 0.72) {
+    $alpha = (int)(8 + 20 * (($t - 0.5) / 0.22));
   } else {
-    $alpha = (int)(48 + 65 * (($t - 0.65) / 0.35));
+    $alpha = (int)(28 + 72 * (($t - 0.72) / 0.28));
   }
-  $alpha = min(113, max(0, $alpha));
+  $alpha = min(100, max(0, $alpha));
   $oc = imagecolorallocatealpha($img, 10, 6, 30, $alpha);
   imageline($img, 0, $y, $W, $y, $oc);
 }
