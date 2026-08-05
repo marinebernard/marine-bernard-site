@@ -73,6 +73,50 @@ try {
   $resultats[] = ['err', 'Création table articles : ' . $e->getMessage()];
 }
 
+$tableProjets = "CREATE TABLE IF NOT EXISTS projets (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  titre VARCHAR(255) NOT NULL,
+  slug VARCHAR(255) NOT NULL UNIQUE,
+  categorie VARCHAR(100) DEFAULT 'web',
+  client VARCHAR(255) DEFAULT NULL,
+  annee YEAR DEFAULT NULL,
+  description TEXT DEFAULT NULL,
+  mission TEXT DEFAULT NULL COMMENT 'Ce que j\'ai fait',
+  outils VARCHAR(500) DEFAULT NULL COMMENT 'JSON array',
+  url_site VARCHAR(500) DEFAULT NULL,
+  photo_principale VARCHAR(500) DEFAULT NULL,
+  photos_galerie TEXT DEFAULT NULL COMMENT 'JSON array',
+  visible TINYINT(1) DEFAULT 1,
+  ordre INT DEFAULT 0 COMMENT 'Ordre d\'affichage',
+  date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  date_modification TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
+
+try {
+  $pdo->exec($tableProjets);
+  $resultats[] = ['ok', 'Table projets créée ou déjà existante'];
+} catch(PDOException $e) {
+  $resultats[] = ['err', 'Création table projets : ' . $e->getMessage()];
+}
+
+$tableGaleriePro = "CREATE TABLE IF NOT EXISTS galerie_pro (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  titre VARCHAR(255) DEFAULT NULL,
+  description VARCHAR(500) DEFAULT NULL,
+  photo VARCHAR(500) NOT NULL,
+  categorie VARCHAR(100) DEFAULT 'photo',
+  ordre INT DEFAULT 0,
+  visible TINYINT(1) DEFAULT 1,
+  date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
+
+try {
+  $pdo->exec($tableGaleriePro);
+  $resultats[] = ['ok', 'Table galerie_pro créée ou déjà existante'];
+} catch(PDOException $e) {
+  $resultats[] = ['err', 'Création table galerie_pro : ' . $e->getMessage()];
+}
+
 $colonnes = [
   'type_paysage'  => "ALTER TABLE parcours ADD COLUMN type_paysage VARCHAR(100) DEFAULT NULL",
   'lieu_depart'   => "ALTER TABLE parcours ADD COLUMN lieu_depart VARCHAR(255) DEFAULT NULL",

@@ -84,6 +84,8 @@ $parcours = $pdo->query("SELECT * FROM parcours ORDER BY date_creation DESC")->f
     <span class="admin-logo">Marine Bernard ✿</span>
     <nav class="admin-nav">
       <a href="/admin/articles.php">✍️ Articles blog</a>
+      <a href="/admin/projets.php">🎨 Projets</a>
+      <a href="/admin/galerie-pro.php">📷 Galerie pro</a>
       <a href="/" target="_blank">Voir le site ↗</a>
       <a href="/admin/parcours-form.php" class="btn-add">+ Ajouter un parcours</a>
       <a href="/admin/login.php?logout=1" class="btn-logout">Déconnexion</a>
@@ -96,6 +98,9 @@ $parcours = $pdo->query("SELECT * FROM parcours ORDER BY date_creation DESC")->f
     <?php if (isset($_GET['saved'])): ?>
       <div class="success">✓ Parcours enregistré avec succès.</div>
     <?php endif; ?>
+    <div style="background:#F0E6FF;border-radius:10px;padding:.7rem 1rem;font-size:12px;color:#5a4870;margin-bottom:1rem">
+      💡 <a href="/admin/import-projets.php" style="color:#2D1B69;font-weight:500">Importer les projets existants →</a>
+    </div>
     <div class="stats">
       <div class="stat-card"><div class="stat-num"><?= $total ?></div><div class="stat-label">Parcours total</div></div>
       <div class="stat-card"><div class="stat-num"><?= $coeurs ?></div><div class="stat-label">Coups de cœur</div></div>

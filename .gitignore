@@ -33,3 +33,11 @@ admin/fonts/*.ttf
 # Photos d'articles envoyées par admin/article-form.php — jamais versionnées
 uploads/articles/*
 !uploads/articles/.htaccess
+
+# Photos de projets envoyées par admin/projet-form.php — jamais versionnées
+uploads/projets/*
+!uploads/projets/.htaccess
+
+# Photos de la galerie pro envoyées par admin/galerie-pro.php — jamais versionnées
+uploads/galerie-pro/*
+!uploads/galerie-pro/.htaccess
