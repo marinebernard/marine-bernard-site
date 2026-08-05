@@ -505,9 +505,9 @@ document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
     autre:       { emoji: '❓', label: 'Balisage local' },
   };
 
-  function createCard(p, featured = false) {
+  function createCard(p) {
     const card = document.createElement('div');
-    card.className = 'rando-card' + (featured ? ' card-featured' : '');
+    card.className = 'rando-card';
     card.setAttribute('data-id', p.id);
     card.setAttribute('data-km', parseFloat(p.distance || 0));
 
@@ -671,7 +671,7 @@ document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
     grid.innerHTML = '';
     if (parcours.length === 0) { empty.style.display = 'block'; return; }
     empty.style.display = 'none';
-    parcours.forEach((p, i) => grid.appendChild(createCard(p, i === 0 && parcours.length > 2)));
+    parcours.forEach(p => grid.appendChild(createCard(p)));
   }
 
   async function loadParcours() {

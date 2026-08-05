@@ -1418,45 +1418,35 @@ body.rando #cursor-flower [fill="#d4b8f0"]{fill:#8fc55f;}
 .rando-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:14px;
+  gap:20px;
 }
 .rando-card{
   background:#fff;
-  border-radius:16px;
+  border-radius:18px;
   overflow:hidden;
-  border:0.5px solid rgba(59,109,17,0.12);
-  transition:transform 0.22s,box-shadow 0.22s;
+  border:0.5px solid rgba(59,109,17,0.1);
+  transition:transform 0.25s,box-shadow 0.25s;
   cursor:none;
   display:flex;
   flex-direction:column;
+  box-shadow:0 2px 8px rgba(39,80,10,0.05);
 }
 .rando-card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 14px 32px rgba(39,80,10,0.13);
+  transform:translateY(-6px);
+  box-shadow:0 16px 36px rgba(39,80,10,0.12);
+  border-color:rgba(59,109,17,0.2);
 }
-.rando-card.card-featured{
-  grid-column:span 2;
-  flex-direction:row;
-}
-.rando-card.card-featured .rando-card-img-wrap,
-.rando-card.card-featured .rando-card-img-placeholder{
-  width:55%;height:100%;min-height:260px;flex-shrink:0;
-}
-.rando-card.card-featured .rando-card-img-wrap img{height:100%;}
-.rando-card.card-featured .rando-card-body{padding:1.4rem;justify-content:center;}
-.rando-card.card-featured .rando-card-title{font-size:18px;margin-bottom:0.6rem;}
-.rando-card.card-featured .rando-card-desc{-webkit-line-clamp:4;}
 
 .rando-card-img-wrap{
-  position:relative;cursor:none;overflow:hidden;height:190px;
+  position:relative;overflow:hidden;height:200px;
 }
 .rando-card-img{
   width:100%;height:100%;object-fit:cover;display:block;
   transition:transform 0.4s;
 }
-.rando-card:hover .rando-card-img{transform:scale(1.04);}
+.rando-card:hover .rando-card-img{transform:scale(1.05);}
 .rando-card-img-placeholder{
-  height:190px;
+  height:200px;
   background:linear-gradient(135deg,#EAF3DE,#C0DD97);
   display:flex;align-items:center;justify-content:center;font-size:3rem;
 }
@@ -1471,9 +1461,10 @@ body.rando #cursor-flower [fill="#d4b8f0"]{fill:#8fc55f;}
   opacity:1;
 }
 .rando-card-img-count{
-  position:absolute;bottom:8px;right:8px;
-  background:rgba(39,80,10,0.8);color:#C0DD97;
-  font-size:11px;font-weight:500;padding:3px 8px;border-radius:8px;
+  position:absolute;bottom:10px;right:10px;
+  background:rgba(10,6,30,0.55);color:#fff;
+  font-size:11px;font-weight:500;padding:4px 9px;border-radius:8px;
+  display:flex;align-items:center;gap:4px;
   backdrop-filter:blur(4px);z-index:2;pointer-events:none;
 }
 
@@ -1586,28 +1577,27 @@ body.rando #cursor-flower [fill="#d4b8f0"]{fill:#8fc55f;}
 }
 
 .rando-card-body{
-  padding:1rem;flex:1;
-  display:flex;flex-direction:column;
+  padding:1.1rem 1.2rem 1.2rem;flex:1;
+  display:flex;flex-direction:column;gap:0.45rem;
 }
 .rando-card-top{
   display:flex;align-items:center;justify-content:space-between;gap:6px;
-  margin-bottom:0.3rem;
 }
 .rando-card-region{
-  font-size:10px;letter-spacing:0.12em;text-transform:uppercase;
+  font-size:10px;letter-spacing:0.13em;text-transform:uppercase;
   color:#C9A96E;font-weight:600;
 }
 
 .rando-card-title{
   font-family:'Playfair Display',serif;font-size:15px;color:#27500A;
-  margin-bottom:0.35rem;line-height:1.3;
+  margin-top:0.1rem;line-height:1.35;
 }
 
 .rando-card-meta{
-  display:flex;gap:8px;font-size:11px;color:#7a8f5a;
-  flex-wrap:wrap;margin-bottom:0.4rem;align-items:center;
+  display:flex;gap:12px;font-size:12px;color:#7a8f5a;
+  flex-wrap:wrap;align-items:center;padding-top:0.2rem;
 }
-.rando-card-diff{font-size:10px;padding:2px 8px;border-radius:8px;font-weight:500;}
+.rando-card-diff{font-size:10px;padding:3px 9px;border-radius:8px;font-weight:500;}
 .diff-facile{background:#EAF3DE;color:#27500A;}
 .diff-modere{background:#FAEEDA;color:#633806;}
 .diff-difficile{background:#EEEDFE;color:#3C3489;}
@@ -1725,14 +1715,11 @@ body.rando #cursor-flower [fill="#d4b8f0"]{fill:#8fc55f;}
 @media(max-width:480px){
   .sentiers-topbar-stats{display:none;}
 }
-@media(max-width:900px){
-  .rando-grid{grid-template-columns:repeat(2,1fr);}
-  .rando-card.card-featured{grid-column:span 2;flex-direction:column;}
-  .rando-card.card-featured .rando-card-img-wrap{width:100%;height:220px;}
+@media(max-width:1000px){
+  .rando-grid{grid-template-columns:repeat(2,1fr);gap:14px;}
 }
 @media(max-width:600px){
-  .rando-grid{grid-template-columns:1fr;}
-  .rando-card.card-featured{grid-column:span 1;}
+  .rando-grid{grid-template-columns:1fr;gap:12px;}
 }
 
 /* ═══════════════════════════════════════════════════════════════
