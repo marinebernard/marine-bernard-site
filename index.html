@@ -225,35 +225,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- RANDONNÉE (teaser) -->
-<section class="section reveal" id="randonnee">
-  <p class="section-eyebrow">En dehors du bureau</p>
-  <h2 class="section-title">La ch'tite randonneuse en vadrouille</h2>
-  <p class="section-sub">Mes sentiers, mes photos et mes traces GPS</p>
-
-  <div class="rando-hero">
-    <div class="rando-hero-bg" id="randoBg"></div>
-    <h3 class="rando-title">La nature comme terrain de jeu ✦</h3>
-    <p class="rando-teaser-desc">Passionnée de randonnée, je partage mes aventures dans les Hauts-de-France — coups de cœur, bons plans et traces GPS Komoot en direct.</p>
-    <div class="rando-stats">
-      <div class="rando-stat">
-        <span class="rando-stat-num">12</span>
-        <span class="rando-stat-label">Sentiers explorés</span>
-      </div>
-      <div class="rando-stat">
-        <span class="rando-stat-num">340</span>
-        <span class="rando-stat-label">Km parcourus</span>
-      </div>
-      <div class="rando-stat">
-        <span class="rando-stat-num">8</span>
-        <span class="rando-stat-label">Régions visitées</span>
-      </div>
+<div class="rando-teaser reveal">
+  <div class="rando-teaser-inner">
+    <div class="rando-teaser-left">
+      <p class="rando-teaser-eyebrow">Un autre côté de moi</p>
+      <h2 class="rando-teaser-title">La nature comme terrain d'inspiration</h2>
+      <p class="rando-teaser-text">En dehors du studio, je chausse mes boots et je pars explorer les sentiers des Hauts-de-France avec mon reflex. La patience et l'observation que m'enseigne la randonnée, je les retrouve chaque jour dans mon travail de graphiste.</p>
+      <a href="/pages/sentiers.html" class="rando-teaser-btn" data-track="clic-rando">
+        Découvrir mon univers rando
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
     </div>
-    <div class="rando-teaser-btns">
-      <a href="pages/sentiers.html" class="rando-teaser-btn" data-track="clic-rando"><svg class="icon"><use href="#icon-compass"/></svg> Découvrir mes parcours →</a>
-      <a href="pages/blog.html" class="rando-teaser-link" data-track="clic-rando"><svg class="icon"><use href="#icon-edit"/></svg> Lire le blog →</a>
+    <div class="rando-teaser-right">
+      <div class="rando-teaser-photos">
+        <img src="/images/rando/foudebassan.webp" alt="Fou de Bassan en vol" class="rando-teaser-photo rando-teaser-photo-1" loading="lazy">
+        <img src="/images/rando/papillon.webp" alt="Papillon Belle-Dame" class="rando-teaser-photo rando-teaser-photo-2" loading="lazy">
+        <img src="/images/rando/cygne.webp" alt="Cygne" class="rando-teaser-photo rando-teaser-photo-3" loading="lazy">
+      </div>
     </div>
   </div>
-</section>
+</div>
 
 <!-- EXPÉRIENCES -->
 <section class="section reveal" id="experiences">
@@ -380,7 +371,6 @@ function makeFloatUpFlowers(container,count,colors){
   }
 }
 makeFloatUpFlowers(document.getElementById('heroBg'),14,['rgba(212,184,240,.35)','rgba(201,169,110,.3)']);
-makeFlowers(document.getElementById('randoBg'),9,['#C0DD97','#EAF3DE','#97C459','#fff']);
 makeFlowers(document.getElementById('contactBg'),9,['#d4b8f0','#C9A96E','rgba(255,255,255,0.5)']);
 
 /* ── CARROUSEL PHOTOS ── */

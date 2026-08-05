@@ -471,54 +471,62 @@ html,body{
 }
 
 /* ── SECTION RANDONNÉE ──────────────────────────────────────── */
-.rando-hero{
-  background:linear-gradient(135deg,#27500A 0%,#3B6D11 60%,#639922 100%);
-  border-radius:22px;padding:2.8rem;color:#fff;
-  margin-bottom:1.6rem;
-  position:relative;overflow:hidden;
+.rando-teaser{
+  background:#FAF8FF;
+  padding:4rem 2.5rem;
+  border-top:0.5px solid rgba(139,107,177,0.1);
 }
-.rando-hero-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden;opacity:0.13}
-
-.rando-title{
+.rando-teaser-inner{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:3rem;
+  align-items:center;
+  max-width:1000px;
+  margin:0 auto;
+}
+.rando-teaser-eyebrow{
+  font-size:11px;letter-spacing:0.18em;text-transform:uppercase;
+  color:#C9A96E;font-weight:600;margin-bottom:0.6rem;
+}
+.rando-teaser-title{
   font-family:'Playfair Display',serif;
-  font-size:2.1rem;color:#fff;margin-bottom:0.45rem;
-  position:relative;z-index:1;
+  font-size:28px;color:#2D1B69;line-height:1.2;
+  margin-bottom:1rem;font-style:italic;
 }
-.rando-sub{
-  font-size:0.83rem;color:#C0DD97;
-  letter-spacing:0.08em;position:relative;z-index:1;margin-bottom:1.3rem;
+.rando-teaser-text{
+  font-size:15px;color:#5a4870;line-height:1.8;margin-bottom:1.5rem;
 }
-.rando-stats{display:flex;gap:2rem;position:relative;z-index:1}
-.rando-stat{display:flex;flex-direction:column}
-.rando-stat-num{
-  font-family:'Playfair Display',serif;
-  font-size:1.7rem;color:#fff;line-height:1;
-}
-.rando-stat-label{
-  font-size:0.68rem;color:#C0DD97;
-  letter-spacing:0.1em;text-transform:uppercase;margin-top:3px;
-}
-
-/* Teaser condensé (accueil) — réutilise .rando-hero/.rando-title/.rando-stats */
-.rando-teaser-desc{
-  font-size:0.86rem;color:rgba(255,255,255,0.85);line-height:1.7;
-  max-width:480px;position:relative;z-index:1;margin-bottom:1.4rem;
-}
-.rando-teaser-btns{display:flex;flex-wrap:wrap;align-items:center;gap:1.2rem;position:relative;z-index:1;}
-.rando-teaser-link{
-  display:inline-flex;align-items:center;gap:6px;
-  color:#fff;font-size:0.78rem;font-weight:600;
-  text-decoration:none;opacity:0.85;transition:opacity 0.2s;
-}
-.rando-teaser-link:hover{opacity:1;text-decoration:underline}
 .rando-teaser-btn{
   display:inline-flex;align-items:center;gap:8px;
-  background:#fff;color:#27500A;padding:12px 26px;border-radius:22px;
-  font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;
-  text-decoration:none;position:relative;z-index:1;margin-top:1.6rem;
-  transition:background 0.2s,color 0.2s;
+  background:#2D1B69;color:#fff;
+  font-size:13px;font-weight:500;padding:11px 22px;border-radius:22px;
+  text-decoration:none;transition:background 0.2s;
+  font-family:'Inter',sans-serif;
 }
-.rando-teaser-btn:hover{background:#C0DD97;color:#1a3306}
+.rando-teaser-btn:hover{background:#8B6BB1}
+.rando-teaser-photos{
+  position:relative;height:320px;
+}
+.rando-teaser-photo{
+  position:absolute;object-fit:cover;border-radius:14px;
+  box-shadow:0 8px 24px rgba(45,27,105,0.12);
+}
+.rando-teaser-photo-1{
+  width:65%;height:220px;top:0;left:0;z-index:3;
+}
+.rando-teaser-photo-2{
+  width:48%;height:170px;bottom:0;right:0;z-index:2;
+  border:3px solid #fff;
+}
+.rando-teaser-photo-3{
+  width:38%;height:130px;bottom:20px;left:20px;z-index:1;
+  opacity:0.7;border:3px solid #fff;
+}
+@media(max-width:768px){
+  .rando-teaser-inner{grid-template-columns:1fr;}
+  .rando-teaser-right{display:none;}
+  .rando-teaser-title{font-size:22px;}
+}
 
 /* .rando-grid/.rando-card* et suite : voir bloc "PAGE PARCOURS : AFFICHAGE
    DYNAMIQUE API" plus bas dans ce fichier. */
@@ -754,7 +762,6 @@ body.rando #cursor-flower [fill="#d4b8f0"]{fill:#8fc55f;}
   .skills-grid,.projects-grid,.rando-grid{grid-template-columns:1fr}
   .proj-card{height:260px}
   .photo-cell{width:210px;height:270px}
-  .rando-hero{padding:2rem}
   .contact-box{padding:2rem 1.5rem}
 }
 
