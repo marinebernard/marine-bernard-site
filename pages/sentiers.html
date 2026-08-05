@@ -93,67 +93,94 @@
 </div>
 
 <!-- SECTION 2 — BARRE DE FILTRES -->
-<div class="sentiers-filters-bar">
-  <div class="sentiers-filters-left">
+<div class="sf-bar" id="sfBar">
+  <div class="sf-bar-inner">
 
-    <div class="sf-dropdown" id="sfDiff">
-      <button class="sf-dropdown-btn" data-filter="diff">
-        Difficulté <span class="sf-badge" id="sfDiffBadge" style="display:none"></span> ▼
-      </button>
-      <div class="sf-dropdown-menu">
-        <label class="sf-option"><input type="radio" name="diff" value="all" checked> Toutes</label>
-        <label class="sf-option"><input type="radio" name="diff" value="facile"> 🟢 Facile</label>
-        <label class="sf-option"><input type="radio" name="diff" value="modere"> 🟡 Modéré</label>
-        <label class="sf-option"><input type="radio" name="diff" value="difficile"> 🔴 Difficile</label>
+    <div class="sf-dropdowns">
+      <div class="sf-dd" id="ddDiff">
+        <button class="sf-dd-btn" onclick="toggleDD('ddDiff')">
+          ⚡ Difficulté
+          <span class="sf-dd-badge" id="badgeDiff" style="display:none"></span>
+          <span class="sf-dd-arrow">▼</span>
+        </button>
+        <div class="sf-dd-menu">
+          <span class="sf-dd-label">Niveau de difficulté</span>
+          <button class="sf-opt active" onclick="setFilter('diff','all',this,'Toutes')">✦ Toutes</button>
+          <button class="sf-opt" onclick="setFilter('diff','facile',this,'Facile')"><span class="sf-dot" style="background:#3B6D11"></span> Facile</button>
+          <button class="sf-opt" onclick="setFilter('diff','modere',this,'Modéré')"><span class="sf-dot" style="background:#BA7517"></span> Modéré</button>
+          <button class="sf-opt" onclick="setFilter('diff','difficile',this,'Difficile')"><span class="sf-dot" style="background:#A32D2D"></span> Difficile</button>
+        </div>
+      </div>
+
+      <div class="sf-dd" id="ddKm">
+        <button class="sf-dd-btn" onclick="toggleDD('ddKm')">
+          🗺 Distance
+          <span class="sf-dd-badge" id="badgeKm" style="display:none"></span>
+          <span class="sf-dd-arrow">▼</span>
+        </button>
+        <div class="sf-dd-menu">
+          <span class="sf-dd-label">Distance du sentier</span>
+          <button class="sf-opt active" onclick="setFilter('km','all',this,'Toutes')">✦ Toutes</button>
+          <button class="sf-opt" onclick="setFilter('km','court',this,'— 5 km')">🚶 Courte — moins de 5 km</button>
+          <button class="sf-opt" onclick="setFilter('km','moyen',this,'5–15 km')">🥾 Moyenne — 5 à 15 km</button>
+          <button class="sf-opt" onclick="setFilter('km','long',this,'+ 15 km')">⛰️ Longue — plus de 15 km</button>
+        </div>
+      </div>
+
+      <div class="sf-dd" id="ddPaysage">
+        <button class="sf-dd-btn" onclick="toggleDD('ddPaysage')">
+          🌳 Paysage
+          <span class="sf-dd-badge" id="badgePaysage" style="display:none"></span>
+          <span class="sf-dd-arrow">▼</span>
+        </button>
+        <div class="sf-dd-menu">
+          <span class="sf-dd-label">Type de paysage</span>
+          <button class="sf-opt active" onclick="setFilter('paysage','all',this,'Tous')">✦ Tous</button>
+          <button class="sf-opt" onclick="setFilter('paysage','littoral',this,'Littoral')">🌊 Littoral</button>
+          <button class="sf-opt" onclick="setFilter('paysage','mer',this,'Mer')">⛵ Mer</button>
+          <button class="sf-opt" onclick="setFilter('paysage','foret',this,'Forêt')">🌲 Forêt</button>
+          <button class="sf-opt" onclick="setFilter('paysage','campagne',this,'Campagne')">🌾 Campagne</button>
+          <button class="sf-opt" onclick="setFilter('paysage','montagne',this,'Montagne')">⛰️ Montagne</button>
+          <button class="sf-opt" onclick="setFilter('paysage','patrimoine',this,'Patrimoine')">🏛️ Patrimoine</button>
+          <button class="sf-opt" onclick="setFilter('paysage','marais',this,'Zone humide')">🦢 Zone humide</button>
+          <button class="sf-opt" onclick="setFilter('paysage','parc',this,'Parc')">🌳 Parc</button>
+          <button class="sf-opt" onclick="setFilter('paysage','ville',this,'Ville')">🏙️ Ville</button>
+          <button class="sf-opt" onclick="setFilter('paysage','terril',this,'Terril')">⛏️ Terril</button>
+        </div>
+      </div>
+
+      <div class="sf-dd" id="ddRegion">
+        <button class="sf-dd-btn" onclick="toggleDD('ddRegion')">
+          📍 Région
+          <span class="sf-dd-badge" id="badgeRegion" style="display:none"></span>
+          <span class="sf-dd-arrow">▼</span>
+        </button>
+        <div class="sf-dd-menu" id="sfRegionMenu">
+          <span class="sf-dd-label">Département / Région</span>
+          <button class="sf-opt active" onclick="setFilter('region','all',this,'Toutes')">✦ Toutes</button>
+        </div>
       </div>
     </div>
 
-    <div class="sf-dropdown" id="sfDistance">
-      <button class="sf-dropdown-btn" data-filter="km">
-        Distance <span class="sf-badge" id="sfKmBadge" style="display:none"></span> ▼
-      </button>
-      <div class="sf-dropdown-menu">
-        <label class="sf-option"><input type="radio" name="km" value="all" checked> Toutes</label>
-        <label class="sf-option"><input type="radio" name="km" value="court"> Moins de 5 km</label>
-        <label class="sf-option"><input type="radio" name="km" value="moyen"> 5 à 15 km</label>
-        <label class="sf-option"><input type="radio" name="km" value="long"> Plus de 15 km</label>
+    <div class="sf-bar-right">
+      <div class="sf-sort">
+        <span class="sf-sort-label">Trier :</span>
+        <button class="sf-sort-btn active" onclick="setSort('date',this)">Récents</button>
+        <button class="sf-sort-btn" onclick="setSort('km_asc',this)">Distance ↑</button>
+        <button class="sf-sort-btn" onclick="setSort('km_desc',this)">Distance ↓</button>
       </div>
-    </div>
-
-    <div class="sf-dropdown" id="sfPaysage">
-      <button class="sf-dropdown-btn" data-filter="paysage">
-        Paysage <span class="sf-badge" id="sfPaysageBadge" style="display:none"></span> ▼
-      </button>
-      <div class="sf-dropdown-menu">
-        <label class="sf-option"><input type="radio" name="paysage" value="all" checked> Tous</label>
-        <label class="sf-option"><input type="radio" name="paysage" value="littoral"> 🌊 Littoral</label>
-        <label class="sf-option"><input type="radio" name="paysage" value="mer"> 🌊 Mer</label>
-        <label class="sf-option"><input type="radio" name="paysage" value="foret"> 🌲 Forêt</label>
-        <label class="sf-option"><input type="radio" name="paysage" value="campagne"> 🌾 Campagne</label>
-        <label class="sf-option"><input type="radio" name="paysage" value="montagne"> ⛰️ Montagne</label>
-        <label class="sf-option"><input type="radio" name="paysage" value="patrimoine"> 🏛️ Patrimoine</label>
-        <label class="sf-option"><input type="radio" name="paysage" value="marais"> 🦢 Zone humide</label>
-        <label class="sf-option"><input type="radio" name="paysage" value="parc"> 🌳 Parc</label>
-        <label class="sf-option"><input type="radio" name="paysage" value="ville"> 🏙️ Ville</label>
-        <label class="sf-option"><input type="radio" name="paysage" value="terril"> ⛏️ Terril</label>
-      </div>
-    </div>
-
-    <div class="sf-dropdown" id="sfRegion">
-      <button class="sf-dropdown-btn" data-filter="region">
-        Région <span class="sf-badge" id="sfRegionBadge" style="display:none"></span> ▼
-      </button>
-      <div class="sf-dropdown-menu" id="sfRegionMenu">
-        <label class="sf-option"><input type="radio" name="region" value="all" checked> Toutes</label>
+      <div class="sf-count-wrap">
+        <span class="sf-count" id="sfCount">—</span>
+        <span class="sf-km-total" id="sfKmTotal"></span>
       </div>
     </div>
 
   </div>
 
-  <div class="sentiers-filters-right">
-    <span class="sf-result-count" id="sfCount">— sentiers</span>
-    <span class="sf-km-count" id="sfKmCount"></span>
-    <button class="sf-reset" id="sfReset" style="display:none">✕ Réinitialiser</button>
+  <div class="sf-active-filters" id="sfActiveFilters" style="display:none">
+    <span class="sf-active-label">Filtres actifs :</span>
+    <div class="sf-active-list" id="sfActiveList"></div>
+    <button class="sf-reset-all" id="sfResetAll">✕ Tout effacer</button>
   </div>
 </div>
 
@@ -162,7 +189,7 @@
   <div class="rando-grid" id="randoGrid"></div>
   <div class="rando-empty" id="randoEmpty" style="display:none">
     <p>Aucun sentier trouvé avec ces critères.</p>
-    <button class="filtres-reset-inline" onclick="document.getElementById('sfReset').click()">Réinitialiser les filtres</button>
+    <button class="filtres-reset-inline" onclick="document.getElementById('sfResetAll').click()">Réinitialiser les filtres</button>
   </div>
   <div class="rando-loader" id="randoLoader">
     <svg width="32" height="32" viewBox="0 0 32 32" style="animation:spinFlower 1.2s linear infinite">
@@ -248,7 +275,9 @@ document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
 
   let vitesseActive = null;
   let allParcours = [];
-  let filtres = { diff: 'all', km: 'all', paysage: 'all', region: 'all' };
+  let currentSort = 'date';
+  const filtres = { diff: 'all', km: 'all', paysage: 'all', region: 'all' };
+  const filterLabels = { diff: 'Toutes', km: 'Toutes', paysage: 'Tous', region: 'Toutes' };
 
   function formatDistance(km) {
     if (!km) return '';
@@ -266,17 +295,55 @@ document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
     return h + 'h' + m.toString().padStart(2, '0');
   }
 
+  function sortParcours(list) {
+    return [...list].sort((a, b) => {
+      if (currentSort === 'km_asc') return parseFloat(a.distance || 0) - parseFloat(b.distance || 0);
+      if (currentSort === 'km_desc') return parseFloat(b.distance || 0) - parseFloat(a.distance || 0);
+      return new Date(b.date_rando || b.date_creation || 0) - new Date(a.date_rando || a.date_creation || 0);
+    });
+  }
+
   function updateStats(parcours) {
     const total = parcours.length;
-    const km = parcours.reduce((s, p) => s + parseFloat(p.distance || 0), 0);
+    const km = Math.round(parcours.reduce((s, p) => s + parseFloat(p.distance || 0), 0));
     const gpx = parcours.filter(p => p.fichier_gpx).length;
     document.getElementById('statTotal').textContent = total;
-    document.getElementById('statKmTotal').textContent = Math.round(km);
+    document.getElementById('statKmTotal').textContent = km;
     document.getElementById('statGpx').textContent = gpx;
-    const countEl = document.getElementById('sfCount');
-    const kmEl = document.getElementById('sfKmCount');
-    countEl.textContent = total + ' sentier' + (total > 1 ? 's' : '');
-    kmEl.textContent = total > 0 ? '· ' + Math.round(km) + ' km au total' : '';
+    document.getElementById('sfCount').textContent = total + ' sentier' + (total > 1 ? 's' : '');
+    document.getElementById('sfKmTotal').textContent = total > 0 ? '· ' + km + ' km' : '';
+  }
+
+  function updateActiveTags() {
+    const activeBar = document.getElementById('sfActiveFilters');
+    const activeList = document.getElementById('sfActiveList');
+    const hasActive = Object.values(filtres).some(v => v !== 'all');
+    if (!hasActive) { activeBar.style.display = 'none'; return; }
+    activeBar.style.display = 'flex';
+    activeList.innerHTML = '';
+    Object.entries(filtres).forEach(([key, val]) => {
+      if (val === 'all') return;
+      const tag = document.createElement('button');
+      tag.className = 'sf-active-tag';
+      tag.innerHTML = filterLabels[key] + ' ✕';
+      tag.onclick = () => resetFilter(key);
+      activeList.appendChild(tag);
+    });
+  }
+
+  function resetFilter(key) {
+    filtres[key] = 'all';
+    const ddMap = { diff: 'ddDiff', km: 'ddKm', paysage: 'ddPaysage', region: 'ddRegion' };
+    const dd = document.getElementById(ddMap[key]);
+    if (dd) {
+      dd.classList.remove('active');
+      const badge = dd.querySelector('.sf-dd-badge');
+      if (badge) badge.style.display = 'none';
+      dd.querySelectorAll('.sf-opt').forEach(o => o.classList.remove('active'));
+      const first = dd.querySelector('.sf-opt');
+      if (first) first.classList.add('active');
+    }
+    applyFiltres();
   }
 
   function applyFiltres() {
@@ -291,54 +358,64 @@ document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
     });
     if (filtres.paysage !== 'all') result = result.filter(p => p.type_paysage === filtres.paysage);
     if (filtres.region !== 'all') result = result.filter(p => p.region === filtres.region);
+    result = sortParcours(result);
     renderCards(result);
     updateStats(result);
-    const hasFilter = Object.values(filtres).some(v => v !== 'all');
-    document.getElementById('sfReset').style.display = hasFilter ? 'block' : 'none';
+    updateActiveTags();
   }
 
-  document.querySelectorAll('.sf-dropdown').forEach(dropdown => {
-    const btn = dropdown.querySelector('.sf-dropdown-btn');
-    btn.addEventListener('click', e => {
-      e.stopPropagation();
-      document.querySelectorAll('.sf-dropdown').forEach(d => { if (d !== dropdown) d.classList.remove('open'); });
-      dropdown.classList.toggle('open');
-    });
-    dropdown.querySelectorAll('input[type="radio"]').forEach(radio => {
-      radio.addEventListener('change', function() {
-        const filterName = this.name;
-        const val = this.value;
-        filtres[filterName] = val;
-        const badge = document.getElementById('sf' + filterName.charAt(0).toUpperCase() + filterName.slice(1) + 'Badge');
-        if (badge) {
-          if (val !== 'all') {
-            badge.textContent = this.parentElement.textContent.trim().replace(/^[^\w\sÀ-ÿ]+\s*/u, '').trim().slice(0, 12);
-            badge.style.display = 'inline';
-            dropdown.classList.add('active');
-          } else {
-            badge.style.display = 'none';
-            dropdown.classList.remove('active');
-          }
-        }
-        dropdown.classList.remove('open');
-        applyFiltres();
-      });
-    });
+  window.setFilter = function(key, val, btn, label) {
+    filtres[key] = val;
+    filterLabels[key] = label;
+    const ddMap = { diff: 'ddDiff', km: 'ddKm', paysage: 'ddPaysage', region: 'ddRegion' };
+    const dd = document.getElementById(ddMap[key]);
+    if (dd) {
+      dd.querySelectorAll('.sf-opt').forEach(o => o.classList.remove('active'));
+      btn.classList.add('active');
+      const badge = dd.querySelector('.sf-dd-badge');
+      if (val === 'all') {
+        dd.classList.remove('active');
+        if (badge) badge.style.display = 'none';
+      } else {
+        dd.classList.add('active');
+        if (badge) { badge.textContent = label; badge.style.display = 'inline'; }
+      }
+      dd.classList.remove('open');
+    }
+    applyFiltres();
+  };
+
+  window.setSort = function(sort, btn) {
+    currentSort = sort;
+    document.querySelectorAll('.sf-sort-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    applyFiltres();
+  };
+
+  window.toggleDD = function(id) {
+    const dd = document.getElementById(id);
+    const isOpen = dd.classList.contains('open');
+    document.querySelectorAll('.sf-dd').forEach(d => d.classList.remove('open'));
+    if (!isOpen) dd.classList.add('open');
+  };
+
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.sf-dd')) document.querySelectorAll('.sf-dd').forEach(d => d.classList.remove('open'));
   });
 
-  document.addEventListener('click', () => {
-    document.querySelectorAll('.sf-dropdown').forEach(d => d.classList.remove('open'));
-  });
-
-  document.getElementById('sfReset').addEventListener('click', () => {
-    filtres = { diff: 'all', km: 'all', paysage: 'all', region: 'all' };
-    document.querySelectorAll('.sf-dropdown').forEach(d => {
-      d.classList.remove('active', 'open');
-      d.querySelector('input[value="all"]').checked = true;
-      const badge = d.querySelector('.sf-badge');
+  document.getElementById('sfResetAll').addEventListener('click', () => {
+    Object.keys(filtres).forEach(k => {
+      filtres[k] = 'all';
+      filterLabels[k] = ['diff', 'paysage'].includes(k) ? 'Tous' : 'Toutes';
+    });
+    document.querySelectorAll('.sf-dd').forEach(dd => {
+      dd.classList.remove('active', 'open');
+      const badge = dd.querySelector('.sf-dd-badge');
       if (badge) badge.style.display = 'none';
+      dd.querySelectorAll('.sf-opt').forEach(o => o.classList.remove('active'));
+      const first = dd.querySelector('.sf-opt');
+      if (first) first.classList.add('active');
     });
-    document.getElementById('sfReset').style.display = 'none';
     applyFiltres();
   });
 
@@ -346,19 +423,11 @@ document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
     const regions = [...new Set(parcours.map(p => p.region).filter(Boolean))].sort();
     const menu = document.getElementById('sfRegionMenu');
     regions.forEach(region => {
-      const label = document.createElement('label');
-      label.className = 'sf-option';
-      label.innerHTML = `<input type="radio" name="region" value="${region}"> ${region}`;
-      label.querySelector('input').addEventListener('change', function() {
-        filtres.region = this.value;
-        const badge = document.getElementById('sfRegionBadge');
-        badge.textContent = region.slice(0, 14);
-        badge.style.display = 'inline';
-        document.getElementById('sfRegion').classList.add('active');
-        document.getElementById('sfRegion').classList.remove('open');
-        applyFiltres();
-      });
-      menu.appendChild(label);
+      const btn = document.createElement('button');
+      btn.className = 'sf-opt';
+      btn.innerHTML = '📍 ' + region;
+      btn.onclick = () => setFilter('region', region, btn, region);
+      menu.appendChild(btn);
     });
   }
 
@@ -419,22 +488,27 @@ document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
     if (e.target === popup) popup.classList.add('hidden');
   });
 
-  const balisageMap = {
-    jaune:       { emoji: '🟡', label: 'Balisage jaune', short: 'PR' },
-    rouge:       { emoji: '🔴', label: 'Balisage rouge', short: 'GRP' },
-    rouge_blanc: { emoji: '🔴⬜', label: 'Rouge & blanc', short: 'GR' },
-    orange:      { emoji: '🟠', label: 'Balisage orange', short: 'Local' },
-    bleu:        { emoji: '🔵', label: 'Balisage bleu', short: 'ONF' },
-    vert:        { emoji: '🟢', label: 'Balisage vert', short: 'Vélo' },
-    mixte:       { emoji: '🎨', label: 'Balisage mixte', short: 'Mixte' },
-    autre:       { emoji: '❓', label: 'Autre balisage', short: '?' },
+  const diffMap = {
+    facile: { cls: 'diff-facile', label: 'Facile' },
+    modere: { cls: 'diff-modere', label: 'Modéré' },
+    difficile: { cls: 'diff-difficile', label: 'Difficile' }
   };
 
-  function createCard(p) {
+  const balisageMap = {
+    jaune:       { emoji: '🟡', label: 'Balisage jaune — PR' },
+    rouge:       { emoji: '🔴', label: 'Balisage rouge — GRP' },
+    rouge_blanc: { emoji: '🔴⬜', label: 'Rouge/Blanc — GR' },
+    orange:      { emoji: '🟠', label: 'Balisage orange' },
+    bleu:        { emoji: '🔵', label: 'Bleu ONF' },
+    vert:        { emoji: '🟢', label: 'Balisage vert' },
+    mixte:       { emoji: '🎨', label: 'Balisage mixte' },
+    autre:       { emoji: '❓', label: 'Balisage local' },
+  };
+
+  function createCard(p, featured = false) {
     const card = document.createElement('div');
-    card.className = 'rando-card';
+    card.className = 'rando-card' + (featured ? ' card-featured' : '');
     card.setAttribute('data-id', p.id);
-    card.setAttribute('data-diff', p.difficulte);
     card.setAttribute('data-km', parseFloat(p.distance || 0));
 
     const imgHtml = p.photo_principale
@@ -444,7 +518,6 @@ document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
          </div>`
       : `<div class="rando-card-img-placeholder">🌿</div>`;
 
-    const diffMap = { facile: { cls: 'diff-facile', label: 'Facile' }, modere: { cls: 'diff-modere', label: 'Modéré' }, difficile: { cls: 'diff-difficile', label: 'Difficile' } };
     const diff = diffMap[p.difficulte] || { cls: 'diff-facile', label: p.difficulte || '—' };
 
     const dureeCalculee = vitesseActive && p.distance ? formatDuree(parseFloat(p.distance), vitesseActive) : null;
@@ -456,16 +529,23 @@ document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
       : p.lieu_depart ? `https://www.google.com/maps/search/${encodeURIComponent(p.lieu_depart)}` : null;
 
     const balisageHtml = p.balisage && p.type_balisage && balisageMap[p.type_balisage]
-      ? `<div class="rando-card-balisage" title="${balisageMap[p.type_balisage].label}">
-           <span class="balisage-dot">${balisageMap[p.type_balisage].emoji}</span>
-           <span>${balisageMap[p.type_balisage].label}</span>
-         </div>`
+      ? `<div class="rando-card-balisage">${balisageMap[p.type_balisage].emoji} ${balisageMap[p.type_balisage].label}</div>`
       : p.balisage
-        ? `<div class="rando-card-balisage"><span class="balisage-dot">✓</span><span>Sentier balisé</span></div>`
-        : `<div class="rando-card-balisage non-balise"><span>⚠ Non balisé</span></div>`;
+        ? `<div class="rando-card-balisage">✓ Sentier balisé</div>`
+        : `<div class="rando-card-balisage non-balise">⚠ Non balisé</div>`;
+
+    const lieuHtml = (p.lieu_depart || p.lieu_ville)
+      ? `<div class="rando-card-lieu">
+           <span>📍</span>
+           <div>
+             ${p.lieu_depart ? `<span>${p.lieu_depart}</span>` : ''}
+             ${p.lieu_ville ? `<span style="color:#9a88b8;font-size:10px;display:block">${p.lieu_ville}</span>` : ''}
+           </div>
+         </div>`
+      : '';
 
     const gpxBtn = p.fichier_gpx
-      ? `<button onclick="telechargerGPX('/${p.fichier_gpx}', '${p.titre.replace(/'/g, "\\'")}')" class="btn-gpx">⬇ GPX</button>`
+      ? `<button onclick="telechargerGPX('/${p.fichier_gpx}', '${p.titre.replace(/'/g, "\\'")}');event.stopPropagation()" class="btn-gpx">⬇ GPX</button>`
       : `<span class="btn-gpx disabled">GPX bientôt</span>`;
 
     card.innerHTML = `
@@ -481,21 +561,13 @@ document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
           ${p.distance || p.duree ? `<span>⏱ ${dureeLabel}</span>` : ''}
           ${p.denivele ? `<span>↑ ${p.denivele}m</span>` : ''}
         </div>
-        ${(p.lieu_depart || p.lieu_ville) ? `
-          <div class="rando-card-lieu">
-            <span>📍</span>
-            <div>
-              ${p.lieu_depart ? `<span>${p.lieu_depart}</span>` : ''}
-              ${p.lieu_ville ? `<span style="color:#9a88b8;font-size:10px;display:block">${p.lieu_ville}</span>` : ''}
-            </div>
-          </div>
-        ` : ''}
         ${balisageHtml}
+        ${lieuHtml}
         ${p.description ? `<p class="rando-card-desc">${p.description}</p>` : ''}
         <div class="rando-card-btns">
           ${gpxBtn}
-          ${mapsUrl ? `<a href="${mapsUrl}" target="_blank" rel="noopener" class="btn-maps">📍</a>` : ''}
-          ${p.lien_komoot ? `<a href="${p.lien_komoot}" target="_blank" rel="noopener" class="btn-komoot">Komoot ↗</a>` : ''}
+          ${mapsUrl ? `<a href="${mapsUrl}" target="_blank" rel="noopener" class="btn-maps" onclick="event.stopPropagation()">📍</a>` : ''}
+          ${p.lien_komoot ? `<a href="${p.lien_komoot}" target="_blank" rel="noopener" class="btn-komoot" onclick="event.stopPropagation()">Komoot ↗</a>` : ''}
         </div>
       </div>
     `;
@@ -594,7 +666,7 @@ document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
     grid.innerHTML = '';
     if (parcours.length === 0) { empty.style.display = 'block'; return; }
     empty.style.display = 'none';
-    parcours.forEach(p => grid.appendChild(createCard(p)));
+    parcours.forEach((p, i) => grid.appendChild(createCard(p, i === 0 && parcours.length > 2)));
   }
 
   async function loadParcours() {
