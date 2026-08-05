@@ -494,31 +494,59 @@ document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
     difficile: { cls: 'diff-difficile', label: 'Difficile' }
   };
 
+  const balisageMap = {
+    jaune:       { emoji: '🟡', label: 'Balisage jaune — PR' },
+    rouge:       { emoji: '🔴', label: 'Balisage rouge — GRP' },
+    rouge_blanc: { emoji: '🔴⬜', label: 'Rouge/Blanc — GR' },
+    orange:      { emoji: '🟠', label: 'Balisage orange' },
+    bleu:        { emoji: '🔵', label: 'Bleu ONF' },
+    vert:        { emoji: '🟢', label: 'Balisage vert' },
+    mixte:       { emoji: '🎨', label: 'Balisage mixte' },
+    autre:       { emoji: '❓', label: 'Balisage local' },
+  };
+
   function createCard(p, featured = false) {
     const card = document.createElement('div');
     card.className = 'rando-card' + (featured ? ' card-featured' : '');
     card.setAttribute('data-id', p.id);
     card.setAttribute('data-km', parseFloat(p.distance || 0));
 
-    const diff = diffMap[p.difficulte] || { cls: 'diff-facile', label: p.difficulte || '—' };
-
-    const dureeCalculee = vitesseActive && p.distance
-      ? formatDuree(parseFloat(p.distance), vitesseActive) : null;
-    const dureeAffichee = dureeCalculee || p.duree || null;
-
     const imgHtml = p.photo_principale
-      ? `<div class="rando-card-img-wrap">
-           <img class="rando-card-img"
-                src="/${p.photo_principale}"
-                alt="${p.titre}"
-                loading="lazy">
-           ${p.photos_galerie && p.photos_galerie.length > 0
-             ? `<span class="rando-card-img-count">📷 ${p.photos_galerie.length + 1}</span>` : ''}
+      ? `<div class="rando-card-img-wrap" data-photos='${JSON.stringify([p.photo_principale, ...(p.photos_galerie || [])])}' data-titre="${p.titre}">
+           <img class="rando-card-img" src="/${p.photo_principale}" alt="${p.titre}" loading="lazy">
+           ${(p.photos_galerie && p.photos_galerie.length > 0) ? `<span class="rando-card-img-count">+${p.photos_galerie.length} photo${p.photos_galerie.length > 1 ? 's' : ''}</span>` : ''}
          </div>`
       : `<div class="rando-card-img-placeholder">🌿</div>`;
 
-    const gpxBadge = p.fichier_gpx
-      ? `<span class="rando-card-gpx-badge">⬇ GPX</span>` : '';
+    const diff = diffMap[p.difficulte] || { cls: 'diff-facile', label: p.difficulte || '—' };
+
+    const dureeCalculee = vitesseActive && p.distance ? formatDuree(parseFloat(p.distance), vitesseActive) : null;
+    const dureeAffichee = dureeCalculee || p.duree || '—';
+    const dureeLabel = dureeCalculee ? `${dureeAffichee} <small style="opacity:.65;font-size:9px">à ${vitesseActive}km/h</small>` : dureeAffichee;
+
+    const mapsUrl = p.lieu_lat && p.lieu_lng
+      ? `https://www.google.com/maps?q=${p.lieu_lat},${p.lieu_lng}`
+      : p.lieu_depart ? `https://www.google.com/maps/search/${encodeURIComponent(p.lieu_depart)}` : null;
+
+    const balisageHtml = p.balisage && p.type_balisage && balisageMap[p.type_balisage]
+      ? `<div class="rando-card-balisage">${balisageMap[p.type_balisage].emoji} ${balisageMap[p.type_balisage].label}</div>`
+      : p.balisage
+        ? `<div class="rando-card-balisage">✓ Sentier balisé</div>`
+        : `<div class="rando-card-balisage non-balise">⚠ Non balisé</div>`;
+
+    const lieuHtml = (p.lieu_depart || p.lieu_ville)
+      ? `<div class="rando-card-lieu">
+           <span>📍</span>
+           <div>
+             ${p.lieu_depart ? `<span>${p.lieu_depart}</span>` : ''}
+             ${p.lieu_ville ? `<span style="color:#9a88b8;font-size:10px;display:block">${p.lieu_ville}</span>` : ''}
+           </div>
+         </div>`
+      : '';
+
+    const gpxBtn = p.fichier_gpx
+      ? `<button onclick="telechargerGPX('/${p.fichier_gpx}', '${p.titre.replace(/'/g, "\\'")}');event.stopPropagation()" class="btn-gpx">⬇ GPX</button>`
+      : `<span class="btn-gpx disabled">GPX bientôt</span>`;
 
     card.innerHTML = `
       ${imgHtml}
@@ -529,20 +557,17 @@ document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
         </div>
         <h3 class="rando-card-title">${p.titre}</h3>
         <div class="rando-card-meta">
-          ${p.distance
-            ? `<span>🗺 ${formatDistance(p.distance)}</span>`
-            : ''}
-          ${dureeAffichee
-            ? `<span>⏱ ${dureeAffichee}${dureeCalculee ? ` <small>@${vitesseActive}km/h</small>` : ''}</span>`
-            : ''}
-          ${p.denivele
-            ? `<span>↑ ${p.denivele}m</span>`
-            : ''}
+          ${p.distance ? `<span>🗺 ${formatDistance(p.distance)}</span>` : ''}
+          ${p.distance || p.duree ? `<span>⏱ ${dureeLabel}</span>` : ''}
+          ${p.denivele ? `<span>↑ ${p.denivele}m</span>` : ''}
         </div>
-        <div class="rando-card-footer">
-          ${p.lieu_ville
-            ? `<span class="rando-card-ville">📍 ${p.lieu_ville}</span>` : ''}
-          ${gpxBadge}
+        ${balisageHtml}
+        ${lieuHtml}
+        ${p.description ? `<p class="rando-card-desc">${p.description}</p>` : ''}
+        <div class="rando-card-btns">
+          ${gpxBtn}
+          ${mapsUrl ? `<a href="${mapsUrl}" target="_blank" rel="noopener" class="btn-maps" onclick="event.stopPropagation()">📍</a>` : ''}
+          ${p.lien_komoot ? `<a href="${p.lien_komoot}" target="_blank" rel="noopener" class="btn-komoot" onclick="event.stopPropagation()">Komoot ↗</a>` : ''}
         </div>
       </div>
     `;
