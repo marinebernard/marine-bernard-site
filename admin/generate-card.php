@@ -113,10 +113,16 @@ if ($photo_path && file_exists($photo_path)) {
 for ($y = 0; $y < $H; $y++) {
   $t = $y / $H;
   $alpha = 0;
-  if ($t < 0.25) $alpha = (int)(20 * ($t / 0.25));
-  elseif ($t < 0.55) $alpha = (int)(20 + 30 * (($t - 0.25) / 0.30));
-  else $alpha = (int)(50 + 77 * (($t - 0.55) / 0.45));
-  $alpha = min(127, max(0, $alpha));
+  if ($t < 0.15) {
+    $alpha = (int)(18 * ($t / 0.15));
+  } elseif ($t < 0.5) {
+    $alpha = (int)(18 - 10 * (($t - 0.15) / 0.35));
+  } elseif ($t < 0.65) {
+    $alpha = (int)(8 + 40 * (($t - 0.5) / 0.15));
+  } else {
+    $alpha = (int)(48 + 65 * (($t - 0.65) / 0.35));
+  }
+  $alpha = min(113, max(0, $alpha));
   $oc = imagecolorallocatealpha($img, 10, 6, 30, $alpha);
   imageline($img, 0, $y, $W, $y, $oc);
 }
@@ -139,105 +145,16 @@ $diff_key    = $p['difficulte'] ?? '';
 $diff_color  = $diff_colors[$diff_key] ?? $vert_clair;
 $diff_label  = $diff_labels[$diff_key] ?? '';
 
-function draw_flower_gd($img, $cx, $cy, $size, $violet, $or, $white) {
-  $s = $size / 11;
-  imagefilledellipse($img, $cx, $cy - (int)(8*$s), (int)(10*$s), (int)(15*$s), $violet);
-  imagefilledellipse($img, $cx, $cy + (int)(8*$s), (int)(10*$s), (int)(15*$s), $violet);
-  imagefilledellipse($img, $cx - (int)(8*$s), $cy, (int)(15*$s), (int)(10*$s), $or);
-  imagefilledellipse($img, $cx + (int)(8*$s), $cy, (int)(15*$s), (int)(10*$s), $or);
-  imagefilledellipse($img, $cx, $cy, (int)(14*$s), (int)(14*$s), $violet);
-  imagefilledellipse($img, $cx, $cy, (int)(8*$s), (int)(8*$s), $white);
-}
-
-/* imageopenpolygon() n'existe qu'à partir de PHP 8.0 — on relie les points
-   avec des lignes pour un résultat identique sans risquer une erreur fatale
-   si l'hébergeur tourne encore sous PHP 7. */
-function draw_open_polyline($img, $pts, $col) {
-  $n = count($pts) / 2;
-  for ($i = 0; $i < $n - 1; $i++) {
-    imageline($img, $pts[$i*2], $pts[$i*2+1], $pts[($i+1)*2], $pts[($i+1)*2+1], $col);
-  }
-}
-
-function draw_icon_km($img, $cx, $cy, $size, $col) {
-  $s = $size / 10;
-  imagesetthickness($img, max(1, (int)(2*$s)));
-  $r = (int)(8*$s);
-  imagearc($img, $cx, $cy, $r*2, $r*2, 0, 360, $col);
-  imageline($img, $cx, $cy - (int)(11*$s), $cx, $cy - (int)(7*$s), $col);
-  imageline($img, $cx - (int)(4*$s), $cy, $cx + (int)(4*$s), $cy, $col);
-  imagesetthickness($img, 1);
-}
-
-function draw_icon_time($img, $cx, $cy, $size, $col) {
-  $s = $size / 10;
-  imagesetthickness($img, max(1, (int)(2*$s)));
-  $r = (int)(9*$s);
-  imagearc($img, $cx, $cy, $r*2, $r*2, 0, 360, $col);
-  imageline($img, $cx, $cy, $cx, $cy - (int)(6*$s), $col);
-  imageline($img, $cx, $cy, $cx + (int)(4*$s), $cy + (int)(2*$s), $col);
-  imagesetthickness($img, 1);
-}
-
-function draw_icon_up($img, $cx, $cy, $size, $col) {
-  $s = $size / 10;
-  imagesetthickness($img, max(1, (int)(2*$s)));
-  $pts = [
-    $cx, $cy + (int)(8*$s),
-    $cx - (int)(6*$s), $cy + (int)(8*$s),
-    $cx - (int)(6*$s), $cy,
-    $cx, $cy - (int)(8*$s),
-    $cx + (int)(6*$s), $cy,
-    $cx + (int)(6*$s), $cy + (int)(8*$s),
-  ];
-  draw_open_polyline($img, $pts, $col);
-  imageline($img, $cx - (int)(3*$s), $cy - (int)(3*$s), $cx, $cy - (int)(8*$s), $col);
-  imageline($img, $cx + (int)(3*$s), $cy - (int)(3*$s), $cx, $cy - (int)(8*$s), $col);
-  imagesetthickness($img, 1);
-}
-
-function draw_icon_diff($img, $cx, $cy, $size, $col) {
-  $s = $size / 10;
-  imagesetthickness($img, max(1, (int)(2*$s)));
-  $pts = [
-    $cx, $cy - (int)(9*$s),
-    $cx + (int)(8*$s), $cy + (int)(6*$s),
-    $cx - (int)(8*$s), $cy + (int)(6*$s),
-  ];
-  draw_open_polyline($img, $pts, $col);
-  imageline($img, $cx, $cy - (int)(4*$s), $cx, $cy + (int)(2*$s), $col);
-  imagefilledellipse($img, $cx, $cy + (int)(5*$s), (int)(3*$s), (int)(3*$s), $col);
-  imagesetthickness($img, 1);
-}
-
-function draw_icon_balise($img, $cx, $cy, $size, $col) {
-  $s = $size / 10;
-  imagesetthickness($img, max(1, (int)(2*$s)));
-  imageline($img, $cx - (int)(2*$s), $cy - (int)(9*$s), $cx - (int)(2*$s), $cy + (int)(9*$s), $col);
-  $pts_flag = [
-    $cx - (int)(2*$s), $cy - (int)(9*$s),
-    $cx + (int)(9*$s), $cy - (int)(5*$s),
-    $cx - (int)(2*$s), $cy - (int)(1*$s),
-  ];
-  imagefilledpolygon($img, $pts_flag, $col);
-  imagesetthickness($img, 1);
-}
-
-$violet_f = imagecolorallocate($img, 139, 107, 177);
-$white_f  = imagecolorallocate($img, 250, 248, 255);
-draw_flower_gd($img, $W - $pad - 5, $pad + 5, 28, $violet_f, $or, $white_f);
-
-$dot = imagecolorallocate($img, 201, 169, 110);
-imagefilledellipse($img, $pad, $pad + 12, 8, 8, $dot);
-$handle = '@lachtiterandonneuse';
+$handle_bg = imagecolorallocatealpha($img, 10, 6, 30, 80);
+imagefilledrectangle($img, $pad - 8, $pad - 8, $pad + 320, $pad + 28, $handle_bg);
 if ($has_fonts) {
-  imagettftext($img, 16, 0, $pad + 16, $pad + 18, $blanc_soft, $font_med, $handle);
+  imagettftext($img, 15, 0, $pad, $pad + 16, $blanc, $font_med, '@lachtiterandonneuse');
 } else {
-  imagestring($img, 3, $pad + 16, $pad + 4, $handle, $blanc_soft);
+  imagestring($img, 3, $pad, $pad + 2, '@lachtiterandonneuse', $blanc);
 }
 
 $titre_raw = $p['titre'] ?? 'Sentier';
-$titre_lines = wrap_text($titre_raw, 28);
+$titre_lines = wrap_text($titre_raw, 32);
 $region_raw = strtoupper($p['region'] ?? 'Hauts-de-France');
 
 $balisage_colors = [
@@ -268,10 +185,10 @@ $balise_rgb   = $has_balisage && isset($balisage_colors[$balise_type]) ? $balisa
 $balise_label = $has_balisage && isset($balisage_labels[$balise_type]) ? $balisage_labels[$balise_type] : 'Balisé';
 
 $stats = [
-  ['ico'=>'km',   'val'=> ($p['distance'] ? $p['distance'].' km' : '-'),  'lbl'=>'Distance',  'draw'=>'draw_icon_km'],
-  ['ico'=>'time', 'val'=> ($p['duree'] ?: '-'),                            'lbl'=>'Duree',     'draw'=>'draw_icon_time'],
-  ['ico'=>'up',   'val'=> ($p['denivele'] ? '+'.$p['denivele'].'m' : '-'),'lbl'=>'Denivele',  'draw'=>'draw_icon_up'],
-  ['ico'=>'diff', 'val'=> $diff_label,                                     'lbl'=>'Difficulte','draw'=>'draw_icon_diff', 'color'=>$diff_color],
+  ['val'=> ($p['distance'] ? $p['distance'].' km' : '-'),  'lbl'=>'Distance'],
+  ['val'=> ($p['duree'] ?: '-'),                            'lbl'=>'Duree'],
+  ['val'=> ($p['denivele'] ? '+'.$p['denivele'].'m' : '-'),'lbl'=>'Denivele'],
+  ['val'=> $diff_label,                                     'lbl'=>'Difficulte', 'color'=>$diff_color],
 ];
 
 $nb_stats   = 4;
@@ -294,16 +211,16 @@ if ($has_fonts) {
   imagestring($img, 3, $pad + 10, $line_y + 16, mb_convert_for_gd($region_raw), $or);
 }
 
-$ty = $region_y + 20;
+$ty = $region_y + 24;
 foreach ($titre_lines as $line) {
-  $shadow = imagecolorallocatealpha($img, 0, 0, 0, 60);
+  $shadow_dark = imagecolorallocatealpha($img, 0, 0, 0, 35);
   if ($has_fonts) {
-    imagettftext($img, 52, 0, $pad + 2, $ty + 2, $shadow, $font_bold_i, safe_text($line, $has_fonts));
-    imagettftext($img, 52, 0, $pad, $ty, $blanc, $font_bold_i, safe_text($line, $has_fonts));
+    imagettftext($img, 46, 0, $pad + 3, $ty + 3, $shadow_dark, $font_bold_i, safe_text($line, $has_fonts));
+    imagettftext($img, 46, 0, $pad, $ty, $blanc, $font_bold_i, safe_text($line, $has_fonts));
   } else {
-    imagestring($img, 5, $pad, $ty - 52, mb_convert_for_gd($line), $blanc);
+    imagestring($img, 5, $pad, $ty - 46, mb_convert_for_gd($line), $blanc);
   }
-  $ty += 68;
+  $ty += 58;
 }
 
 for ($i = 0; $i < $nb_stats; $i++) {
@@ -316,29 +233,16 @@ for ($i = 0; $i < $nb_stats; $i++) {
   imagerectangle($img, $sx, $sy, $sx + $stat_w, $sy + $stat_h, $border);
 
   $val_color = isset($stats[$i]['color']) ? $stats[$i]['color'] : $blanc;
-  $icon_col  = imagecolorallocatealpha($img, 255, 255, 255, 55);
-  $cx_icon   = $sx + $stat_w - 22;
-  $cy_icon   = $sy + 22;
-  $icon_size = 10;
-
-  switch ($stats[$i]['ico']) {
-    case 'km':   draw_icon_km($img,   $cx_icon, $cy_icon, $icon_size, $icon_col); break;
-    case 'time': draw_icon_time($img, $cx_icon, $cy_icon, $icon_size, $icon_col); break;
-    case 'up':   draw_icon_up($img,   $cx_icon, $cy_icon, $icon_size, $icon_col); break;
-    case 'diff': draw_icon_diff($img, $cx_icon, $cy_icon, $icon_size, $icon_col); break;
-  }
 
   $val_text = safe_text($stats[$i]['val'], $has_fonts);
   $lbl_text = safe_text($stats[$i]['lbl'], $has_fonts);
 
   if ($has_fonts) {
-    $shadow2 = imagecolorallocatealpha($img, 0, 0, 0, 55);
-    imagettftext($img, 24, 0, $sx + 14, $sy + 52, $shadow2, $font_bold_i, $val_text);
-    imagettftext($img, 24, 0, $sx + 12, $sy + 50, $val_color, $font_bold_i, $val_text);
-    imagettftext($img, 12, 0, $sx + 12, $sy + 74, $gris_pale, $font_med, strtoupper($lbl_text));
+    imagettftext($img, 28, 0, $sx + 16, $sy + 55, $val_color, $font_bold_i, $val_text);
+    imagettftext($img, 13, 0, $sx + 16, $sy + 78, $gris_pale, $font_med, strtoupper($lbl_text));
   } else {
-    imagestring($img, 4, $sx + 10, $sy + 22, mb_convert_for_gd($val_text), $val_color);
-    imagestring($img, 2, $sx + 10, $sy + 46, mb_convert_for_gd(strtoupper($lbl_text)), $gris_pale);
+    imagestring($img, 5, $sx + 12, $sy + 22, mb_convert_for_gd($val_text), $val_color);
+    imagestring($img, 2, $sx + 12, $sy + 48, mb_convert_for_gd(strtoupper($lbl_text)), $gris_pale);
   }
 }
 
@@ -363,8 +267,6 @@ if ($has_balisage) {
   imagefilledellipse($img, $color_dot_x, $color_dot_y, 22, 22, $bc);
   $dot_border = imagecolorallocatealpha($img, 255, 255, 255, 60);
   imagearc($img, $color_dot_x, $color_dot_y, 22, 22, 0, 360, $dot_border);
-
-  draw_icon_balise($img, $color_dot_x, $color_dot_y, 8, imagecolorallocate($img, 255,255,255));
 
   $balise_text_x = $pad + 50;
   $balise_label_safe = safe_text('Balisage ' . $balise_label, $has_fonts);
@@ -391,13 +293,13 @@ if ($has_balisage) {
   imageline($img, $sep_x, $balise_y + 10, $sep_x, $balise_y + $balise_bh - 10, $balise_border);
 }
 
-$url_col = imagecolorallocatealpha($img, 255, 255, 255, 80);
-$url_text = 'marine-bernard.fr';
-$gpx_text = $p['fichier_gpx'] ? '  |  Trace GPX disponible' : '';
+$url_bg = imagecolorallocatealpha($img, 10, 6, 30, 80);
+imagefilledrectangle($img, $pad - 8, $H - $pad - 30, $W - $pad + 8, $H - $pad + 10, $url_bg);
+$url_full = 'marine-bernard.fr' . ($p['fichier_gpx'] ? '   |   Trace GPX disponible' : '');
 if ($has_fonts) {
-  imagettftext($img, 14, 0, $pad, $H - $pad + 28, $url_col, $font_reg, $url_text . $gpx_text);
+  imagettftext($img, 14, 0, $pad, $H - $pad, $blanc, $font_med, $url_full);
 } else {
-  imagestring($img, 2, $pad, $H - $pad + 10, $url_text . $gpx_text, $url_col);
+  imagestring($img, 2, $pad, $H - $pad - 14, mb_convert_for_gd($url_full), $blanc);
 }
 
 $output_dir = __DIR__ . '/../uploads/cartes/';
@@ -405,6 +307,14 @@ if (!is_dir($output_dir)) mkdir($output_dir, 0755, true);
 $filename = 'instagram_' . $id . '_' . time() . '.jpg';
 imagejpeg($img, $output_dir . $filename, 95);
 imagedestroy($img);
+
+if (isset($_GET['download']) && $_GET['download'] === '1') {
+  header('Content-Type: image/jpeg');
+  header('Content-Disposition: attachment; filename="instagram_' . $id . '.jpg"');
+  header('Content-Length: ' . filesize($output_dir . $filename));
+  readfile($output_dir . $filename);
+  exit;
+}
 
 echo json_encode([
   'success'  => true,

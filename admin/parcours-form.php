@@ -543,38 +543,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <script>
     async function genererCarte(id, btn) {
       btn.classList.add('loading');
+      const original = btn.textContent;
       btn.textContent = '⏳ Génération...';
       try {
-        const res = await fetch('/admin/generate-card.php?id=' + id);
-        const data = await res.json();
+        const genRes = await fetch('/admin/generate-card.php?id=' + id);
+        const data = await genRes.json();
         if (data.success && data.cards && data.cards.instagram) {
-          const card = data.cards.instagram;
-          btn.textContent = '✓ Prête !';
+          btn.textContent = '⬇ Téléchargement...';
+          const dlRes = await fetch('/admin/generate-card.php?id=' + id + '&download=1');
+          const blob = await dlRes.blob();
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'instagram_' + id + '.jpg';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+          btn.textContent = '✓ Téléchargée !';
           btn.style.background = '#EAF3DE';
           btn.style.color = '#27500A';
-          const existing = document.getElementById('dl-menu-' + id);
-          if (existing) existing.remove();
-          const a = document.createElement('a');
-          a.id = 'dl-menu-' + id;
-          a.href = card.url;
-          a.download = card.filename;
-          a.textContent = '⬇ Télécharger ' + card.label;
-          a.style.cssText = 'font-size:11px;padding:4px 12px;border-radius:8px;background:#27500A;color:#fff;text-decoration:none;display:inline-block;margin-top:6px;transition:background .2s';
-          btn.parentElement.appendChild(a);
           setTimeout(() => {
-            btn.textContent = '📸 Générer la carte Instagram (1080×1080)';
+            btn.textContent = original;
             btn.style.background = '';
             btn.style.color = '';
             btn.classList.remove('loading');
-          }, 5000);
+          }, 3000);
         } else {
-          alert('Erreur : ' + (data.error || 'Génération impossible'));
-          btn.textContent = '📸 Générer la carte Instagram (1080×1080)';
+          alert('Erreur génération : ' + (data.error || 'Inconnue'));
+          btn.textContent = original;
           btn.classList.remove('loading');
         }
       } catch(e) {
         alert('Erreur de connexion');
-        btn.textContent = '📸 Générer la carte Instagram (1080×1080)';
+        btn.textContent = original;
         btn.classList.remove('loading');
       }
     }
